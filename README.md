@@ -1,4 +1,6 @@
-# iearn finance
+# Da-Fi 
+# Web app remains in development 
+# hat tip yearn.finance
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

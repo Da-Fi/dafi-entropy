@@ -64,7 +64,7 @@ class Receiving extends Component {
     return (
       <div className={ classes.root }>
         <div className={ classes.inputCard }>
-          <Typography variant='h3' className={ classes.inputCardHeading }>Receive amount</Typography>
+          <Typography variant='h4' className={ classes.inputCardHeading }>Receive amount</Typography>
           { this.renderAmountInput('amount', amount, amountError, 'Amount', '0.00', (receiveAsset ? receiveAsset.symbol : '')) }
         </div>
       </div>
@@ -96,7 +96,7 @@ class Receiving extends Component {
         variant="outlined"
         disabled
         InputProps={{
-          endAdornment: <InputAdornment position="end" className={ classes.inputAdornment }><Typography variant='h3'>{ inputAdornment }</Typography></InputAdornment>,
+          endAdornment: <InputAdornment position="end" className={ classes.inputAdornment }><Typography variant='h4'>{ inputAdornment }</Typography></InputAdornment>,
         }}
       />
     )

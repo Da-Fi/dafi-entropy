@@ -1,6 +1,7 @@
-import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
-import { withStyles } from '@material-ui/core/styles';
+import React,{Component} from "react";
+import {withRouter} from "react-router-dom";
+import {withStyles} from '@material-ui/core/styles';
+import {colors} from '../../theme/theme'
 import {
   Typography,
   TextField,
@@ -16,16 +17,16 @@ import {
 } from '../../constants'
 
 import Store from "../../stores";
-const emitter = Store.emitter
-const dispatcher = Store.dispatcher
-const store = Store.store
+const emitter=Store.emitter
+const dispatcher=Store.dispatcher
+const store=Store.store
 
 
-const styles = theme => ({
+const styles=theme => ({
   root: {
     flex: 1,
     display: 'flex',
-    maxWidth: '1200px',
+    maxWidth: '1600px',
     width: '100%',
     justifyContent: 'center',
     marginTop: '60px',
@@ -93,7 +94,7 @@ const styles = theme => ({
   },
   actionButton: {
     padding: '12px',
-    backgroundColor: 'white',
+    backgroundColor: 'gray',
     borderRadius: '1rem',
     border: '1px solid #E1E1E1',
     fontWeight: 500,
@@ -136,7 +137,7 @@ const styles = theme => ({
   overlay: {
     position: 'absolute',
     borderRadius: '10px',
-    background: 'RGBA(200, 200, 200, 1)',
+    background: colors.dafispace,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -162,7 +163,7 @@ class Asset extends Component {
   constructor() {
     super()
 
-    this.state = {
+    this.state={
       amount: '',
       amountError: false,
       account: store.getStore('account'),
@@ -170,209 +171,209 @@ class Asset extends Component {
   }
 
   componentWillMount() {
-    emitter.on(DONATE_RETURNED, this.investReturned);
-    emitter.on(REBALANCE_RETURNED, this.redeemReturned);
-    emitter.on(ERROR, this.errorReturned);
+    emitter.on(DONATE_RETURNED,this.investReturned);
+    emitter.on(REBALANCE_RETURNED,this.redeemReturned);
+    emitter.on(ERROR,this.errorReturned);
   }
 
   componentWillUnmount() {
-    emitter.removeListener(DONATE_RETURNED, this.investReturned);
-    emitter.removeListener(REBALANCE_RETURNED, this.redeemReturned);
-    emitter.removeListener(ERROR, this.errorReturned);
+    emitter.removeListener(DONATE_RETURNED,this.investReturned);
+    emitter.removeListener(REBALANCE_RETURNED,this.redeemReturned);
+    emitter.removeListener(ERROR,this.errorReturned);
   };
 
-  investReturned = () => {
-    this.setState({ loading: false, amount: '' })
+  investReturned=() => {
+    this.setState({loading: false,amount: ''})
   };
 
-  redeemReturned = (txHash) => {
-    this.setState({ loading: false, redeemAmount: '' })
+  redeemReturned=(txHash) => {
+    this.setState({loading: false,redeemAmount: ''})
   };
 
-  errorReturned = (error) => {
-    this.setState({ loading: false })
+  errorReturned=(error) => {
+    this.setState({loading: false})
   };
 
   render() {
-    const { classes, asset } = this.props;
+    const {classes,asset}=this.props;
     const {
       account,
       amount,
       amountError,
       loading
-    } = this.state
+    }=this.state
 
-    return (<div className={ classes.actionsContainer }>
-      <div className={ classes.tradeContainer }>
-        <div className={ classes.balances }>
-            <Typography variant='h3' className={ classes.title }></Typography><Typography variant='h4' onClick={ () => { this.setAmount(100) } } className={ classes.value } noWrap>{ 'Balance: '+ (asset.balance ? asset.balance.toFixed(4) : '0.0000') } { asset.tokenSymbol ? asset.tokenSymbol : asset.symbol }</Typography>
+    return (<div className={classes.actionsContainer}>
+      <div className={classes.tradeContainer}>
+        <div className={classes.balances}>
+          <Typography variant='h4' className={classes.title}></Typography><Typography variant='h4' onClick={() => {this.setAmount(100)}} className={classes.value} noWrap>{'Balance: '+(asset.balance? asset.balance.toFixed(4):'0.0000')} {asset.tokenSymbol? asset.tokenSymbol:asset.symbol}</Typography>
         </div>
         <TextField
           fullWidth
-          className={ classes.actionInput }
+          className={classes.actionInput}
           id='amount'
-          value={ amount }
-          error={ amountError }
-          onChange={ this.onChange }
-          disabled={ loading }
+          value={amount}
+          error={amountError}
+          onChange={this.onChange}
+          disabled={loading}
           label=""
           size="small"
           placeholder="0.00"
           variant="outlined"
-          onKeyDown={ this.inputKeyDown }
+          onKeyDown={this.inputKeyDown}
         />
-        <div className={ classes.scaleContainer }>
+        <div className={classes.scaleContainer}>
           <Button
-            className={ classes.scale }
+            className={classes.scale}
             variant='text'
-            disabled={ loading }
+            disabled={loading}
             color="primary"
-            onClick={ () => { this.setAmount(25) } }>
+            onClick={() => {this.setAmount(25)}}>
             <Typography variant={'h5'}>25%</Typography>
           </Button>
           <Button
-            className={ classes.scale }
+            className={classes.scale}
             variant='text'
-            disabled={ loading }
+            disabled={loading}
             color="primary"
-            onClick={ () => { this.setAmount(50) } }>
+            onClick={() => {this.setAmount(50)}}>
             <Typography variant={'h5'}>50%</Typography>
           </Button>
           <Button
-            className={ classes.scale }
+            className={classes.scale}
             variant='text'
-            disabled={ loading }
+            disabled={loading}
             color="primary"
-            onClick={ () => { this.setAmount(75) } }>
+            onClick={() => {this.setAmount(75)}}>
             <Typography variant={'h5'}>75%</Typography>
           </Button>
           <Button
-            className={ classes.scale }
+            className={classes.scale}
             variant='text'
-            disabled={ loading }
+            disabled={loading}
             color="primary"
-            onClick={ () => { this.setAmount(100) } }>
+            onClick={() => {this.setAmount(100)}}>
             <Typography variant={'h5'}>Recommend</Typography>
           </Button>
         </div>
-        <div className={ classes.scaleContainer }>
+        <div className={classes.scaleContainer}>
           <Button
-            className={ classes.actionButton }
+            className={classes.actionButton}
             variant="outlined"
             color="primary"
-            disabled={ loading || !account.address }
-            onClick={ this.onInvest }
-            >
-            <Typography className={ classes.buttonText } variant={ 'h5'} color='secondary'>Donate</Typography>
+            disabled={loading||!account.address}
+            onClick={this.onInvest}
+          >
+            <Typography className={classes.buttonText} variant={'h5'} color='secondary'>Donate</Typography>
           </Button>
         </div>
       </div>
       <div className={classes.tradeContainer}>
-        <div className={ classes.textContainer }>
-          <Typography className={ classes.text } variant={ 'h5' }>{ 'Token: ' }</Typography>
-          <Typography className={ classes.text } variant={ 'h3' }>{ parseFloat(asset.tokenBalance).toFixed(2) }</Typography>
-          <Typography className={ classes.text } variant={ 'h5' }>{ 'Current: ' }</Typography>
-          <Typography className={ classes.text } variant={ 'h3' }>{ this.lender(asset.current) }</Typography>
-          <Typography className={ classes.text } variant={ 'h5' }>{ 'Recommend: ' }</Typography>
-          <Typography className={ classes.text } variant={ 'h3' }>{ this.lender(asset.recommended) }</Typography>
+        <div className={classes.textContainer}>
+          <Typography className={classes.text} variant={'h5'}>{'Token: '}</Typography>
+          <Typography className={classes.text} variant={'h4'}>{parseFloat(asset.tokenBalance).toFixed(2)}</Typography>
+          <Typography className={classes.text} variant={'h5'}>{'Current: '}</Typography>
+          <Typography className={classes.text} variant={'h4'}>{this.lender(asset.current)}</Typography>
+          <Typography className={classes.text} variant={'h5'}>{'Recommend: '}</Typography>
+          <Typography className={classes.text} variant={'h4'}>{this.lender(asset.recommended)}</Typography>
         </div>
-        <div className={ classes.scaleContainer }>
+        <div className={classes.scaleContainer}>
           <Button
-            className={ classes.actionButton }
+            className={classes.actionButton}
             variant="outlined"
             color="primary"
-            disabled={ loading || !account.address }
-            onClick={ this.onRedeem }
-            >
-            <Typography className={ classes.buttonText } variant={ 'h5'} color='secondary'>Rebalance</Typography>
+            disabled={loading||!account.address}
+            onClick={this.onRedeem}
+          >
+            <Typography className={classes.buttonText} variant={'h5'} color='secondary'>Rebalance</Typography>
           </Button>
         </div>
       </div>
     </div>)
   };
 
-  lender = (val) => {
-    if (val === 0) {
+  lender=(val) => {
+    if(val===0) {
       return 'NONE'
-    } else if (val === 1) {
+    } else if(val===1) {
       return 'dYdX'
-    } else if (val === 2) {
+    } else if(val===2) {
       return 'Compound'
-    } else if (val === 3) {
+    } else if(val===3) {
       return 'Aave'
-    } else if (val === 4) {
+    } else if(val===4) {
       return 'Fulcrum'
     }
   }
 
-  onChange = (event) => {
-    let val = []
-    val[event.target.id] = event.target.value
+  onChange=(event) => {
+    let val=[]
+    val[event.target.id]=event.target.value
     this.setState(val)
   }
 
-  inputKeyDown = (event) => {
-    if (event.which === 13) {
+  inputKeyDown=(event) => {
+    if(event.which===13) {
       this.onInvest();
     }
   }
 
-  onInvest = () => {
-    this.setState({ amountError: false })
+  onInvest=() => {
+    this.setState({amountError: false})
 
-    const { amount } = this.state
-    const { asset, startLoading } = this.props
+    const {amount}=this.state
+    const {asset,startLoading}=this.props
 
-    if(!amount || isNaN(amount) || amount <= 0 || amount > asset.balance) {
-      this.setState({ amountError: true })
+    if(!amount||isNaN(amount)||amount<=0||amount>asset.balance) {
+      this.setState({amountError: true})
       return false
     }
 
-    this.setState({ loading: true })
+    this.setState({loading: true})
     startLoading()
-    dispatcher.dispatch({ type: DONATE, content: { amount: amount, asset: asset } })
+    dispatcher.dispatch({type: DONATE,content: {amount: amount,asset: asset}})
   }
 
-  onRedeem = () => {
-    this.setState({ redeemAmountError: false })
+  onRedeem=() => {
+    this.setState({redeemAmountError: false})
 
-    const { asset, startLoading  } = this.props
+    const {asset,startLoading}=this.props
 
-    this.setState({ loading: true })
+    this.setState({loading: true})
     startLoading()
 
-    dispatcher.dispatch({ type: REBALANCE, content: { asset: asset } })
+    dispatcher.dispatch({type: REBALANCE,content: {asset: asset}})
   }
 
-  setAmount = (percent) => {
+  setAmount=(percent) => {
 
     if(this.state.loading) {
       return
     }
 
-    const { asset } = this.props
+    const {asset}=this.props
 
-    const balance = asset.balance
-    let amount = balance*percent/100
+    const balance=asset.balance
+    let amount=balance*percent/100
 
-    if (percent === 100) {
-      amount = ((asset.poolValue/100)*10)/365;
+    if(percent===100) {
+      amount=((asset.poolValue/100)*10)/365;
     }
 
-    this.setState({ amount: amount.toFixed(8) })
+    this.setState({amount: amount.toFixed(8)})
   }
 
-  setRedeemAmount = (percent) => {
+  setRedeemAmount=(percent) => {
 
     if(this.state.loading) {
       return
     }
 
-    const balance = this.props.asset.investedBalance
-    let amount = balance*percent/100
+    const balance=this.props.asset.investedBalance
+    let amount=balance*percent/100
 
-    this.setState({ redeemAmount: amount.toFixed(8) })
+    this.setState({redeemAmount: amount.toFixed(8)})
   }
 }
 
-export default withRouter(withStyles(styles, { withTheme: true })(Asset));
+export default withRouter(withStyles(styles,{withTheme: true})(Asset));

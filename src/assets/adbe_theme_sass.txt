@@ -1,0 +1,20 @@
+/* Color Theme Swatches in Hex */
+$color-theme_FullColor_IconOnly_1280x1024_72dpi-1-hex: #3FBFBF;
+$color-theme_FullColor_IconOnly_1280x1024_72dpi-2-hex: #212626;
+$color-theme_FullColor_IconOnly_1280x1024_72dpi-3-hex: #3FBFA8;
+$color-theme_FullColor_IconOnly_1280x1024_72dpi-4-hex: #43D9A2;
+$color-theme_FullColor_IconOnly_1280x1024_72dpi-5-hex: #41D983;
+
+/* Color Theme Swatches in RGBA */
+$color-theme_FullColor_IconOnly_1280x1024_72dpi-1-rgba: rgba(63,191,191, 1);
+$color-theme_FullColor_IconOnly_1280x1024_72dpi-2-rgba: rgba(33,38,38, 1);
+$color-theme_FullColor_IconOnly_1280x1024_72dpi-3-rgba: rgba(63,191,168, 1);
+$color-theme_FullColor_IconOnly_1280x1024_72dpi-4-rgba: rgba(67,217,162, 1);
+$color-theme_FullColor_IconOnly_1280x1024_72dpi-5-rgba: rgba(65,217,131, 1);
+
+/* Color Theme Swatches in HSLA */
+$color-theme_FullColor_IconOnly_1280x1024_72dpi-1-hsla: hsla(180, 50, 49, 1);
+$color-theme_FullColor_IconOnly_1280x1024_72dpi-2-hsla: hsla(180, 7, 13, 1);
+$color-theme_FullColor_IconOnly_1280x1024_72dpi-3-hsla: hsla(169, 50, 49, 1);
+$color-theme_FullColor_IconOnly_1280x1024_72dpi-4-hsla: hsla(158, 66, 55, 1);
+$color-theme_FullColor_IconOnly_1280x1024_72dpi-5-hsla: hsla(146, 66, 55, 1);

@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
-import { withStyles } from '@material-ui/core/styles';
+import React,{Component} from "react";
+import {withRouter} from "react-router-dom";
+import {withStyles} from '@material-ui/core/styles';
 import {
   Typography,
   Button,
@@ -14,7 +14,7 @@ import UnlockModal from '../unlock/unlockModal.jsx'
 import Snackbar from '../snackbar'
 import Asset from './asset'
 import Loader from '../loader'
-
+import {colors} from '../../theme/theme.jsx';
 import {
   ERROR,
   GET_BALANCES,
@@ -26,20 +26,20 @@ import {
 } from '../../constants'
 
 import Store from "../../stores";
-const emitter = Store.emitter
-const dispatcher = Store.dispatcher
-const store = Store.store
+const emitter=Store.emitter
+const dispatcher=Store.dispatcher
+const store=Store.store
 
-const formatter = new Intl.NumberFormat('en-US', {
+const formatter=new Intl.NumberFormat('en-US',{
   minimumFractionDigits: 4
 })
 
-const styles = theme => ({
+const styles=theme => ({
   root: {
     flex: 1,
     display: 'flex',
     flexDirection: 'column',
-    maxWidth: '1200px',
+    maxWidth: '1600px',
     width: '100%',
     justifyContent: 'flex-start',
     alignItems: 'center'
@@ -79,7 +79,7 @@ const styles = theme => ({
     display: 'flex',
     justifyContent: 'space-between',
     width: '100%',
-    maxWidth: '1200px',
+    maxWidth: '1600px',
     [theme.breakpoints.up('md')]: {
       width: '750px',
     }
@@ -144,7 +144,7 @@ const styles = theme => ({
   overlay: {
     position: 'absolute',
     borderRadius: '10px',
-    background: 'RGBA(200, 200, 200, 1)',
+    background: colors.dafispace,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -181,7 +181,7 @@ const styles = theme => ({
   },
   buttonText: {
     fontWeight: '700',
-    color: 'white',
+    color: 'black',
   },
   assetSummary: {
     display: 'flex',
@@ -206,7 +206,7 @@ const styles = theme => ({
     whiteSpace: 'nowrap',
     fontSize: '0.83rem',
     margin: "0px 0.5rem 0px 0.25rem",
-    textOverflow:'ellipsis',
+    textOverflow: 'ellipsis',
     cursor: 'pointer',
     padding: '10px',
     borderRadius: '0.75rem',
@@ -224,7 +224,7 @@ class Manage extends Component {
   constructor() {
     super()
 
-    this.state = {
+    this.state={
       assets: store.getStore('assets'),
       account: store.getStore('account'),
       modalOpen: false,
@@ -235,234 +235,234 @@ class Manage extends Component {
   componentWillMount() {
     // emitter.on(METAMASK_CONNECTED, this.metamaskConnected);
     // emitter.on(LEDGER_CONNECTED, this.ledgerConnected);
-    emitter.on(DONATE_RETURNED, this.investReturned);
-    emitter.on(REBALANCE_RETURNED, this.redeemReturned);
-    emitter.on(ERROR, this.errorReturned);
-    emitter.on(BALANCES_RETURNED, this.balancesReturned);
-    emitter.on(CONNECTION_CONNECTED, this.connectionConnected);
-    emitter.on(CONNECTION_DISCONNECTED, this.connectionDisconnected);
+    emitter.on(DONATE_RETURNED,this.investReturned);
+    emitter.on(REBALANCE_RETURNED,this.redeemReturned);
+    emitter.on(ERROR,this.errorReturned);
+    emitter.on(BALANCES_RETURNED,this.balancesReturned);
+    emitter.on(CONNECTION_CONNECTED,this.connectionConnected);
+    emitter.on(CONNECTION_DISCONNECTED,this.connectionDisconnected);
 
   }
 
   componentWillUnmount() {
     // emitter.removeListener(METAMASK_CONNECTED, this.metamaskConnected);
     // emitter.removeListener(LEDGER_CONNECTED, this.ledgerConnected);
-    emitter.removeListener(DONATE_RETURNED, this.investReturned);
-    emitter.removeListener(REBALANCE_RETURNED, this.redeemReturned);
-    emitter.removeListener(ERROR, this.errorReturned);
-    emitter.removeListener(CONNECTION_CONNECTED, this.connectionConnected);
-    emitter.removeListener(CONNECTION_DISCONNECTED, this.connectionDisconnected);
+    emitter.removeListener(DONATE_RETURNED,this.investReturned);
+    emitter.removeListener(REBALANCE_RETURNED,this.redeemReturned);
+    emitter.removeListener(ERROR,this.errorReturned);
+    emitter.removeListener(CONNECTION_CONNECTED,this.connectionConnected);
+    emitter.removeListener(CONNECTION_DISCONNECTED,this.connectionDisconnected);
 
-    emitter.removeListener(BALANCES_RETURNED, this.balancesReturned);
+    emitter.removeListener(BALANCES_RETURNED,this.balancesReturned);
   };
 
   refresh() {
-    dispatcher.dispatch({ type: GET_BALANCES, content: {} })
+    dispatcher.dispatch({type: GET_BALANCES,content: {}})
   }
 
-  balancesReturned = (balances) => {
-    this.setState({ assets: store.getStore('assets') })
+  balancesReturned=(balances) => {
+    this.setState({assets: store.getStore('assets')})
   };
 
-  connectionConnected = () => {
-    this.setState({ account: store.getStore('account') })
+  connectionConnected=() => {
+    this.setState({account: store.getStore('account')})
 
-    dispatcher.dispatch({ type: GET_BALANCES, content: {} })
+    dispatcher.dispatch({type: GET_BALANCES,content: {}})
 
-    const that = this
+    const that=this
     setTimeout(() => {
-      const snackbarObj = { snackbarMessage: 'Wallet succesfully connected.', snackbarType: 'Info' }
+      const snackbarObj={snackbarMessage: 'Wallet succesfully connected.',snackbarType: 'Info'}
       that.setState(snackbarObj)
     })
   };
 
-  connectionDisconnected = () => {
-    this.setState({ account: store.getStore('account') })
+  connectionDisconnected=() => {
+    this.setState({account: store.getStore('account')})
   }
 
-  metamaskConnected = () => {
-    this.setState({ account: store.getStore('account') })
+  metamaskConnected=() => {
+    this.setState({account: store.getStore('account')})
 
-    dispatcher.dispatch({ type: GET_BALANCES, content: {} })
+    dispatcher.dispatch({type: GET_BALANCES,content: {}})
 
-    const that = this
+    const that=this
     setTimeout(() => {
-      const snackbarObj = { snackbarMessage: 'Metamask wallet succesfully connected.', snackbarType: 'Info' }
+      const snackbarObj={snackbarMessage: 'Metamask wallet succesfully connected.',snackbarType: 'Info'}
       that.setState(snackbarObj)
     })
   };
 
-  ledgerConnected = () => {
-    this.setState({ account: store.getStore('account') })
+  ledgerConnected=() => {
+    this.setState({account: store.getStore('account')})
 
-    const that = this
+    const that=this
     setTimeout(() => {
-      const snackbarObj = { snackbarMessage: 'Ledger succesfully connected.', snackbarType: 'Info' }
+      const snackbarObj={snackbarMessage: 'Ledger succesfully connected.',snackbarType: 'Info'}
       that.setState(snackbarObj)
     })
   };
 
-  errorReturned = (error) => {
-    const snackbarObj = { snackbarMessage: null, snackbarType: null }
+  errorReturned=(error) => {
+    const snackbarObj={snackbarMessage: null,snackbarType: null}
     this.setState(snackbarObj)
-    this.setState({ loading: false })
-    const that = this
+    this.setState({loading: false})
+    const that=this
     setTimeout(() => {
-      const snackbarObj = { snackbarMessage: error.toString(), snackbarType: 'Error' }
+      const snackbarObj={snackbarMessage: error.toString(),snackbarType: 'Error'}
       that.setState(snackbarObj)
     })
   };
 
-  investReturned = (txHash) => {
-    const snackbarObj = { snackbarMessage: null, snackbarType: null }
+  investReturned=(txHash) => {
+    const snackbarObj={snackbarMessage: null,snackbarType: null}
     this.setState(snackbarObj)
-    this.setState({ loading: false })
-    const that = this
+    this.setState({loading: false})
+    const that=this
     setTimeout(() => {
-      const snackbarObj = { snackbarMessage: txHash, snackbarType: 'Hash' }
+      const snackbarObj={snackbarMessage: txHash,snackbarType: 'Hash'}
       that.setState(snackbarObj)
     })
   };
 
-  redeemReturned = (txHash) => {
-    const snackbarObj = { snackbarMessage: null, snackbarType: null }
+  redeemReturned=(txHash) => {
+    const snackbarObj={snackbarMessage: null,snackbarType: null}
     this.setState(snackbarObj)
-    this.setState({ loading: false })
-    const that = this
+    this.setState({loading: false})
+    const that=this
     setTimeout(() => {
-      const snackbarObj = { snackbarMessage: txHash, snackbarType: 'Hash' }
+      const snackbarObj={snackbarMessage: txHash,snackbarType: 'Hash'}
       that.setState(snackbarObj)
     })
   };
 
   render() {
-    const { classes } = this.props;
+    const {classes}=this.props;
     const {
       loading,
       account,
       modalOpen,
       snackbarMessage
-    } = this.state
+    }=this.state
 
     return (
-      <div className={ classes.root }>
-        <div className={ classes.investedContainer }>
-          { account.address &&
-            <div className={ classes.intro }>
-              <Typography variant='h3'>Management. You should probably not be here.</Typography>
+      <div className={classes.root}>
+        <div className={classes.investedContainer}>
+          {account.address&&
+            <div className={classes.intro}>
+              <Typography variant='h4'>Management. You should probably not be here.</Typography>
             </div>
           }
-          { !account.address &&
-            <div className={ classes.introCenter }>
-              <Typography variant='h3'>Management. Simplified.</Typography>
+          {!account.address&&
+            <div className={classes.introCenter}>
+              <Typography variant='h4'>Management. Simplified.</Typography>
             </div>
           }
-          <div className={ classes.balancesContainer }>
-            { false && <div className={ classes.overlay } onClick={ this.overlayClicked }>
-              <Typography variant='h1' >Connect wallet</Typography>
+          <div className={classes.balancesContainer}>
+            {false&&<div className={classes.overlay} onClick={this.overlayClicked}>
+              <Typography style={{fontFamily:'"RobotoC"'}} variant='h1' >Connect wallet</Typography>
             </div>}
           </div>
 
-          {!account.address &&
-            <div className={ classes.connectContainer }>
+          {!account.address&&
+            <div className={classes.connectContainer}>
               <Button
-                className={ classes.actionButton }
+                className={classes.actionButton}
                 variant="outlined"
                 color="primary"
-                disabled={ loading }
-                onClick={ this.overlayClicked }
-                >
-                <Typography className={ classes.buttonText } variant={ 'h5'}>Connect Wallet</Typography>
+                disabled={loading}
+                onClick={this.overlayClicked}
+              >
+                <Typography style={{fontFamily:'"RobotoC"'}} className={classes.buttonText} variant={'h5'}>Connect Wallet</Typography>
               </Button>
             </div>
           }
 
-          { account.address && this.renderAssetBlocks() }
+          {account.address&&this.renderAssetBlocks()}
         </div>
-        { loading && <Loader /> }
-        { modalOpen && this.renderModal() }
-        { snackbarMessage && this.renderSnackbar() }
+        { loading&&<Loader />}
+        { modalOpen&&this.renderModal()}
+        { snackbarMessage&&this.renderSnackbar()}
       </div>
     )
   };
 
 
-  renderAssetBlocks = () => {
-    const { assets, expanded } = this.state
-    const { classes } = this.props
+  renderAssetBlocks=() => {
+    const {assets,expanded}=this.state
+    const {classes}=this.props
 
     console.log(assets);
 
     return assets.map((asset) => {
       return (
-        <Accordion square key={ asset.symbol+"_expand" } expanded={ expanded === asset.symbol} onChange={ () => { this.handleChange(asset.symbol) } } className={ classes.accordionRoot } >
+        <Accordion square key={asset.symbol+"_expand"} expanded={expanded===asset.symbol} onChange={() => {this.handleChange(asset.symbol)}} className={classes.accordionRoot} >
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1bh-content"
             id="panel1bh-header"
           >
-            <div className={ classes.assetSummary }>
-              <div className={ classes.assetIcon }>
+            <div className={classes.assetSummary}>
+              <div className={classes.assetIcon}>
                 <img
                   alt=""
-                  src={ require('../../assets/'+asset.symbol.replace(/\+/g, '')+'-logo.png') }
+                  src={require('../../assets/'+asset.symbol.replace(/\+/g,'')+'-logo.png')}
                   height="40px"
                 />
               </div>
               <div className={classes.heading}>
-                <Typography className={classes.heading} variant={ 'h3' }>{ asset.name }</Typography>
-                <Typography className={classes.heading} variant={ 'h5' }>{ asset.description }</Typography>
+                <Typography className={classes.heading} variant={'h4'}>{asset.name}</Typography>
+                <Typography style={{fontFamily:'"RobotoC"'}} className={classes.heading} variant={'h5'}>{asset.description}</Typography>
               </div>
               <div className={classes.heading}>
-                <Typography className={classes.heading} variant={ 'h3' }>{ (asset.maxApr*100).toFixed(4) + ' %' }</Typography>
-                <Typography className={classes.heading} variant={ 'h5' }>{'Interest Rate'}</Typography>
+                <Typography className={classes.heading} style={{fontFamily:'"Eczar"'}} variant={'h4'}>{(asset.maxApr*100).toFixed(4)+' %'}</Typography>
+                <Typography className={classes.heading} style={{fontFamily:'"RobotoC"'}} variant={'h5'}>{'Interest Rate'}</Typography>
               </div>
               <div className={classes.heading}>
-                <Typography className={classes.heading} variant={ 'h3' }>{ (asset.apy*100).toFixed(4) + ' %' }</Typography>
-                <Typography className={classes.heading} variant={ 'h5' }>{'Annual Yield'}</Typography>
+                <Typography className={classes.heading} style={{fontFamily:'"Eczar"'}} variant={'h4'}>{(asset.apy*100).toFixed(4)+' %'}</Typography>
+                <Typography className={classes.heading}  style={{fontFamily:'"RobotoC"'}} variant={'h5'}>{'Annual Yield'}</Typography>
               </div>
               <div className={classes.heading}>
-                <Typography className={classes.heading} variant={ 'h3' }>{formatter.format(asset.poolValue)+' '+( asset.tokenSymbol ? asset.tokenSymbol : asset.symbol )}</Typography>
-                <Typography className={classes.heading} variant={ 'h5' }>{'Pool Balance'}</Typography>
+                <Typography className={classes.heading} style={{fontFamily:'"Eczar"'}} variant={'h4'}>{formatter.format(asset.poolValue)+' '+(asset.tokenSymbol? asset.tokenSymbol:asset.symbol)}</Typography>
+                <Typography className={classes.heading} style={{fontFamily:'"RobotoC"'}} variant={'h5'}>{'Pool Balance'}</Typography>
               </div>
             </div>
           </AccordionSummary>
           <AccordionDetails>
-            <Asset asset={ asset } startLoading={ this.startLoading } />
+            <Asset asset={asset} startLoading={this.startLoading} />
           </AccordionDetails>
         </Accordion>
       )
     })
   }
 
-  handleChange = (symbol) => {
-    this.setState({ expanded: this.state.expanded === symbol ? null : symbol })
+  handleChange=(symbol) => {
+    this.setState({expanded: this.state.expanded===symbol? null:symbol})
   }
 
-  startLoading = () => {
-    this.setState({ loading: true })
+  startLoading=() => {
+    this.setState({loading: true})
   }
 
-  renderSnackbar = () => {
+  renderSnackbar=() => {
     var {
       snackbarType,
       snackbarMessage
-    } = this.state
-    return <Snackbar type={ snackbarType } message={ snackbarMessage } open={true}/>
+    }=this.state
+    return <Snackbar type={snackbarType} message={snackbarMessage} open={true} />
   };
 
-  renderModal = () => {
+  renderModal=() => {
     return (
-      <UnlockModal closeModal={ this.closeModal } modalOpen={ this.state.modalOpen } />
+      <UnlockModal closeModal={this.closeModal} modalOpen={this.state.modalOpen} />
     )
   }
 
-  overlayClicked = () => {
-    this.setState({ modalOpen: true })
+  overlayClicked=() => {
+    this.setState({modalOpen: true})
   }
 
-  closeModal = () => {
-    this.setState({ modalOpen: false })
+  closeModal=() => {
+    this.setState({modalOpen: false})
   }
 }
 

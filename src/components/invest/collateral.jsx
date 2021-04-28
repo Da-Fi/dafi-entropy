@@ -166,14 +166,14 @@ class Collateral extends Component {
     return (
       <div className={ classes.root }>
         <Card className={ classes.inputCard }>
-          <Typography variant='h3' className={ classes.inputCardHeading }>Invested</Typography>
+          <Typography variant='h4' className={ classes.inputCardHeading }>Invested</Typography>
           <div className={ classes.inputCardValues }>
             <Typography variant='h4' className={ classes.inputCardBalance } align='right'>$203.43</Typography>
             <Typography variant='h5' className={ classes.inputCardSubtitle } align='right'>Current Balance</Typography>
           </div>
         </Card>
         <Card className={ classes.assetsCard }>
-          <Typography variant='h3' className={ classes.assetCardHeading }>I want to earn interest on</Typography>
+          <Typography variant='h4' className={ classes.assetCardHeading }>I want to earn interest on</Typography>
           {this.renderAssetTable()}
         </Card>
       </div>
@@ -239,7 +239,7 @@ class Collateral extends Component {
                     disabled={ loading }
                     onClick={ this.onInvest }
                     >
-                    <Typography className={ classes.buttonText } variant={ 'h3'}>Invest</Typography>
+                    <Typography className={ classes.buttonText } variant={ 'h4'}>Invest</Typography>
                   </Button>
                 </div>
               </div>

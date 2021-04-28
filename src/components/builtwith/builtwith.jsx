@@ -150,8 +150,9 @@ function MyComponent(props) {
                   color: 'rgb(1, 1, 1)',
                   fontWeight: 500,
                   fontSize: '1rem',
+                  fontFamily: '"RobotoC"'
                 } }
-                variant={ 'h3'}>
+                variant={ 'h4'}>
                 { project.name }
               </Typography>
 

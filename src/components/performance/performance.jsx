@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
-import { withStyles } from '@material-ui/core/styles';
+import React,{Component} from "react";
+import {withRouter} from "react-router-dom";
+import {withStyles} from '@material-ui/core/styles';
 import {
   Typography,
   Card
@@ -22,15 +22,15 @@ import {
 } from '../../constants'
 
 import Store from "../../stores";
-const emitter = Store.emitter
-const dispatcher = Store.dispatcher
-const store = Store.store
+const emitter=Store.emitter
+const dispatcher=Store.dispatcher
+const store=Store.store
 
-const styles = theme => ({
+const styles=theme => ({
   root: {
     flex: 1,
     display: 'flex',
-    maxWidth: '1200px',
+    maxWidth: '1600px',
     width: '100%',
     justifyContent: 'center',
     marginTop: '60px',
@@ -98,41 +98,41 @@ class Performance extends Component {
   constructor() {
     super()
 
-    this.state = {
+    this.state={
       events: store.getStore('events'),
     }
   }
 
   componentWillMount() {
-    emitter.on(GET_CONTRACT_EVENTS_RETURNED, this.contractEventsReturned);
+    emitter.on(GET_CONTRACT_EVENTS_RETURNED,this.contractEventsReturned);
 
-    dispatcher.dispatch({ type: GET_CONTRACT_EVENTS, content: {  } })
+    dispatcher.dispatch({type: GET_CONTRACT_EVENTS,content: {}})
   }
 
   componentWillUnmount() {
-    emitter.removeListener(GET_CONTRACT_EVENTS_RETURNED, this.contractEventsReturned);
+    emitter.removeListener(GET_CONTRACT_EVENTS_RETURNED,this.contractEventsReturned);
   };
 
-  contractEventsReturned = (balances) => {
-    this.setState({ events: store.getStore('events') })
+  contractEventsReturned=(balances) => {
+    this.setState({events: store.getStore('events')})
   };
 
   render() {
-    const { classes } = this.props;
+    const {classes}=this.props;
 
     return (
-      <div className={ classes.root }>
-        <div className={ classes.investedContainer }>
-          <div className={ classes.intro }>
-            <Typography variant='h3'>ROI</Typography>
+      <div className={classes.root}>
+        <div className={classes.investedContainer}>
+          <div className={classes.intro}>
+            <Typography variant='h4'>ROI</Typography>
           </div>
-          <div className={ classes.tablesContainer }>
-            <Card className={ classes.pairs } style={{ marginRight: '24px' }}>
-              { this.renderHeader() }
-              { this.renderValues() }
+          <div className={classes.tablesContainer}>
+            <Card className={classes.pairs} style={{marginRight: '24px'}}>
+              {this.renderHeader()}
+              {this.renderValues()}
             </Card>
-            <Card className={ classes.pairs }>
-              { this.renderGraph() }
+            <Card className={classes.pairs}>
+              {this.renderGraph()}
             </Card>
           </div>
         </div>
@@ -158,57 +158,57 @@ class Performance extends Component {
     // )
   }
 
-  renderHeader = () => {
-    const { classes } = this.props
+  renderHeader=() => {
+    const {classes}=this.props
 
     return (
-      <div key={ 'name' } className={ classes.pair }>
-        <div className={ classes.headerName }>
-          <Typography align='left' variant={'h3'}>Block</Typography>
+      <div key={'name'} className={classes.pair}>
+        <div className={classes.headerName}>
+          <Typography align='left' variant={'h4'}>Block</Typography>
         </div>
-        <div className={ classes.headerApr }>
-          <Typography variant={'h3'} align='right'>ETH</Typography>
+        <div className={classes.headerApr}>
+          <Typography variant={'h4'} align='right'>ETH</Typography>
         </div>
-        <div className={ classes.headerApr }>
-          <Typography variant={'h3'} align='right'>iETH</Typography>
+        <div className={classes.headerApr}>
+          <Typography variant={'h4'} align='right'>iETH</Typography>
         </div>
-        <div className={ classes.headerApr }>
-          <Typography variant={'h3'} align='right'>ETH Redeem</Typography>
+        <div className={classes.headerApr}>
+          <Typography variant={'h4'} align='right'>ETH Redeem</Typography>
         </div>
-        <div className={ classes.headerApr }>
-          <Typography variant={'h3'} align='right'>Growth %</Typography>
+        <div className={classes.headerApr}>
+          <Typography variant={'h4'} align='right'>Growth %</Typography>
         </div>
-        <div className={ classes.headerApr }>
-          <Typography variant={'h3'} align='right'>iETH:ETH</Typography>
+        <div className={classes.headerApr}>
+          <Typography variant={'h4'} align='right'>iETH:ETH</Typography>
         </div>
       </div>
     )
   }
 
-  renderValues = () => {
-    const { classes } = this.props
-    const { events } = this.state
+  renderValues=() => {
+    const {classes}=this.props
+    const {events}=this.state
 
     return events.map((e) => {
       return (
-        <div key={ e.blockNumber+'_y' } className={ classes.pair }>
-          <div className={ classes.apr }>
-            <Typography variant={'h3'} align='left' color='secondary'>{ e.blockNumber }</Typography>
+        <div key={e.blockNumber+'_y'} className={classes.pair}>
+          <div className={classes.apr}>
+            <Typography variant={'h4'} align='left' color='secondary'>{e.blockNumber}</Typography>
           </div>
-          <div className={ classes.apr }>
-            <Typography align='right' color='secondary'>{ parseFloat(e.eth).toFixed(4) + '' }</Typography>
+          <div className={classes.apr}>
+            <Typography align='right' color='secondary'>{parseFloat(e.eth).toFixed(4)+''}</Typography>
           </div>
-          <div className={ classes.apr }>
-            <Typography align='right' color='secondary'>{ parseFloat(e.iEth).toFixed(4) + '' }</Typography>
+          <div className={classes.apr}>
+            <Typography align='right' color='secondary'>{parseFloat(e.iEth).toFixed(4)+''}</Typography>
           </div>
-          <div className={ classes.apr }>
-            <Typography align='right' color='secondary'>{ parseFloat(e.ethRedeem).toFixed(4) + '' }</Typography>
+          <div className={classes.apr}>
+            <Typography align='right' color='secondary'>{parseFloat(e.ethRedeem).toFixed(4)+''}</Typography>
           </div>
-          <div className={ classes.apr }>
-            <Typography align='right' color='secondary'>{ parseFloat(e.growth).toFixed(4) + ' %' }</Typography>
+          <div className={classes.apr}>
+            <Typography align='right' color='secondary'>{parseFloat(e.growth).toFixed(4)+' %'}</Typography>
           </div>
-          <div className={ classes.apr }>
-            <Typography align='right' color='secondary'>{ parseFloat(e.ethRatio).toFixed(4) + ' %' }</Typography>
+          <div className={classes.apr}>
+            <Typography align='right' color='secondary'>{parseFloat(e.ethRatio).toFixed(4)+' %'}</Typography>
           </div>
         </div>
       )

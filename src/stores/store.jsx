@@ -80,7 +80,7 @@ import {
   COVER_BALANCES_RETURNED,
   COVER_PURCHASE,
   COVER_PURCHASE_RETURNED,
-} from '../constants';
+} from '../constants'
 import Web3 from 'web3';
 import BigNumber from 'bignumber.js'
 
@@ -98,23 +98,25 @@ import {
   authereum
 } from "./connectors";
 
-const rp = require('request-promise');
-const ethers = require('ethers');
+//TODO:ydaiv3 to ydaiv4 and address updates
 
-const Dispatcher = require('flux').Dispatcher;
-const Emitter = require('events').EventEmitter;
+const rp=require('request-promise');
+const ethers=require('ethers');
 
-const dispatcher = new Dispatcher();
-const emitter = new Emitter();
+const Dispatcher=require('flux').Dispatcher;
+const Emitter=require('events').EventEmitter;
+
+const dispatcher=new Dispatcher();
+const emitter=new Emitter();
 
 class Store {
   constructor() {
 
-    const defaultValues = this._getDefaultValues()
+    const defaultValues=this._getDefaultValues()
 
-    this.store = {
+    this.store={
       statistics: [],
-      universalGasPrice: '70',
+      universalGasPrice: '100',
       ethPrice: 0,
       dashboard: defaultValues.dashboard,
       aprs: defaultValues.aprs,
@@ -244,6 +246,11 @@ class Store {
           logo: 'alchemy.png',
           name: 'Alchemy'
         },
+        {
+          website: 'https://polkadot.network',
+          logo: 'polkadot.png',
+          name: 'Alchemy'
+        },
       ],
       web3context: null,
       languages: [
@@ -308,7 +315,7 @@ class Store {
           description: 'yDAI/yUSDC/yUSDT/yTUSD',
           erc20address: '0xdf5e0e81dff6faf3a7e52ba697820c5e32d806a8',
           insuranceAddress: '0x4BA8C6Ce0e855C051e65DfC37883360efAf7c82B',
-          insuranceABI:  config.insuranceABI,
+          insuranceABI: config.insuranceABI,
           uniswapInsuranceAddress: '0x21f5e9d4ec20571402a5396084b1634314a68c97',
           uniswapInsuranceABI: config.uniswapInsuranceABI,
           decimals: 18,
@@ -322,12 +329,12 @@ class Store {
         }
       ],
       ethBalance: 0,
-      sCrvBalance:  0
+      sCrvBalance: 0
     }
 
     dispatcher.register(
-      function (payload) {
-        switch (payload.type) {
+      function(payload) {
+        switch(payload.type) {
           case GET_BALANCES_LIGHT:
             this.getBalancesLight(payload);
             break;
@@ -450,17 +457,17 @@ class Store {
   }
 
   getStore(index) {
-    return(this.store[index]);
+    return (this.store[index]);
   };
 
   setStore(obj) {
-    this.store = {...this.store, ...obj}
+    this.store={...this.store,...obj}
     // console.log(this.store)
     return emitter.emit('StoreUpdated');
   };
 
-  resetProfile = () => {
-    const defaultvalues = this._getDefaultValues()
+  resetProfile=() => {
+    const defaultvalues=this._getDefaultValues()
 
     store.setStore({
       aprs: defaultvalues.aprs,
@@ -472,67 +479,67 @@ class Store {
     })
   }
 
-  _getDefaultValues = () => {
+  _getDefaultValues=() => {
     return {
       coverProtocols: [
 
       ],
       lendingAssets: [{
-      	"address": "0x41c84c0e2EE0b740Cf0d31F63f3B6F627DC6b393",
-      	"erc20address": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
-      	"vaultSymbol": "cyWETH",
-      	"symbol": "WETH",
-      	"vaultDecimals": 8,
-      	"decimals": 18,
-      	"collateralEnabled": false,
-      	"liquidity": 0,
-      	"balance": 0,
-      	"supplyBalance": 0,
-      	"supplyAPY": 0,
-      	"borrowBalance": 0,
-      	"borrowAPY": 0,
-      	"exchangeRate": "0",
-      	"price": 0,
-      	"supplyBalanceDolar": 0,
-      	"borrowBalanceDolar": 0,
+        "address": "0x41c84c0e2EE0b740Cf0d31F63f3B6F627DC6b393",
+        "erc20address": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "vaultSymbol": "cyWETH",
+        "symbol": "WETH",
+        "vaultDecimals": 8,
+        "decimals": 18,
+        "collateralEnabled": false,
+        "liquidity": 0,
+        "balance": 0,
+        "supplyBalance": 0,
+        "supplyAPY": 0,
+        "borrowBalance": 0,
+        "borrowAPY": 0,
+        "exchangeRate": "0",
+        "price": 0,
+        "supplyBalanceDolar": 0,
+        "borrowBalanceDolar": 0,
         "collateralPercent": 85
-      }, {
-      	"address": "0x8e595470Ed749b85C6F7669de83EAe304C2ec68F",
-      	"erc20address": "0x6B175474E89094C44Da98b954EedeAC495271d0F",
-      	"vaultSymbol": "cyDAI",
-      	"symbol": "DAI",
-      	"vaultDecimals": 8,
-      	"decimals": 18,
-      	"collateralEnabled": false,
-      	"liquidity": 0,
-      	"balance": 0,
-      	"supplyBalance": 0,
-      	"supplyAPY": 0,
-      	"borrowBalance": 0,
-      	"borrowAPY": 0,
-      	"exchangeRate": "0",
-      	"price": 0,
-      	"supplyBalanceDolar": 0,
-      	"borrowBalanceDolar": 0,
+      },{
+        "address": "0x8e595470Ed749b85C6F7669de83EAe304C2ec68F",
+        "erc20address": "0x6B175474E89094C44Da98b954EedeAC495271d0F",
+        "vaultSymbol": "cyDAI",
+        "symbol": "DAI",
+        "vaultDecimals": 8,
+        "decimals": 18,
+        "collateralEnabled": false,
+        "liquidity": 0,
+        "balance": 0,
+        "supplyBalance": 0,
+        "supplyAPY": 0,
+        "borrowBalance": 0,
+        "borrowAPY": 0,
+        "exchangeRate": "0",
+        "price": 0,
+        "supplyBalanceDolar": 0,
+        "borrowBalanceDolar": 0,
         "collateralPercent": 90
-      }, {
-      	"address": "0x7589C9E17BCFcE1Ccaa1f921196FDa177F0207Fc",
-      	"erc20address": "0x9cA85572E6A3EbF24dEDd195623F188735A5179f",
-      	"vaultSymbol": "cyY3CRV",
-      	"symbol": "y3Crv",
-      	"vaultDecimals": 8,
-      	"decimals": 18,
-      	"collateralEnabled": false,
-      	"liquidity": 0,
-      	"balance": 0,
-      	"supplyBalance": 0,
-      	"supplyAPY": 0,
-      	"borrowBalance": 0,
-      	"borrowAPY": 0,
-      	"exchangeRate": "0",
-      	"price": 0,
-      	"supplyBalanceDolar": 0,
-      	"borrowBalanceDolar": 0,
+      },{
+        "address": "0x7589C9E17BCFcE1Ccaa1f921196FDa177F0207Fc",
+        "erc20address": "0x9cA85572E6A3EbF24dEDd195623F188735A5179f",
+        "vaultSymbol": "cyY3CRV",
+        "symbol": "y3Crv",
+        "vaultDecimals": 8,
+        "decimals": 18,
+        "collateralEnabled": false,
+        "liquidity": 0,
+        "balance": 0,
+        "supplyBalance": 0,
+        "supplyAPY": 0,
+        "borrowBalance": 0,
+        "borrowAPY": 0,
+        "exchangeRate": "0",
+        "price": 0,
+        "supplyBalanceDolar": 0,
+        "borrowBalanceDolar": 0,
         "collateralPercent": 90
       }],
       assets: [
@@ -543,7 +550,7 @@ class Store {
           description: 'DAI Stablecoin',
           investSymbol: 'yDAI',
           erc20address: '0x6b175474e89094c44da98b954eedeac495271d0f',
-          iEarnContract: '0xC2cB1040220768554cf699b0d863A3cd4324ce32',
+          iEarnContract: '0x36eDE31daE17B981dc32Fba9372A09C7e4Aa29B3',
           maxApr: 0,
           balance: 0,
           investedBalance: 0,
@@ -710,7 +717,7 @@ class Store {
           erc20address: '0x0000000000085d4780B73119b644AE5ecd22b376',
           iEarnContract: '0x73a052500105205d34Daf004eAb301916DA8190f',
           lastMeasurement: 9479531,
-          measurement: 1000197346651007837 ,
+          measurement: 1000197346651007837,
           apr: 0,
           maxApr: 0,
           balance: 0,
@@ -934,7 +941,7 @@ class Store {
           description: 'Ethereum',
           investSymbol: 'iETH',
           erc20address: 'Ethereum',
-          iEarnContract: '0x9Dde7cdd09dbed542fC422d18d89A589fA9fD4C0',
+          iEarnContract: '0x36eDE31daE17B981dc32Fba9372A09C7e4Aa29B3',
           apr: 0,
           maxApr: 0,
           balance: 0,
@@ -1122,7 +1129,7 @@ class Store {
           symbol: 'YFI',
           description: 'yearn.finance',
           vaultSymbol: 'yYFI',
-          erc20address: '0x0bc529c00c6401aef6d220be8c6ea1667f6ad93e',
+          erc20address: '0x0bc529c00C6401aEF6D220BE8C6Ea1667F6Ad93e',
           vaultContractAddress: '0xBA2E7Fed597fd0E3e70f5130BcDbbFE06bB94fe1',
           vaultContractABI: config.vaultContractV3ABI,
           balance: 0,
@@ -1142,9 +1149,9 @@ class Store {
           symbol: 'DAI',
           description: 'DAI Stablecoin',
           vaultSymbol: 'yDAI',
-          erc20address: '0x6b175474e89094c44da98b954eedeac495271d0f',
+          erc20address: '0x6B175474E89094C44Da98b954EedeAC495271d0F',
           vaultContractAddress: '0xACd43E627e64355f1861cEC6d3a6688B31a6F952',
-          vaultContractABI: config.vaultContractV3ABI,
+          vaultContractABI: config.vaultContractV2ABI,
           balance: 0,
           vaultBalance: 0,
           decimals: 18,
@@ -1155,9 +1162,11 @@ class Store {
           lastMeasurement: 10650116,
           measurement: 1e18,
           price_id: 'dai',
-          yVaultCheckAddress: '0x1bbe0f9af0cf852f9ff14637da2f0bc477a6d1ad',
+          yVaultCheckAddress: '0x1bbe0F9Af0CF852f9Ff14637dA2F0bC477A6d1Ad',
           yVaultCheckDisabled: true
         },
+
+
         {
           id: 'TUSD',
           name: 'TUSD',
@@ -1184,7 +1193,7 @@ class Store {
           symbol: 'USDC',
           description: 'USD Coin',
           vaultSymbol: 'yUSDC',
-          erc20address: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48',
+          erc20address: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
           vaultContractAddress: '0x597aD1e0c13Bfe8025993D9e79C69E1c0233522e',
           vaultContractABI: config.vaultContractABI,
           balance: 0,
@@ -1264,7 +1273,7 @@ class Store {
           symbol: 'LINK',
           description: 'ChainLink',
           vaultSymbol: 'yLINK',
-          erc20address: '0x514910771af9ca656af840dff83e8264ecf986ca',
+          erc20address: '0x514910771AF9Ca656af840dff83E8264EcF986CA',
           vaultContractAddress: '0x881b06da56BB5675c54E4Ed311c21E54C5025298',
           vaultContractABI: config.vaultContractV3ABI,
           balance: 0,
@@ -1285,7 +1294,7 @@ class Store {
           symbol: 'WETH',
           description: 'Wrapped Ether',
           vaultSymbol: 'yWETH',
-          erc20address: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2',
+          erc20address: '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2',
           vaultContractAddress: '0xe1237aA7f535b0CC33Fd973D66cBf830354D16c7',
           vaultContractABI: config.vaultContractV4ABI,
           balance: 0,
@@ -1329,7 +1338,7 @@ class Store {
           symbol: "CRV",
           description: "veCRV DAO Admin Rewards",
           vaultSymbol: "yveCRV-DAO",
-          erc20address: "0xd533a949740bb3306d119cc777fa900ba034cd52",
+          erc20address: "0xD533a949740bb3306d119CC777fa900bA034cd52",
           vaultContractAddress: "0xc5bDdf9843308380375a611c18B50Fb9341f502A",
           vaultContractABI: config.veCRVvaultContractABI,
           balance: 0,
@@ -1353,205 +1362,205 @@ class Store {
         }
       ],
       aprs: [{
-          token: 'DAI',
-          address: '0x6b175474e89094c44da98b954eedeac495271d0f',
-          earnAddress: '0x16de59092dAE5CcF4A1E6439D611fd0653f0Bd01',
-          lastMeasurement: 9465912,
-          measurement: 1000037230456849197,
-          mod: 1,
-          decimals: 18
-        },{
-          token: 'TUSD',
-          address: '0x0000000000085d4780B73119b644AE5ecd22b376',
-          earnAddress: '0x73a052500105205d34daf004eab301916da8190f',
-          lastMeasurement: 9479531,
-          measurement: 1000197346651007837 ,
-          created: 0,
-          mod: 1,
-          decimals: 18
-        },{
-          token: 'USDC',
-          address: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
-          earnAddress: '0xa2609B2b43AC0F5EbE27deB944d2a399C201E3dA',
-          lastMeasurement: 9400732,
-          measurement: 1001761741440856097,
-          mod: 1,
-          decimals: 6
-        },{
-          token: 'USDT',
-          address: '0xdAC17F958D2ee523a2206206994597C13D831ec7',
-          earnAddress: '0x83f798e925BcD4017Eb265844FDDAbb448f1707D',
-          lastMeasurement: 9465880,
-          measurement: 1000030025124779312,
-          mod: 1,
-          decimals: 6
-        },{
-          token: 'SUSD',
-          address: '0x57Ab1ec28D129707052df4dF418D58a2D46d5f51',
-          earnAddress: '0x36324b8168f960A12a8fD01406C9C78143d41380',
-          lastMeasurement: 9400732,
-          measurement: 1029186724259834543,
-          mod: 1,
-          decimals: 18
-        },{
-          token: 'BAT',
-          address: '0x0D8775F648430679A709E98d2b0Cb6250d2887EF',
-          created: 0,
-          mod: 1,
-          earnAddress: '',
-          decimals: 18
-        },{
-          token: 'ETH',
-          address: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
-          created: 0,
-          mod: 1,
-          earnAddress: '',
-          decimals: 18
-        },{
-          token: 'LINK',
-          address: '0x514910771AF9Ca656af840dff83E8264EcF986CA',
-          created: 0,
-          mod: 1,
-          earnAddress: '',
-          decimals: 18
-        },{
-          token: 'KNC',
-          address: '0xdd974D5C2e2928deA5F71b9825b8b646686BD200',
-          created: 0,
-          mod: 1,
-          earnAddress: '',
-          decimals: 18
-        },{
-          token: 'REP',
-          address: '0x1985365e9f78359a9B6AD760e32412f4a445E862',
-          created: 0,
-          mod: 1,
-          earnAddress: '',
-          decimals: 18
-        },{
-          token: 'MKR',
-          address: '0x9f8F72aA9304c8B593d555F12eF6589cC3A579A2',
-          created: 0,
-          mod: 1,
-          earnAddress: '',
-          decimals: 18
-        },{
-          token: 'ZRX',
-          address: '0xE41d2489571d322189246DaFA5ebDe1F4699F498',
-          created: 0,
-          mod: 1,
-          earnAddress: '',
-          decimals: 18
-        },{
-          token: 'SNX',
-          address: '0xC011a73ee8576Fb46F5E1c5751cA3B9Fe0af2a6F',
-          created: 0,
-          mod: 1,
-          earnAddress: '',
-          decimals: 18
-        },{
-          token: 'wBTC',
-          address: '0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599',
-          earnAddress: '0x04EF8121aD039ff41d10029c91EA1694432514e9',
-          lastMeasurement: 9427488,
-          measurement: 2000175540087812685,
-          mod: 1,
-          decimals: 18
-        },
+        token: 'DAI',
+        address: '0x6B175474E89094C44Da98b954EedeAC495271d0F',
+        earnAddress: '0x16de59092dAE5CcF4A1E6439D611fd0653f0Bd01',
+        lastMeasurement: 9465912,
+        measurement: 1000037230456849197,
+        mod: 1,
+        decimals: 18
+      },{
+        token: 'TUSD',
+        address: '0x0000000000085d4780B73119b644AE5ecd22b376',
+        earnAddress: '0x73a052500105205d34Daf004eAb301916DA8190f',
+        lastMeasurement: 9479531,
+        measurement: 1000197346651007837,
+        created: 0,
+        mod: 1,
+        decimals: 18
+      },{
+        token: 'USDC',
+        address: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
+        earnAddress: '0xa2609B2b43AC0F5EbE27deB944d2a399C201E3dA',
+        lastMeasurement: 9400732,
+        measurement: 1001761741440856097,
+        mod: 1,
+        decimals: 6
+      },{
+        token: 'USDT',
+        address: '0xdAC17F958D2ee523a2206206994597C13D831ec7',
+        earnAddress: '0x83f798e925BcD4017Eb265844FDDAbb448f1707D',
+        lastMeasurement: 9465880,
+        measurement: 1000030025124779312,
+        mod: 1,
+        decimals: 6
+      },{
+        token: 'SUSD',
+        address: '0x57Ab1ec28D129707052df4dF418D58a2D46d5f51',
+        earnAddress: '0x36324b8168f960A12a8fD01406C9C78143d41380',
+        lastMeasurement: 9400732,
+        measurement: 1029186724259834543,
+        mod: 1,
+        decimals: 18
+      },{
+        token: 'BAT',
+        address: '0x0D8775F648430679A709E98d2b0Cb6250d2887EF',
+        created: 0,
+        mod: 1,
+        earnAddress: '',
+        decimals: 18
+      },{
+        token: 'ETH',
+        address: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
+        created: 0,
+        mod: 1,
+        earnAddress: '',
+        decimals: 18
+      },{
+        token: 'LINK',
+        address: '0x514910771AF9Ca656af840dff83E8264EcF986CA',
+        created: 0,
+        mod: 1,
+        earnAddress: '',
+        decimals: 18
+      },{
+        token: 'KNC',
+        address: '0xdd974D5C2e2928deA5F71b9825b8b646686BD200',
+        created: 0,
+        mod: 1,
+        earnAddress: '',
+        decimals: 18
+      },{
+        token: 'REP',
+        address: '0x1985365e9f78359a9B6AD760e32412f4a445E862',
+        created: 0,
+        mod: 1,
+        earnAddress: '',
+        decimals: 18
+      },{
+        token: 'MKR',
+        address: '0x9f8F72aA9304c8B593d555F12eF6589cC3A579A2',
+        created: 0,
+        mod: 1,
+        earnAddress: '',
+        decimals: 18
+      },{
+        token: 'ZRX',
+        address: '0xE41d2489571d322189246DaFA5ebDe1F4699F498',
+        created: 0,
+        mod: 1,
+        earnAddress: '',
+        decimals: 18
+      },{
+        token: 'SNX',
+        address: '0xC011a73ee8576Fb46F5E1c5751cA3B9Fe0af2a6F',
+        created: 0,
+        mod: 1,
+        earnAddress: '',
+        decimals: 18
+      },{
+        token: 'wBTC',
+        address: '0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599',
+        earnAddress: '0x04EF8121aD039ff41d10029c91EA1694432514e9',
+        lastMeasurement: 9427488,
+        measurement: 2000175540087812685,
+        mod: 1,
+        decimals: 18
+      },
       ],
       dashboard: {
-          vault_balance_usd: 0,
-          vault_growth_usd_daily: 0,
-          vault_growth_usd_weekly: 0,
-          vault_growth_usd_yearly: 0,
-          vault_growth_usd_daily_perc: 0,
-          vault_growth_usd_weekly_perc: 0,
-          vault_growth_usd_yearly_perc: 0,
+        vault_balance_usd: 0,
+        vault_growth_usd_daily: 0,
+        vault_growth_usd_weekly: 0,
+        vault_growth_usd_yearly: 0,
+        vault_growth_usd_daily_perc: 0,
+        vault_growth_usd_weekly_perc: 0,
+        vault_growth_usd_yearly_perc: 0,
 
-          vault_balance_eth: 0,
-          vault_growth_eth_daily: 0,
-          vault_growth_eth_weekly: 0,
-          vault_growth_eth_yearly: 0,
-          vault_growth_eth_daily_perc: 0,
-          vault_growth_eth_weekly_perc: 0,
-          vault_growth_eth_yearly_perc: 0,
+        vault_balance_eth: 0,
+        vault_growth_eth_daily: 0,
+        vault_growth_eth_weekly: 0,
+        vault_growth_eth_yearly: 0,
+        vault_growth_eth_daily_perc: 0,
+        vault_growth_eth_weekly_perc: 0,
+        vault_growth_eth_yearly_perc: 0,
 
 
-          earn_balance_usd: 0,
-          earn_growth_usd_daily: 0,
-          earn_growth_usd_weekly: 0,
-          earn_growth_usd_yearly: 0,
-          earn_growth_usd_daily_perc: 0,
-          earn_growth_usd_weekly_perc: 0,
-          earn_growth_usd_yearly_perc: 0,
+        earn_balance_usd: 0,
+        earn_growth_usd_daily: 0,
+        earn_growth_usd_weekly: 0,
+        earn_growth_usd_yearly: 0,
+        earn_growth_usd_daily_perc: 0,
+        earn_growth_usd_weekly_perc: 0,
+        earn_growth_usd_yearly_perc: 0,
 
-          earn_balance_eth: 0,
-          earn_growth_eth_daily: 0,
-          earn_growth_eth_weekly: 0,
-          earn_growth_eth_yearly: 0,
-          earn_growth_eth_daily_perc: 0,
-          earn_growth_eth_weekly_perc: 0,
-          earn_growth_eth_yearly_perc: 0,
+        earn_balance_eth: 0,
+        earn_growth_eth_daily: 0,
+        earn_growth_eth_weekly: 0,
+        earn_growth_eth_yearly: 0,
+        earn_growth_eth_daily_perc: 0,
+        earn_growth_eth_weekly_perc: 0,
+        earn_growth_eth_yearly_perc: 0,
 
-          portfolio_balance_usd: 0,
-          portfolio_growth_usd_daily: 0,
-          portfolio_growth_usd_weekly: 0,
-          portfolio_growth_usd_yearly: 0,
-          portfolio_growth_usd_daily_perc: 0,
-          portfolio_growth_usd_weekly_perc: 0,
-          portfolio_growth_usd_yearly_perc: 0,
+        portfolio_balance_usd: 0,
+        portfolio_growth_usd_daily: 0,
+        portfolio_growth_usd_weekly: 0,
+        portfolio_growth_usd_yearly: 0,
+        portfolio_growth_usd_daily_perc: 0,
+        portfolio_growth_usd_weekly_perc: 0,
+        portfolio_growth_usd_yearly_perc: 0,
 
-          portfolio_balance_eth: 0,
-          portfolio_growth_eth_daily: 0,
-          portfolio_growth_eth_weekly: 0,
-          portfolio_growth_eth_yearly: 0,
-          portfolio_growth_eth_daily_perc: 0,
-          portfolio_growth_eth_weekly_perc: 0,
-          portfolio_growth_eth_yearly_perc: 0,
+        portfolio_balance_eth: 0,
+        portfolio_growth_eth_daily: 0,
+        portfolio_growth_eth_weekly: 0,
+        portfolio_growth_eth_yearly: 0,
+        portfolio_growth_eth_daily_perc: 0,
+        portfolio_growth_eth_weekly_perc: 0,
+        portfolio_growth_eth_yearly_perc: 0,
       }
     }
   }
 
-  invest = (payload) => {
-    const account = store.getStore('account')
-    const { asset, amount } = payload.content
+  invest=(payload) => {
+    const account=store.getStore('account')
+    const {asset,amount}=payload.content
 
-    if(asset.erc20address !== 'Ethereum') {
-      this._checkApproval(asset, account, amount, asset.iEarnContract, (err) => {
+    if(asset.erc20address!=='Ethereum') {
+      this._checkApproval(asset,account,amount,asset.iEarnContract,(err) => {
         if(err) {
-          return emitter.emit(ERROR, err);
+          return emitter.emit(ERROR,err);
         }
 
-        this._callInvest(asset, account, amount, (err, investResult) => {
+        this._callInvest(asset,account,amount,(err,investResult) => {
           if(err) {
-            return emitter.emit(ERROR, err);
+            return emitter.emit(ERROR,err);
           }
 
-          return emitter.emit(INVEST_RETURNED, investResult)
+          return emitter.emit(INVEST_RETURNED,investResult)
         })
       })
     } else {
-      this._callInvest(asset, account, amount, (err, investResult) => {
+      this._callInvest(asset,account,amount,(err,investResult) => {
         if(err) {
-          return emitter.emit(ERROR, err);
+          return emitter.emit(ERROR,err);
         }
 
-        return emitter.emit(INVEST_RETURNED, investResult)
+        return emitter.emit(INVEST_RETURNED,investResult)
       })
     }
   }
 
-  _checkApprovalForProxy = async (asset, account, amount, contract, callback) => {
-    const web3 = new Web3(store.getStore('web3context').library.provider);
+  _checkApprovalForProxy=async (asset,account,amount,contract,callback) => {
+    const web3=new Web3(store.getStore('web3context').library.provider);
 
-    const vaultContract = new web3.eth.Contract(asset.vaultContractABI, asset.vaultContractAddress)
+    const vaultContract=new web3.eth.Contract(asset.vaultContractABI,asset.vaultContractAddress)
     try {
-      const allowance = await vaultContract.methods.allowance(account.address, contract).call({ from: account.address })
+      const allowance=await vaultContract.methods.allowance(account.address,contract).call({from: account.address})
 
-      const ethAllowance = web3.utils.fromWei(allowance, "ether")
+      const ethAllowance=web3.utils.fromWei(allowance,"ether")
 
-      if(parseFloat(ethAllowance) < parseFloat(amount)) {
-        await vaultContract.methods.approve(contract, web3.utils.toWei('999999999999', "ether")).send({ from: account.address, gasPrice: web3.utils.toWei(await this._getGasPrice(), 'gwei') })
+      if(parseFloat(ethAllowance)<parseFloat(amount)) {
+        await vaultContract.methods.approve(contract,web3.utils.toWei('999999999999',"ether")).send({from: account.address,gasPrice: web3.utils.toWei(await this._getGasPrice(),'gwei')})
         callback()
       } else {
         callback()
@@ -1564,18 +1573,18 @@ class Store {
     }
   }
 
-  _checkCurveMintApproval = async (asset, account, contract, callback) => {
+  _checkCurveMintApproval=async (asset,account,contract,callback) => {
     try {
 
-      const web3 = new Web3(store.getStore('web3context').library.provider);
-      const curveContracts = new web3.eth.Contract(asset.minterContractABI, asset.minterContractAddress)
+      const web3=new Web3(store.getStore('web3context').library.provider);
+      const curveContracts=new web3.eth.Contract(asset.minterContractABI,asset.minterContractAddress)
 
-      const allowedToMintFor = await curveContracts.methods.allowed_to_mint_for(contract, account.address).call({ from: account.address })
+      const allowedToMintFor=await curveContracts.methods.allowed_to_mint_for(contract,account.address).call({from: account.address})
 
       if(allowedToMintFor) {
         return callback()
       } else {
-        await curveContracts.methods.toggle_approve_mint(contract).send({ from: account.address, gasPrice: web3.utils.toWei(await this._getGasPrice(), 'gwei') })
+        await curveContracts.methods.toggle_approve_mint(contract).send({from: account.address,gasPrice: web3.utils.toWei(await this._getGasPrice(),'gwei')})
         callback()
       }
 
@@ -1587,34 +1596,34 @@ class Store {
     }
   }
 
-  _checkApproval = async (asset, account, amount, contract, callback) => {
+  _checkApproval=async (asset,account,amount,contract,callback) => {
 
-    if(asset.erc20address === 'Ethereum') {
+    if(asset.erc20address==='Ethereum') {
       return callback()
     }
 
-    const web3 = new Web3(store.getStore('web3context').library.provider);
-    let erc20Contract = new web3.eth.Contract(config.erc20ABI, asset.erc20address)
+    const web3=new Web3(store.getStore('web3context').library.provider);
+    let erc20Contract=new web3.eth.Contract(config.erc20ABI,asset.erc20address)
     try {
-      const allowance = await erc20Contract.methods.allowance(account.address, contract).call({ from: account.address })
+      const allowance=await erc20Contract.methods.allowance(account.address,contract).call({from: account.address})
 
-      let ethAllowance = web3.utils.fromWei(allowance, "ether")
-      if (asset.decimals !== 18) {
-        ethAllowance = (allowance*10**asset.decimals).toFixed(0);
+      let ethAllowance=web3.utils.fromWei(allowance,"ether")
+      if(asset.decimals!==18) {
+        ethAllowance=(allowance*10**asset.decimals).toFixed(0);
       }
 
-      const amountToSend = MAX_UINT256;
+      const amountToSend=MAX_UINT256;
 
-      if(parseFloat(ethAllowance) < parseFloat(amount)) {
+      if(parseFloat(ethAllowance)<parseFloat(amount)) {
         /*
           code to accomodate for "assert _value == 0 or self.allowances[msg.sender][_spender] == 0" in contract
           We check to see if the allowance is > 0. If > 0 set to 0 before we set it to the correct amount.
         */
-        if(['crvV1', 'crvV2', 'crvV3', 'crvV4', 'USDTv1', 'USDTv2', 'USDTv3', 'USDT', 'sCRV'].includes(asset.id) && ethAllowance > 0) {
-          await erc20Contract.methods.approve(contract, web3.utils.toWei('0', "ether")).send({ from: account.address, gasPrice: web3.utils.toWei(await this._getGasPrice(), 'gwei') })
+        if(['crvV1','crvV2','crvV3','crvV4','USDTv1','USDTv2','USDTv3','USDT','sCRV'].includes(asset.id)&&ethAllowance>0) {
+          await erc20Contract.methods.approve(contract,web3.utils.toWei('0',"ether")).send({from: account.address,gasPrice: web3.utils.toWei(await this._getGasPrice(),'gwei')})
         }
 
-        await erc20Contract.methods.approve(contract, amountToSend).send({ from: account.address, gasPrice: web3.utils.toWei(await this._getGasPrice(), 'gwei') })
+        await erc20Contract.methods.approve(contract,amountToSend).send({from: account.address,gasPrice: web3.utils.toWei(await this._getGasPrice(),'gwei')})
         callback()
       } else {
         callback()
@@ -1627,23 +1636,23 @@ class Store {
     }
   }
 
-  _checkApprovalWaitForConfirmation = async (asset, account, amount, contract, callback) => {
-    const web3 = new Web3(store.getStore('web3context').library.provider);
-    let erc20Contract = new web3.eth.Contract(config.erc20ABI, asset.erc20address)
-    const allowance = await erc20Contract.methods.allowance(account.address, contract).call({ from: account.address })
+  _checkApprovalWaitForConfirmation=async (asset,account,amount,contract,callback) => {
+    const web3=new Web3(store.getStore('web3context').library.provider);
+    let erc20Contract=new web3.eth.Contract(config.erc20ABI,asset.erc20address)
+    const allowance=await erc20Contract.methods.allowance(account.address,contract).call({from: account.address})
 
-    const ethAllowance = web3.utils.fromWei(allowance, "ether")
+    const ethAllowance=web3.utils.fromWei(allowance,"ether")
 
-    if(parseFloat(ethAllowance) < parseFloat(amount)) {
-      if(['crvV1', 'crvV2', 'crvV3', 'crvV4', 'USDTv1', 'USDTv2', 'USDTv3', 'sCRV'].includes(asset.id) && ethAllowance > 0) {
-        erc20Contract.methods.approve(contract, web3.utils.toWei('0', "ether")).send({ from: account.address, gasPrice: web3.utils.toWei(await this._getGasPrice(), 'gwei') })
-          .on('transactionHash', async function(hash){
-            erc20Contract.methods.approve(contract, web3.utils.toWei(amount, "ether")).send({ from: account.address, gasPrice: web3.utils.toWei(await this._getGasPrice(), 'gwei') })
-              .on('transactionHash', function(hash){
+    if(parseFloat(ethAllowance)<parseFloat(amount)) {
+      if(['crvV1','crvV2','crvV3','crvV4','USDTv1','USDTv2','USDTv3','sCRV'].includes(asset.id)&&ethAllowance>0) {
+        erc20Contract.methods.approve(contract,web3.utils.toWei('0',"ether")).send({from: account.address,gasPrice: web3.utils.toWei(await this._getGasPrice(),'gwei')})
+          .on('transactionHash',async function(hash) {
+            erc20Contract.methods.approve(contract,web3.utils.toWei(amount,"ether")).send({from: account.address,gasPrice: web3.utils.toWei(await this._getGasPrice(),'gwei')})
+              .on('transactionHash',function(hash) {
                 callback()
               })
-              .on('error', function(error) {
-                if (!error.toString().includes("-32601")) {
+              .on('error',function(error) {
+                if(!error.toString().includes("-32601")) {
                   if(error.message) {
                     return callback(error.message)
                   }
@@ -1651,8 +1660,8 @@ class Store {
                 }
               })
           })
-          .on('error', function(error) {
-            if (!error.toString().includes("-32601")) {
+          .on('error',function(error) {
+            if(!error.toString().includes("-32601")) {
               if(error.message) {
                 return callback(error.message)
               }
@@ -1660,12 +1669,12 @@ class Store {
             }
           })
       } else {
-        erc20Contract.methods.approve(contract, web3.utils.toWei(amount, "ether")).send({ from: account.address, gasPrice: web3.utils.toWei(await this._getGasPrice(), 'gwei') })
-          .on('transactionHash', function(hash){
+        erc20Contract.methods.approve(contract,web3.utils.toWei(amount,"ether")).send({from: account.address,gasPrice: web3.utils.toWei(await this._getGasPrice(),'gwei')})
+          .on('transactionHash',function(hash) {
             callback()
           })
-          .on('error', function(error) {
-            if (!error.toString().includes("-32601")) {
+          .on('error',function(error) {
+            if(!error.toString().includes("-32601")) {
               if(error.message) {
                 return callback(error.message)
               }
@@ -1678,24 +1687,24 @@ class Store {
     }
   }
 
-  _callInvest = async (asset, account, amount, callback) => {
-    const web3 = new Web3(store.getStore('web3context').library.provider);
+  _callInvest=async (asset,account,amount,callback) => {
+    const web3=new Web3(store.getStore('web3context').library.provider);
 
-    let iEarnContract = new web3.eth.Contract(asset.abi, asset.iEarnContract)
-    if(asset.erc20address === 'Ethereum') {
-      iEarnContract.methods[asset.invest]().send({ from: account.address, value: web3.utils.toWei(amount, "ether"), gasPrice: web3.utils.toWei(await this._getGasPrice(), 'gwei') })
-        .on('transactionHash', function(hash){
+    let iEarnContract=new web3.eth.Contract(asset.abi,asset.iEarnContract)
+    if(asset.erc20address==='Ethereum') {
+      iEarnContract.methods[asset.invest]().send({from: account.address,value: web3.utils.toWei(amount,"ether"),gasPrice: web3.utils.toWei(await this._getGasPrice(),'gwei')})
+        .on('transactionHash',function(hash) {
           console.log(hash)
-          callback(null, hash)
+          callback(null,hash)
         })
-        .on('confirmation', function(confirmationNumber, receipt){
-          console.log(confirmationNumber, receipt);
+        .on('confirmation',function(confirmationNumber,receipt) {
+          console.log(confirmationNumber,receipt);
         })
-        .on('receipt', function(receipt){
+        .on('receipt',function(receipt) {
           console.log(receipt);
         })
-        .on('error', function(error) {
-          if (!error.toString().includes("-32601")) {
+        .on('error',function(error) {
+          if(!error.toString().includes("-32601")) {
             if(error.message) {
               return callback(error.message)
             }
@@ -1703,7 +1712,7 @@ class Store {
           }
         })
         .catch((error) => {
-          if (!error.toString().includes("-32601")) {
+          if(!error.toString().includes("-32601")) {
             if(error.message) {
               return callback(error.message)
             }
@@ -1711,23 +1720,23 @@ class Store {
           }
         })
     } else {
-      var amountToSend = web3.utils.toWei(amount, "ether")
-      if (asset.decimals !== 18) {
-        amountToSend = amount*10**asset.decimals;
+      var amountToSend=web3.utils.toWei(amount,"ether")
+      if(asset.decimals!==18) {
+        amountToSend=amount*10**asset.decimals;
       }
-      iEarnContract.methods[asset.invest](amountToSend).send({ from: account.address, gasPrice: web3.utils.toWei(await this._getGasPrice(), 'gwei') })
-        .on('transactionHash', function(hash){
+      iEarnContract.methods[asset.invest](amountToSend).send({from: account.address,gasPrice: web3.utils.toWei(await this._getGasPrice(),'gwei')})
+        .on('transactionHash',function(hash) {
           console.log(hash)
-          callback(null, hash)
+          callback(null,hash)
         })
-        .on('confirmation', function(confirmationNumber, receipt){
-          console.log(confirmationNumber, receipt);
+        .on('confirmation',function(confirmationNumber,receipt) {
+          console.log(confirmationNumber,receipt);
         })
-        .on('receipt', function(receipt){
+        .on('receipt',function(receipt) {
           console.log(receipt);
         })
-        .on('error', function(error) {
-          if (!error.toString().includes("-32601")) {
+        .on('error',function(error) {
+          if(!error.toString().includes("-32601")) {
             if(error.message) {
               return callback(error.message)
             }
@@ -1735,7 +1744,7 @@ class Store {
           }
         })
         .catch((error) => {
-          if (!error.toString().includes("-32601")) {
+          if(!error.toString().includes("-32601")) {
             if(error.message) {
               return callback(error.message)
             }
@@ -1745,235 +1754,235 @@ class Store {
     }
   }
 
-  rebalance = (payload) => {
-    const account = store.getStore('account')
-    const { asset } = payload.content
+  rebalance=(payload) => {
+    const account=store.getStore('account')
+    const {asset}=payload.content
 
-    this._callRebalance(asset, account, (err, result) => {
+    this._callRebalance(asset,account,(err,result) => {
       if(err) {
-        return emitter.emit(ERROR, err);
+        return emitter.emit(ERROR,err);
       }
 
-      return emitter.emit(REBALANCE_RETURNED, result)
+      return emitter.emit(REBALANCE_RETURNED,result)
     })
   }
 
-  _callRebalance = async (asset, account, callback) => {
-    const web3 = new Web3(store.getStore('web3context').library.provider);
+  _callRebalance=async (asset,account,callback) => {
+    const web3=new Web3(store.getStore('web3context').library.provider);
 
-    let iEarnContract = new web3.eth.Contract(config.IEarnERC20ABI, asset.iEarnContract)
+    let iEarnContract=new web3.eth.Contract(config.IEarnERC20ABI,asset.iEarnContract)
 
-    iEarnContract.methods.rebalance().send({ from: account.address, gasPrice: web3.utils.toWei(await this._getGasPrice(), 'gwei') })
-    .on('transactionHash', function(hash){
-      console.log(hash)
-      callback(null, hash)
-    })
-    .on('confirmation', function(confirmationNumber, receipt){
-      console.log(confirmationNumber, receipt);
-    })
-    .on('receipt', function(receipt){
-      console.log(receipt);
-    })
-    .on('error', function(error) {
-      console.log(error);
-      if (!error.toString().includes("-32601")) {
-        if(error.message) {
-          return callback(error.message)
+    iEarnContract.methods.rebalance().send({from: account.address,gasPrice: web3.utils.toWei(await this._getGasPrice(),'gwei')})
+      .on('transactionHash',function(hash) {
+        console.log(hash)
+        callback(null,hash)
+      })
+      .on('confirmation',function(confirmationNumber,receipt) {
+        console.log(confirmationNumber,receipt);
+      })
+      .on('receipt',function(receipt) {
+        console.log(receipt);
+      })
+      .on('error',function(error) {
+        console.log(error);
+        if(!error.toString().includes("-32601")) {
+          if(error.message) {
+            return callback(error.message)
+          }
+          callback(error)
         }
-        callback(error)
-      }
-    })
+      })
   }
 
-  donate = (payload) => {
-    const account = store.getStore('account')
-    const { asset, amount } = payload.content
+  donate=(payload) => {
+    const account=store.getStore('account')
+    const {asset,amount}=payload.content
 
-    this._callDonate(asset, account, amount, (err, result) => {
+    this._callDonate(asset,account,amount,(err,result) => {
       if(err) {
-        return emitter.emit(ERROR, err);
+        return emitter.emit(ERROR,err);
       }
 
-      return emitter.emit(DONATE_RETURNED, result)
+      return emitter.emit(DONATE_RETURNED,result)
     })
   }
 
-  _callDonate = async (asset, account, amount, callback) => {
-    const web3 = new Web3(store.getStore('web3context').library.provider);
+  _callDonate=async (asset,account,amount,callback) => {
+    const web3=new Web3(store.getStore('web3context').library.provider);
 
-    let iEarnContract = new web3.eth.Contract(config.IEarnERC20ABI, asset.erc20address)
+    let iEarnContract=new web3.eth.Contract(config.IEarnERC20ABI,asset.erc20address)
 
-    var amountSend = web3.utils.toWei(amount, "ether")
-    if (asset.decimals !== 18) {
-      amountSend = Math.round(amount*10**asset.decimals);
+    var amountSend=web3.utils.toWei(amount,"ether")
+    if(asset.decimals!==18) {
+      amountSend=Math.round(amount*10**asset.decimals);
     }
 
-    iEarnContract.methods.transfer(asset.iEarnContract, amountSend).send({ from: account.address, gasPrice: web3.utils.toWei(await this._getGasPrice(), 'gwei') })
-    .on('transactionHash', function(hash){
-      console.log(hash)
-      callback(null, hash)
-    })
-    .on('confirmation', function(confirmationNumber, receipt){
-      console.log(confirmationNumber, receipt);
-    })
-    .on('receipt', function(receipt){
-      console.log(receipt);
-    })
-    .on('error', function(error) {
-      console.log(error);
-      if (!error.toString().includes("-32601")) {
-        if(error.message) {
-          return callback(error.message)
+    iEarnContract.methods.transfer(asset.iEarnContract,amountSend).send({from: account.address,gasPrice: web3.utils.toWei(await this._getGasPrice(),'gwei')})
+      .on('transactionHash',function(hash) {
+        console.log(hash)
+        callback(null,hash)
+      })
+      .on('confirmation',function(confirmationNumber,receipt) {
+        console.log(confirmationNumber,receipt);
+      })
+      .on('receipt',function(receipt) {
+        console.log(receipt);
+      })
+      .on('error',function(error) {
+        console.log(error);
+        if(!error.toString().includes("-32601")) {
+          if(error.message) {
+            return callback(error.message)
+          }
+          callback(error)
         }
-        callback(error)
-      }
-    })
+      })
   }
 
-  redeem = (payload) => {
-    const account = store.getStore('account')
-    const { asset, amount } = payload.content
+  redeem=(payload) => {
+    const account=store.getStore('account')
+    const {asset,amount}=payload.content
 
-    this._callRedeem(asset, account, amount, (err, redeemResult) => {
+    this._callRedeem(asset,account,amount,(err,redeemResult) => {
       if(err) {
-        return emitter.emit(ERROR, err);
+        return emitter.emit(ERROR,err);
       }
-      return emitter.emit(REDEEM_RETURNED, redeemResult)
+      return emitter.emit(REDEEM_RETURNED,redeemResult)
     })
   }
 
-  _callRedeem = async (asset, account, amount, callback) => {
-    const web3 = new Web3(store.getStore('web3context').library.provider);
+  _callRedeem=async (asset,account,amount,callback) => {
+    const web3=new Web3(store.getStore('web3context').library.provider);
 
-    let iEarnContract = new web3.eth.Contract(asset.abi, asset.iEarnContract)
+    let iEarnContract=new web3.eth.Contract(asset.abi,asset.iEarnContract)
 
-    var amountSend = web3.utils.toWei(amount, "ether")
-    if (asset.decimals !== 18) {
-      amountSend = Math.round(amount*10**asset.decimals);
+    var amountSend=web3.utils.toWei(amount,"ether")
+    if(asset.decimals!==18) {
+      amountSend=Math.round(amount*10**asset.decimals);
     }
 
-    iEarnContract.methods[asset.redeem](amountSend).send({ from: account.address, gasPrice: web3.utils.toWei(await this._getGasPrice(), 'gwei') })
-    .on('transactionHash', function(hash){
-      console.log(hash)
-      callback(null, hash)
-    })
-    .on('confirmation', function(confirmationNumber, receipt){
-      console.log(confirmationNumber, receipt);
-    })
-    .on('receipt', function(receipt){
-      console.log(receipt);
-    })
-    .on('error', function(error) {
-      console.log(error);
-      if (!error.toString().includes("-32601")) {
-        if(error.message) {
-          return callback(error.message)
+    iEarnContract.methods[asset.redeem](amountSend).send({from: account.address,gasPrice: web3.utils.toWei(await this._getGasPrice(),'gwei')})
+      .on('transactionHash',function(hash) {
+        console.log(hash)
+        callback(null,hash)
+      })
+      .on('confirmation',function(confirmationNumber,receipt) {
+        console.log(confirmationNumber,receipt);
+      })
+      .on('receipt',function(receipt) {
+        console.log(receipt);
+      })
+      .on('error',function(error) {
+        console.log(error);
+        if(!error.toString().includes("-32601")) {
+          if(error.message) {
+            return callback(error.message)
+          }
+          callback(error)
         }
-        callback(error)
-      }
-    })
+      })
   }
 
-  getBalancesLight = async () => {
-    const account = store.getStore('account')
+  getBalancesLight=async () => {
+    const account=store.getStore('account')
 
-    const assets = store.getStore('assets')
+    const assets=store.getStore('assets')
 
-    if(!account || !account.address) {
+    if(!account||!account.address) {
       return false
     }
 
-    const web3 = await this._getWeb3Provider();
+    const web3=await this._getWeb3Provider();
     if(!web3) {
       return null
     }
 
-    async.map(assets, (asset, callback) => {
+    async.map(assets,(asset,callback) => {
       async.parallel([
-        (callbackInner) => { this._getERC20Balance(web3, asset, account, callbackInner) },
-        (callbackInner) => { this._getInvestedBalance(web3, asset, account, callbackInner) },
-        (callbackInner) => { this._getPoolPrice(web3, asset, account, callbackInner) },
-        (callbackInner) => { this._getMaxAPR(web3, asset, account, callbackInner) },
-      ], (err, data) => {
-        asset.balance = data[0]
-        asset.investedBalance = data[1]
-        asset.price = data[2]
-        asset.maxApr = data[3]
+        (callbackInner) => {this._getERC20Balance(web3,asset,account,callbackInner)},
+        (callbackInner) => {this._getInvestedBalance(web3,asset,account,callbackInner)},
+        (callbackInner) => {this._getPoolPrice(web3,asset,account,callbackInner)},
+        (callbackInner) => {this._getMaxAPR(web3,asset,account,callbackInner)},
+      ],(err,data) => {
+        asset.balance=data[0]
+        asset.investedBalance=data[1]
+        asset.price=data[2]
+        asset.maxApr=data[3]
 
-        callback(null, asset)
+        callback(null,asset)
       })
-    }, (err, assets) => {
+    },(err,assets) => {
       if(err) {
-        return emitter.emit(ERROR, err)
+        return emitter.emit(ERROR,err)
       }
 
-      store.setStore({ assets: assets })
-      return emitter.emit(BALANCES_LIGHT_RETURNED, assets)
+      store.setStore({assets: assets})
+      return emitter.emit(BALANCES_LIGHT_RETURNED,assets)
     })
   }
 
-  getBalances = async () => {
-    const account = store.getStore('account')
+  getBalances=async () => {
+    const account=store.getStore('account')
 
-    const assets = store.getStore('assets')
+    const assets=store.getStore('assets')
 
-    if(!account || !account.address) {
+    if(!account||!account.address) {
       return false
     }
 
-    const web3 = new Web3(store.getStore('web3context').library.provider);
+    const web3=new Web3(store.getStore('web3context').library.provider);
 
-    async.map(assets, (asset, callback) => {
+    async.map(assets,(asset,callback) => {
       async.parallel([
-        (callbackInner) => { this._getERC20Balance(web3, asset, account, callbackInner) },
-        (callbackInner) => { this._getInvestedBalance(web3, asset, account, callbackInner) },
-        (callbackInner) => { this._getPoolPrice(web3, asset, account, callbackInner) },
-        (callbackInner) => { this._getMaxAPR(web3, asset, account, callbackInner) },
-        (callbackInner) => { this._getPoolValue(web3, asset, account, callbackInner) },
-        (callbackInner) => { this._getAPY(web3, asset, account, callbackInner) },
-        (callbackInner) => { this._getCurrentLender(web3, asset, account, callbackInner) },
-        (callbackInner) => { this._getRecommendedLender(web3, asset, account, callbackInner) },
-        (callbackInner) => { this._getBalance(web3, asset, account, callbackInner) },
-      ], (err, data) => {
-        asset.balance = data[0]
-        asset.investedBalance = data[1]
-        asset.price = data[2]
-        asset.maxApr = data[3]
-        asset.poolValue = data[4]
-        asset.apy = data[5]
-        asset.current = data[6]
-        asset.recommended = data[7]
-        asset.tokenBalance = data[8]
+        (callbackInner) => {this._getERC20Balance(web3,asset,account,callbackInner)},
+        (callbackInner) => {this._getInvestedBalance(web3,asset,account,callbackInner)},
+        (callbackInner) => {this._getPoolPrice(web3,asset,account,callbackInner)},
+        (callbackInner) => {this._getMaxAPR(web3,asset,account,callbackInner)},
+        (callbackInner) => {this._getPoolValue(web3,asset,account,callbackInner)},
+        (callbackInner) => {this._getAPY(web3,asset,account,callbackInner)},
+        (callbackInner) => {this._getCurrentLender(web3,asset,account,callbackInner)},
+        (callbackInner) => {this._getRecommendedLender(web3,asset,account,callbackInner)},
+        (callbackInner) => {this._getBalance(web3,asset,account,callbackInner)},
+      ],(err,data) => {
+        asset.balance=data[0]
+        asset.investedBalance=data[1]
+        asset.price=data[2]
+        asset.maxApr=data[3]
+        asset.poolValue=data[4]
+        asset.apy=data[5]
+        asset.current=data[6]
+        asset.recommended=data[7]
+        asset.tokenBalance=data[8]
 
-        callback(null, asset)
+        callback(null,asset)
       })
-    }, (err, assets) => {
+    },(err,assets) => {
       if(err) {
-        return emitter.emit(ERROR, err)
+        return emitter.emit(ERROR,err)
       }
 
-      store.setStore({ assets: assets })
-      return emitter.emit(BALANCES_RETURNED, assets)
+      store.setStore({assets: assets})
+      return emitter.emit(BALANCES_RETURNED,assets)
     })
   }
 
-  _getERC20Balance = async (web3, asset, account, callback) => {
+  _getERC20Balance=async (web3,asset,account,callback) => {
 
-    if(asset.erc20address === 'Ethereum') {
+    if(asset.erc20address==='Ethereum') {
       try {
-        const eth_balance = web3.utils.fromWei(await web3.eth.getBalance(account.address), "ether");
-        callback(null, parseFloat(eth_balance))
+        const eth_balance=web3.utils.fromWei(await web3.eth.getBalance(account.address),"ether");
+        callback(null,parseFloat(eth_balance))
       } catch(ex) {
         console.log(ex)
         return callback(ex)
       }
     } else {
-      let erc20Contract = new web3.eth.Contract(config.erc20ABI, asset.erc20address)
+      let erc20Contract=new web3.eth.Contract(config.erc20ABI,asset.erc20address)
 
       try {
-        var balance = await erc20Contract.methods.balanceOf(account.address).call({ from: account.address });
-        balance = parseFloat(balance)/10**asset.decimals
-        callback(null, parseFloat(balance))
+        var balance=await erc20Contract.methods.balanceOf(account.address).call({from: account.address});
+        balance=parseFloat(balance)/10**asset.decimals
+        callback(null,parseFloat(balance))
       } catch(ex) {
         console.log(ex)
         return callback(ex)
@@ -1981,27 +1990,27 @@ class Store {
     }
   }
 
-  _getBalance = async (web3, asset, account, callback) => {
+  _getBalance=async (web3,asset,account,callback) => {
 
-    if(asset.iEarnContract === null) {
-      return callback(null, 0)
+    if(asset.iEarnContract===null) {
+      return callback(null,0)
     }
 
-    if(asset.erc20address === 'Ethereum') {
+    if(asset.erc20address==='Ethereum') {
       try {
-        const eth_balance = web3.utils.fromWei(await web3.eth.getBalance(asset.iEarnContract), "ether");
-        callback(null, parseFloat(eth_balance))
+        const eth_balance=web3.utils.fromWei(await web3.eth.getBalance(asset.iEarnContract),"ether");
+        callback(null,parseFloat(eth_balance))
       } catch(ex) {
         console.log(ex)
         return callback(ex)
       }
     } else {
-      let erc20Contract = new web3.eth.Contract(config.erc20ABI, asset.erc20address)
+      let erc20Contract=new web3.eth.Contract(config.erc20ABI,asset.erc20address)
 
       try {
-        var balance = await erc20Contract.methods.balanceOf(asset.iEarnContract).call({ from: account.address });
-        balance = parseFloat(balance)/10**asset.decimals
-        callback(null, parseFloat(balance))
+        var balance=await erc20Contract.methods.balanceOf(asset.iEarnContract).call({from: account.address});
+        balance=parseFloat(balance)/10**asset.decimals
+        callback(null,parseFloat(balance))
       } catch(ex) {
         console.log(ex)
         return callback(ex)
@@ -2009,414 +2018,414 @@ class Store {
     }
   }
 
-  _getAPY = async (web3, asset, account, callback) => {
-    if(asset.iEarnContract === null) {
-      return callback(null, 0)
+  _getAPY=async (web3,asset,account,callback) => {
+    if(asset.iEarnContract===null) {
+      return callback(null,0)
     }
-    if (asset.measurement == null) {
-      return callback(null, 0)
+    if(asset.measurement==null) {
+      return callback(null,0)
     }
     try {
-      let block = await web3.eth.getBlockNumber();
-      let earn = new web3.eth.Contract(config.IEarnABI, asset.iEarnContract);
-      let balance = await earn.methods.getPricePerFullShare().call();
+      let block=await web3.eth.getBlockNumber();
+      let earn=new web3.eth.Contract(config.IEarnABI,asset.iEarnContract);
+      let balance=await earn.methods.getPricePerFullShare().call();
 
-      balance = balance - asset.measurement;
-      balance = balance / 1e18;
-      let diff = block - asset.lastMeasurement;
+      balance=balance-asset.measurement;
+      balance=balance/1e18;
+      let diff=block-asset.lastMeasurement;
 
-      balance = balance / diff;
-      balance = balance * 2425846;
+      balance=balance/diff;
+      balance=balance*2425846;
 
-      callback(null, parseFloat(balance))
-    } catch (e) {
+      callback(null,parseFloat(balance))
+    } catch(e) {
       console.log(e)
-      callback(null, 0)
+      callback(null,0)
     }
   }
 
-  _getCurrentLender = async (web3, asset, account, callback) => {
-    if(asset.iEarnContract === null) {
-      return callback(null, 0)
+  _getCurrentLender=async (web3,asset,account,callback) => {
+    if(asset.iEarnContract===null) {
+      return callback(null,0)
     }
 
     try {
-      let iEarnContract = new web3.eth.Contract(asset.abi, asset.iEarnContract)
-      let value = 0
+      let iEarnContract=new web3.eth.Contract(asset.abi,asset.iEarnContract)
+      let value=0
 
-      if(asset.erc20address === 'Ethereum' || asset.id === 'CRVv1') {
-        value = 0;
+      if(asset.erc20address==='Ethereum'||asset.id==='CRVv1') {
+        value=0;
       } else {
-        value = await iEarnContract.methods.provider().call({ from: account.address });
+        value=await iEarnContract.methods.provider().call({from: account.address});
       }
-      callback(null, parseFloat(value))
-    } catch (e) {
+      callback(null,parseFloat(value))
+    } catch(e) {
       console.log(e)
-      callback(null, 0)
+      callback(null,0)
     }
   }
 
-  _getRecommendedLender = async (web3, asset, account, callback) => {
-    if(asset.iEarnContract === null) {
-      return callback(null, 0)
+  _getRecommendedLender=async (web3,asset,account,callback) => {
+    if(asset.iEarnContract===null) {
+      return callback(null,0)
     }
 
     try {
-      let iEarnContract = new web3.eth.Contract(asset.abi, asset.iEarnContract)
-      let value = 0
+      let iEarnContract=new web3.eth.Contract(asset.abi,asset.iEarnContract)
+      let value=0
 
-      if(asset.erc20address === 'Ethereum' || asset.id === 'CRVv1') {
-        value = 0;
+      if(asset.erc20address==='Ethereum'||asset.id==='CRVv1') {
+        value=0;
       } else {
-        value = await iEarnContract.methods.recommend().call({ from: account.address });
+        value=await iEarnContract.methods.recommend().call({from: account.address});
       }
-      callback(null, parseFloat(value))
-    } catch (e) {
+      callback(null,parseFloat(value))
+    } catch(e) {
       console.log(asset)
       console.log(e)
-      callback(null, 0)
+      callback(null,0)
     }
   }
 
-  _getPoolValue = async (web3, asset, account, callback) => {
+  _getPoolValue=async (web3,asset,account,callback) => {
 
-    if(asset.iEarnContract === null) {
-      return callback(null, 0)
+    if(asset.iEarnContract===null) {
+      return callback(null,0)
     }
 
     try {
-      let iEarnContract = new web3.eth.Contract(asset.abi, asset.iEarnContract)
-      let value = 0
+      let iEarnContract=new web3.eth.Contract(asset.abi,asset.iEarnContract)
+      let value=0
 
-      if(asset.erc20address === 'Ethereum') {
-        value = web3.utils.fromWei(await iEarnContract.methods.calcPoolValueInETH().call({ from: account.address }), 'ether');
+      if(asset.erc20address==='Ethereum') {
+        value=web3.utils.fromWei(await iEarnContract.methods.calcPoolValueInETH().call({from: account.address}),'ether');
       } else {
-        value = await iEarnContract.methods.calcPoolValueInToken().call({ from: account.address });
-        if (asset.decimals === 18) {
-          value = web3.utils.fromWei(value, 'ether');
+        value=await iEarnContract.methods.calcPoolValueInToken().call({from: account.address});
+        if(asset.decimals===18) {
+          value=web3.utils.fromWei(value,'ether');
         } else {
-          value = value / (10 ** asset.decimals);
+          value=value/(10**asset.decimals);
         }
       }
-      callback(null, parseFloat(value))
-    } catch (e) {
+      callback(null,parseFloat(value))
+    } catch(e) {
       console.log(e)
-      callback(null, 0)
+      callback(null,0)
     }
 
   }
 
-  _getPoolPrice = async (web3, asset, account, callback) => {
+  _getPoolPrice=async (web3,asset,account,callback) => {
 
-    if(asset.iEarnContract === null) {
-      return callback(null, 0)
+    if(asset.iEarnContract===null) {
+      return callback(null,0)
     }
 
-    let iEarnContract = new web3.eth.Contract(config.IEarnABI, asset.iEarnContract)
-    const balance = web3.utils.fromWei(await iEarnContract.methods.getPricePerFullShare().call({ from: account.address }), 'ether');
-    callback(null, parseFloat(balance))
+    let iEarnContract=new web3.eth.Contract(config.IEarnABI,asset.iEarnContract)
+    const balance=web3.utils.fromWei(await iEarnContract.methods.getPricePerFullShare().call({from: account.address}),'ether');
+    callback(null,parseFloat(balance))
   }
 
-  _getInvestedBalance = async (web3, asset, account, callback) => {
+  _getInvestedBalance=async (web3,asset,account,callback) => {
 
-    if(asset.iEarnContract === null) {
-      return callback(null, 0)
+    if(asset.iEarnContract===null) {
+      return callback(null,0)
     }
 
-    let iEarnContract = new web3.eth.Contract(config.IEarnABI, asset.iEarnContract)
-    var  balance = await iEarnContract.methods.balanceOf(account.address).call({ from: account.address });
-    balance = parseFloat(balance)/10**asset.decimals
-    callback(null, parseFloat(balance))
+    let iEarnContract=new web3.eth.Contract(config.IEarnABI,asset.iEarnContract)
+    var balance=await iEarnContract.methods.balanceOf(account.address).call({from: account.address});
+    balance=parseFloat(balance)/10**asset.decimals
+    callback(null,parseFloat(balance))
   }
 
-  _getMaxAPR = async (web3, asset, account, callback) => {
+  _getMaxAPR=async (web3,asset,account,callback) => {
 
-    if(asset.iEarnContract === null) {
-      return callback(null, 0)
+    if(asset.iEarnContract===null) {
+      return callback(null,0)
     }
-    if (asset.symbol === 'CRV') {
-      let aprContract = new web3.eth.Contract(config.crvContractABI, config.crvAddress)
-      const call = 'crvapr'
-      const aprs = await aprContract.methods[call]().call();
-      return callback(null, web3.utils.fromWei(parseFloat(aprs).toFixed(0), 'ether'))
+    if(asset.symbol==='CRV') {
+      let aprContract=new web3.eth.Contract(config.crvContractABI,config.crvAddress)
+      const call='crvapr'
+      const aprs=await aprContract.methods[call]().call();
+      return callback(null,web3.utils.fromWei(parseFloat(aprs).toFixed(0),'ether'))
     }
 
-    let aprContract = new web3.eth.Contract(config.aggregatedContractABI, config.aggregatedContractAddress)
+    let aprContract=new web3.eth.Contract(config.aggregatedContractABI,config.aggregatedContractAddress)
 
-    var call = 'getAPROptions';//+asset.symbol
-    var address = asset.erc20address
-    var aprs = 0;
-    if (asset.erc20address === 'Ethereum') {
-      call = 'getETH';
-      aprs = await aprContract.methods[call]().call();
+    var call='getAPROptions';//+asset.symbol
+    var address=asset.erc20address
+    var aprs=0;
+    if(asset.erc20address==='Ethereum') {
+      call='getETH';
+      aprs=await aprContract.methods[call]().call();
     } else {
-      aprs = await aprContract.methods[call](address).call();
+      aprs=await aprContract.methods[call](address).call();
     }
 
 
-    const keys = Object.keys(aprs)
-    const workKeys = keys.filter((key) => {
+    const keys=Object.keys(aprs)
+    const workKeys=keys.filter((key) => {
       return isNaN(key)
     })
-    const maxApr = Math.max.apply(Math, workKeys.map(function(o) {
-      if(o === 'uniapr' || o === 'unicapr' || o === "iapr") {
+    const maxApr=Math.max.apply(Math,workKeys.map(function(o) {
+      if(o==='uniapr'||o==='unicapr'||o==="iapr") {
         return aprs[o]-100000000000000000000
       }
       return aprs[o];
     }))
 
-    callback(null, web3.utils.fromWei(maxApr.toFixed(0), 'ether'))
+    callback(null,web3.utils.fromWei(maxApr.toFixed(0),'ether'))
   }
 
-  getAPR = (payload) => {
-    var value = 0;
-    if (payload.content&&payload.content.amount) {
-      value = payload.content.amount;
+  getAPR=(payload) => {
+    var value=0;
+    if(payload.content&&payload.content.amount) {
+      value=payload.content.amount;
     }
-    const web3 = new Web3(new Web3.providers.HttpProvider(config.infuraProvider));
+    const web3=new Web3(new Web3.providers.HttpProvider(config.infuraProvider));
 
-    async.map(store.getStore('aprs'), (apr, callback) => {
-      apr.value = value.toString();
-      this._getAPR(web3, apr, callback)
-    }, (err, yields) => {
+    async.map(store.getStore('aprs'),(apr,callback) => {
+      apr.value=value.toString();
+      this._getAPR(web3,apr,callback)
+    },(err,yields) => {
       if(err) {
-        return emitter.emit(ERROR, err)
+        return emitter.emit(ERROR,err)
       }
       //get all headers
-      if(yields && yields.length > 0 && yields[0].apr) {
-        const headers = Object.keys(yields[0].apr)
-        store.setStore({ aggregatedYields: yields, aggregatedHeaders: headers })
+      if(yields&&yields.length>0&&yields[0].apr) {
+        const headers=Object.keys(yields[0].apr)
+        store.setStore({aggregatedYields: yields,aggregatedHeaders: headers})
       }
-      return emitter.emit(GET_AGGREGATED_YIELD_RETURNED, yields)
+      return emitter.emit(GET_AGGREGATED_YIELD_RETURNED,yields)
     })
   }
 
-  _getAPR = async (web3, apr, callback) => {
-    let contract = new web3.eth.Contract(config.aprContractABI, config.aprContractAddress)
-    var value = apr.value;
-    if (apr.decimals === 6) {
-      value = web3.utils.toWei(apr.value, 'picoether');
+  _getAPR=async (web3,apr,callback) => {
+    let contract=new web3.eth.Contract(config.aprContractABI,config.aprContractAddress)
+    var value=apr.value;
+    if(apr.decimals===6) {
+      value=web3.utils.toWei(apr.value,'picoether');
     } else {
-      value = web3.utils.toWei(apr.value, 'ether');
+      value=web3.utils.toWei(apr.value,'ether');
     }
     try {
-      const val = await contract.methods['getAPROptionsAdjusted'](apr.address, value).call()
-      const keys = Object.keys(val)
+      const val=await contract.methods['getAPROptionsAdjusted'](apr.address,value).call()
+      const keys=Object.keys(val)
 
-      const vals = keys.filter((key) => {
+      const vals=keys.filter((key) => {
         return isNaN(key)
       }).map((key) => {
-        const obj = {}
-        obj[key] = web3.utils.fromWei(val[key].toString(), 'ether');
+        const obj={}
+        obj[key]=web3.utils.fromWei(val[key].toString(),'ether');
         return obj
       })
 
-      let output = {}
+      let output={}
 
-      for(let i = 0; i < vals.length; i++) {
-        const keys = Object.keys(vals[i])
-        if (keys[0] === '_unifulcrum'||keys[0] === '_uniaave'||keys[0] === '_unicompound'||keys[0] === '_uniswap') {
+      for(let i=0;i<vals.length;i++) {
+        const keys=Object.keys(vals[i])
+        if(keys[0]==='_unifulcrum'||keys[0]==='_uniaave'||keys[0]==='_unicompound'||keys[0]==='_uniswap') {
           // skip
         } else {
-          output[keys[0]] = vals[i][keys[0]]
+          output[keys[0]]=vals[i][keys[0]]
         }
       }
 
-      let iearn = 0;
-      if (apr.earnAddress !== '') {
-        let block = await web3.eth.getBlockNumber();
-        let earn = new web3.eth.Contract(config.IEarnABI, apr.earnAddress);
-        let balance = await earn.methods.getPricePerFullShare().call();
+      let iearn=0;
+      if(apr.earnAddress!=='') {
+        let block=await web3.eth.getBlockNumber();
+        let earn=new web3.eth.Contract(config.IEarnABI,apr.earnAddress);
+        let balance=await earn.methods.getPricePerFullShare().call();
 
-        balance = balance - apr.measurement;
-        balance = balance / 1e18;
-        let diff = block - apr.lastMeasurement;
+        balance=balance-apr.measurement;
+        balance=balance/1e18;
+        let diff=block-apr.lastMeasurement;
 
-        balance = balance / diff;
-        balance = balance * 2425846;
-        iearn = balance;
+        balance=balance/diff;
+        balance=balance*2425846;
+        iearn=balance;
       }
-      output["iearn.finance \n(APY)"] = iearn;
-      apr.apr = output
+      output["iearn.finance \n(APY)"]=iearn;
+      apr.apr=output
 
-      callback(null, apr)
+      callback(null,apr)
     } catch(ex) {
       console.log(ex);
       // return callback(ex)
-      callback(null, false)
+      callback(null,false)
     }
   }
 
-  _getAggregatedYield = async (web3, call, callback) => {
-    let uniswapContract = new web3.eth.Contract(config.aggregatedContractABI, config.aggregatedContractAddress)
+  _getAggregatedYield=async (web3,call,callback) => {
+    let uniswapContract=new web3.eth.Contract(config.aggregatedContractABI,config.aggregatedContractAddress)
 
     try {
 
-      const val = await uniswapContract.methods[call.name]().call()
+      const val=await uniswapContract.methods[call.name]().call()
 
-      const keys = Object.keys(val)
+      const keys=Object.keys(val)
 
-      const vals = keys.filter((key) => {
+      const vals=keys.filter((key) => {
         return isNaN(key)
       }).map((key) => {
-        const obj = {}
-        obj[key] = web3.utils.fromWei(val[key].toString(), 'ether');
+        const obj={}
+        obj[key]=web3.utils.fromWei(val[key].toString(),'ether');
         return obj
       })
 
-      let output = {}
+      let output={}
 
-      for(let i = 0; i < vals.length; i++) {
-        const keys = Object.keys(vals[i])
-        output[keys[0]] = vals[i][keys[0]]
+      for(let i=0;i<vals.length;i++) {
+        const keys=Object.keys(vals[i])
+        output[keys[0]]=vals[i][keys[0]]
       }
 
-      call.token = call.name.replace('get', '')
-      call.apr = output
+      call.token=call.name.replace('get','')
+      call.apr=output
 
-      callback(null, call)
+      callback(null,call)
     } catch(ex) {
       // console.log(ex)
       // return callback(ex)
-      callback(null, false)
+      callback(null,false)
     }
   }
 
-  getContractEvents = (payload) => {
-    const web3 = new Web3(store.getStore('web3context').library.provider);
-    let iEarnContract = new web3.eth.Contract(config.IEarnABI, config.iEarnContract)
+  getContractEvents=(payload) => {
+    const web3=new Web3(store.getStore('web3context').library.provider);
+    let iEarnContract=new web3.eth.Contract(config.IEarnABI,config.iEarnContract)
 
-    iEarnContract.getPastEvents('allEvents', { fromBlock: 1, toBlock: 'latest' })
+    iEarnContract.getPastEvents('allEvents',{fromBlock: 1,toBlock: 'latest'})
       .then((res) => {
 
-        const sorted = res.sort((a, b) => {
-          return parseFloat(a.blockNumber) - parseFloat(b.blockNumber)
+        const sorted=res.sort((a,b) => {
+          return parseFloat(a.blockNumber)-parseFloat(b.blockNumber)
         }).filter((tx) => {
-          if(tx.event !== 'Transfer') {
+          if(tx.event!=='Transfer') {
             return false
           }
 
-          if(!tx.returnValues.value || tx.returnValues.value === 0) {
+          if(!tx.returnValues.value||tx.returnValues.value===0) {
             return false
           }
 
-          if(tx.returnValues.from !== '0x0000000000000000000000000000000000000000') {
+          if(tx.returnValues.from!=='0x0000000000000000000000000000000000000000') {
             return false
           }
 
           return true
         }).map(async (tx) => {
-          const rawTx = await this._getTransaction(web3, tx.transactionHash)
+          const rawTx=await this._getTransaction(web3,tx.transactionHash)
 
           return {
             blockNumber: tx.blockNumber,
             transactionHash: tx.transactionHash,
-            eth: web3.utils.fromWei(rawTx.value, 'ether'),
-            iEth: web3.utils.fromWei(tx.returnValues.value, 'ether'),
+            eth: web3.utils.fromWei(rawTx.value,'ether'),
+            iEth: web3.utils.fromWei(tx.returnValues.value,'ether'),
             ethRatio: tx.returnValues.value*100/rawTx.value,
             address: rawTx.from
           }
         })
 
         Promise.all(sorted).then(async (transactions) => {
-          const pricePerFullShare = await this._getPricePerFullShare(web3, iEarnContract)
+          const pricePerFullShare=await this._getPricePerFullShare(web3,iEarnContract)
 
-          const trxs = transactions.map(async (tx) => {
+          const trxs=transactions.map(async (tx) => {
             //console.log(tx.address)
-            const balance = await this._getIEthBalance(web3, iEarnContract, tx.address)
+            const balance=await this._getIEthBalance(web3,iEarnContract,tx.address)
 
-            tx.ethRedeem = (parseFloat(pricePerFullShare)*parseFloat(balance))
-            tx.growth = (parseFloat(tx.ethRedeem)*100/parseFloat(tx.eth))
+            tx.ethRedeem=(parseFloat(pricePerFullShare)*parseFloat(balance))
+            tx.growth=(parseFloat(tx.ethRedeem)*100/parseFloat(tx.eth))
             return tx
           })
 
           Promise.all(trxs).then(async (txs) => {
-            store.setStore({ events: txs })
-            return emitter.emit(GET_CONTRACT_EVENTS_RETURNED, txs)
+            store.setStore({events: txs})
+            return emitter.emit(GET_CONTRACT_EVENTS_RETURNED,txs)
           })
         })
       })
   }
 
-  _getTransaction = async (web3, hash) => {
-    const rawTx = await web3.eth.getTransaction(hash)
+  _getTransaction=async (web3,hash) => {
+    const rawTx=await web3.eth.getTransaction(hash)
     return rawTx
   }
 
-  _getPricePerFullShare = async (web3, iEarnContract) => {
-    const balance = web3.utils.fromWei(await iEarnContract.methods.getPricePerFullShare().call({ }), 'ether');
+  _getPricePerFullShare=async (web3,iEarnContract) => {
+    const balance=web3.utils.fromWei(await iEarnContract.methods.getPricePerFullShare().call({}),'ether');
     return balance
   }
 
-  _getIEthBalance = async (web3, iEarnContract, address) => {
-    const balance = web3.utils.fromWei(await iEarnContract.methods.balanceOf(address).call({ }), 'ether');
+  _getIEthBalance=async (web3,iEarnContract,address) => {
+    const balance=web3.utils.fromWei(await iEarnContract.methods.balanceOf(address).call({}),'ether');
     return balance
   }
 
-  swap = (payload) => {
-    const account = store.getStore('account')
-    const { sendAsset, amount } = payload.content
+  swap=(payload) => {
+    const account=store.getStore('account')
+    const {sendAsset,amount}=payload.content
 
-    let yCurveZapSwapContract = config.yCurveZapSwapAddress
-    if (sendAsset.id === 'crvV3') {
-      yCurveZapSwapContract = config.yCurveZapSwapV4Address
+    let yCurveZapSwapContract=config.yCurveZapSwapAddress
+    if(sendAsset.id==='crvV3') {
+      yCurveZapSwapContract=config.yCurveZapSwapV4Address
     }
 
-    this._checkApproval(sendAsset, account, amount, yCurveZapSwapContract, (err) => {
+    this._checkApproval(sendAsset,account,amount,yCurveZapSwapContract,(err) => {
       if(err) {
-        return emitter.emit(ERROR, err);
+        return emitter.emit(ERROR,err);
       }
 
-      this._callSwap(sendAsset, account, amount, (err, swapResult) => {
+      this._callSwap(sendAsset,account,amount,(err,swapResult) => {
         if(err) {
-          return emitter.emit(ERROR, err);
+          return emitter.emit(ERROR,err);
         }
 
-        return emitter.emit(SWAP_RETURNED, swapResult)
+        return emitter.emit(SWAP_RETURNED,swapResult)
       })
     })
   }
 
-  _callSwap = async (sendAsset, account, amount, callback) => {
-    const web3 = new Web3(store.getStore('web3context').library.provider);
+  _callSwap=async (sendAsset,account,amount,callback) => {
+    const web3=new Web3(store.getStore('web3context').library.provider);
 
-    var amountToSend = web3.utils.toWei(amount, "ether")
-    if (sendAsset.decimals !== 18) {
-      amountToSend = amount*10**sendAsset.decimals;
+    var amountToSend=web3.utils.toWei(amount,"ether")
+    if(sendAsset.decimals!==18) {
+      amountToSend=amount*10**sendAsset.decimals;
     }
 
-    let call = ''
+    let call=''
 
-    switch (sendAsset.id) {
+    switch(sendAsset.id) {
       case 'crvV1':
-        call = 'swapv1tov3'
+        call='swapv1tov3'
         break;
       case 'crvV2':
-        call = 'swapv2tov3'
+        call='swapv2tov3'
         break;
       case 'crvV3':
-        call = 'swapv3tov4'
+        call='swapv3tov4'
         break;
       default:
     }
 
-    let yCurveZapSwapContract = new web3.eth.Contract(config.yCurveZapSwapABI, config.yCurveZapSwapAddress)
-    if (sendAsset.id === 'crvV3') {
-      yCurveZapSwapContract = new web3.eth.Contract(config.yCurveZapSwapV4ABI, config.yCurveZapSwapV4Address)
+    let yCurveZapSwapContract=new web3.eth.Contract(config.yCurveZapSwapABI,config.yCurveZapSwapAddress)
+    if(sendAsset.id==='crvV3') {
+      yCurveZapSwapContract=new web3.eth.Contract(config.yCurveZapSwapV4ABI,config.yCurveZapSwapV4Address)
     }
-    yCurveZapSwapContract.methods[call](amountToSend).send({ from: account.address, gasPrice: web3.utils.toWei(await this._getGasPrice(), 'gwei') })
-      .on('transactionHash', function(hash){
+    yCurveZapSwapContract.methods[call](amountToSend).send({from: account.address,gasPrice: web3.utils.toWei(await this._getGasPrice(),'gwei')})
+      .on('transactionHash',function(hash) {
         console.log(hash)
-        callback(null, hash)
+        callback(null,hash)
       })
-      .on('confirmation', function(confirmationNumber, receipt){
-        console.log(confirmationNumber, receipt);
+      .on('confirmation',function(confirmationNumber,receipt) {
+        console.log(confirmationNumber,receipt);
       })
-      .on('receipt', function(receipt){
+      .on('receipt',function(receipt) {
         console.log(receipt);
       })
-      .on('error', function(error) {
-        if (!error.toString().includes("-32601")) {
+      .on('error',function(error) {
+        if(!error.toString().includes("-32601")) {
           if(error.message) {
             return callback(error.message)
           }
@@ -2424,7 +2433,7 @@ class Store {
         }
       })
       .catch((error) => {
-        if (!error.toString().includes("-32601")) {
+        if(!error.toString().includes("-32601")) {
           if(error.message) {
             return callback(error.message)
           }
@@ -2433,88 +2442,88 @@ class Store {
       })
   }
 
-  getBestPrice = (payload) => {
-    const account = store.getStore('account')
-    const { sendAsset, receiveAsset, amount } = payload.content
+  getBestPrice=(payload) => {
+    const account=store.getStore('account')
+    const {sendAsset,receiveAsset,amount}=payload.content
 
-    this._getBestPrice(sendAsset, receiveAsset, account, amount, (err, price) => {
+    this._getBestPrice(sendAsset,receiveAsset,account,amount,(err,price) => {
       if(err) {
-        return emitter.emit(ERROR, err);
+        return emitter.emit(ERROR,err);
       }
 
-      return emitter.emit(GET_BEST_PRICE_RETURNED, price)
+      return emitter.emit(GET_BEST_PRICE_RETURNED,price)
     })
   }
 
-  _getBestPrice = async (sendAsset, receiveAsset, account, amount, callback) => {
+  _getBestPrice=async (sendAsset,receiveAsset,account,amount,callback) => {
     try {
-      const url = 'https://api-v2.dex.ag/price?from='+sendAsset.symbol.toLowerCase()+'&to='+receiveAsset.symbol.toLowerCase()+'&fromAmount='+amount+'&dex=ag&tradable=true'
-      let price = await rp(url);
-      callback(null, JSON.parse(price));
+      const url='https://api-v2.dex.ag/price?from='+sendAsset.symbol.toLowerCase()+'&to='+receiveAsset.symbol.toLowerCase()+'&fromAmount='+amount+'&dex=ag&tradable=true'
+      let price=await rp(url);
+      callback(null,JSON.parse(price));
     } catch(e) {
-      callback(null, {})
+      callback(null,{})
     }
   }
 
-  trade = (payload) => {
-    const account = store.getStore('account')
-    const { sendAsset, receiveAsset, amount } = payload.content
+  trade=(payload) => {
+    const account=store.getStore('account')
+    const {sendAsset,receiveAsset,amount}=payload.content
 
-    this._callTrade(sendAsset, receiveAsset, account, amount, (err, tradeResult) => {
+    this._callTrade(sendAsset,receiveAsset,account,amount,(err,tradeResult) => {
       if(err) {
-        return emitter.emit(ERROR, err);
+        return emitter.emit(ERROR,err);
       }
 
-      return emitter.emit(TRADE_RETURNED, tradeResult)
+      return emitter.emit(TRADE_RETURNED,tradeResult)
     })
   }
 
-  _callTrade = async (sendAsset, receiveAsset, account, amount, callback) => {
-    const web3 = new Web3(store.getStore('web3context').library.provider);
+  _callTrade=async (sendAsset,receiveAsset,account,amount,callback) => {
+    const web3=new Web3(store.getStore('web3context').library.provider);
 
-    let trade = await this._getDexAgTrade(sendAsset, receiveAsset, account, amount);
+    let trade=await this._getDexAgTrade(sendAsset,receiveAsset,account,amount);
     // await this._approveToken(trade.metadata.input.address, trade.metadata.input.spender, trade.metadata.input.amount, account, web3);
 
     try {
-      const tx = await this._sendTrade(trade, account, web3);
-      return callback(null, tx.transactionHash)
+      const tx=await this._sendTrade(trade,account,web3);
+      return callback(null,tx.transactionHash)
     } catch(ex) {
       return callback(ex.message)
     }
   }
 
-  _getDexAgTrade = async (sendAsset, receiveAsset, account, amount) => {
-    const url = 'https://api-v2.dex.ag/trade?from='+sendAsset.symbol.toLowerCase()+'&to='+receiveAsset.symbol.toLowerCase()+'&fromAmount='+amount+'&dex=ag'
-    let trade = await rp(url);
+  _getDexAgTrade=async (sendAsset,receiveAsset,account,amount) => {
+    const url='https://api-v2.dex.ag/trade?from='+sendAsset.symbol.toLowerCase()+'&to='+receiveAsset.symbol.toLowerCase()+'&fromAmount='+amount+'&dex=ag'
+    let trade=await rp(url);
     return JSON.parse(trade);
   }
 
-  _approveToken = async (token, spender, amount, account, web3) => {
+  _approveToken=async (token,spender,amount,account,web3) => {
     // First 4 bytes of the hash of "fee()" for the sighash selector
-    let funcHash = ethers.utils.hexDataSlice(ethers.utils.id('approve(address,uint256)'), 0, 4);
+    let funcHash=ethers.utils.hexDataSlice(ethers.utils.id('approve(address,uint256)'),0,4);
 
-    let abi = new ethers.utils.AbiCoder();
-    let inputs = [{
+    let abi=new ethers.utils.AbiCoder();
+    let inputs=[{
       name: 'spender',
       type: 'address'
-    }, {
+    },{
       name: 'amount',
       type: 'uint256'
     }];
 
-    let params = [spender, amount];
-    let bytes = abi.encode(inputs, params).substr(2);
+    let params=[spender,amount];
+    let bytes=abi.encode(inputs,params).substr(2);
 
     // construct approval data from function hash and parameters
-    let inputData = `${funcHash}${bytes}`;
+    let inputData=`${funcHash}${bytes}`;
 
     // let nonce = await infuraProvider.getTransactionCount(ethersWallet.address);
-    let nonce = await web3.eth.getTransactionCount(account.address)
+    let nonce=await web3.eth.getTransactionCount(account.address)
 
     // You will want to get the real gas price from https://ethgasstation.info/json/ethgasAPI.json
-    let gasPrice = web3.utils.toWei(await this._getGasPrice(), 'gwei');
+    let gasPrice=web3.utils.toWei(await this._getGasPrice(),'gwei');
 
-    let transaction = {
+    let transaction={
       to: token,
       nonce: nonce,
       gasLimit: 500000, // You will want to use estimateGas instead for real apps
@@ -2524,121 +2533,121 @@ class Store {
     }
 
     // let tx = await ethersWallet.sendTransaction(transaction);
-    let tx = await web3.eth.sendTransaction(transaction)
+    let tx=await web3.eth.sendTransaction(transaction)
     console.log(tx);
   }
 
-  _sendTrade = async (trade, account, web3) => {
+  _sendTrade=async (trade,account,web3) => {
     // let nonce = await infuraProvider.getTransactionCount(ethersWallet.address);
-    let nonce = await web3.eth.getTransactionCount(account.address)
+    let nonce=await web3.eth.getTransactionCount(account.address)
 
     // You will want to get the real gas price from https://ethgasstation.info/json/ethgasAPI.json
-    let gasPrice = web3.utils.toWei(await this._getGasPrice(), 'gwei');
+    let gasPrice=web3.utils.toWei(await this._getGasPrice(),'gwei');
 
-    let transaction = trade.trade;
-    transaction.nonce = nonce;
-    transaction.gasPrice = Number(gasPrice);
-    transaction.gasLimit = 500000; // You will want to use estimateGas instead for real apps
-    transaction.value = Number(transaction.value);
-    transaction.from = account.address
+    let transaction=trade.trade;
+    transaction.nonce=nonce;
+    transaction.gasPrice=Number(gasPrice);
+    transaction.gasLimit=500000; // You will want to use estimateGas instead for real apps
+    transaction.value=Number(transaction.value);
+    transaction.from=account.address
     // let tx = await ethersWallet.sendTransaction(transaction);
-    let tx = await web3.eth.sendTransaction(transaction)
+    let tx=await web3.eth.sendTransaction(transaction)
     return tx
   }
 
-  zap = (payload) => {
-    const account = store.getStore('account')
-    const { sendAsset, receiveAsset, amount } = payload.content
+  zap=(payload) => {
+    const account=store.getStore('account')
+    const {sendAsset,receiveAsset,amount}=payload.content
 
-    let contractAddress = ''
+    let contractAddress=''
 
-    if(receiveAsset.id === 'crvV3') {
-      contractAddress = config.yCurveZapAddress
+    if(receiveAsset.id==='crvV3') {
+      contractAddress=config.yCurveZapAddress
     }
-    if(receiveAsset.id === 'crvV4') {
-      contractAddress = config.yCurveZapV4Address
+    if(receiveAsset.id==='crvV4') {
+      contractAddress=config.yCurveZapV4Address
     }
-    if(sendAsset.id === 'crvV3') {
-      contractAddress = config.yCurveZapOutAddress
+    if(sendAsset.id==='crvV3') {
+      contractAddress=config.yCurveZapOutAddress
     }
-    if(sendAsset.id === 'crvV4') {
-      contractAddress = config.yCurveZapOutV4Address
+    if(sendAsset.id==='crvV4') {
+      contractAddress=config.yCurveZapOutV4Address
     }
 
-    this._checkApproval(sendAsset, account, amount, contractAddress, (err) => {
+    this._checkApproval(sendAsset,account,amount,contractAddress,(err) => {
       if(err) {
-        return emitter.emit(ERROR, err);
+        return emitter.emit(ERROR,err);
       }
 
-      this._callZap(sendAsset, receiveAsset, account, amount, (err, zapResult) => {
+      this._callZap(sendAsset,receiveAsset,account,amount,(err,zapResult) => {
         if(err) {
-          return emitter.emit(ERROR, err);
+          return emitter.emit(ERROR,err);
         }
 
-        return emitter.emit(ZAP_RETURNED, zapResult)
+        return emitter.emit(ZAP_RETURNED,zapResult)
       })
     })
   }
 
-  _callZap = async (sendAsset, receiveAsset, account, amount, callback) => {
-    const web3 = new Web3(store.getStore('web3context').library.provider);
+  _callZap=async (sendAsset,receiveAsset,account,amount,callback) => {
+    const web3=new Web3(store.getStore('web3context').library.provider);
 
-    var amountToSend = web3.utils.toWei(amount, "ether")
-    if (sendAsset.decimals !== 18) {
-      amountToSend = amount*10**sendAsset.decimals;
+    var amountToSend=web3.utils.toWei(amount,"ether")
+    if(sendAsset.decimals!==18) {
+      amountToSend=amount*10**sendAsset.decimals;
     }
 
-    let yCurveZapContract = null
-    if(receiveAsset.id === 'crvV3') {
-      yCurveZapContract = new web3.eth.Contract(config.yCurveZapABI, config.yCurveZapAddress)
-    } else if(receiveAsset.id === 'crvV4') {
-      yCurveZapContract = new web3.eth.Contract(config.yCurveZapV4ABI, config.yCurveZapV4Address)
-    } else if(sendAsset.id === 'crvV3') {
-      yCurveZapContract = new web3.eth.Contract(config.yCurveZapOutABI, config.yCurveZapOutAddress)
-    } else if(sendAsset.id === 'crvV4') {
-      yCurveZapContract = new web3.eth.Contract(config.yCurveZapOutV4ABI, config.yCurveZapOutV4Address)
+    let yCurveZapContract=null
+    if(receiveAsset.id==='crvV3') {
+      yCurveZapContract=new web3.eth.Contract(config.yCurveZapABI,config.yCurveZapAddress)
+    } else if(receiveAsset.id==='crvV4') {
+      yCurveZapContract=new web3.eth.Contract(config.yCurveZapV4ABI,config.yCurveZapV4Address)
+    } else if(sendAsset.id==='crvV3') {
+      yCurveZapContract=new web3.eth.Contract(config.yCurveZapOutABI,config.yCurveZapOutAddress)
+    } else if(sendAsset.id==='crvV4') {
+      yCurveZapContract=new web3.eth.Contract(config.yCurveZapOutV4ABI,config.yCurveZapOutV4Address)
     }
-    let call = ''
+    let call=''
 
-    switch (sendAsset.id) {
+    switch(sendAsset.id) {
       case 'DAIv2':
       case 'DAIv3':
-        call = 'depositDAI'
+        call='depositDAI'
         break;
       case 'USDCv2':
       case 'USDCv3':
-        call = 'depositUSDC'
+        call='depositUSDC'
         break;
       case 'USDTv2':
       case 'USDTv3':
-        call = 'depositUSDT'
+        call='depositUSDT'
         break;
       case 'TUSDv2':
-        call = 'depositTUSD'
+        call='depositTUSD'
         break;
       case 'BUSDv3':
-        call = 'depositBUSD'
+        call='depositBUSD'
         break;
       case 'crvV3':
       case 'crvV4':
-        switch (receiveAsset.id) {
+        switch(receiveAsset.id) {
           case 'DAIv2':
           case 'DAIv3':
-            call = 'withdrawDAI'
+            call='withdrawDAI'
             break;
           case 'USDCv2':
           case 'USDCv3':
-            call = 'withdrawUSDC'
+            call='withdrawUSDC'
             break;
           case 'USDTv2':
           case 'USDTv3':
-            call = 'withdrawUSDT'
+            call='withdrawUSDT'
             break;
           case 'TUSDv2':
-            call = 'withdrawTUSD'
+            call='withdrawTUSD'
             break;
           case 'BUSDv3':
-            call = 'withdrawBUSD'
+            call='withdrawBUSD'
             break;
           default:
 
@@ -2647,19 +2656,19 @@ class Store {
       default:
     }
 
-    yCurveZapContract.methods[call](amountToSend).send({ from: account.address, gasPrice: web3.utils.toWei(await this._getGasPrice(), 'gwei') })
-      .on('transactionHash', function(hash){
+    yCurveZapContract.methods[call](amountToSend).send({from: account.address,gasPrice: web3.utils.toWei(await this._getGasPrice(),'gwei')})
+      .on('transactionHash',function(hash) {
         console.log(hash)
-        callback(null, hash)
+        callback(null,hash)
       })
-      .on('confirmation', function(confirmationNumber, receipt){
-        console.log(confirmationNumber, receipt);
+      .on('confirmation',function(confirmationNumber,receipt) {
+        console.log(confirmationNumber,receipt);
       })
-      .on('receipt', function(receipt){
+      .on('receipt',function(receipt) {
         console.log(receipt);
       })
-      .on('error', function(error) {
-        if (!error.toString().includes("-32601")) {
+      .on('error',function(error) {
+        if(!error.toString().includes("-32601")) {
           if(error.message) {
             return callback(error.message)
           }
@@ -2667,7 +2676,7 @@ class Store {
         }
       })
       .catch((error) => {
-        if (!error.toString().includes("-32601")) {
+        if(!error.toString().includes("-32601")) {
           if(error.message) {
             return callback(error.message)
           }
@@ -2676,49 +2685,49 @@ class Store {
       })
   }
 
-  idai = (payload) => {
-    const account = store.getStore('account')
-    const { sendAsset, receiveAsset, amount } = payload.content
+  idai=(payload) => {
+    const account=store.getStore('account')
+    const {sendAsset,receiveAsset,amount}=payload.content
 
-    this._checkApproval(sendAsset, account, amount, config.iDAIZapSwapAddress, (err) => {
+    this._checkApproval(sendAsset,account,amount,config.iDAIZapSwapAddress,(err) => {
       if(err) {
-        return emitter.emit(ERROR, err);
+        return emitter.emit(ERROR,err);
       }
 
-      this._callIDAI(sendAsset, receiveAsset, account, amount, (err, zapResult) => {
+      this._callIDAI(sendAsset,receiveAsset,account,amount,(err,zapResult) => {
         if(err) {
-          return emitter.emit(ERROR, err);
+          return emitter.emit(ERROR,err);
         }
 
-        return emitter.emit(IDAI_RETURNED, zapResult)
+        return emitter.emit(IDAI_RETURNED,zapResult)
       })
     })
   }
 
-  _callIDAI = async (sendAsset, receiveAsset, account, amount, callback) => {
-    const web3 = new Web3(store.getStore('web3context').library.provider);
+  _callIDAI=async (sendAsset,receiveAsset,account,amount,callback) => {
+    const web3=new Web3(store.getStore('web3context').library.provider);
 
-    var amountToSend = web3.utils.toWei(amount, "ether")
-    if (sendAsset.decimals !== 18) {
-      amountToSend = amount*10**sendAsset.decimals;
+    var amountToSend=web3.utils.toWei(amount,"ether")
+    if(sendAsset.decimals!==18) {
+      amountToSend=amount*10**sendAsset.decimals;
     }
 
-    let call = 'swapiDAItoyDAI'
+    let call='swapiDAItoyDAI'
 
-    let iDAIZapSwapContract = new web3.eth.Contract(config.iDAIZapSwapABI, config.iDAIZapSwapAddress)
-    iDAIZapSwapContract.methods[call](amountToSend).send({ from: account.address, gasPrice: web3.utils.toWei(await this._getGasPrice(), 'gwei') })
-      .on('transactionHash', function(hash){
+    let iDAIZapSwapContract=new web3.eth.Contract(config.iDAIZapSwapABI,config.iDAIZapSwapAddress)
+    iDAIZapSwapContract.methods[call](amountToSend).send({from: account.address,gasPrice: web3.utils.toWei(await this._getGasPrice(),'gwei')})
+      .on('transactionHash',function(hash) {
         console.log(hash)
-        callback(null, hash)
+        callback(null,hash)
       })
-      .on('confirmation', function(confirmationNumber, receipt){
-        console.log(confirmationNumber, receipt);
+      .on('confirmation',function(confirmationNumber,receipt) {
+        console.log(confirmationNumber,receipt);
       })
-      .on('receipt', function(receipt){
+      .on('receipt',function(receipt) {
         console.log(receipt);
       })
-      .on('error', function(error) {
-        if (!error.toString().includes("-32601")) {
+      .on('error',function(error) {
+        if(!error.toString().includes("-32601")) {
           if(error.message) {
             return callback(error.message)
           }
@@ -2726,7 +2735,7 @@ class Store {
         }
       })
       .catch((error) => {
-        if (!error.toString().includes("-32601")) {
+        if(!error.toString().includes("-32601")) {
           if(error.message) {
             return callback(error.message)
           }
@@ -2735,116 +2744,116 @@ class Store {
       })
   }
 
-  getCurveBalances = (payload) => {
-    const account = store.getStore('account')
+  getCurveBalances=(payload) => {
+    const account=store.getStore('account')
 
-    const web3 = new Web3(store.getStore('web3context').library.provider);
-    const curveContracts = store.getStore('curveContracts')
+    const web3=new Web3(store.getStore('web3context').library.provider);
+    const curveContracts=store.getStore('curveContracts')
 
-    async.map(curveContracts, (curv, callback) => {
+    async.map(curveContracts,(curv,callback) => {
 
-      this._getERC20Balance(web3, curv, account, (err, balance) => {
+      this._getERC20Balance(web3,curv,account,(err,balance) => {
         if(err) {
           return callback(err)
         }
-        curv.balance = balance
+        curv.balance=balance
 
-        callback(null, curv)
+        callback(null,curv)
       })
-    }, (err, result) => {
+    },(err,result) => {
 
-      store.setStore({ curveContracts: result })
+      store.setStore({curveContracts: result})
 
-      return emitter.emit(GET_CURV_BALANCE_RETURNED, result)
+      return emitter.emit(GET_CURV_BALANCE_RETURNED,result)
     })
   }
 
-  getVaultBalancesFull = async () => {
-    const account = store.getStore('account')
-    const assets = store.getStore('vaultAssets')
+  getVaultBalancesFull=async () => {
+    const account=store.getStore('account')
+    const assets=store.getStore('vaultAssets')
 
-    if(!account || !account.address) {
+    if(!account||!account.address) {
       return false
     }
 
-    const web3 = await this._getWeb3Provider()
+    const web3=await this._getWeb3Provider()
     if(!web3) {
       return null
     }
 
-    const vaultStatistics = await this._getStatistics()
-    const addressStatistics = await this._getAddressStatistics(account.address)
-    const addressTXHitory = await this._getAddressTxHistory(account.address)
+    const vaultStatistics=await this._getStatistics()
+    const addressStatistics=await this._getAddressStatistics(account.address)
+    const addressTXHitory=await this._getAddressTxHistory(account.address)
 
-    const usdPrices = await this._getUSDPrices()
+    const usdPrices=await this._getUSDPrices()
 
 
-    async.map(assets, (asset, callback) => {
+    async.map(assets,(asset,callback) => {
       async.parallel([
-        (callbackInner) => { this._getERC20Balance(web3, asset, account, callbackInner) },
-        (callbackInner) => { this._getVaultBalance(web3, asset, account, callbackInner) },
-        (callbackInner) => { this._getStrategy(web3, asset, account, callbackInner) },
-        (callbackInner) => { this._getStatsAPY(vaultStatistics, asset, callbackInner) },
-        (callbackInner) => { this._getVaultHoldings(web3, asset, account, callbackInner) },
-        (callbackInner) => { this._getAssetUSDPrices(web3, asset, account, usdPrices, callbackInner) },
-        (callbackInner) => { this._getVaultAPY(web3, asset, account, callbackInner) },
-        (callbackInner) => { this._getAddressStats(addressStatistics, asset, callbackInner) },
-        (callbackInner) => { this._getAddressTransactions(addressTXHitory, asset, callbackInner) },
-      ], (err, data) => {
+        (callbackInner) => {this._getERC20Balance(web3,asset,account,callbackInner)},
+        (callbackInner) => {this._getVaultBalance(web3,asset,account,callbackInner)},
+        (callbackInner) => {this._getStrategy(web3,asset,account,callbackInner)},
+        (callbackInner) => {this._getStatsAPY(vaultStatistics,asset,callbackInner)},
+        (callbackInner) => {this._getVaultHoldings(web3,asset,account,callbackInner)},
+        (callbackInner) => {this._getAssetUSDPrices(web3,asset,account,usdPrices,callbackInner)},
+        (callbackInner) => {this._getVaultAPY(web3,asset,account,callbackInner)},
+        (callbackInner) => {this._getAddressStats(addressStatistics,asset,callbackInner)},
+        (callbackInner) => {this._getAddressTransactions(addressTXHitory,asset,callbackInner)},
+      ],(err,data) => {
         if(err) {
           return callback(err)
         }
 
-        asset.balance = data[0]
-        asset.vaultBalance = data[1]
-        asset.strategy = data[2].strategy
-        asset.strategyHoldings = data[2].holdings
-        asset.strategyName = data[2].name
-        asset.stats = data[3]
-        asset.vaultHoldings = data[4]
-        asset.pricePerFullShare = data[5].pricePerFullShare
-        asset.usdPrice = data[5].usdPrice
-        asset.pricePerFullShare = data[6].pricePerFullShare
-        asset.apy = data[6].apy
-        asset.addressStatistics = data[7]
-        asset.addressTransactions = data[8]
+        asset.balance=data[0]
+        asset.vaultBalance=data[1]
+        asset.strategy=data[2].strategy
+        asset.strategyHoldings=data[2].holdings
+        asset.strategyName=data[2].name
+        asset.stats=data[3]
+        asset.vaultHoldings=data[4]
+        asset.pricePerFullShare=data[5].pricePerFullShare
+        asset.usdPrice=data[5].usdPrice
+        asset.pricePerFullShare=data[6].pricePerFullShare
+        asset.apy=data[6].apy
+        asset.addressStatistics=data[7]
+        asset.addressTransactions=data[8]
 
-        callback(null, asset)
+        callback(null,asset)
       })
-    }, (err, assets) => {
+    },(err,assets) => {
       if(err) {
         console.log(err)
-        return emitter.emit(ERROR, err)
+        return emitter.emit(ERROR,err)
       }
 
-      store.setStore({ vaultAssets: assets })
-      return emitter.emit(VAULT_BALANCES_FULL_RETURNED, assets)
+      store.setStore({vaultAssets: assets})
+      return emitter.emit(VAULT_BALANCES_FULL_RETURNED,assets)
     })
   }
 
-  _getAssetUSDPrices = async (web3, asset, account, usdPrices, callback) => {
+  _getAssetUSDPrices=async (web3,asset,account,usdPrices,callback) => {
     try {
-      const vaultContract = new web3.eth.Contract(asset.vaultContractABI, asset.vaultContractAddress)
-      const pricePerFullShare = await vaultContract.methods.getPricePerFullShare().call({ from: account.address })
+      const vaultContract=new web3.eth.Contract(asset.vaultContractABI,asset.vaultContractAddress)
+      const pricePerFullShare=await vaultContract.methods.getPricePerFullShare().call({from: account.address})
 
-      const usdPrice = usdPrices[asset.price_id]
+      const usdPrice=usdPrices[asset.price_id]
 
-      const returnObj = {
+      const returnObj={
         pricePerFullShare: pricePerFullShare/1e18,
         usdPrice: usdPrice.usd
       }
 
-      callback(null, returnObj)
+      callback(null,returnObj)
 
-    } catch (ex) {
-      callback(null, {})
+    } catch(ex) {
+      callback(null,{})
     }
   }
 
-  _getStrategy = async (web3, asset, account, callback) => {
+  _getStrategy=async (web3,asset,account,callback) => {
 
-    if(['LINK'].includes(asset.id) ) {
-      return callback(null, {
+    if(['LINK'].includes(asset.id)) {
+      return callback(null,{
         strategy: '',
         name: '',
         holdings: 0
@@ -2852,26 +2861,26 @@ class Store {
     }
 
     try {
-      const url = config.statsProvider + 'vaults'
-      const vaultsApiResultString = await rp(url);
-      const vaults = JSON.parse(vaultsApiResultString)
-      const vault = vaults.find((vault) => vault.address.toLowerCase() === asset.vaultContractAddress.toLowerCase())
+      const url=config.statsProvider+'vaults'
+      const vaultsApiResultString=await rp(url);
+      const vaults=JSON.parse(vaultsApiResultString)
+      const vault=vaults.find((vault) => vault.address.toLowerCase()===asset.vaultContractAddress.toLowerCase())
 
-      const strategyAddress = vault["strategyAddress"]
-      const strategyName = vault["strategyName"].replace(/^Strategy/, '')
+      const strategyAddress=vault["strategyAddress"]
+      const strategyName=vault["strategyName"].replace(/^Strategy/,'')
 
-      const strategyContract = new web3.eth.Contract(config.vaultStrategyABI, strategyAddress)
-      const holdings = await strategyContract.methods.balanceOf().call({ from: account.address })
+      const strategyContract=new web3.eth.Contract(config.vaultStrategyABI,strategyAddress)
+      const holdings=await strategyContract.methods.balanceOf().call({from: account.address})
 
-      callback(null, {
+      callback(null,{
         strategy: strategyAddress,
         name: strategyName,
-        holdings: holdings/(10**(asset.id === 'aLINK' ? 6 : asset.decimals))
+        holdings: holdings/(10**(asset.id==='aLINK'? 6:asset.decimals))
       })
-    } catch (ex) {
+    } catch(ex) {
       console.log(asset)
       console.log(ex)
-      callback(null, {
+      callback(null,{
         strategy: '',
         name: '',
         holdings: 0
@@ -2879,92 +2888,92 @@ class Store {
     }
   }
 
-  _getStatsAPY = (vaultStatistics, asset, callback) => {
+  _getStatsAPY=(vaultStatistics,asset,callback) => {
     try {
 
-      if(asset.erc20address === 'Ethereum') {
-        asset.erc20address = '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2'
+      if(asset.erc20address==='Ethereum') {
+        asset.erc20address='0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2'
       }
 
-      const vault = vaultStatistics.filter((stats) => {
-        return stats.tokenAddress.toLowerCase() === asset.erc20address.toLowerCase()
+      const vault=vaultStatistics.filter((stats) => {
+        return stats.tokenAddress.toLowerCase()===asset.erc20address.toLowerCase()
       })
 
-      if(vault.length === 0) {
-        return callback(null, {})
+      if(vault.length===0) {
+        return callback(null,{})
       }
 
-      callback(null, vault[0])
+      callback(null,vault[0])
     } catch(ex) {
-      callback(null, {})
+      callback(null,{})
     }
   }
 
-  _getAddressStats = (addressStatistics, asset, callback) => {
+  _getAddressStats=(addressStatistics,asset,callback) => {
     try {
-      if(asset.erc20address === 'Ethereum') {
-        asset.erc20address = '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2'
+      if(asset.erc20address==='Ethereum') {
+        asset.erc20address='0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2'
       }
 
-      const vault = addressStatistics.filter((stats) => {
-        return stats.vaultAddress.toLowerCase() === asset.vaultContractAddress.toLowerCase()
+      const vault=addressStatistics.filter((stats) => {
+        return stats.vaultAddress.toLowerCase()===asset.vaultContractAddress.toLowerCase()
       })
 
-      if(vault.length === 0) {
-        return callback(null, null)
+      if(vault.length===0) {
+        return callback(null,null)
       }
 
-      callback(null, vault[0])
+      callback(null,vault[0])
     } catch(ex) {
-      callback(null, {})
+      callback(null,{})
     }
   }
 
-  _getAddressTransactions = (addressTXHitory, asset, callback) => {
+  _getAddressTransactions=(addressTXHitory,asset,callback) => {
     try {
 
-      if(asset.erc20address === 'Ethereum') {
-        asset.erc20address = '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2'
+      if(asset.erc20address==='Ethereum') {
+        asset.erc20address='0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2'
       }
 
-      const vault = addressTXHitory.filter((stats) => {
-        return stats.vaultAddress.toLowerCase() === asset.vaultContractAddress.toLowerCase()
+      const vault=addressTXHitory.filter((stats) => {
+        return stats.vaultAddress.toLowerCase()===asset.vaultContractAddress.toLowerCase()
       })
 
-      if(vault.length === 0) {
-        return callback(null, {})
+      if(vault.length===0) {
+        return callback(null,{})
       }
 
-      callback(null, vault[0])
+      callback(null,vault[0])
     } catch(ex) {
-      callback(null, {})
+      callback(null,{})
     }
   }
 
-  _getVaultHoldings = async (web3, asset, account, callback) => {
+  _getVaultHoldings=async (web3,asset,account,callback) => {
     try {
-      let vaultContract = new web3.eth.Contract(asset.vaultContractABI, asset.vaultContractAddress)
-      var balance = await vaultContract.methods.balance().call({ from: account.address });
-      balance = parseFloat(balance)/10**asset.decimals
-      callback(null, parseFloat(balance))
+      let vaultContract=new web3.eth.Contract(asset.vaultContractABI,asset.vaultContractAddress)
+      var balance=await vaultContract.methods.balance().call({from: account.address});
+      balance=parseFloat(balance)/10**asset.decimals
+      callback(null,parseFloat(balance))
     } catch(ex) {
-      callback(null, 0)
+      callback(null,0)
     }
   }
 
-  _getStrategyHoldings = async (web3, asset, account, callback) => {
+  _getStrategyHoldings=async (web3,asset,account,callback) => {
     try {
-      let vaultContract = new web3.eth.Contract(asset.vaultContractABI, asset.vaultContractAddress)
-      let balance = await vaultContract.methods.balance().call({ from: account.address });
+      let vaultContract=new web3.eth.Contract(asset.vaultContractABI,asset.vaultContractAddress)
+      let balance=await vaultContract.methods.balance().call({from: account.address});
 
-      let available = 0
-      if(asset.id === 'aLINK') {
-        available = await vaultContract.methods.credit().call({ from: account.address });
+      let available=0
+      if(asset.id==='aLINK') {
+        available=await vaultContract.methods.credit().call({from: account.address});
       } else {
-        available = await vaultContract.methods.available().call({ from: account.address });
+        available=await vaultContract.methods.available().call({from: account.address});
       }
-      balance = parseFloat(balance-available)/10**asset.decimals
-      callback(null, parseFloat(balance))
+      balance=parseFloat(balance-available)/10**asset.decimals
+      callback(null,parseFloat(balance))
     } catch(ex) {
       console.log(asset)
       console.log(ex)
@@ -2972,122 +2981,122 @@ class Store {
 
   }
 
-  getVaultBalances = async () => {
-    const account = store.getStore('account')
+  getVaultBalances=async () => {
+    const account=store.getStore('account')
 
-    const assets = store.getStore('vaultAssets')
+    const assets=store.getStore('vaultAssets')
 
-    if(!account || !account.address) {
+    if(!account||!account.address) {
       return false
     }
 
-    const web3 = new Web3(store.getStore('web3context').library.provider);
+    const web3=new Web3(store.getStore('web3context').library.provider);
 
-    async.map(assets, (asset, callback) => {
+    async.map(assets,(asset,callback) => {
       async.parallel([
-        (callbackInner) => { this._getERC20Balance(web3, asset, account, callbackInner) },
-        (callbackInner) => { this._getVaultBalance(web3, asset, account, callbackInner) },
-        (callbackInner) => { this._getVaultAPY(web3, asset, account, callbackInner) }
-      ], (err, data) => {
+        (callbackInner) => {this._getERC20Balance(web3,asset,account,callbackInner)},
+        (callbackInner) => {this._getVaultBalance(web3,asset,account,callbackInner)},
+        (callbackInner) => {this._getVaultAPY(web3,asset,account,callbackInner)}
+      ],(err,data) => {
         if(err) {
           return callback(err)
         }
 
-        asset.balance = data[0]
-        asset.vaultBalance = data[1]
-        asset.pricePerFullShare = data[2].pricePerFullShare
-        asset.apy = data[2].apy
+        asset.balance=data[0]
+        asset.vaultBalance=data[1]
+        asset.pricePerFullShare=data[2].pricePerFullShare
+        asset.apy=data[2].apy
 
-        callback(null, asset)
+        callback(null,asset)
       })
-    }, (err, assets) => {
+    },(err,assets) => {
       if(err) {
-        return emitter.emit(ERROR, err)
+        return emitter.emit(ERROR,err)
       }
 
-      store.setStore({ vaultAssets: assets })
-      return emitter.emit(VAULT_BALANCES_RETURNED, assets)
+      store.setStore({vaultAssets: assets})
+      return emitter.emit(VAULT_BALANCES_RETURNED,assets)
     })
   }
 
-  _getVaultBalance = async (web3, asset, account, callback) => {
-    if(asset.vaultContractAddress === null) {
-      return callback(null, 0)
+  _getVaultBalance=async (web3,asset,account,callback) => {
+    if(asset.vaultContractAddress===null) {
+      return callback(null,0)
     }
 
     try {
-      let vaultContract = new web3.eth.Contract(asset.vaultContractABI, asset.vaultContractAddress)
-      var  balance = await vaultContract.methods.balanceOf(account.address).call({ from: account.address });
-      balance = parseFloat(balance)/10**asset.decimals
-      callback(null, parseFloat(balance))
+      let vaultContract=new web3.eth.Contract(asset.vaultContractABI,asset.vaultContractAddress)
+      var balance=await vaultContract.methods.balanceOf(account.address).call({from: account.address});
+      balance=parseFloat(balance)/10**asset.decimals
+      callback(null,parseFloat(balance))
     } catch(ex) {
-      callback(null, 0)
+      callback(null,0)
     }
   }
 
-  _getVaultPricePerShare = async (web3, asset, account, callback) => {
-    if(asset.vaultContractAddress === null) {
-      return callback(null, 0)
+  _getVaultPricePerShare=async (web3,asset,account,callback) => {
+    if(asset.vaultContractAddress===null) {
+      return callback(null,0)
     }
 
     try {
-      let vaultContract = new web3.eth.Contract(asset.vaultContractABI, asset.vaultContractAddress)
-      var price = await vaultContract.methods.getPricePerFullShare().call({ from: account.address });
-      price = parseFloat(price)/10**18
-      callback(null, parseFloat(price))
+      let vaultContract=new web3.eth.Contract(asset.vaultContractABI,asset.vaultContractAddress)
+      var price=await vaultContract.methods.getPricePerFullShare().call({from: account.address});
+      price=parseFloat(price)/10**18
+      callback(null,parseFloat(price))
     } catch(ex) {
       console.log(ex)
-      callback(null, 0)
+      callback(null,0)
     }
   }
 
-  depositVault = (payload) => {
-    const account = store.getStore('account')
-    const { asset, amount } = payload.content
+  depositVault=(payload) => {
+    const account=store.getStore('account')
+    const {asset,amount}=payload.content
 
-    this._checkApproval(asset, account, amount, asset.vaultContractAddress, (err) => {
+    this._checkApproval(asset,account,amount,asset.vaultContractAddress,(err) => {
       if(err) {
-        return emitter.emit(ERROR, err);
+        return emitter.emit(ERROR,err);
       }
 
-      this._callDepositVault(asset, account, amount, (err, depositResult) => {
+      this._callDepositVault(asset,account,amount,(err,depositResult) => {
         if(err) {
-          return emitter.emit(ERROR, err);
+          return emitter.emit(ERROR,err);
         }
 
-        return emitter.emit(DEPOSIT_VAULT_RETURNED, depositResult)
+        return emitter.emit(DEPOSIT_VAULT_RETURNED,depositResult)
       })
     })
   }
 
-  _checkIfApprovalIsNeeded = async (asset, account, amount, contract, callback) => {
-    const web3 = new Web3(store.getStore('web3context').library.provider);
-    let erc20Contract = new web3.eth.Contract(config.erc20ABI, asset.erc20address)
-    const allowance = await erc20Contract.methods.allowance(account.address, contract).call({ from: account.address })
+  _checkIfApprovalIsNeeded=async (asset,account,amount,contract,callback) => {
+    const web3=new Web3(store.getStore('web3context').library.provider);
+    let erc20Contract=new web3.eth.Contract(config.erc20ABI,asset.erc20address)
+    const allowance=await erc20Contract.methods.allowance(account.address,contract).call({from: account.address})
 
-    const ethAllowance = web3.utils.fromWei(allowance, "ether")
-    if(parseFloat(ethAllowance) < parseFloat(amount)) {
-      asset.amount = amount
-      callback(null, asset)
+    const ethAllowance=web3.utils.fromWei(allowance,"ether")
+    if(parseFloat(ethAllowance)<parseFloat(amount)) {
+      asset.amount=amount
+      callback(null,asset)
     } else {
-      callback(null, false)
+      callback(null,false)
     }
   }
 
-  _callApproval = async (asset, account, amount, contract, last, callback) => {
-    const web3 = new Web3(store.getStore('web3context').library.provider);
-    let erc20Contract = new web3.eth.Contract(config.erc20ABI, asset.erc20address)
+  _callApproval=async (asset,account,amount,contract,last,callback) => {
+    const web3=new Web3(store.getStore('web3context').library.provider);
+    let erc20Contract=new web3.eth.Contract(config.erc20ABI,asset.erc20address)
     try {
-      if(['crvV1', 'crvV2', 'crvV3', 'crvV4', 'USDTv1', 'USDTv2', 'USDTv3', 'USDT'].includes(asset.id)) {
-        const allowance = await erc20Contract.methods.allowance(account.address, contract).call({ from: account.address })
-        const ethAllowance = web3.utils.fromWei(allowance, "ether")
-        if(ethAllowance > 0) {
-          erc20Contract.methods.approve(contract, web3.utils.toWei('0', "ether")).send({ from: account.address, gasPrice: web3.utils.toWei(await this._getGasPrice(), 'gwei') })
-            .on('transactionHash', function(hash){
+      if(['crvV1','crvV2','crvV3','crvV4','USDTv1','USDTv2','USDTv3','USDT'].includes(asset.id)) {
+        const allowance=await erc20Contract.methods.allowance(account.address,contract).call({from: account.address})
+        const ethAllowance=web3.utils.fromWei(allowance,"ether")
+        if(ethAllowance>0) {
+          erc20Contract.methods.approve(contract,web3.utils.toWei('0',"ether")).send({from: account.address,gasPrice: web3.utils.toWei(await this._getGasPrice(),'gwei')})
+            .on('transactionHash',function(hash) {
               //success...
             })
-            .on('error', function(error) {
-              if (!error.toString().includes("-32601")) {
+            .on('error',function(error) {
+              if(!error.toString().includes("-32601")) {
                 if(error.message) {
                   return callback(error.message)
                 }
@@ -3098,15 +3107,15 @@ class Store {
       }
 
       if(last) {
-        await erc20Contract.methods.approve(contract, web3.utils.toWei(amount, "ether")).send({ from: account.address, gasPrice: web3.utils.toWei(await this._getGasPrice(), 'gwei') })
+        await erc20Contract.methods.approve(contract,web3.utils.toWei(amount,"ether")).send({from: account.address,gasPrice: web3.utils.toWei(await this._getGasPrice(),'gwei')})
         callback()
       } else {
-        erc20Contract.methods.approve(contract, web3.utils.toWei(amount, "ether")).send({ from: account.address, gasPrice: web3.utils.toWei(await this._getGasPrice(), 'gwei') })
-          .on('transactionHash', function(hash){
+        erc20Contract.methods.approve(contract,web3.utils.toWei(amount,"ether")).send({from: account.address,gasPrice: web3.utils.toWei(await this._getGasPrice(),'gwei')})
+          .on('transactionHash',function(hash) {
             callback()
           })
-          .on('error', function(error) {
-            if (!error.toString().includes("-32601")) {
+          .on('error',function(error) {
+            if(!error.toString().includes("-32601")) {
               if(error.message) {
                 return callback(error.message)
               }
@@ -3122,30 +3131,30 @@ class Store {
     }
   }
 
-  _callDepositVault = async (asset, account, amount, callback) => {
-    const web3 = new Web3(store.getStore('web3context').library.provider);
+  _callDepositVault=async (asset,account,amount,callback) => {
+    const web3=new Web3(store.getStore('web3context').library.provider);
 
-    let vaultContract = new web3.eth.Contract(asset.vaultContractABI, asset.vaultContractAddress)
+    let vaultContract=new web3.eth.Contract(asset.vaultContractABI,asset.vaultContractAddress)
 
-    var amountToSend = web3.utils.toWei(amount, "ether")
-    if (asset.decimals !== 18) {
-      amountToSend = amount*10**asset.decimals;
+    var amountToSend=web3.utils.toWei(amount,"ether")
+    if(asset.decimals!==18) {
+      amountToSend=amount*10**asset.decimals;
     }
 
-    if(asset.erc20address === 'Ethereum') {
-      vaultContract.methods.depositETH().send({ from: account.address, value: amountToSend, gasPrice: web3.utils.toWei(await this._getGasPrice(), 'gwei') })
-        .on('transactionHash', function(hash){
+    if(asset.erc20address==='Ethereum') {
+      vaultContract.methods.depositETH().send({from: account.address,value: amountToSend,gasPrice: web3.utils.toWei(await this._getGasPrice(),'gwei')})
+        .on('transactionHash',function(hash) {
           console.log(hash)
-          callback(null, hash)
+          callback(null,hash)
         })
-        .on('confirmation', function(confirmationNumber, receipt){
-          console.log(confirmationNumber, receipt);
+        .on('confirmation',function(confirmationNumber,receipt) {
+          console.log(confirmationNumber,receipt);
         })
-        .on('receipt', function(receipt){
+        .on('receipt',function(receipt) {
           console.log(receipt);
         })
-        .on('error', function(error) {
-          if (!error.toString().includes("-32601")) {
+        .on('error',function(error) {
+          if(!error.toString().includes("-32601")) {
             if(error.message) {
               return callback(error.message)
             }
@@ -3153,7 +3162,7 @@ class Store {
           }
         })
         .catch((error) => {
-          if (!error.toString().includes("-32601")) {
+          if(!error.toString().includes("-32601")) {
             if(error.message) {
               return callback(error.message)
             }
@@ -3161,19 +3170,19 @@ class Store {
           }
         })
     } else {
-      vaultContract.methods.deposit(amountToSend).send({ from: account.address, gasPrice: web3.utils.toWei(await this._getGasPrice(), 'gwei') })
-        .on('transactionHash', function(hash){
+      vaultContract.methods.deposit(amountToSend).send({from: account.address,gasPrice: web3.utils.toWei(await this._getGasPrice(),'gwei')})
+        .on('transactionHash',function(hash) {
           console.log(hash)
-          callback(null, hash)
+          callback(null,hash)
         })
-        .on('confirmation', function(confirmationNumber, receipt){
-          console.log(confirmationNumber, receipt);
+        .on('confirmation',function(confirmationNumber,receipt) {
+          console.log(confirmationNumber,receipt);
         })
-        .on('receipt', function(receipt){
+        .on('receipt',function(receipt) {
           console.log(receipt);
         })
-        .on('error', function(error) {
-          if (!error.toString().includes("-32601")) {
+        .on('error',function(error) {
+          if(!error.toString().includes("-32601")) {
             if(error.message) {
               return callback(error.message)
             }
@@ -3181,7 +3190,7 @@ class Store {
           }
         })
         .catch((error) => {
-          if (!error.toString().includes("-32601")) {
+          if(!error.toString().includes("-32601")) {
             if(error.message) {
               return callback(error.message)
             }
@@ -3191,43 +3200,43 @@ class Store {
     }
   }
 
-  depositAllVault = (payload) => {
-    const account = store.getStore('account')
-    const { asset } = payload.content
+  depositAllVault=(payload) => {
+    const account=store.getStore('account')
+    const {asset}=payload.content
 
-    this._checkApproval(asset, account, asset.balance, asset.vaultContractAddress, (err) => {
+    this._checkApproval(asset,account,asset.balance,asset.vaultContractAddress,(err) => {
       if(err) {
-        return emitter.emit(ERROR, err);
+        return emitter.emit(ERROR,err);
       }
 
-      this._callDepositAllVault(asset, account, (err, depositResult) => {
+      this._callDepositAllVault(asset,account,(err,depositResult) => {
         if(err) {
-          return emitter.emit(ERROR, err);
+          return emitter.emit(ERROR,err);
         }
 
-        return emitter.emit(DEPOSIT_ALL_VAULT_RETURNED, depositResult)
+        return emitter.emit(DEPOSIT_ALL_VAULT_RETURNED,depositResult)
       })
     })
   }
 
-  _callDepositAllVault = async (asset, account, callback) => {
-    const web3 = new Web3(store.getStore('web3context').library.provider);
+  _callDepositAllVault=async (asset,account,callback) => {
+    const web3=new Web3(store.getStore('web3context').library.provider);
 
-    let vaultContract = new web3.eth.Contract(asset.vaultContractABI, asset.vaultContractAddress)
+    let vaultContract=new web3.eth.Contract(asset.vaultContractABI,asset.vaultContractAddress)
 
-    vaultContract.methods.depositAll().send({ from: account.address, gasPrice: web3.utils.toWei(await this._getGasPrice(), 'gwei') })
-      .on('transactionHash', function(hash){
+    vaultContract.methods.depositAll().send({from: account.address,gasPrice: web3.utils.toWei(await this._getGasPrice(),'gwei')})
+      .on('transactionHash',function(hash) {
         console.log(hash)
-        callback(null, hash)
+        callback(null,hash)
       })
-      .on('confirmation', function(confirmationNumber, receipt){
-        console.log(confirmationNumber, receipt);
+      .on('confirmation',function(confirmationNumber,receipt) {
+        console.log(confirmationNumber,receipt);
       })
-      .on('receipt', function(receipt){
+      .on('receipt',function(receipt) {
         console.log(receipt);
       })
-      .on('error', function(error) {
-        if (!error.toString().includes("-32601")) {
+      .on('error',function(error) {
+        if(!error.toString().includes("-32601")) {
           if(error.message) {
             return callback(error.message)
           }
@@ -3235,7 +3244,7 @@ class Store {
         }
       })
       .catch((error) => {
-        if (!error.toString().includes("-32601")) {
+        if(!error.toString().includes("-32601")) {
           if(error.message) {
             return callback(error.message)
           }
@@ -3244,250 +3253,250 @@ class Store {
       })
   }
 
-  withdrawVault = (payload) => {
-    const account = store.getStore('account')
-    const { asset, amount } = payload.content
+  withdrawVault=(payload) => {
+    const account=store.getStore('account')
+    const {asset,amount}=payload.content
 
 
-    if(asset.yVaultCheckAddress && !asset.yVaultCheckDisabled) {
-      this._checkApprovalForProxy(asset, account, amount, asset.yVaultCheckAddress, (err) => {
+    if(asset.yVaultCheckAddress&&!asset.yVaultCheckDisabled) {
+      this._checkApprovalForProxy(asset,account,amount,asset.yVaultCheckAddress,(err) => {
         if(err) {
-          return emitter.emit(ERROR, err);
+          return emitter.emit(ERROR,err);
         }
 
-        this._callWithdrawVaultProxy(asset, account, amount, (err, withdrawResult) => {
+        this._callWithdrawVaultProxy(asset,account,amount,(err,withdrawResult) => {
           if(err) {
-            return emitter.emit(ERROR, err);
+            return emitter.emit(ERROR,err);
           }
 
-          return emitter.emit(WITHDRAW_VAULT_RETURNED, withdrawResult)
+          return emitter.emit(WITHDRAW_VAULT_RETURNED,withdrawResult)
         })
       })
     } else {
-      this._callWithdrawVault(asset, account, amount, (err, withdrawResult) => {
+      this._callWithdrawVault(asset,account,amount,(err,withdrawResult) => {
         if(err) {
-          return emitter.emit(ERROR, err);
+          return emitter.emit(ERROR,err);
         }
-        return emitter.emit(WITHDRAW_VAULT_RETURNED, withdrawResult)
+        return emitter.emit(WITHDRAW_VAULT_RETURNED,withdrawResult)
       })
     }
   }
 
-  _callWithdrawVaultProxy = async (asset, account, amount, callback) => {
-    const web3 = new Web3(store.getStore('web3context').library.provider);
+  _callWithdrawVaultProxy=async (asset,account,amount,callback) => {
+    const web3=new Web3(store.getStore('web3context').library.provider);
 
-    let yVaultCheckContract = new web3.eth.Contract(config.yVaultCheckABI, asset.yVaultCheckAddress)
+    let yVaultCheckContract=new web3.eth.Contract(config.yVaultCheckABI,asset.yVaultCheckAddress)
 
-    var amountSend = web3.utils.toWei(amount, "ether")
-    if (asset.decimals !== 18) {
-      amountSend = Math.round(amount*10**asset.decimals);
+    var amountSend=web3.utils.toWei(amount,"ether")
+    if(asset.decimals!==18) {
+      amountSend=Math.round(amount*10**asset.decimals);
     }
 
-    yVaultCheckContract.methods.withdraw(amountSend).send({ from: account.address, gasPrice: web3.utils.toWei(await this._getGasPrice(), 'gwei') })
-    .on('transactionHash', function(hash){
-      console.log(hash)
-      callback(null, hash)
-    })
-    .on('confirmation', function(confirmationNumber, receipt){
-      console.log(confirmationNumber, receipt);
-    })
-    .on('receipt', function(receipt){
-      console.log(receipt);
-    })
-    .on('error', function(error) {
-      console.log(error);
-      if (!error.toString().includes("-32601")) {
-        if(error.message) {
-          return callback(error.message)
+    yVaultCheckContract.methods.withdraw(amountSend).send({from: account.address,gasPrice: web3.utils.toWei(await this._getGasPrice(),'gwei')})
+      .on('transactionHash',function(hash) {
+        console.log(hash)
+        callback(null,hash)
+      })
+      .on('confirmation',function(confirmationNumber,receipt) {
+        console.log(confirmationNumber,receipt);
+      })
+      .on('receipt',function(receipt) {
+        console.log(receipt);
+      })
+      .on('error',function(error) {
+        console.log(error);
+        if(!error.toString().includes("-32601")) {
+          if(error.message) {
+            return callback(error.message)
+          }
+          callback(error)
         }
-        callback(error)
-      }
-    })
+      })
   }
 
-  _callWithdrawVault = async (asset, account, amount, callback) => {
-    const web3 = new Web3(store.getStore('web3context').library.provider);
+  _callWithdrawVault=async (asset,account,amount,callback) => {
+    const web3=new Web3(store.getStore('web3context').library.provider);
 
-    let vaultContract = new web3.eth.Contract(asset.vaultContractABI, asset.vaultContractAddress)
+    let vaultContract=new web3.eth.Contract(asset.vaultContractABI,asset.vaultContractAddress)
 
-    var amountSend = web3.utils.toWei(amount, "ether")
-    if (asset.decimals !== 18) {
-      amountSend = Math.round(amount*10**asset.decimals);
+    var amountSend=web3.utils.toWei(amount,"ether")
+    if(asset.decimals!==18) {
+      amountSend=Math.round(amount*10**asset.decimals);
     }
 
-    let functionCall = vaultContract.methods.withdraw(amountSend)
-    if(asset.erc20address === 'Ethereum') {
-      functionCall = vaultContract.methods.withdrawETH(amountSend)
+    let functionCall=vaultContract.methods.withdraw(amountSend)
+    if(asset.erc20address==='Ethereum') {
+      functionCall=vaultContract.methods.withdrawETH(amountSend)
     }
 
-    functionCall.send({ from: account.address, gasPrice: web3.utils.toWei(await this._getGasPrice(), 'gwei') })
-    .on('transactionHash', function(hash){
-      console.log(hash)
-      callback(null, hash)
-    })
-    .on('confirmation', function(confirmationNumber, receipt){
-      console.log(confirmationNumber, receipt);
-    })
-    .on('receipt', function(receipt){
-      console.log(receipt);
-    })
-    .on('error', function(error) {
-      console.log(error);
-      if (!error.toString().includes("-32601")) {
-        if(error.message) {
-          return callback(error.message)
+    functionCall.send({from: account.address,gasPrice: web3.utils.toWei(await this._getGasPrice(),'gwei')})
+      .on('transactionHash',function(hash) {
+        console.log(hash)
+        callback(null,hash)
+      })
+      .on('confirmation',function(confirmationNumber,receipt) {
+        console.log(confirmationNumber,receipt);
+      })
+      .on('receipt',function(receipt) {
+        console.log(receipt);
+      })
+      .on('error',function(error) {
+        console.log(error);
+        if(!error.toString().includes("-32601")) {
+          if(error.message) {
+            return callback(error.message)
+          }
+          callback(error)
         }
-        callback(error)
-      }
-    })
+      })
   }
 
-  withdrawAllVault = (payload) => {
-    const account = store.getStore('account')
-    const { asset } = payload.content
+  withdrawAllVault=(payload) => {
+    const account=store.getStore('account')
+    const {asset}=payload.content
 
-    if(asset.yVaultCheckAddress && !asset.yVaultCheckDisabled) {
-      this._checkApprovalForProxy(asset, account, asset.vaultBalance, asset.yVaultCheckAddress, (err) => {
+    if(asset.yVaultCheckAddress&&!asset.yVaultCheckDisabled) {
+      this._checkApprovalForProxy(asset,account,asset.vaultBalance,asset.yVaultCheckAddress,(err) => {
         if(err) {
-          return emitter.emit(ERROR, err);
+          return emitter.emit(ERROR,err);
         }
 
-        this._callWithdrawAllVaultProxy(asset, account, (err, withdrawResult) => {
+        this._callWithdrawAllVaultProxy(asset,account,(err,withdrawResult) => {
           if(err) {
-            return emitter.emit(ERROR, err);
+            return emitter.emit(ERROR,err);
           }
 
-          return emitter.emit(WITHDRAW_ALL_VAULT_RETURNED, withdrawResult)
+          return emitter.emit(WITHDRAW_ALL_VAULT_RETURNED,withdrawResult)
         })
       })
     } else {
-      this._callWithdrawAllVault(asset, account, (err, withdrawResult) => {
+      this._callWithdrawAllVault(asset,account,(err,withdrawResult) => {
         if(err) {
-          return emitter.emit(ERROR, err);
+          return emitter.emit(ERROR,err);
         }
-        return emitter.emit(WITHDRAW_ALL_VAULT_RETURNED, withdrawResult)
+        return emitter.emit(WITHDRAW_ALL_VAULT_RETURNED,withdrawResult)
       })
     }
   }
 
-  _callWithdrawAllVaultProxy = async (asset, account, callback) => {
-    const web3 = new Web3(store.getStore('web3context').library.provider);
+  _callWithdrawAllVaultProxy=async (asset,account,callback) => {
+    const web3=new Web3(store.getStore('web3context').library.provider);
 
-    let vaultContract = new web3.eth.Contract(config.yVaultCheckABI, asset.yVaultCheckAddress)
+    let vaultContract=new web3.eth.Contract(config.yVaultCheckABI,asset.yVaultCheckAddress)
 
-    vaultContract.methods.withdrawAll().send({ from: account.address, gasPrice: web3.utils.toWei(await this._getGasPrice(), 'gwei') })
-    .on('transactionHash', function(hash){
-      console.log(hash)
-      callback(null, hash)
-    })
-    .on('confirmation', function(confirmationNumber, receipt){
-      console.log(confirmationNumber, receipt);
-    })
-    .on('receipt', function(receipt){
-      console.log(receipt);
-    })
-    .on('error', function(error) {
-      console.log(error);
-      if (!error.toString().includes("-32601")) {
-        if(error.message) {
-          return callback(error.message)
+    vaultContract.methods.withdrawAll().send({from: account.address,gasPrice: web3.utils.toWei(await this._getGasPrice(),'gwei')})
+      .on('transactionHash',function(hash) {
+        console.log(hash)
+        callback(null,hash)
+      })
+      .on('confirmation',function(confirmationNumber,receipt) {
+        console.log(confirmationNumber,receipt);
+      })
+      .on('receipt',function(receipt) {
+        console.log(receipt);
+      })
+      .on('error',function(error) {
+        console.log(error);
+        if(!error.toString().includes("-32601")) {
+          if(error.message) {
+            return callback(error.message)
+          }
+          callback(error)
         }
-        callback(error)
-      }
-    })
+      })
   }
 
-  _callWithdrawAllVault = async (asset, account, callback) => {
-    const web3 = new Web3(store.getStore('web3context').library.provider);
+  _callWithdrawAllVault=async (asset,account,callback) => {
+    const web3=new Web3(store.getStore('web3context').library.provider);
 
-    let vaultContract = new web3.eth.Contract(asset.vaultContractABI, asset.vaultContractAddress)
+    let vaultContract=new web3.eth.Contract(asset.vaultContractABI,asset.vaultContractAddress)
 
-    let functionCall = vaultContract.methods.withdrawAll()
-    if(asset.erc20address === 'Ethereum') {
-      functionCall = vaultContract.methods.withdrawAllETH()
+    let functionCall=vaultContract.methods.withdrawAll()
+    if(asset.erc20address==='Ethereum') {
+      functionCall=vaultContract.methods.withdrawAllETH()
     }
 
-    functionCall.send({ from: account.address, gasPrice: web3.utils.toWei(await this._getGasPrice(), 'gwei') })
-    .on('transactionHash', function(hash){
-      console.log(hash)
-      callback(null, hash)
-    })
-    .on('confirmation', function(confirmationNumber, receipt){
-      console.log(confirmationNumber, receipt);
-    })
-    .on('receipt', function(receipt){
-      console.log(receipt);
-    })
-    .on('error', function(error) {
-      console.log(error);
-      if (!error.toString().includes("-32601")) {
-        if(error.message) {
-          return callback(error.message)
+    functionCall.send({from: account.address,gasPrice: web3.utils.toWei(await this._getGasPrice(),'gwei')})
+      .on('transactionHash',function(hash) {
+        console.log(hash)
+        callback(null,hash)
+      })
+      .on('confirmation',function(confirmationNumber,receipt) {
+        console.log(confirmationNumber,receipt);
+      })
+      .on('receipt',function(receipt) {
+        console.log(receipt);
+      })
+      .on('error',function(error) {
+        console.log(error);
+        if(!error.toString().includes("-32601")) {
+          if(error.message) {
+            return callback(error.message)
+          }
+          callback(error)
         }
-        callback(error)
-      }
-    })
+      })
   }
 
-  _getVaultAPY = async (web3, asset, account, callback) => {
+  _getVaultAPY=async (web3,asset,account,callback) => {
     try {
-      if(asset.vaultContractAddress === null) {
-        return callback(null, {
+      if(asset.vaultContractAddress===null) {
+        return callback(null,{
           pricePerFullShare: 0,
           apy: 0
         })
       }
 
-      const block = await web3.eth.getBlockNumber();
-      const contract = new web3.eth.Contract(asset.vaultContractABI, asset.vaultContractAddress);
-      let pricePerFullShare = await contract.methods.getPricePerFullShare().call();
+      const block=await web3.eth.getBlockNumber();
+      const contract=new web3.eth.Contract(asset.vaultContractABI,asset.vaultContractAddress);
+      let pricePerFullShare=await contract.methods.getPricePerFullShare().call();
 
-      let balance = pricePerFullShare - asset.measurement;
-      balance = balance / 1e18;
-      let diff = block - asset.lastMeasurement;
+      let balance=pricePerFullShare-asset.measurement;
+      balance=balance/1e18;
+      let diff=block-asset.lastMeasurement;
 
-      if(diff === 0) {
-        return callback(null, {
+      if(diff===0) {
+        return callback(null,{
           pricePerFullShare: 0,
           apy: 0
         })
       }
 
-      balance = balance / diff;
-      balance = balance * 242584600;
+      balance=balance/diff;
+      balance=balance*242584600;
 
-      const returnObj = {
+      const returnObj={
         pricePerFullShare: parseFloat(pricePerFullShare)/10**18,
         apy: parseFloat(balance)
       }
 
-      callback(null, returnObj)
-    } catch (e) {
+      callback(null,returnObj)
+    } catch(e) {
       console.log(e)
-      callback(null, {
+      callback(null,{
         pricePerFullShare: 0,
         apy: 0
       })
     }
   }
 
-  getUSDPrices = async () => {
+  getUSDPrices=async () => {
     try {
-      const priceJSON = await this._getUSDPrices()
+      const priceJSON=await this._getUSDPrices()
 
-      store.setStore({ usdPrices: priceJSON })
-      return emitter.emit(USD_PRICE_RETURNED, priceJSON)
+      store.setStore({usdPrices: priceJSON})
+      return emitter.emit(USD_PRICE_RETURNED,priceJSON)
 
     } catch(e) {
       console.log(e)
     }
   }
 
-  _getUSDPrices = async () => {
+  _getUSDPrices=async () => {
     try {
-      const url = 'https://api.coingecko.com/api/v3/simple/price?ids=usd-coin,dai,true-usd,tether,usd-coin,chainlink,yearn-finance,binance-usd,wrapped-bitcoin,ethereum,nusd,chainlink,aave-link,lp-sbtc-curve,lp-bcurve,curve-fi-ydai-yusdc-yusdt-ytusd,lp-3pool-curve,gemini-dollar,curve-dao-token&vs_currencies=usd,eth'
-      const priceString = await rp(url);
-      const priceJSON = JSON.parse(priceString)
+      const url='https://api.coingecko.com/api/v3/simple/price?ids=usd-coin,dai,true-usd,tether,usd-coin,chainlink,yearn-finance,binance-usd,wrapped-bitcoin,ethereum,nusd,chainlink,aave-link,lp-sbtc-curve,lp-bcurve,curve-fi-ydai-yusdc-yusdt-ytusd,lp-3pool-curve,gemini-dollar,curve-dao-token&vs_currencies=usd,eth'
+      const priceString=await rp(url);
+      const priceJSON=JSON.parse(priceString)
 
       return priceJSON
     } catch(e) {
@@ -3496,11 +3505,11 @@ class Store {
     }
   }
 
-  _getETHUSDPrices = async () => {
+  _getETHUSDPrices=async () => {
     try {
-      const url = 'https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd'
-      const priceString = await rp(url);
-      const priceJSON = JSON.parse(priceString)
+      const url='https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd'
+      const priceString=await rp(url);
+      const priceJSON=JSON.parse(priceString)
 
       return priceJSON.ethereum.usd
     } catch(e) {
@@ -3509,11 +3518,11 @@ class Store {
     }
   }
 
-  getDashboardSnapshot = (payload) => {
-    emitter.on(VAULT_BALANCES_FULL_RETURNED, this._calculateDashboard)
-    emitter.on(BALANCES_LIGHT_RETURNED, this._calculateDashboard)
-    emitter.on(USD_PRICE_RETURNED, this._calculateDashboard)
-    emitter.on(STATISTICS_RETURNED, this._calculateDashboard)
+  getDashboardSnapshot=(payload) => {
+    emitter.on(VAULT_BALANCES_FULL_RETURNED,this._calculateDashboard)
+    emitter.on(BALANCES_LIGHT_RETURNED,this._calculateDashboard)
+    emitter.on(USD_PRICE_RETURNED,this._calculateDashboard)
+    emitter.on(STATISTICS_RETURNED,this._calculateDashboard)
 
     this.getVaultBalancesFull()
     this.getBalancesLight()
@@ -3521,80 +3530,80 @@ class Store {
     this.getStatistics()
   }
 
-  _calculateDashboard = () => {
-    const vaults = store.getStore('vaultAssets')
-    const assets = store.getStore('assets')
-    const prices = store.getStore('usdPrices')
-    const statistics = store.getStore('statistics')
+  _calculateDashboard=() => {
+    const vaults=store.getStore('vaultAssets')
+    const assets=store.getStore('assets')
+    const prices=store.getStore('usdPrices')
+    const statistics=store.getStore('statistics')
 
-    if(vaults && vaults.length > 0 && assets && assets.length > 0 && prices !== null && statistics && statistics.length > 0) {
-      let basedOn = localStorage.getItem('yearn.finance-dashboard-basedon')
+    if(vaults&&vaults.length>0&&assets&&assets.length>0&&prices!==null&&statistics&&statistics.length>0) {
+      let basedOn=localStorage.getItem('dafi-entropy-dashboard-basedon')
 
       if(!basedOn) {
-        basedOn = '1'
+        basedOn='1'
       }
 
       // FILTER USED VAULTS AND CALCULATE VAULT ASSET BALANCES
-      const vaultsInUse = vaults.filter((vault) => {
-        if(vault.id === 'ETH') {
+      const vaultsInUse=vaults.filter((vault) => {
+        if(vault.id==='ETH') {
           return false
         }
 
-        return vault.vaultBalance > 0.0001
+        return vault.vaultBalance>0.0001
       }).map((vault) => {
 
-        let apy = 0
+        let apy=0
 
-        const vaultStats = statistics.filter((stats) => {
-          return stats.tokenAddress.toLowerCase() === vault.erc20address.toLowerCase()
+        const vaultStats=statistics.filter((stats) => {
+          return stats.tokenAddress.toLowerCase()===vault.erc20address.toLowerCase()
         })
 
-        if(vaultStats.length === 0) {
-          apy = vault.apy
+        if(vaultStats.length===0) {
+          apy=vault.apy
         } else {
-          switch (basedOn) {
+          switch(basedOn) {
             case '1':
-              apy = vaultStats[0].apyOneWeekSample
+              apy=vaultStats[0].apyOneWeekSample
               break;
             case '2':
-              apy = vaultStats[0].apyOneMonthSample
+              apy=vaultStats[0].apyOneMonthSample
               break;
             case '3':
-              apy = vaultStats[0].apyInceptionSample
+              apy=vaultStats[0].apyInceptionSample
               break;
             default:
-              apy = vault.apy
+              apy=vault.apy
           }
         }
 
-        const price = prices[vault.price_id]
-        vault.prices = price
-        vault.usdBalance = vault.vaultBalance * vault.pricePerFullShare * vault.prices.usd
-        vault.vaultGrowth_daily_usd = vault.vaultBalance * vault.pricePerFullShare * (apy/36500) * vault.prices.usd
-        vault.vaultGrowth_weekly_usd = vault.vaultBalance * vault.pricePerFullShare * (apy/5200) * vault.prices.usd
-        vault.vaultGrowth_yearly_usd = vault.vaultBalance * vault.pricePerFullShare * apy/100 * vault.prices.usd
+        const price=prices[vault.price_id]
+        vault.prices=price
+        vault.usdBalance=vault.vaultBalance*vault.pricePerFullShare*vault.prices.usd
+        vault.vaultGrowth_daily_usd=vault.vaultBalance*vault.pricePerFullShare*(apy/36500)*vault.prices.usd
+        vault.vaultGrowth_weekly_usd=vault.vaultBalance*vault.pricePerFullShare*(apy/5200)*vault.prices.usd
+        vault.vaultGrowth_yearly_usd=vault.vaultBalance*vault.pricePerFullShare*apy/100*vault.prices.usd
 
-        vault.ethBalance = vault.vaultBalance * vault.pricePerFullShare * vault.prices.eth
-        vault.vaultGrowth_daily_eth = vault.vaultBalance * vault.pricePerFullShare * (apy/36500) * vault.prices.eth
-        vault.vaultGrowth_weekly_eth = vault.vaultBalance * vault.pricePerFullShare * (apy/5200) * vault.prices.eth
-        vault.vaultGrowth_yearly_eth = vault.vaultBalance * vault.pricePerFullShare * apy/100 * vault.prices.eth
+        vault.ethBalance=vault.vaultBalance*vault.pricePerFullShare*vault.prices.eth
+        vault.vaultGrowth_daily_eth=vault.vaultBalance*vault.pricePerFullShare*(apy/36500)*vault.prices.eth
+        vault.vaultGrowth_weekly_eth=vault.vaultBalance*vault.pricePerFullShare*(apy/5200)*vault.prices.eth
+        vault.vaultGrowth_yearly_eth=vault.vaultBalance*vault.pricePerFullShare*apy/100*vault.prices.eth
 
         return vault
       })
 
       // CALCULATE VAULT BALANCES AND DAILY GROWTH
-      const vaultBalances = vaultsInUse.reduce((accumulator, vault) => {
-        accumulator.vaultBalance_usd = accumulator.vaultBalance_usd + vault.usdBalance
-        accumulator.vaultGrowth_daily_usd = accumulator.vaultGrowth_daily_usd + vault.vaultGrowth_daily_usd
-        accumulator.vaultGrowth_weekly_usd = accumulator.vaultGrowth_weekly_usd + vault.vaultGrowth_weekly_usd
-        accumulator.vaultGrowth_yearly_usd = accumulator.vaultGrowth_yearly_usd + vault.vaultGrowth_yearly_usd
+      const vaultBalances=vaultsInUse.reduce((accumulator,vault) => {
+        accumulator.vaultBalance_usd=accumulator.vaultBalance_usd+vault.usdBalance
+        accumulator.vaultGrowth_daily_usd=accumulator.vaultGrowth_daily_usd+vault.vaultGrowth_daily_usd
+        accumulator.vaultGrowth_weekly_usd=accumulator.vaultGrowth_weekly_usd+vault.vaultGrowth_weekly_usd
+        accumulator.vaultGrowth_yearly_usd=accumulator.vaultGrowth_yearly_usd+vault.vaultGrowth_yearly_usd
 
-        accumulator.vaultBalance_eth = accumulator.vaultBalance_eth + vault.ethBalance
-        accumulator.vaultGrowth_daily_eth = accumulator.vaultGrowth_daily_eth + vault.vaultGrowth_daily_eth
-        accumulator.vaultGrowth_weekly_eth = accumulator.vaultGrowth_weekly_eth + vault.vaultGrowth_weekly_eth
-        accumulator.vaultGrowth_yearly_eth = accumulator.vaultGrowth_yearly_eth + vault.vaultGrowth_yearly_eth
+        accumulator.vaultBalance_eth=accumulator.vaultBalance_eth+vault.ethBalance
+        accumulator.vaultGrowth_daily_eth=accumulator.vaultGrowth_daily_eth+vault.vaultGrowth_daily_eth
+        accumulator.vaultGrowth_weekly_eth=accumulator.vaultGrowth_weekly_eth+vault.vaultGrowth_weekly_eth
+        accumulator.vaultGrowth_yearly_eth=accumulator.vaultGrowth_yearly_eth+vault.vaultGrowth_yearly_eth
         return accumulator
-      }, {
+      },{
         vaultBalance_usd: 0,
         vaultGrowth_daily_usd: 0,
         vaultGrowth_weekly_usd: 0,
@@ -3606,50 +3615,50 @@ class Store {
       })
 
       // CALCULATE VAULT GROWth PERCENTAGES
-      const vaultGrowthDailyPerc_usd = vaultBalances.vaultGrowth_daily_usd * 100 / vaultBalances.vaultBalance_usd
-      const vaultGrowthWeeklyPerc_usd = vaultBalances.vaultGrowth_weekly_usd * 100 / vaultBalances.vaultBalance_usd
-      const vaultGrowthYearlyPerc_usd = vaultBalances.vaultGrowth_yearly_usd * 100 / vaultBalances.vaultBalance_usd
+      const vaultGrowthDailyPerc_usd=vaultBalances.vaultGrowth_daily_usd*100/vaultBalances.vaultBalance_usd
+      const vaultGrowthWeeklyPerc_usd=vaultBalances.vaultGrowth_weekly_usd*100/vaultBalances.vaultBalance_usd
+      const vaultGrowthYearlyPerc_usd=vaultBalances.vaultGrowth_yearly_usd*100/vaultBalances.vaultBalance_usd
 
-      const vaultGrowthDailyPerc_eth = vaultBalances.vaultGrowth_daily_eth * 100 / vaultBalances.vaultBalance_eth
-      const vaultGrowthWeeklyPerc_eth = vaultBalances.vaultGrowth_weekly_eth * 100 / vaultBalances.vaultBalance_eth
-      const vaultGrowthYearlyPerc_eth = vaultBalances.vaultGrowth_yearly_eth * 100 / vaultBalances.vaultBalance_eth
+      const vaultGrowthDailyPerc_eth=vaultBalances.vaultGrowth_daily_eth*100/vaultBalances.vaultBalance_eth
+      const vaultGrowthWeeklyPerc_eth=vaultBalances.vaultGrowth_weekly_eth*100/vaultBalances.vaultBalance_eth
+      const vaultGrowthYearlyPerc_eth=vaultBalances.vaultGrowth_yearly_eth*100/vaultBalances.vaultBalance_eth
 
 
       // FILTER USED EARN AND CALCULATE EARN ASSET BALANCES
-      const assetsInUse = assets.filter((asset) => {
-        return asset.investedBalance > 0.0001
+      const assetsInUse=assets.filter((asset) => {
+        return asset.investedBalance>0.0001
       }).map((asset) => {
-        const price = prices[asset.price_id]
-        if(price == null) {
+        const price=prices[asset.price_id]
+        if(price==null) {
           console.log(asset.price_id)
         }
-        asset.prices = price
-        asset.usdBalance = asset.investedBalance * asset.price * asset.prices.usd
-        asset.earnGrowth_daily_usd = asset.investedBalance * asset.price * (asset.maxApr/36500) * asset.prices.usd
-        asset.earnGrowth_weekly_usd = asset.investedBalance * asset.price * (asset.maxApr/5200) * asset.prices.usd
-        asset.earnGrowth_yearly_usd = asset.investedBalance * asset.price * asset.maxApr/100 * asset.prices.usd
+        asset.prices=price
+        asset.usdBalance=asset.investedBalance*asset.price*asset.prices.usd
+        asset.earnGrowth_daily_usd=asset.investedBalance*asset.price*(asset.maxApr/36500)*asset.prices.usd
+        asset.earnGrowth_weekly_usd=asset.investedBalance*asset.price*(asset.maxApr/5200)*asset.prices.usd
+        asset.earnGrowth_yearly_usd=asset.investedBalance*asset.price*asset.maxApr/100*asset.prices.usd
 
-        asset.ethBalance = asset.investedBalance * asset.price * asset.prices.eth
-        asset.earnGrowth_daily_eth = asset.investedBalance * asset.price * (asset.maxApr/36500) * asset.prices.eth
-        asset.earnGrowth_weekly_eth = asset.investedBalance * asset.price * (asset.maxApr/5200) * asset.prices.eth
-        asset.earnGrowth_yearly_eth = asset.investedBalance * asset.price * asset.maxApr/100 * asset.prices.eth
+        asset.ethBalance=asset.investedBalance*asset.price*asset.prices.eth
+        asset.earnGrowth_daily_eth=asset.investedBalance*asset.price*(asset.maxApr/36500)*asset.prices.eth
+        asset.earnGrowth_weekly_eth=asset.investedBalance*asset.price*(asset.maxApr/5200)*asset.prices.eth
+        asset.earnGrowth_yearly_eth=asset.investedBalance*asset.price*asset.maxApr/100*asset.prices.eth
         return asset
       })
 
 
       // CALCULATE EARN BALANCES AND DAILY GROWTH
-      const earnBalances = assetsInUse.reduce((accumulator, asset) => {
-        accumulator.earnBalance_usd = accumulator.earnBalance_usd + asset.usdBalance
-        accumulator.earnGrowth_daily_usd = accumulator.earnGrowth_daily_usd + asset.earnGrowth_daily_usd
-        accumulator.earnGrowth_weekly_usd = accumulator.earnGrowth_weekly_usd + asset.earnGrowth_weekly_usd
-        accumulator.earnGrowth_yearly_usd = accumulator.earnGrowth_yearly_usd + asset.earnGrowth_yearly_usd
+      const earnBalances=assetsInUse.reduce((accumulator,asset) => {
+        accumulator.earnBalance_usd=accumulator.earnBalance_usd+asset.usdBalance
+        accumulator.earnGrowth_daily_usd=accumulator.earnGrowth_daily_usd+asset.earnGrowth_daily_usd
+        accumulator.earnGrowth_weekly_usd=accumulator.earnGrowth_weekly_usd+asset.earnGrowth_weekly_usd
+        accumulator.earnGrowth_yearly_usd=accumulator.earnGrowth_yearly_usd+asset.earnGrowth_yearly_usd
 
-        accumulator.earnBalance_eth = accumulator.earnBalance_eth + asset.ethBalance
-        accumulator.earnGrowth_daily_eth = accumulator.earnGrowth_daily_eth + asset.earnGrowth_daily_eth
-        accumulator.earnGrowth_weekly_eth = accumulator.earnGrowth_weekly_eth + asset.earnGrowth_weekly_eth
-        accumulator.earnGrowth_yearly_eth = accumulator.earnGrowth_yearly_eth + asset.earnGrowth_yearly_eth
+        accumulator.earnBalance_eth=accumulator.earnBalance_eth+asset.ethBalance
+        accumulator.earnGrowth_daily_eth=accumulator.earnGrowth_daily_eth+asset.earnGrowth_daily_eth
+        accumulator.earnGrowth_weekly_eth=accumulator.earnGrowth_weekly_eth+asset.earnGrowth_weekly_eth
+        accumulator.earnGrowth_yearly_eth=accumulator.earnGrowth_yearly_eth+asset.earnGrowth_yearly_eth
         return accumulator
-      }, {
+      },{
         earnBalance_usd: 0,
         earnGrowth_daily_usd: 0,
         earnGrowth_weekly_usd: 0,
@@ -3661,37 +3670,37 @@ class Store {
       })
 
       // CALCULATE EARN GROWth PERCENTAGES
-      const earnGrowthDailyPerc_usd = earnBalances.earnGrowth_daily_usd * 100 / earnBalances.earnBalance_usd
-      const earnGrowthWeeklyPerc_usd = earnBalances.earnGrowth_weekly_usd * 100 / earnBalances.earnBalance_usd
-      const earnGrowthYearlyPerc_usd = earnBalances.earnGrowth_yearly_usd * 100 / earnBalances.earnBalance_usd
+      const earnGrowthDailyPerc_usd=earnBalances.earnGrowth_daily_usd*100/earnBalances.earnBalance_usd
+      const earnGrowthWeeklyPerc_usd=earnBalances.earnGrowth_weekly_usd*100/earnBalances.earnBalance_usd
+      const earnGrowthYearlyPerc_usd=earnBalances.earnGrowth_yearly_usd*100/earnBalances.earnBalance_usd
 
-      const earnGrowthDailyPerc_eth = earnBalances.earnGrowth_daily_eth * 100 / earnBalances.earnBalance_eth
-      const earnGrowthWeeklyPerc_eth = earnBalances.earnGrowth_weekly_eth * 100 / earnBalances.earnBalance_eth
-      const earnGrowthYearlyPerc_eth = earnBalances.earnGrowth_yearly_eth * 100 / earnBalances.earnBalance_eth
+      const earnGrowthDailyPerc_eth=earnBalances.earnGrowth_daily_eth*100/earnBalances.earnBalance_eth
+      const earnGrowthWeeklyPerc_eth=earnBalances.earnGrowth_weekly_eth*100/earnBalances.earnBalance_eth
+      const earnGrowthYearlyPerc_eth=earnBalances.earnGrowth_yearly_eth*100/earnBalances.earnBalance_eth
 
 
 
 
       // CALCULATE PORTFOLIO (earn + vault) BALANCES
-      const portfolioBalance_usd = vaultBalances.vaultBalance_usd + earnBalances.earnBalance_usd
-      const portfolioGrowthDaily_usd = vaultBalances.vaultGrowth_daily_usd + earnBalances.earnGrowth_daily_usd
-      const portfolioGrowthWeekly_usd = vaultBalances.vaultGrowth_weekly_usd + earnBalances.earnGrowth_weekly_usd
-      const portfolioGrowthYearly_usd = vaultBalances.vaultGrowth_yearly_usd + earnBalances.earnGrowth_yearly_usd
-      const portfolioGrowthDailyPerc_usd = (vaultBalances.vaultGrowth_daily_usd + earnBalances.earnGrowth_daily_usd) * 100 / (vaultBalances.vaultBalance_usd + earnBalances.earnBalance_usd)
-      const portfolioGrowthWeeklyPerc_usd = (vaultBalances.vaultGrowth_weekly_usd + earnBalances.earnGrowth_weekly_usd) * 100 / (vaultBalances.vaultBalance_usd + earnBalances.earnBalance_usd)
-      const portfolioGrowthYearlyPerc_usd = (vaultBalances.vaultGrowth_yearly_usd + earnBalances.earnGrowth_yearly_usd) * 100 / (vaultBalances.vaultBalance_usd + earnBalances.earnBalance_usd)
+      const portfolioBalance_usd=vaultBalances.vaultBalance_usd+earnBalances.earnBalance_usd
+      const portfolioGrowthDaily_usd=vaultBalances.vaultGrowth_daily_usd+earnBalances.earnGrowth_daily_usd
+      const portfolioGrowthWeekly_usd=vaultBalances.vaultGrowth_weekly_usd+earnBalances.earnGrowth_weekly_usd
+      const portfolioGrowthYearly_usd=vaultBalances.vaultGrowth_yearly_usd+earnBalances.earnGrowth_yearly_usd
+      const portfolioGrowthDailyPerc_usd=(vaultBalances.vaultGrowth_daily_usd+earnBalances.earnGrowth_daily_usd)*100/(vaultBalances.vaultBalance_usd+earnBalances.earnBalance_usd)
+      const portfolioGrowthWeeklyPerc_usd=(vaultBalances.vaultGrowth_weekly_usd+earnBalances.earnGrowth_weekly_usd)*100/(vaultBalances.vaultBalance_usd+earnBalances.earnBalance_usd)
+      const portfolioGrowthYearlyPerc_usd=(vaultBalances.vaultGrowth_yearly_usd+earnBalances.earnGrowth_yearly_usd)*100/(vaultBalances.vaultBalance_usd+earnBalances.earnBalance_usd)
 
 
-      const portfolioBalance_eth = vaultBalances.vaultBalance_eth + earnBalances.earnBalance_eth
-      const portfolioGrowthDaily_eth = vaultBalances.vaultGrowth_daily_eth + earnBalances.earnGrowth_daily_eth
-      const portfolioGrowthWeekly_eth = vaultBalances.vaultGrowth_weekly_eth + earnBalances.earnGrowth_weekly_eth
-      const portfolioGrowthYearly_eth = vaultBalances.vaultGrowth_yearly_eth + earnBalances.earnGrowth_yearly_eth
-      const portfolioGrowthDailyPerc_eth = (vaultBalances.vaultGrowth_daily_eth + earnBalances.earnGrowth_daily_eth) * 100 / (vaultBalances.vaultBalance_eth + earnBalances.earnBalance_eth)
-      const portfolioGrowthWeeklyPerc_eth = (vaultBalances.vaultGrowth_weekly_eth + earnBalances.earnGrowth_weekly_eth) * 100 / (vaultBalances.vaultBalance_eth + earnBalances.earnBalance_eth)
-      const portfolioGrowthYearlyPerc_eth = (vaultBalances.vaultGrowth_yearly_eth + earnBalances.earnGrowth_yearly_eth) * 100 / (vaultBalances.vaultBalance_eth + earnBalances.earnBalance_eth)
+      const portfolioBalance_eth=vaultBalances.vaultBalance_eth+earnBalances.earnBalance_eth
+      const portfolioGrowthDaily_eth=vaultBalances.vaultGrowth_daily_eth+earnBalances.earnGrowth_daily_eth
+      const portfolioGrowthWeekly_eth=vaultBalances.vaultGrowth_weekly_eth+earnBalances.earnGrowth_weekly_eth
+      const portfolioGrowthYearly_eth=vaultBalances.vaultGrowth_yearly_eth+earnBalances.earnGrowth_yearly_eth
+      const portfolioGrowthDailyPerc_eth=(vaultBalances.vaultGrowth_daily_eth+earnBalances.earnGrowth_daily_eth)*100/(vaultBalances.vaultBalance_eth+earnBalances.earnBalance_eth)
+      const portfolioGrowthWeeklyPerc_eth=(vaultBalances.vaultGrowth_weekly_eth+earnBalances.earnGrowth_weekly_eth)*100/(vaultBalances.vaultBalance_eth+earnBalances.earnBalance_eth)
+      const portfolioGrowthYearlyPerc_eth=(vaultBalances.vaultGrowth_yearly_eth+earnBalances.earnGrowth_yearly_eth)*100/(vaultBalances.vaultBalance_eth+earnBalances.earnBalance_eth)
 
 
-      let dashboard = {
+      let dashboard={
         vault_balance_usd: vaultBalances.vaultBalance_usd,
         vault_growth_usd_daily: vaultBalances.vaultGrowth_daily_usd,
         vault_growth_usd_weekly: vaultBalances.vaultGrowth_weekly_usd,
@@ -3746,29 +3755,29 @@ class Store {
         statistics: statistics
       }
 
-      store.setStore({ dashboard: dashboard })
-      emitter.emit(DASHBOARD_SNAPSHOT_RETURNED, dashboard)
+      store.setStore({dashboard: dashboard})
+      emitter.emit(DASHBOARD_SNAPSHOT_RETURNED,dashboard)
 
     }
   }
 
-  getStatistics = async () => {
+  getStatistics=async () => {
     try {
-      const statistics = await this._getStatistics()
+      const statistics=await this._getStatistics()
 
-      store.setStore({ statistics: statistics })
-      emitter.emit(STATISTICS_RETURNED, statistics)
+      store.setStore({statistics: statistics})
+      emitter.emit(STATISTICS_RETURNED,statistics)
     } catch(e) {
       console.log(e)
       return store.getStore('universalGasPrice')
     }
   }
 
-  _getStatistics = async () => {
+  _getStatistics=async () => {
     try {
-      const url = config.statsProvider+'vaults/apy'
-      const statisticsString = await rp(url);
-      const statistics = JSON.parse(statisticsString)
+      const url=config.statsProvider+'vaults/apy'
+      const statisticsString=await rp(url);
+      const statistics=JSON.parse(statisticsString)
 
       return statistics
     } catch(e) {
@@ -3777,11 +3786,11 @@ class Store {
     }
   }
 
-  _getAddressStatistics = async (address) => {
+  _getAddressStatistics=async (address) => {
     try {
-      const url = config.statsProvider+'user/'+address+'/vaults/statistics'
-      const statisticsString = await rp(url);
-      const statistics = JSON.parse(statisticsString)
+      const url=config.statsProvider+'user/'+address+'/vaults/statistics'
+      const statisticsString=await rp(url);
+      const statistics=JSON.parse(statisticsString)
 
       return statistics
     } catch(e) {
@@ -3790,11 +3799,11 @@ class Store {
     }
   }
 
-  _getAddressTxHistory = async (address) => {
+  _getAddressTxHistory=async (address) => {
     try {
-      const url = config.statsProvider+'user/'+address+'/vaults/transactions'
-      const statisticsString = await rp(url);
-      const statistics = JSON.parse(statisticsString)
+      const url=config.statsProvider+'user/'+address+'/vaults/transactions'
+      const statisticsString=await rp(url);
+      const statistics=JSON.parse(statisticsString)
 
       return statistics
     } catch(e) {
@@ -3803,11 +3812,11 @@ class Store {
     }
   }
 
-  _getGasPrice = async () => {
+  _getGasPrice=async () => {
     try {
-      const url = 'https://gasprice.poa.network/'
-      const priceString = await rp(url);
-      const priceJSON = JSON.parse(priceString)
+      const url='https://gasprice.poa.network/'
+      const priceString=await rp(url);
+      const priceJSON=JSON.parse(priceString)
       if(priceJSON) {
         return priceJSON.fast.toFixed(0)
       }
@@ -3818,181 +3827,181 @@ class Store {
     }
   }
 
-  _getWeb3Provider = async () => {
-    const web3context = store.getStore('web3context')
+  _getWeb3Provider=async () => {
+    const web3context=store.getStore('web3context')
     if(!web3context) {
       return null
     }
-    const provider = web3context.library.provider
+    const provider=web3context.library.provider
     if(!provider) {
       return null
     }
 
-    const web3 = new Web3(provider);
+    const web3=new Web3(provider);
 
     // const web3 = createAlchemyWeb3(config.infuraProvider, { writeProvider: provider });
 
     return web3
   }
 
-  getExperimentalVaultBalancesFull = async () => {
-    const account = store.getStore('account')
-    const assets = store.getStore('experimentalVaultAssets')
+  getExperimentalVaultBalancesFull=async () => {
+    const account=store.getStore('account')
+    const assets=store.getStore('experimentalVaultAssets')
 
-    if(!account || !account.address) {
+    if(!account||!account.address) {
       return false
     }
 
-    const web3 = await this._getWeb3Provider()
+    const web3=await this._getWeb3Provider()
     if(!web3) {
       return null
     }
 
-    const usdPrices = await this._getUSDPrices()
+    const usdPrices=await this._getUSDPrices()
 
-    async.map(assets, (asset, callback) => {
+    async.map(assets,(asset,callback) => {
       async.parallel([
-        (callbackInner) => { this._getERC20Balance(web3, asset, account, callbackInner) },
-        (callbackInner) => { this._getVaultBalance(web3, asset, account, callbackInner) },
-        (callbackInner) => { this._getAssetUSDPrices(web3, asset, account, usdPrices, callbackInner) },
-        (callbackInner) => { this._getExperimentalVaultClaimable(web3, asset, account, callbackInner) },
-        (callbackInner) => { this._getExperimentalVaultVested(web3, asset, account, callbackInner) },
-        (callbackInner) => { this._getExperimentalVaultGauges(web3, asset, account, callbackInner) },
-      ], (err, data) => {
+        (callbackInner) => {this._getERC20Balance(web3,asset,account,callbackInner)},
+        (callbackInner) => {this._getVaultBalance(web3,asset,account,callbackInner)},
+        (callbackInner) => {this._getAssetUSDPrices(web3,asset,account,usdPrices,callbackInner)},
+        (callbackInner) => {this._getExperimentalVaultClaimable(web3,asset,account,callbackInner)},
+        (callbackInner) => {this._getExperimentalVaultVested(web3,asset,account,callbackInner)},
+        (callbackInner) => {this._getExperimentalVaultGauges(web3,asset,account,callbackInner)},
+      ],(err,data) => {
         if(err) {
           return callback(err)
         }
 
-        asset.balance = data[0]
-        asset.vaultBalance = data[1]
-        asset.usdPrice = data[2].usdPrice
-        asset.claimable = data[3]
-        asset.vested = data[4]
-        asset.gaugeBalance = data[5].gaugeBalance
-        asset.gauges = data[5].userGauges
+        asset.balance=data[0]
+        asset.vaultBalance=data[1]
+        asset.usdPrice=data[2].usdPrice
+        asset.claimable=data[3]
+        asset.vested=data[4]
+        asset.gaugeBalance=data[5].gaugeBalance
+        asset.gauges=data[5].userGauges
         console.log(asset.gauges)
 
-        callback(null, asset)
+        callback(null,asset)
       })
-    }, (err, assets) => {
+    },(err,assets) => {
       if(err) {
         console.log(err)
-        return emitter.emit(ERROR, err)
+        return emitter.emit(ERROR,err)
       }
 
-      store.setStore({ experimentalVaultAssets: assets })
-      return emitter.emit(EXPERIMENTAL_VAULT_BALANCES_FULL_RETURNED, assets)
+      store.setStore({experimentalVaultAssets: assets})
+      return emitter.emit(EXPERIMENTAL_VAULT_BALANCES_FULL_RETURNED,assets)
     })
   }
 
-  _getExperimentalVaultClaimable = async (web3, asset, account, callback) => {
+  _getExperimentalVaultClaimable=async (web3,asset,account,callback) => {
     try {
-      let vaultContract = new web3.eth.Contract(asset.vaultContractABI, asset.vaultContractAddress)
-      let balance = await vaultContract.methods.claimable(account.address).call({ from: account.address });
-      balance = parseFloat(balance)/10**asset.decimals
-      callback(null, parseFloat(balance))
+      let vaultContract=new web3.eth.Contract(asset.vaultContractABI,asset.vaultContractAddress)
+      let balance=await vaultContract.methods.claimable(account.address).call({from: account.address});
+      balance=parseFloat(balance)/10**asset.decimals
+      callback(null,parseFloat(balance))
     } catch(ex) {
-      callback(null, 0)
+      callback(null,0)
     }
   }
 
-  _getExperimentalVaultVested = async (web3, asset, account, callback) => {
+  _getExperimentalVaultVested=async (web3,asset,account,callback) => {
     try {
-      let vaultContract = new web3.eth.Contract(asset.vestingContractABI, asset.vestingContractAddress)
-      let balance = await vaultContract.methods.balanceOf(account.address).call({ from: account.address });
-      balance = parseFloat(balance)/10**asset.decimals
-      callback(null, parseFloat(balance))
+      let vaultContract=new web3.eth.Contract(asset.vestingContractABI,asset.vestingContractAddress)
+      let balance=await vaultContract.methods.balanceOf(account.address).call({from: account.address});
+      balance=parseFloat(balance)/10**asset.decimals
+      callback(null,parseFloat(balance))
     } catch(ex) {
-      callback(null, 0)
+      callback(null,0)
     }
   }
 
-  _getExperimentalVaultGauges = async (web3, asset, account, callback) => {
-    const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000'
+  _getExperimentalVaultGauges=async (web3,asset,account,callback) => {
+    const ZERO_ADDRESS='0x0000000000000000000000000000000000000000'
     try {
-      const curveRegistryContract = new web3.eth.Contract(config.curveRegistryContractABI, config.curveRegistryContractAddress)
+      const curveRegistryContract=new web3.eth.Contract(config.curveRegistryContractABI,config.curveRegistryContractAddress)
 
-      const poolCount = await curveRegistryContract.methods.pool_count().call()
+      const poolCount=await curveRegistryContract.methods.pool_count().call()
       console.log(poolCount)
-      const pools = await Promise.all([...Array(parseInt(poolCount)).keys()].map(
+      const pools=await Promise.all([...Array(parseInt(poolCount)).keys()].map(
         i => curveRegistryContract.methods.pool_list(i).call()
       ))
       console.log(pools)
-      const resp = await Promise.all(pools.map(
+      const resp=await Promise.all(pools.map(
         pool => curveRegistryContract.methods.get_gauges(pool).call()
       ))
       console.log(resp)
-      let gauges = []
-      for (let x of resp) gauges.push(...x[0])
-      gauges = gauges.filter(gauge => gauge !== ZERO_ADDRESS)
+      let gauges=[]
+      for(let x of resp) gauges.push(...x[0])
+      gauges=gauges.filter(gauge => gauge!==ZERO_ADDRESS)
 
-      let balances = await Promise.all(gauges.map(this._gagueClaimable))
-      let userGauges = gauges.filter((gauge, i) => { return balances[i] > 0 })
-      while (userGauges.length < 20) userGauges.push(ZERO_ADDRESS)
-      const gaugeBalance = balances.reduce((prev, curr) => { return curr + prev })
+      let balances=await Promise.all(gauges.map(this._gagueClaimable))
+      let userGauges=gauges.filter((gauge,i) => {return balances[i]>0})
+      while(userGauges.length<20) userGauges.push(ZERO_ADDRESS)
+      const gaugeBalance=balances.reduce((prev,curr) => {return curr+prev})
 
       console.log(gaugeBalance)
       console.log(userGauges)
-      callback(null, { gaugeBalance: gaugeBalance, userGauges: userGauges })
+      callback(null,{gaugeBalance: gaugeBalance,userGauges: userGauges})
     } catch(ex) {
       console.log(ex)
-      const emptyGauges = []
-      while (emptyGauges.length < 20) emptyGauges.push(ZERO_ADDRESS)
-      callback(null, { gaugeBalance: 0, userGauges: emptyGauges })
+      const emptyGauges=[]
+      while(emptyGauges.length<20) emptyGauges.push(ZERO_ADDRESS)
+      callback(null,{gaugeBalance: 0,userGauges: emptyGauges})
     }
   }
 
-  _gagueClaimable = async (gauge) => {
-    const web3 = await this._getWeb3Provider()
-    const account = store.getStore('account')
+  _gagueClaimable=async (gauge) => {
+    const web3=await this._getWeb3Provider()
+    const account=store.getStore('account')
 
-    const contract = new web3.eth.Contract(config.curveGaugeContractABI, gauge)
-    let balance = await contract.methods.claimable_tokens(account.address).call()
-    return parseFloat(web3.utils.fromWei(balance, "ether"))
+    const contract=new web3.eth.Contract(config.curveGaugeContractABI,gauge)
+    let balance=await contract.methods.claimable_tokens(account.address).call()
+    return parseFloat(web3.utils.fromWei(balance,"ether"))
   }
 
-  depositExperimentalVault = (payload) => {
-    const account = store.getStore('account')
-    const { asset, amount } = payload.content
+  depositExperimentalVault=(payload) => {
+    const account=store.getStore('account')
+    const {asset,amount}=payload.content
 
-    this._checkApproval(asset, account, amount, asset.vaultContractAddress, (err) => {
+    this._checkApproval(asset,account,amount,asset.vaultContractAddress,(err) => {
       if(err) {
-        return emitter.emit(ERROR, err);
+        return emitter.emit(ERROR,err);
       }
 
-      this._callDepositExperimentalVault(asset, account, amount, (err, depositResult) => {
+      this._callDepositExperimentalVault(asset,account,amount,(err,depositResult) => {
         if(err) {
-          return emitter.emit(ERROR, err);
+          return emitter.emit(ERROR,err);
         }
 
-        return emitter.emit(DEPOSIT_EXPERIMENTAL_VAULT_RETURNED, depositResult)
+        return emitter.emit(DEPOSIT_EXPERIMENTAL_VAULT_RETURNED,depositResult)
       })
     })
   }
 
-  _callDepositExperimentalVault = async (asset, account, amount, callback) => {
-    const web3 = new Web3(store.getStore('web3context').library.provider);
+  _callDepositExperimentalVault=async (asset,account,amount,callback) => {
+    const web3=new Web3(store.getStore('web3context').library.provider);
 
-    let vaultContract = new web3.eth.Contract(asset.vaultContractABI, asset.vaultContractAddress)
+    let vaultContract=new web3.eth.Contract(asset.vaultContractABI,asset.vaultContractAddress)
 
-    var amountToSend = web3.utils.toWei(amount, "ether")
-    if (asset.decimals !== 18) {
-      amountToSend = amount*10**asset.decimals;
+    var amountToSend=web3.utils.toWei(amount,"ether")
+    if(asset.decimals!==18) {
+      amountToSend=amount*10**asset.decimals;
     }
 
-    vaultContract.methods.deposit(amountToSend).send({ from: account.address, gasPrice: web3.utils.toWei(await this._getGasPrice(), 'gwei') })
-      .on('transactionHash', function(hash){
+    vaultContract.methods.deposit(amountToSend).send({from: account.address,gasPrice: web3.utils.toWei(await this._getGasPrice(),'gwei')})
+      .on('transactionHash',function(hash) {
         console.log(hash)
-        callback(null, hash)
+        callback(null,hash)
       })
-      .on('confirmation', function(confirmationNumber, receipt){
-        console.log(confirmationNumber, receipt);
+      .on('confirmation',function(confirmationNumber,receipt) {
+        console.log(confirmationNumber,receipt);
       })
-      .on('receipt', function(receipt){
+      .on('receipt',function(receipt) {
         console.log(receipt);
       })
-      .on('error', function(error) {
-        if (!error.toString().includes("-32601")) {
+      .on('error',function(error) {
+        if(!error.toString().includes("-32601")) {
           if(error.message) {
             return callback(error.message)
           }
@@ -4000,7 +4009,7 @@ class Store {
         }
       })
       .catch((error) => {
-        if (!error.toString().includes("-32601")) {
+        if(!error.toString().includes("-32601")) {
           if(error.message) {
             return callback(error.message)
           }
@@ -4009,43 +4018,43 @@ class Store {
       })
   }
 
-  depositAllExperimentalVault = (payload) => {
-    const account = store.getStore('account')
-    const { asset } = payload.content
+  depositAllExperimentalVault=(payload) => {
+    const account=store.getStore('account')
+    const {asset}=payload.content
 
-    this._checkApproval(asset, account, asset.balance, asset.vaultContractAddress, (err) => {
+    this._checkApproval(asset,account,asset.balance,asset.vaultContractAddress,(err) => {
       if(err) {
-        return emitter.emit(ERROR, err);
+        return emitter.emit(ERROR,err);
       }
 
-      this._callDepositAllExperimentalVault(asset, account, (err, depositResult) => {
+      this._callDepositAllExperimentalVault(asset,account,(err,depositResult) => {
         if(err) {
-          return emitter.emit(ERROR, err);
+          return emitter.emit(ERROR,err);
         }
 
-        return emitter.emit(DEPOSIT_ALL_EXPERIMENTAL_VAULT_RETURNED, depositResult)
+        return emitter.emit(DEPOSIT_ALL_EXPERIMENTAL_VAULT_RETURNED,depositResult)
       })
     })
   }
 
-  _callDepositAllExperimentalVault = async (asset, account, callback) => {
-    const web3 = new Web3(store.getStore('web3context').library.provider);
+  _callDepositAllExperimentalVault=async (asset,account,callback) => {
+    const web3=new Web3(store.getStore('web3context').library.provider);
 
-    let vaultContract = new web3.eth.Contract(asset.vaultContractABI, asset.vaultContractAddress)
+    let vaultContract=new web3.eth.Contract(asset.vaultContractABI,asset.vaultContractAddress)
 
-    vaultContract.methods.depositAll().send({ from: account.address, gasPrice: web3.utils.toWei(await this._getGasPrice(), 'gwei') })
-      .on('transactionHash', function(hash){
+    vaultContract.methods.depositAll().send({from: account.address,gasPrice: web3.utils.toWei(await this._getGasPrice(),'gwei')})
+      .on('transactionHash',function(hash) {
         console.log(hash)
-        callback(null, hash)
+        callback(null,hash)
       })
-      .on('confirmation', function(confirmationNumber, receipt){
-        console.log(confirmationNumber, receipt);
+      .on('confirmation',function(confirmationNumber,receipt) {
+        console.log(confirmationNumber,receipt);
       })
-      .on('receipt', function(receipt){
+      .on('receipt',function(receipt) {
         console.log(receipt);
       })
-      .on('error', function(error) {
-        if (!error.toString().includes("-32601")) {
+      .on('error',function(error) {
+        if(!error.toString().includes("-32601")) {
           if(error.message) {
             return callback(error.message)
           }
@@ -4053,7 +4062,7 @@ class Store {
         }
       })
       .catch((error) => {
-        if (!error.toString().includes("-32601")) {
+        if(!error.toString().includes("-32601")) {
           if(error.message) {
             return callback(error.message)
           }
@@ -4062,37 +4071,37 @@ class Store {
       })
   }
 
-  claimExperimentalVault = (payload) => {
-    const account = store.getStore('account')
-    const { asset } = payload.content
+  claimExperimentalVault=(payload) => {
+    const account=store.getStore('account')
+    const {asset}=payload.content
 
-    this._callClaimExperimentalVault(asset, account, (err, claimResult) => {
+    this._callClaimExperimentalVault(asset,account,(err,claimResult) => {
       if(err) {
-        return emitter.emit(ERROR, err);
+        return emitter.emit(ERROR,err);
       }
 
-      return emitter.emit(CLAIM_EXPERIMENTAL_VAULT_RETURNED, claimResult)
+      return emitter.emit(CLAIM_EXPERIMENTAL_VAULT_RETURNED,claimResult)
     })
   }
 
-  _callClaimExperimentalVault = async (asset, account, callback) => {
-    const web3 = new Web3(store.getStore('web3context').library.provider);
+  _callClaimExperimentalVault=async (asset,account,callback) => {
+    const web3=new Web3(store.getStore('web3context').library.provider);
 
-    let vaultContract = new web3.eth.Contract(asset.vaultContractABI, asset.vaultContractAddress)
+    let vaultContract=new web3.eth.Contract(asset.vaultContractABI,asset.vaultContractAddress)
 
-    vaultContract.methods.claim().send({ from: account.address, gasPrice: web3.utils.toWei(await this._getGasPrice(), 'gwei') })
-      .on('transactionHash', function(hash){
+    vaultContract.methods.claim().send({from: account.address,gasPrice: web3.utils.toWei(await this._getGasPrice(),'gwei')})
+      .on('transactionHash',function(hash) {
         console.log(hash)
-        callback(null, hash)
+        callback(null,hash)
       })
-      .on('confirmation', function(confirmationNumber, receipt){
-        console.log(confirmationNumber, receipt);
+      .on('confirmation',function(confirmationNumber,receipt) {
+        console.log(confirmationNumber,receipt);
       })
-      .on('receipt', function(receipt){
+      .on('receipt',function(receipt) {
         console.log(receipt);
       })
-      .on('error', function(error) {
-        if (!error.toString().includes("-32601")) {
+      .on('error',function(error) {
+        if(!error.toString().includes("-32601")) {
           if(error.message) {
             return callback(error.message)
           }
@@ -4100,7 +4109,7 @@ class Store {
         }
       })
       .catch((error) => {
-        if (!error.toString().includes("-32601")) {
+        if(!error.toString().includes("-32601")) {
           if(error.message) {
             return callback(error.message)
           }
@@ -4109,51 +4118,51 @@ class Store {
       })
   }
 
-  zapExperimentalVault = (payload) => {
-    const account = store.getStore('account')
-    const { asset } = payload.content
-    const zappableCrv = asset.balance + asset.gaugeBalance + asset.vested;
-    this._checkApproval(asset, account, zappableCrv, asset.zapContractAddress, (err) => {
+  zapExperimentalVault=(payload) => {
+    const account=store.getStore('account')
+    const {asset}=payload.content
+    const zappableCrv=asset.balance+asset.gaugeBalance+asset.vested;
+    this._checkApproval(asset,account,zappableCrv,asset.zapContractAddress,(err) => {
       if(err) {
-        return emitter.emit(ERROR, err);
+        return emitter.emit(ERROR,err);
       }
 
-      this._checkCurveMintApproval(asset, account, asset.zapContractAddress, (err) => {
+      this._checkCurveMintApproval(asset,account,asset.zapContractAddress,(err) => {
         if(err) {
-          return emitter.emit(ERROR, err);
+          return emitter.emit(ERROR,err);
         }
 
-        this._callZapExperimentalVault(asset, account, (err, depositResult) => {
+        this._callZapExperimentalVault(asset,account,(err,depositResult) => {
           if(err) {
-            return emitter.emit(ERROR, err);
+            return emitter.emit(ERROR,err);
           }
 
-          return emitter.emit(ZAP_EXPERIMENTAL_VAULT_RETURNED, depositResult)
+          return emitter.emit(ZAP_EXPERIMENTAL_VAULT_RETURNED,depositResult)
         })
       })
     })
   }
 
-  _callZapExperimentalVault = async (asset, account, callback) => {
-    const web3 = new Web3(store.getStore('web3context').library.provider);
+  _callZapExperimentalVault=async (asset,account,callback) => {
+    const web3=new Web3(store.getStore('web3context').library.provider);
 
-    let zapContract = new web3.eth.Contract(asset.zapContractABI, asset.zapContractAddress)
+    let zapContract=new web3.eth.Contract(asset.zapContractABI,asset.zapContractAddress)
 
     console.log(asset.gauges)
 
-    zapContract.methods.zap(asset.gauges).send({ from: account.address, gasPrice: web3.utils.toWei(await this._getGasPrice(), 'gwei') })
-      .on('transactionHash', function(hash){
+    zapContract.methods.zap(asset.gauges).send({from: account.address,gasPrice: web3.utils.toWei(await this._getGasPrice(),'gwei')})
+      .on('transactionHash',function(hash) {
         console.log(hash)
-        callback(null, hash)
+        callback(null,hash)
       })
-      .on('confirmation', function(confirmationNumber, receipt){
-        console.log(confirmationNumber, receipt);
+      .on('confirmation',function(confirmationNumber,receipt) {
+        console.log(confirmationNumber,receipt);
       })
-      .on('receipt', function(receipt){
+      .on('receipt',function(receipt) {
         console.log(receipt);
       })
-      .on('error', function(error) {
-        if (!error.toString().includes("-32601")) {
+      .on('error',function(error) {
+        if(!error.toString().includes("-32601")) {
           if(error.message) {
             return callback(error.message)
           }
@@ -4161,7 +4170,7 @@ class Store {
         }
       })
       .catch((error) => {
-        if (!error.toString().includes("-32601")) {
+        if(!error.toString().includes("-32601")) {
           if(error.message) {
             return callback(error.message)
           }
@@ -4170,62 +4179,62 @@ class Store {
       })
   }
 
-  getLendingBalances = async (payload) => {
-    const account = store.getStore('account')
+  getLendingBalances=async (payload) => {
+    const account=store.getStore('account')
 
-    const web3 = await this._getWeb3Provider()
+    const web3=await this._getWeb3Provider()
     if(!web3) {
       return null
     }
-    const assets = store.getStore('lendingAssets')
-    const assetsIn = await this._getAssetsIn(web3, account)
-    const blocksPeryear = 2102400
+    const assets=store.getStore('lendingAssets')
+    const assetsIn=await this._getAssetsIn(web3,account)
+    const blocksPeryear=2102400
 
-    async.map(assets, async (asset, callback) => {
+    async.map(assets,async (asset,callback) => {
       try {
-        let marketContract = null
-        const creamPriceOracleContract = new web3.eth.Contract(config.creamPriceOracleABI, config.creamPriceOracleAddress)
+        let marketContract=null
+        const creamPriceOracleContract=new web3.eth.Contract(config.creamPriceOracleABI,config.creamPriceOracleAddress)
 
-        let balance = 0
+        let balance=0
 
-        const bnDecimals = new BigNumber(10)
+        const bnDecimals=new BigNumber(10)
           .pow(asset.decimals)
 
-        const bnVaultDecimals = new BigNumber(10)
+        const bnVaultDecimals=new BigNumber(10)
           .pow(asset.vaultDecimals)
 
-        if(asset.vaultSymbol !== 'crETH') {
-          const erc20Contract = new web3.eth.Contract(config.erc20ABI, asset.erc20address)
-          balance = await erc20Contract.methods.balanceOf(account.address).call()
-          balance = new BigNumber(balance).div(bnDecimals).toFixed(asset.decimals, BigNumber.ROUND_DOWN)
+        if(asset.vaultSymbol!=='crETH') {
+          const erc20Contract=new web3.eth.Contract(config.erc20ABI,asset.erc20address)
+          balance=await erc20Contract.methods.balanceOf(account.address).call()
+          balance=new BigNumber(balance).div(bnDecimals).toFixed(asset.decimals,BigNumber.ROUND_DOWN)
 
-          marketContract = new web3.eth.Contract(config.cErc20DelegatorABI, asset.address)
+          marketContract=new web3.eth.Contract(config.cErc20DelegatorABI,asset.address)
         } else {
-          balance = await web3.eth.getBalance(account.address)
-          balance = new BigNumber(balance).div(bnDecimals).toFixed(asset.decimals, BigNumber.ROUND_DOWN)
+          balance=await web3.eth.getBalance(account.address)
+          balance=new BigNumber(balance).div(bnDecimals).toFixed(asset.decimals,BigNumber.ROUND_DOWN)
 
-          marketContract = new web3.eth.Contract(config.cEtherABI, asset.address)
+          marketContract=new web3.eth.Contract(config.cEtherABI,asset.address)
         }
 
-        const exchangeRate = await marketContract.methods.exchangeRateStored().call()
-        let supplyBalance = await marketContract.methods.balanceOf(account.address).call()
-        let borrowBalance = await marketContract.methods.borrowBalanceStored(account.address).call()
-        let cash = await marketContract.methods.getCash().call()
-        const borrowRatePerBlock = await marketContract.methods.borrowRatePerBlock().call()
-        const supplyRatePerBlock = await marketContract.methods.supplyRatePerBlock().call()
-        const ethPerAsset = await creamPriceOracleContract.methods.getUnderlyingPrice(asset.address).call() //no longer eth per asset it's now dollars per asset
+        const exchangeRate=await marketContract.methods.exchangeRateStored().call()
+        let supplyBalance=await marketContract.methods.balanceOf(account.address).call()
+        let borrowBalance=await marketContract.methods.borrowBalanceStored(account.address).call()
+        let cash=await marketContract.methods.getCash().call()
+        const borrowRatePerBlock=await marketContract.methods.borrowRatePerBlock().call()
+        const supplyRatePerBlock=await marketContract.methods.supplyRatePerBlock().call()
+        const ethPerAsset=await creamPriceOracleContract.methods.getUnderlyingPrice(asset.address).call() //no longer eth per asset it's now dollars per asset
 
-        const exchangeRateReal = exchangeRate/10**28
+        const exchangeRateReal=exchangeRate/10**28
 
-        supplyBalance = new BigNumber(supplyBalance).times(exchangeRateReal).div(bnVaultDecimals).toFixed(asset.vaultDecimals, BigNumber.ROUND_DOWN)
-        borrowBalance = new BigNumber(borrowBalance).div(bnDecimals).toFixed(asset.decimals, BigNumber.ROUND_DOWN)
-        cash = new BigNumber(cash).div(bnDecimals).toFixed(asset.decimals, BigNumber.ROUND_DOWN)
+        supplyBalance=new BigNumber(supplyBalance).times(exchangeRateReal).div(bnVaultDecimals).toFixed(asset.vaultDecimals,BigNumber.ROUND_DOWN)
+        borrowBalance=new BigNumber(borrowBalance).div(bnDecimals).toFixed(asset.decimals,BigNumber.ROUND_DOWN)
+        cash=new BigNumber(cash).div(bnDecimals).toFixed(asset.decimals,BigNumber.ROUND_DOWN)
 
-        const borrowRatePerYear = (borrowRatePerBlock) * blocksPeryear / 1e16
-        const supplyRatePerYear = (supplyRatePerBlock) * blocksPeryear / 1e16
-        const dollarPerAsset = ethPerAsset/10**asset.decimals
+        const borrowRatePerYear=(borrowRatePerBlock)*blocksPeryear/1e16
+        const supplyRatePerYear=(supplyRatePerBlock)*blocksPeryear/1e16
+        const dollarPerAsset=ethPerAsset/10**asset.decimals
 
-        const lendingAsset = {
+        const lendingAsset={
           address: asset.address,
           erc20address: asset.erc20address,
           vaultSymbol: asset.vaultSymbol,
@@ -4247,7 +4256,7 @@ class Store {
         }
 
         if(callback) {
-          callback(null, lendingAsset)
+          callback(null,lendingAsset)
         } else {
           return lendingAsset
         }
@@ -4261,139 +4270,139 @@ class Store {
           throw ex
         }
       }
-    }, (err, allMarketsData) => {
+    },(err,allMarketsData) => {
       if(err) {
-        return emitter.emit(ERROR, err)
+        return emitter.emit(ERROR,err)
       }
 
-      const lendingSupply = allMarketsData.reduce((val, market) => {
-        return val + market.supplyBalanceDolar
-      }, 0)
+      const lendingSupply=allMarketsData.reduce((val,market) => {
+        return val+market.supplyBalanceDolar
+      },0)
 
-      const lendingBorrowLimit = allMarketsData.reduce((val, market) => {
-        return val + (market.collateralEnabled ? market.supplyBalanceDolar*market.collateralPercent/100 : 0)
-      }, 0)
+      const lendingBorrowLimit=allMarketsData.reduce((val,market) => {
+        return val+(market.collateralEnabled? market.supplyBalanceDolar*market.collateralPercent/100:0)
+      },0)
 
       store.setStore({
         lendingAssets: allMarketsData,
         lendingSupply: lendingSupply,
         lendingBorrowLimit: lendingBorrowLimit,
-        lendingBorrow: allMarketsData.reduce((val, market) => {
-          return val + market.borrowBalanceDolar
-        }, 0),
+        lendingBorrow: allMarketsData.reduce((val,market) => {
+          return val+market.borrowBalanceDolar
+        },0),
       })
 
       emitter.emit(LENDING_BALANCES_RETURNED)
     })
   }
 
-  configureLending = async (payload) => {
-    const account = store.getStore('account')
+  configureLending=async (payload) => {
+    const account=store.getStore('account')
 
-    const web3 = await this._getWeb3Provider()
+    const web3=await this._getWeb3Provider()
     if(!web3) {
       return null
     }
 
-    const allMarkets = await this._getAllMarkets(web3)
-    const assetsIn = await this._getAssetsIn(web3, account)
-    const blocksPeryear = 2102400
+    const allMarkets=await this._getAllMarkets(web3)
+    const assetsIn=await this._getAssetsIn(web3,account)
+    const blocksPeryear=2102400
 
-    const removedDeadMarket = allMarkets.filter((market) => {
-      return market.toLowerCase() !== '0xBdf447B39D152d6A234B4c02772B8ab5D1783F72'.toLowerCase()
+    const removedDeadMarket=allMarkets.filter((market) => {
+      return market.toLowerCase()!=='0xBdf447B39D152d6A234B4c02772B8ab5D1783F72'.toLowerCase()
     })
 
-    const defaultValues = this._getDefaultValues().lendingAssets
+    const defaultValues=this._getDefaultValues().lendingAssets
 
-    async.map(removedDeadMarket, async (market, callback) => {
+    async.map(removedDeadMarket,async (market,callback) => {
       try {
-        let marketContract = new web3.eth.Contract(config.cErc20DelegatorABI, market)
-        const creamPriceOracleContract = new web3.eth.Contract(config.creamPriceOracleABI, config.creamPriceOracleAddress)
+        let marketContract=new web3.eth.Contract(config.cErc20DelegatorABI,market)
+        const creamPriceOracleContract=new web3.eth.Contract(config.creamPriceOracleABI,config.creamPriceOracleAddress)
 
 
         //set static values to avoid doing tons more calls.
-        let defaultMarket = defaultValues.filter((val) => {
-          return val.address === market
+        let defaultMarket=defaultValues.filter((val) => {
+          return val.address===market
         })
 
-        if(defaultMarket.length > 0) {
-          defaultMarket = defaultMarket[0]
+        if(defaultMarket.length>0) {
+          defaultMarket=defaultMarket[0]
         } else {
-          defaultMarket = null
+          defaultMarket=null
         }
 
-        let erc20Contract = null
-        let vaultSymbol = ''
-        let vaultDecimals = 0
-        let erc20address = ''
-        let symbol = ''
-        let decimals = 0
+        let erc20Contract=null
+        let vaultSymbol=''
+        let vaultDecimals=0
+        let erc20address=''
+        let symbol=''
+        let decimals=0
 
-        if(defaultMarket !== null) {
-          vaultSymbol = defaultMarket.vaultSymbol
-          vaultDecimals = defaultMarket.vaultDecimals
-          erc20address = defaultMarket.erc20address
-          symbol = defaultMarket.symbol
-          decimals = defaultMarket.decimals
+        if(defaultMarket!==null) {
+          vaultSymbol=defaultMarket.vaultSymbol
+          vaultDecimals=defaultMarket.vaultDecimals
+          erc20address=defaultMarket.erc20address
+          symbol=defaultMarket.symbol
+          decimals=defaultMarket.decimals
         } else {
-          vaultDecimals = await marketContract.methods.decimals().call()
-          vaultSymbol = await marketContract.methods.symbol().call()
+          vaultDecimals=await marketContract.methods.decimals().call()
+          vaultSymbol=await marketContract.methods.symbol().call()
 
-          if(vaultSymbol !== 'crETH') {
-            erc20address = await marketContract.methods.underlying().call()
+          if(vaultSymbol!=='crETH') {
+            erc20address=await marketContract.methods.underlying().call()
 
-            erc20Contract = new web3.eth.Contract(config.erc20ABI, erc20address)
-            symbol = await erc20Contract.methods.symbol().call()
-            decimals = await erc20Contract.methods.decimals().call()
+            erc20Contract=new web3.eth.Contract(config.erc20ABI,erc20address)
+            symbol=await erc20Contract.methods.symbol().call()
+            decimals=await erc20Contract.methods.decimals().call()
           } else {
-            erc20address = 'Ethereum'
-            symbol = 'ETH'
-            decimals = 18
+            erc20address='Ethereum'
+            symbol='ETH'
+            decimals=18
           }
         }
 
-        const bnDecimals = new BigNumber(10)
+        const bnDecimals=new BigNumber(10)
           .pow(decimals)
 
-        const bnVaultDecimals = new BigNumber(10)
+        const bnVaultDecimals=new BigNumber(10)
           .pow(vaultDecimals)
 
-        let balance = 0
+        let balance=0
 
-        if(vaultSymbol !== 'crETH') {
+        if(vaultSymbol!=='crETH') {
           if(!erc20Contract) {
-            erc20Contract = new web3.eth.Contract(config.erc20ABI, erc20address)
+            erc20Contract=new web3.eth.Contract(config.erc20ABI,erc20address)
           }
 
-          balance = await erc20Contract.methods.balanceOf(account.address).call()
-          balance = new BigNumber(balance).div(bnDecimals).toFixed(decimals, BigNumber.ROUND_DOWN)
+          balance=await erc20Contract.methods.balanceOf(account.address).call()
+          balance=new BigNumber(balance).div(bnDecimals).toFixed(decimals,BigNumber.ROUND_DOWN)
         } else {
-          balance = await web3.eth.getBalance(account.address)
-          balance = new BigNumber(balance).div(bnDecimals).toFixed(decimals, BigNumber.ROUND_DOWN)
+          balance=await web3.eth.getBalance(account.address)
+          balance=new BigNumber(balance).div(bnDecimals).toFixed(decimals,BigNumber.ROUND_DOWN)
 
-          marketContract = new web3.eth.Contract(config.cEtherABI, market)
+          marketContract=new web3.eth.Contract(config.cEtherABI,market)
         }
 
 
-        const exchangeRate = await marketContract.methods.exchangeRateStored().call()
-        let supplyBalance = await marketContract.methods.balanceOf(account.address).call()
-        let borrowBalance = await marketContract.methods.borrowBalanceStored(account.address).call()
-        let cash = await marketContract.methods.getCash().call()
-        const borrowRatePerBlock = await marketContract.methods.borrowRatePerBlock().call()
-        const supplyRatePerBlock = await marketContract.methods.supplyRatePerBlock().call()
-        const ethPerAsset = await creamPriceOracleContract.methods.getUnderlyingPrice(market).call() //no longer eth per asset it's now dollars per asset
+        const exchangeRate=await marketContract.methods.exchangeRateStored().call()
+        let supplyBalance=await marketContract.methods.balanceOf(account.address).call()
+        let borrowBalance=await marketContract.methods.borrowBalanceStored(account.address).call()
+        let cash=await marketContract.methods.getCash().call()
+        const borrowRatePerBlock=await marketContract.methods.borrowRatePerBlock().call()
+        const supplyRatePerBlock=await marketContract.methods.supplyRatePerBlock().call()
+        const ethPerAsset=await creamPriceOracleContract.methods.getUnderlyingPrice(market).call() //no longer eth per asset it's now dollars per asset
 
-        const exchangeRateReal = exchangeRate/10**28
+        const exchangeRateReal=exchangeRate/10**28
 
-        supplyBalance = new BigNumber(supplyBalance).times(exchangeRateReal).div(bnVaultDecimals).toFixed(decimals, BigNumber.ROUND_DOWN)
-        borrowBalance = new BigNumber(borrowBalance).div(bnDecimals).toFixed(decimals, BigNumber.ROUND_DOWN)
-        cash = new BigNumber(cash).div(bnDecimals).toFixed(decimals, BigNumber.ROUND_DOWN)
+        supplyBalance=new BigNumber(supplyBalance).times(exchangeRateReal).div(bnVaultDecimals).toFixed(decimals,BigNumber.ROUND_DOWN)
+        borrowBalance=new BigNumber(borrowBalance).div(bnDecimals).toFixed(decimals,BigNumber.ROUND_DOWN)
+        cash=new BigNumber(cash).div(bnDecimals).toFixed(decimals,BigNumber.ROUND_DOWN)
 
-        const borrowRatePerYear = (borrowRatePerBlock) * blocksPeryear / 1e16
-        const supplyRatePerYear = (supplyRatePerBlock) * blocksPeryear / 1e16
-        const dollarPerAsset = ethPerAsset/10**decimals
+        const borrowRatePerYear=(borrowRatePerBlock)*blocksPeryear/1e16
+        const supplyRatePerYear=(supplyRatePerBlock)*blocksPeryear/1e16
+        const dollarPerAsset=ethPerAsset/10**decimals
 
-        const lendingAsset = {
+        const lendingAsset={
           address: market,
           erc20address: erc20address,
           vaultSymbol: vaultSymbol,
@@ -4415,7 +4424,7 @@ class Store {
         }
 
         if(callback) {
-          callback(null, lendingAsset)
+          callback(null,lendingAsset)
         } else {
           return lendingAsset
         }
@@ -4429,34 +4438,34 @@ class Store {
           throw ex
         }
       }
-    }, (err, allMarketsData) => {
+    },(err,allMarketsData) => {
       if(err) {
-        return emitter.emit(ERROR, err)
+        return emitter.emit(ERROR,err)
       }
 
-      const lendingSupply = allMarketsData.reduce((val, market) => {
-        return val + market.supplyBalanceDolar
-      }, 0)
+      const lendingSupply=allMarketsData.reduce((val,market) => {
+        return val+market.supplyBalanceDolar
+      },0)
 
-      const lendingBorrowLimit = allMarketsData.reduce((val, market) => {
-        return val + (market.collateralEnabled ? (market.supplyBalanceDolar*market.collateralPercent/100) : 0)
-      }, 0)
+      const lendingBorrowLimit=allMarketsData.reduce((val,market) => {
+        return val+(market.collateralEnabled? (market.supplyBalanceDolar*market.collateralPercent/100):0)
+      },0)
 
       store.setStore({
         lendingAssets: allMarketsData,
         lendingSupply: lendingSupply,
         lendingBorrowLimit: lendingBorrowLimit,
-        lendingBorrow: allMarketsData.reduce((val, market) => {
-          return val + market.borrowBalanceDolar
-        }, 0),
+        lendingBorrow: allMarketsData.reduce((val,market) => {
+          return val+market.borrowBalanceDolar
+        },0),
       })
 
       emitter.emit(CONFIGURE_LENDING_RETURNED)
     })
   }
 
-  _getCollateralPercent = (vaultSymbol) => {
-    switch (vaultSymbol) {
+  _getCollateralPercent=(vaultSymbol) => {
+    switch(vaultSymbol) {
       case 'cyWETH':
         return 85
       case 'cyDAI':
@@ -4467,75 +4476,75 @@ class Store {
     }
   }
 
-  _getAllMarkets = async (web3) => {
-    const comptrollerContract = new web3.eth.Contract(config.comptrollerContractABI, config.comptrollerContractAddress)
+  _getAllMarkets=async (web3) => {
+    const comptrollerContract=new web3.eth.Contract(config.comptrollerContractABI,config.comptrollerContractAddress)
 
-    const allMarkets = await comptrollerContract.methods.getAllMarkets().call()
+    const allMarkets=await comptrollerContract.methods.getAllMarkets().call()
 
     return allMarkets
   }
 
-  _getAssetsIn = async (web3, account) => {
-    const comptrollerContract = new web3.eth.Contract(config.comptrollerContractABI, config.comptrollerContractAddress)
+  _getAssetsIn=async (web3,account) => {
+    const comptrollerContract=new web3.eth.Contract(config.comptrollerContractABI,config.comptrollerContractAddress)
 
-    const assetsIn = await comptrollerContract.methods.getAssetsIn(account.address).call()
+    const assetsIn=await comptrollerContract.methods.getAssetsIn(account.address).call()
 
     return assetsIn
   }
 
-  lendingSupply = async (payload) => {
-    const account = store.getStore('account')
-    const { asset, amount } = payload.content
+  lendingSupply=async (payload) => {
+    const account=store.getStore('account')
+    const {asset,amount}=payload.content
 
-    this._checkApproval(asset, account, amount, asset.address, (err) => {
+    this._checkApproval(asset,account,amount,asset.address,(err) => {
       if(err) {
-        return emitter.emit(ERROR, err);
+        return emitter.emit(ERROR,err);
       }
 
-      this._callLendMint(asset, account, amount, (err, res) => {
+      this._callLendMint(asset,account,amount,(err,res) => {
         if(err) {
-          return emitter.emit(ERROR, err);
+          return emitter.emit(ERROR,err);
         }
 
-        return emitter.emit(LENDING_SUPPLY_RETURNED, res)
+        return emitter.emit(LENDING_SUPPLY_RETURNED,res)
       })
     })
   }
 
-  _callLendMint = async (asset, account, amount, callback) => {
-    const web3 = new Web3(store.getStore('web3context').library.provider);
+  _callLendMint=async (asset,account,amount,callback) => {
+    const web3=new Web3(store.getStore('web3context').library.provider);
 
-    let lendContract = null
+    let lendContract=null
 
-    var amountToSend = web3.utils.toWei(amount, "ether")
-    if (asset.decimals !== 18) {
-      const decimals = new BigNumber(10)
+    var amountToSend=web3.utils.toWei(amount,"ether")
+    if(asset.decimals!==18) {
+      const decimals=new BigNumber(10)
         .pow(asset.decimals)
 
-      amountToSend = new BigNumber(amount)
+      amountToSend=new BigNumber(amount)
         .times(decimals)
         .toFixed(0);
     }
 
-    if(asset.erc20address === 'Ethereum') {
-      lendContract = new web3.eth.Contract(config.cEtherABI, asset.address)
+    if(asset.erc20address==='Ethereum') {
+      lendContract=new web3.eth.Contract(config.cEtherABI,asset.address)
 
-      lendContract.methods.mint().send({ from: account.address, value: amountToSend, gasPrice: web3.utils.toWei(await this._getGasPrice(), 'gwei') })
-        .on('transactionHash', function(hash){
+      lendContract.methods.mint().send({from: account.address,value: amountToSend,gasPrice: web3.utils.toWei(await this._getGasPrice(),'gwei')})
+        .on('transactionHash',function(hash) {
           console.log(hash)
-          callback(null, hash)
+          callback(null,hash)
         })
-        .on('confirmation', function(confirmationNumber, receipt){
-          console.log(confirmationNumber, receipt);
-          if(confirmationNumber === 1) {
-            dispatcher.dispatch({ type: GET_LENDING_BALANCES })
+        .on('confirmation',function(confirmationNumber,receipt) {
+          console.log(confirmationNumber,receipt);
+          if(confirmationNumber===1) {
+            dispatcher.dispatch({type: GET_LENDING_BALANCES})
           }
         })
-        .on('receipt', function(receipt){
+        .on('receipt',function(receipt) {
           console.log(receipt);
         })
-        .on('error', function(error) {
-          if (!error.toString().includes("-32601")) {
+        .on('error',function(error) {
+          if(!error.toString().includes("-32601")) {
             if(error.message) {
               return callback(error.message)
             }
@@ -4543,7 +4552,7 @@ class Store {
           }
         })
         .catch((error) => {
-          if (!error.toString().includes("-32601")) {
+          if(!error.toString().includes("-32601")) {
             if(error.message) {
               return callback(error.message)
             }
@@ -4551,24 +4560,24 @@ class Store {
           }
         })
     } else {
-      lendContract = new web3.eth.Contract(config.cErc20DelegatorABI, asset.address)
+      lendContract=new web3.eth.Contract(config.cErc20DelegatorABI,asset.address)
 
-      lendContract.methods.mint(amountToSend).send({ from: account.address, gasPrice: web3.utils.toWei(await this._getGasPrice(), 'gwei') })
-        .on('transactionHash', function(hash){
+      lendContract.methods.mint(amountToSend).send({from: account.address,gasPrice: web3.utils.toWei(await this._getGasPrice(),'gwei')})
+        .on('transactionHash',function(hash) {
           console.log(hash)
-          callback(null, hash)
+          callback(null,hash)
         })
-        .on('confirmation', function(confirmationNumber, receipt){
-          console.log(confirmationNumber, receipt);
-          if(confirmationNumber === 1) {
-            dispatcher.dispatch({ type: GET_LENDING_BALANCES })
+        .on('confirmation',function(confirmationNumber,receipt) {
+          console.log(confirmationNumber,receipt);
+          if(confirmationNumber===1) {
+            dispatcher.dispatch({type: GET_LENDING_BALANCES})
           }
         })
-        .on('receipt', function(receipt){
+        .on('receipt',function(receipt) {
           console.log(receipt);
         })
-        .on('error', function(error) {
-          if (!error.toString().includes("-32601")) {
+        .on('error',function(error) {
+          if(!error.toString().includes("-32601")) {
             if(error.message) {
               return callback(error.message)
             }
@@ -4576,7 +4585,7 @@ class Store {
           }
         })
         .catch((error) => {
-          if (!error.toString().includes("-32601")) {
+          if(!error.toString().includes("-32601")) {
             if(error.message) {
               return callback(error.message)
             }
@@ -4586,92 +4595,92 @@ class Store {
     }
   }
 
-  lendingWithdraw = (payload) => {
-    const account = store.getStore('account')
-    const { asset, amount } = payload.content
+  lendingWithdraw=(payload) => {
+    const account=store.getStore('account')
+    const {asset,amount}=payload.content
 
-    this._callLendRedeem(asset, account, amount, (err, res) => {
+    this._callLendRedeem(asset,account,amount,(err,res) => {
       if(err) {
-        return emitter.emit(ERROR, err);
+        return emitter.emit(ERROR,err);
       }
-      return emitter.emit(LENDING_WITHDRAW_RETURNED, res)
+      return emitter.emit(LENDING_WITHDRAW_RETURNED,res)
     })
   }
 
-  _callLendRedeem = async (asset, account, amount, callback) => {
-    const web3 = new Web3(store.getStore('web3context').library.provider);
+  _callLendRedeem=async (asset,account,amount,callback) => {
+    const web3=new Web3(store.getStore('web3context').library.provider);
 
-    let lendContract = new web3.eth.Contract(config.cErc20DelegatorABI, asset.address)
+    let lendContract=new web3.eth.Contract(config.cErc20DelegatorABI,asset.address)
 
-    var amountToSend = web3.utils.toWei(amount, "ether")
-    if (asset.decimals !== 18) {
-      const decimals = new BigNumber(10)
+    var amountToSend=web3.utils.toWei(amount,"ether")
+    if(asset.decimals!==18) {
+      const decimals=new BigNumber(10)
         .pow(asset.decimals)
 
-      amountToSend = new BigNumber(amount)
+      amountToSend=new BigNumber(amount)
         .times(decimals)
         .toFixed(0);
     }
 
-    lendContract.methods.redeemUnderlying(amountToSend).send({ from: account.address, gasPrice: web3.utils.toWei(await this._getGasPrice(), 'gwei') })
-    .on('transactionHash', function(hash){
-      console.log(hash)
-      callback(null, hash)
-    })
-    .on('confirmation', function(confirmationNumber, receipt){
-      console.log(confirmationNumber, receipt);
-      if(confirmationNumber === 1) {
-        dispatcher.dispatch({ type: GET_LENDING_BALANCES })
-      }
-    })
-    .on('receipt', function(receipt){
-      console.log(receipt);
-    })
-    .on('error', function(error) {
-      console.log(error);
-      if (!error.toString().includes("-32601")) {
-        if(error.message) {
-          return callback(error.message)
-        }
-        callback(error)
-      }
-    })
-  }
-
-  lendingEnableCollateral = async (payload) => {
-    const account = store.getStore('account')
-    const { asset, amount } = payload.content
-
-    this._callEnterMarkets(asset, account, amount, (err, res) => {
-      if(err) {
-        return emitter.emit(ERROR, err);
-      }
-
-      return emitter.emit(LENDING_ENABLE_COLLATERAL_RETURNED, res)
-    })
-  }
-
-  _callEnterMarkets = async (asset, account, amount, callback) => {
-    const web3 = new Web3(store.getStore('web3context').library.provider);
-
-    const comptrollerContract = new web3.eth.Contract(config.comptrollerContractABI, config.comptrollerContractAddress)
-
-    comptrollerContract.methods.enterMarkets([asset.address]).send({ from: account.address, gasPrice: web3.utils.toWei(await this._getGasPrice(), 'gwei') })
-      .on('transactionHash', function(hash){
+    lendContract.methods.redeemUnderlying(amountToSend).send({from: account.address,gasPrice: web3.utils.toWei(await this._getGasPrice(),'gwei')})
+      .on('transactionHash',function(hash) {
         console.log(hash)
-        callback(null, hash)
+        callback(null,hash)
       })
-      .on('confirmation', function(confirmationNumber, receipt){
-        console.log(confirmationNumber, receipt);
-        if(confirmationNumber === 1) {
-          dispatcher.dispatch({ type: GET_LENDING_BALANCES })
+      .on('confirmation',function(confirmationNumber,receipt) {
+        console.log(confirmationNumber,receipt);
+        if(confirmationNumber===1) {
+          dispatcher.dispatch({type: GET_LENDING_BALANCES})
         }
       })
-      .on('receipt', function(receipt){
+      .on('receipt',function(receipt) {
         console.log(receipt);
       })
-      .on('error', function(error) {
-        if (!error.toString().includes("-32601")) {
+      .on('error',function(error) {
+        console.log(error);
+        if(!error.toString().includes("-32601")) {
+          if(error.message) {
+            return callback(error.message)
+          }
+          callback(error)
+        }
+      })
+  }
+
+  lendingEnableCollateral=async (payload) => {
+    const account=store.getStore('account')
+    const {asset,amount}=payload.content
+
+    this._callEnterMarkets(asset,account,amount,(err,res) => {
+      if(err) {
+        return emitter.emit(ERROR,err);
+      }
+
+      return emitter.emit(LENDING_ENABLE_COLLATERAL_RETURNED,res)
+    })
+  }
+
+  _callEnterMarkets=async (asset,account,amount,callback) => {
+    const web3=new Web3(store.getStore('web3context').library.provider);
+
+    const comptrollerContract=new web3.eth.Contract(config.comptrollerContractABI,config.comptrollerContractAddress)
+
+    comptrollerContract.methods.enterMarkets([asset.address]).send({from: account.address,gasPrice: web3.utils.toWei(await this._getGasPrice(),'gwei')})
+      .on('transactionHash',function(hash) {
+        console.log(hash)
+        callback(null,hash)
+      })
+      .on('confirmation',function(confirmationNumber,receipt) {
+        console.log(confirmationNumber,receipt);
+        if(confirmationNumber===1) {
+          dispatcher.dispatch({type: GET_LENDING_BALANCES})
+        }
+      })
+      .on('receipt',function(receipt) {
+        console.log(receipt);
+      })
+      .on('error',function(error) {
+        if(!error.toString().includes("-32601")) {
           if(error.message) {
             return callback(error.message)
           }
@@ -4679,7 +4688,7 @@ class Store {
         }
       })
       .catch((error) => {
-        if (!error.toString().includes("-32601")) {
+        if(!error.toString().includes("-32601")) {
           if(error.message) {
             return callback(error.message)
           }
@@ -4688,40 +4697,40 @@ class Store {
       })
   }
 
-  lendingDisableCollateral = async (payload) => {
-    const account = store.getStore('account')
-    const { asset, amount } = payload.content
+  lendingDisableCollateral=async (payload) => {
+    const account=store.getStore('account')
+    const {asset,amount}=payload.content
 
-    this._callExitMarkets(asset, account, amount, (err, res) => {
+    this._callExitMarkets(asset,account,amount,(err,res) => {
       if(err) {
-        return emitter.emit(ERROR, err);
+        return emitter.emit(ERROR,err);
       }
 
-      return emitter.emit(LENDING_DISABLE_COLLATERAL_RETURNED, res)
+      return emitter.emit(LENDING_DISABLE_COLLATERAL_RETURNED,res)
     })
   }
 
-  _callExitMarkets = async (asset, account, amount, callback) => {
-    const web3 = new Web3(store.getStore('web3context').library.provider);
+  _callExitMarkets=async (asset,account,amount,callback) => {
+    const web3=new Web3(store.getStore('web3context').library.provider);
 
-    const comptrollerContract = new web3.eth.Contract(config.comptrollerContractABI, config.comptrollerContractAddress)
+    const comptrollerContract=new web3.eth.Contract(config.comptrollerContractABI,config.comptrollerContractAddress)
 
-    comptrollerContract.methods.exitMarket(asset.address).send({ from: account.address, gasPrice: web3.utils.toWei(await this._getGasPrice(), 'gwei') })
-      .on('transactionHash', function(hash){
+    comptrollerContract.methods.exitMarket(asset.address).send({from: account.address,gasPrice: web3.utils.toWei(await this._getGasPrice(),'gwei')})
+      .on('transactionHash',function(hash) {
         console.log(hash)
-        callback(null, hash)
+        callback(null,hash)
       })
-      .on('confirmation', function(confirmationNumber, receipt){
-        console.log(confirmationNumber, receipt);
-        if(confirmationNumber === 1) {
-          dispatcher.dispatch({ type: GET_LENDING_BALANCES })
+      .on('confirmation',function(confirmationNumber,receipt) {
+        console.log(confirmationNumber,receipt);
+        if(confirmationNumber===1) {
+          dispatcher.dispatch({type: GET_LENDING_BALANCES})
         }
       })
-      .on('receipt', function(receipt){
+      .on('receipt',function(receipt) {
         console.log(receipt);
       })
-      .on('error', function(error) {
-        if (!error.toString().includes("-32601")) {
+      .on('error',function(error) {
+        if(!error.toString().includes("-32601")) {
           if(error.message) {
             return callback(error.message)
           }
@@ -4729,7 +4738,7 @@ class Store {
         }
       })
       .catch((error) => {
-        if (!error.toString().includes("-32601")) {
+        if(!error.toString().includes("-32601")) {
           if(error.message) {
             return callback(error.message)
           }
@@ -4738,111 +4747,111 @@ class Store {
       })
   }
 
-  lendingBorrow = (payload) => {
-    const account = store.getStore('account')
-    const { asset, amount } = payload.content
+  lendingBorrow=(payload) => {
+    const account=store.getStore('account')
+    const {asset,amount}=payload.content
 
-    this._callLendBorrow(asset, account, amount, (err, res) => {
+    this._callLendBorrow(asset,account,amount,(err,res) => {
       if(err) {
-        return emitter.emit(ERROR, err);
+        return emitter.emit(ERROR,err);
       }
-      return emitter.emit(LENDING_BORROW_RETURNED, res)
+      return emitter.emit(LENDING_BORROW_RETURNED,res)
     })
   }
 
-  _callLendBorrow = async (asset, account, amount, callback) => {
-    const web3 = new Web3(store.getStore('web3context').library.provider);
+  _callLendBorrow=async (asset,account,amount,callback) => {
+    const web3=new Web3(store.getStore('web3context').library.provider);
 
-    let lendContract = new web3.eth.Contract(config.cErc20DelegatorABI, asset.address)
+    let lendContract=new web3.eth.Contract(config.cErc20DelegatorABI,asset.address)
 
-    var amountToSend = web3.utils.toWei(amount, "ether")
-    if (asset.decimals !== 18) {
-      const decimals = new BigNumber(10)
+    var amountToSend=web3.utils.toWei(amount,"ether")
+    if(asset.decimals!==18) {
+      const decimals=new BigNumber(10)
         .pow(asset.decimals)
 
-      amountToSend = new BigNumber(amount)
+      amountToSend=new BigNumber(amount)
         .times(decimals)
         .toFixed(0);
     }
 
-    lendContract.methods.borrow(amountToSend).send({ from: account.address, gasPrice: web3.utils.toWei(await this._getGasPrice(), 'gwei') })
-    .on('transactionHash', function(hash){
-      console.log(hash)
-      callback(null, hash)
-    })
-    .on('confirmation', function(confirmationNumber, receipt){
-      console.log(confirmationNumber, receipt);
-      if(confirmationNumber === 1) {
-        dispatcher.dispatch({ type: GET_LENDING_BALANCES })
-      }
-    })
-    .on('receipt', function(receipt){
-      console.log(receipt);
-    })
-    .on('error', function(error) {
-      console.log(error);
-      if (!error.toString().includes("-32601")) {
-        if(error.message) {
-          return callback(error.message)
+    lendContract.methods.borrow(amountToSend).send({from: account.address,gasPrice: web3.utils.toWei(await this._getGasPrice(),'gwei')})
+      .on('transactionHash',function(hash) {
+        console.log(hash)
+        callback(null,hash)
+      })
+      .on('confirmation',function(confirmationNumber,receipt) {
+        console.log(confirmationNumber,receipt);
+        if(confirmationNumber===1) {
+          dispatcher.dispatch({type: GET_LENDING_BALANCES})
         }
-        callback(error)
-      }
-    })
+      })
+      .on('receipt',function(receipt) {
+        console.log(receipt);
+      })
+      .on('error',function(error) {
+        console.log(error);
+        if(!error.toString().includes("-32601")) {
+          if(error.message) {
+            return callback(error.message)
+          }
+          callback(error)
+        }
+      })
   }
 
-  lendingRepay = async (payload) => {
-    const account = store.getStore('account')
-    const { asset, amount } = payload.content
+  lendingRepay=async (payload) => {
+    const account=store.getStore('account')
+    const {asset,amount}=payload.content
 
-    this._checkApproval(asset, account, amount, asset.address, (err) => {
+    this._checkApproval(asset,account,amount,asset.address,(err) => {
       if(err) {
-        return emitter.emit(ERROR, err);
+        return emitter.emit(ERROR,err);
       }
 
-      this._callLendRepayBorrow(asset, account, amount, (err, res) => {
+      this._callLendRepayBorrow(asset,account,amount,(err,res) => {
         if(err) {
-          return emitter.emit(ERROR, err);
+          return emitter.emit(ERROR,err);
         }
 
-        return emitter.emit(LENDING_REPAY_RETURNED, res)
+        return emitter.emit(LENDING_REPAY_RETURNED,res)
       })
     })
   }
 
-  _callLendRepayBorrow = async (asset, account, amount, callback) => {
-    const web3 = new Web3(store.getStore('web3context').library.provider);
+  _callLendRepayBorrow=async (asset,account,amount,callback) => {
+    const web3=new Web3(store.getStore('web3context').library.provider);
 
-    let lendContract = null
+    let lendContract=null
 
-    var amountToSend = web3.utils.toWei(amount, "ether")
-    if (asset.decimals !== 18) {
-      const decimals = new BigNumber(10)
+    var amountToSend=web3.utils.toWei(amount,"ether")
+    if(asset.decimals!==18) {
+      const decimals=new BigNumber(10)
         .pow(asset.decimals)
 
-      amountToSend = new BigNumber(amount)
+      amountToSend=new BigNumber(amount)
         .times(decimals)
         .toFixed(0);
     }
 
-    if(asset.erc20address === 'Ethereum') {
-      lendContract = new web3.eth.Contract(config.cEtherABI, asset.address)
+    if(asset.erc20address==='Ethereum') {
+      lendContract=new web3.eth.Contract(config.cEtherABI,asset.address)
 
-      lendContract.methods.repayBorrow().send({ from: account.address, value: amountToSend, gasPrice: web3.utils.toWei(await this._getGasPrice(), 'gwei') })
-        .on('transactionHash', function(hash){
+      lendContract.methods.repayBorrow().send({from: account.address,value: amountToSend,gasPrice: web3.utils.toWei(await this._getGasPrice(),'gwei')})
+        .on('transactionHash',function(hash) {
           console.log(hash)
-          callback(null, hash)
+          callback(null,hash)
         })
-        .on('confirmation', function(confirmationNumber, receipt){
-          console.log(confirmationNumber, receipt);
-          if(confirmationNumber === 1) {
-            dispatcher.dispatch({ type: GET_LENDING_BALANCES })
+        .on('confirmation',function(confirmationNumber,receipt) {
+          console.log(confirmationNumber,receipt);
+          if(confirmationNumber===1) {
+            dispatcher.dispatch({type: GET_LENDING_BALANCES})
           }
         })
-        .on('receipt', function(receipt){
+        .on('receipt',function(receipt) {
           console.log(receipt);
         })
-        .on('error', function(error) {
-          if (!error.toString().includes("-32601")) {
+        .on('error',function(error) {
+          if(!error.toString().includes("-32601")) {
             if(error.message) {
               return callback(error.message)
             }
@@ -4850,7 +4859,7 @@ class Store {
           }
         })
         .catch((error) => {
-          if (!error.toString().includes("-32601")) {
+          if(!error.toString().includes("-32601")) {
             if(error.message) {
               return callback(error.message)
             }
@@ -4858,24 +4867,24 @@ class Store {
           }
         })
     } else {
-      lendContract = new web3.eth.Contract(config.cErc20DelegatorABI, asset.address)
+      lendContract=new web3.eth.Contract(config.cErc20DelegatorABI,asset.address)
 
-      lendContract.methods.repayBorrow(amountToSend).send({ from: account.address, gasPrice: web3.utils.toWei(await this._getGasPrice(), 'gwei') })
-        .on('transactionHash', function(hash){
+      lendContract.methods.repayBorrow(amountToSend).send({from: account.address,gasPrice: web3.utils.toWei(await this._getGasPrice(),'gwei')})
+        .on('transactionHash',function(hash) {
           console.log(hash)
-          callback(null, hash)
+          callback(null,hash)
         })
-        .on('confirmation', function(confirmationNumber, receipt){
-          console.log(confirmationNumber, receipt);
-          if(confirmationNumber === 1) {
-            dispatcher.dispatch({ type: GET_LENDING_BALANCES })
+        .on('confirmation',function(confirmationNumber,receipt) {
+          console.log(confirmationNumber,receipt);
+          if(confirmationNumber===1) {
+            dispatcher.dispatch({type: GET_LENDING_BALANCES})
           }
         })
-        .on('receipt', function(receipt){
+        .on('receipt',function(receipt) {
           console.log(receipt);
         })
-        .on('error', function(error) {
-          if (!error.toString().includes("-32601")) {
+        .on('error',function(error) {
+          if(!error.toString().includes("-32601")) {
             if(error.message) {
               return callback(error.message)
             }
@@ -4883,7 +4892,7 @@ class Store {
           }
         })
         .catch((error) => {
-          if (!error.toString().includes("-32601")) {
+          if(!error.toString().includes("-32601")) {
             if(error.message) {
               return callback(error.message)
             }
@@ -4893,72 +4902,37 @@ class Store {
     }
   }
 
-  configureCover = async (payload) => {
+  configureCover=async (payload) => {
 
     try {
-      const url = config.coverAPI
-      const protocolsString = await rp(url);
-      const protocolsJSON = JSON.parse(protocolsString)
+      const url=config.coverAPI
+      const protocolsString=await rp(url);
+      const protocolsJSON=JSON.parse(protocolsString)
 
-      const poolDataArr = Object.entries(protocolsJSON.poolData)
-      const shieldMiningPoolData = protocolsJSON.shieldMiningData.poolData
+      const poolDataArr=Object.entries(protocolsJSON.poolData)
+      const shieldMiningPoolData=protocolsJSON.shieldMiningData.poolData
 
-      const claimAssets = protocolsJSON.protocols.filter((protocol) => protocol.protocolActive).map((protocol) => {
-        const name = protocol.protocolName
-        const latestExpiry = protocol.expirationTimestamps[protocol.expirationTimestamps.length - 1]
-        const claimAddress = protocol.coverObjects[protocol.coverObjects.length - 1].tokens.claimAddress
-        const noClaimAddress = protocol.coverObjects[protocol.coverObjects.length - 1].tokens.noClaimAddress
-        const collateralAddress = protocol.coverObjects[protocol.coverObjects.length - 1].collateralAddress
+      const claimAssets=protocolsJSON.protocols.filter((protocol) => protocol.protocolActive).map((protocol) => {
+        const name=protocol.protocolName
+        const latestExpiry=protocol.expirationTimestamps[protocol.expirationTimestamps.length-1]
+        const claimAddress=protocol.coverObjects[protocol.coverObjects.length-1].tokens.claimAddress
+        const noClaimAddress=protocol.coverObjects[protocol.coverObjects.length-1].tokens.noClaimAddress
+        const collateralAddress=protocol.coverObjects[protocol.coverObjects.length-1].collateralAddress
         let collateralName;
         // currently supported collateral types are DAI and yDAI, however, purchasing coverage always uses DAI through Balancer
-        const daiAddress = '0x6B175474E89094C44Da98b954EedeAC495271d0F'
-        if(collateralAddress === '0x16de59092dAE5CcF4A1E6439D611fd0653f0Bd01') {
-          collateralName = "yDAI";
-        } else if (collateralAddress === '0x6B175474E89094C44Da98b954EedeAC495271d0F') {
-          collateralName = "DAI";
+        const daiAddress='0x6B175474E89094C44Da98b954EedeAC495271d0F'
+        if(collateralAddress==='0x16de59092dAE5CcF4A1E6439D611fd0653f0Bd01') {
+          collateralName="yDAI";
+        } else if(collateralAddress==='0x6B175474E89094C44Da98b954EedeAC495271d0F') {
+          collateralName="DAI";
         }
-        let claimPoolData = poolDataArr.filter((data) => {
-          const token0Address = data[1].poolId.tokens[0].address.toLowerCase();
-          const token1Address = data[1].poolId.tokens[1].address.toLowerCase();
-          if(token0Address === claimAddress.toLowerCase() && token1Address === daiAddress.toLowerCase()) {
+        let claimPoolData=poolDataArr.filter((data) => {
+          const token0Address=data[1].poolId.tokens[0].address.toLowerCase();
+          const token1Address=data[1].poolId.tokens[1].address.toLowerCase();
+          if(token0Address===claimAddress.toLowerCase()&&token1Address===daiAddress.toLowerCase()) {
             return true
           }
-          if(token1Address === claimAddress.toLowerCase() && token0Address === daiAddress.toLowerCase()) {
-            return true
-          }
-
-          return false
-        }).map((data) => {
-          return {
-            address: data[1].poolId.id,
-            price: data[1].price,
-            symbol: data[1].symbol,
-            swapFee: parseFloat(data[1].poolId.swapFee),
-            liquidity: data[1].poolId.liquidity,
-            daiInPool: parseFloat(data[1].poolId.tokens.find((token) => token.address.toLowerCase() === daiAddress.toLowerCase()).balance),
-            covTokenBalance: parseFloat(data[1].poolId.tokens.find((token) => token.address.toLowerCase() === claimAddress.toLowerCase()).balance),
-            covTokenWeight:
-              parseFloat(data[1].poolId.tokens.find((token) => token.address.toLowerCase() === claimAddress.toLowerCase()).denormWeight) /
-              parseFloat(data[1].poolId.totalWeight)
-          }
-        })
-        if(claimPoolData.length > 0) {
-          claimPoolData = claimPoolData.sort((a, b) => {
-            return b.liquidity !== null ? parseFloat(b.liquidity) - parseFloat(a.liquidity) : -9999999999
-          })[0]
-        } else {
-          claimPoolData = {
-            price: 0,
-            symbol: 'N/A',
-            swapFee: 0,
-            liquidity: 0
-          }
-        }
-        let noClaimPoolData = poolDataArr.filter((data) => {
-          if(data[1].poolId.tokens[0].address.toLowerCase() === noClaimAddress.toLowerCase() && data[1].poolId.tokens[1].address.toLowerCase() === daiAddress.toLowerCase()) {
-            return true
-          }
-          if(data[1].poolId.tokens[1].address.toLowerCase() === noClaimAddress.toLowerCase() && data[1].poolId.tokens[0].address.toLowerCase() === daiAddress.toLowerCase()) {
+          if(token1Address===claimAddress.toLowerCase()&&token0Address===daiAddress.toLowerCase()) {
             return true
           }
 
@@ -4970,20 +4944,55 @@ class Store {
             symbol: data[1].symbol,
             swapFee: parseFloat(data[1].poolId.swapFee),
             liquidity: data[1].poolId.liquidity,
-            daiInPool: parseFloat(data[1].poolId.tokens.find((token) => token.address.toLowerCase() === daiAddress.toLowerCase()).balance),
-            covTokenBalance: parseFloat(data[1].poolId.tokens.find((token) => token.address.toLowerCase() === noClaimAddress.toLowerCase()).balance),
+            daiInPool: parseFloat(data[1].poolId.tokens.find((token) => token.address.toLowerCase()===daiAddress.toLowerCase()).balance),
+            covTokenBalance: parseFloat(data[1].poolId.tokens.find((token) => token.address.toLowerCase()===claimAddress.toLowerCase()).balance),
             covTokenWeight:
-              parseFloat(data[1].poolId.tokens.find((token) => token.address.toLowerCase() === noClaimAddress.toLowerCase()).denormWeight) /
+              parseFloat(data[1].poolId.tokens.find((token) => token.address.toLowerCase()===claimAddress.toLowerCase()).denormWeight)/
+              parseFloat(data[1].poolId.totalWeight)
+          }
+        })
+        if(claimPoolData.length>0) {
+          claimPoolData=claimPoolData.sort((a,b) => {
+            return b.liquidity!==null? parseFloat(b.liquidity)-parseFloat(a.liquidity):-9999999999
+          })[0]
+        } else {
+          claimPoolData={
+            price: 0,
+            symbol: 'N/A',
+            swapFee: 0,
+            liquidity: 0
+          }
+        }
+        let noClaimPoolData=poolDataArr.filter((data) => {
+          if(data[1].poolId.tokens[0].address.toLowerCase()===noClaimAddress.toLowerCase()&&data[1].poolId.tokens[1].address.toLowerCase()===daiAddress.toLowerCase()) {
+            return true
+          }
+          if(data[1].poolId.tokens[1].address.toLowerCase()===noClaimAddress.toLowerCase()&&data[1].poolId.tokens[0].address.toLowerCase()===daiAddress.toLowerCase()) {
+            return true
+          }
+
+          return false
+        }).map((data) => {
+          return {
+            address: data[1].poolId.id,
+            price: data[1].price,
+            symbol: data[1].symbol,
+            swapFee: parseFloat(data[1].poolId.swapFee),
+            liquidity: data[1].poolId.liquidity,
+            daiInPool: parseFloat(data[1].poolId.tokens.find((token) => token.address.toLowerCase()===daiAddress.toLowerCase()).balance),
+            covTokenBalance: parseFloat(data[1].poolId.tokens.find((token) => token.address.toLowerCase()===noClaimAddress.toLowerCase()).balance),
+            covTokenWeight:
+              parseFloat(data[1].poolId.tokens.find((token) => token.address.toLowerCase()===noClaimAddress.toLowerCase()).denormWeight)/
               parseFloat(data[1].poolId.totalWeight)
           }
         })
 
-        if(noClaimPoolData.length > 0) {
-          noClaimPoolData = noClaimPoolData.sort((a, b) => {
-            return b.liquidity !== null ? parseFloat(b.liquidity) - parseFloat(a.liquidity) : -9999999999
+        if(noClaimPoolData.length>0) {
+          noClaimPoolData=noClaimPoolData.sort((a,b) => {
+            return b.liquidity!==null? parseFloat(b.liquidity)-parseFloat(a.liquidity):-9999999999
           })[0]
         } else {
-          noClaimPoolData = {
+          noClaimPoolData={
             price: 0,
             symbol: 'N/A',
             swapFee: 0,
@@ -4991,39 +5000,39 @@ class Store {
           }
         }
 
-        let noClaimShieldData = shieldMiningPoolData.filter((data) => {
-          return data.tokensList.map((a) => { return a.toLowerCase() }).includes(noClaimAddress.toLowerCase()) && data.tokensList.map((a) => { return a.toLowerCase() }).includes(daiAddress.toLowerCase())
+        let noClaimShieldData=shieldMiningPoolData.filter((data) => {
+          return data.tokensList.map((a) => {return a.toLowerCase()}).includes(noClaimAddress.toLowerCase())&&data.tokensList.map((a) => {return a.toLowerCase()}).includes(daiAddress.toLowerCase())
         })
 
-        if(noClaimShieldData.length > 0) {
-          noClaimShieldData = noClaimShieldData.sort((a, b) => {
-            return parseFloat(b.liquidity) - parseFloat(a.liquidity)
+        if(noClaimShieldData.length>0) {
+          noClaimShieldData=noClaimShieldData.sort((a,b) => {
+            return parseFloat(b.liquidity)-parseFloat(a.liquidity)
           })[0]
         } else {
-          noClaimShieldData = {
+          noClaimShieldData={
             id: null
           }
         }
 
-        let claimShieldData = shieldMiningPoolData.filter((data) => {
-          return data.tokensList.map((a) => { return a.toLowerCase() }).includes(claimAddress.toLowerCase()) && data.tokensList.map((a) => { return a.toLowerCase() }).includes(daiAddress.toLowerCase())
+        let claimShieldData=shieldMiningPoolData.filter((data) => {
+          return data.tokensList.map((a) => {return a.toLowerCase()}).includes(claimAddress.toLowerCase())&&data.tokensList.map((a) => {return a.toLowerCase()}).includes(daiAddress.toLowerCase())
         })
 
-        if(claimShieldData.length > 0) {
-          claimShieldData = claimShieldData.sort((a, b) => {
-            return parseFloat(b.liquidity) - parseFloat(a.liquidity)
+        if(claimShieldData.length>0) {
+          claimShieldData=claimShieldData.sort((a,b) => {
+            return parseFloat(b.liquidity)-parseFloat(a.liquidity)
           })[0]
         } else {
-          claimShieldData = {
+          claimShieldData={
             id: null
           }
         }
 
-        if (claimShieldData.id) {
-          claimPoolData.address = claimShieldData.id;
+        if(claimShieldData.id) {
+          claimPoolData.address=claimShieldData.id;
         }
-        if (noClaimShieldData.id) {
-          noClaimPoolData.address = noClaimShieldData.id;
+        if(noClaimShieldData.id) {
+          noClaimPoolData.address=noClaimShieldData.id;
         }
 
         return {
@@ -5038,34 +5047,34 @@ class Store {
           noClaimPoolData: noClaimPoolData,
         }
       })
-      claimAssets.sort((a, b) => {
-        if (a.expires[0] > b.expires[0]) {
+      claimAssets.sort((a,b) => {
+        if(a.expires[0]>b.expires[0]) {
           return 1;
-        } else if (a.expires[0] < b.expires[0]) {
+        } else if(a.expires[0]<b.expires[0]) {
           return -1;
         } else {
-          return a.name > b.name ? 1 : -1;
+          return a.name>b.name? 1:-1;
         }
       })
-      store.setStore({ coverProtocols: claimAssets })
+      store.setStore({coverProtocols: claimAssets})
 
-      emitter.emit(CONFIGURE_COVER_RETURNED, claimAssets)
+      emitter.emit(CONFIGURE_COVER_RETURNED,claimAssets)
     } catch(e) {
       console.log(e)
-      emitter.emit(ERROR, e)
+      emitter.emit(ERROR,e)
     }
   }
 
-  getCoverBalances = async (payload) => {
-    const account = store.getStore('account')
+  getCoverBalances=async (payload) => {
+    const account=store.getStore('account')
 
-    const coverProtocols = store.getStore('coverProtocols')
+    const coverProtocols=store.getStore('coverProtocols')
 
-    if(!account || !account.address) {
+    if(!account||!account.address) {
       return false
     }
 
-    const web3 = await this._getWeb3Provider();
+    const web3=await this._getWeb3Provider();
     if(!web3) {
       return null
     }
@@ -5075,34 +5084,34 @@ class Store {
     }
 
     // get unique collaterals
-    const collateralAssets = coverProtocols.map((protocol) => {
+    const collateralAssets=coverProtocols.map((protocol) => {
       return protocol.collateralAddress
-    }).reduce((unique, item) => {
-      return unique.includes(item) ? unique : [...unique, item]
-    }, [])
+    }).reduce((unique,item) => {
+      return unique.includes(item)? unique:[...unique,item]
+    },[])
 
     // get unique tokens (claim vs noclaim)
-    const claimAssets = coverProtocols.map((protocol) => {
-      return [protocol.claimAddress, protocol.noClaimAddress]
-    }).flat().reduce((unique, item) => {
-      return unique.includes(item) ? unique : [...unique, item]
-    }, [])
+    const claimAssets=coverProtocols.map((protocol) => {
+      return [protocol.claimAddress,protocol.noClaimAddress]
+    }).flat().reduce((unique,item) => {
+      return unique.includes(item)? unique:[...unique,item]
+    },[])
 
     // get balance and decimals
-    const collateral = await this._getClaimAssetInfo(web3, account, collateralAssets)
-    const assets = await this._getClaimAssetInfo(web3, account, claimAssets)
+    const collateral=await this._getClaimAssetInfo(web3,account,collateralAssets)
+    const assets=await this._getClaimAssetInfo(web3,account,claimAssets)
 
-    let populatedCoverProtocols = coverProtocols.map((protocol) => {
-      let claimAsset = assets.filter((asset) => {
-        return asset.address === protocol.claimAddress
+    let populatedCoverProtocols=coverProtocols.map((protocol) => {
+      let claimAsset=assets.filter((asset) => {
+        return asset.address===protocol.claimAddress
       })
 
-      let noClaimAsset = assets.filter((asset) => {
-        return asset.address === protocol.noClaimAddress
+      let noClaimAsset=assets.filter((asset) => {
+        return asset.address===protocol.noClaimAddress
       })
 
-      protocol.claimAsset = claimAsset[0]
-      protocol.noClaimAsset = noClaimAsset[0]
+      protocol.claimAsset=claimAsset[0]
+      protocol.noClaimAsset=noClaimAsset[0]
 
       return protocol
     })
@@ -5116,28 +5125,28 @@ class Store {
     return emitter.emit(COVER_BALANCES_RETURNED)
   }
 
-  _getClaimAssetInfo = async (web3, account, assets) => {
-    const promises = assets.map((asset) => {
-      return new Promise((resolve, reject) => {
-        const assetInfo = this._getInfo(web3, account, asset)
+  _getClaimAssetInfo=async (web3,account,assets) => {
+    const promises=assets.map((asset) => {
+      return new Promise((resolve,reject) => {
+        const assetInfo=this._getInfo(web3,account,asset)
         resolve(assetInfo)
       });
     })
 
-    const result = await Promise.all(promises);
+    const result=await Promise.all(promises);
 
     return result
   }
 
-  _getInfo = async (web3, account, asset) => {
-    const erc20Contract = new web3.eth.Contract(config.erc20ABI, asset)
+  _getInfo=async (web3,account,asset) => {
+    const erc20Contract=new web3.eth.Contract(config.erc20ABI,asset)
 
     try {
-      const decimals = await erc20Contract.methods.decimals().call()
-      const symbol = await erc20Contract.methods.symbol().call()
-      let balance = await erc20Contract.methods.balanceOf(account.address).call()
+      const decimals=await erc20Contract.methods.decimals().call()
+      const symbol=await erc20Contract.methods.symbol().call()
+      let balance=await erc20Contract.methods.balanceOf(account.address).call()
 
-      balance = parseFloat(balance)/10**decimals
+      balance=parseFloat(balance)/10**decimals
 
       return {
         address: asset,
@@ -5154,63 +5163,63 @@ class Store {
     }
   }
 
-  purchaseCover = (payload) => {
-    const account = store.getStore('account')
-    const { asset, collateral, amount, amountOut, pool } = payload.content
+  purchaseCover=(payload) => {
+    const account=store.getStore('account')
+    const {asset,collateral,amount,amountOut,pool}=payload.content
 
-    const sendAsset = {
+    const sendAsset={
       erc20address: collateral.address,
       decimals: collateral.decimals,
       id: collateral.symbol
     }
 
-    this._checkApproval(sendAsset, account, amount, pool.address, (err) => {
+    this._checkApproval(sendAsset,account,amount,pool.address,(err) => {
       if(err) {
-        return emitter.emit(ERROR, err);
+        return emitter.emit(ERROR,err);
       }
 
-      this._callSwapExactAmountIn(asset, collateral, amount, amountOut, account, pool, (err, res) => {
+      this._callSwapExactAmountIn(asset,collateral,amount,amountOut,account,pool,(err,res) => {
         if(err) {
-          return emitter.emit(ERROR, err);
+          return emitter.emit(ERROR,err);
         }
 
-        return emitter.emit(COVER_PURCHASE_RETURNED, res)
+        return emitter.emit(COVER_PURCHASE_RETURNED,res)
       })
     })
   }
 
-  _callSwapExactAmountIn = async (asset, collateral, amount, amountOut, account, pool, callback) => {
-    const web3 = await this._getWeb3Provider();
+  _callSwapExactAmountIn=async (asset,collateral,amount,amountOut,account,pool,callback) => {
+    const web3=await this._getWeb3Provider();
 
-    let balancerContract = new web3.eth.Contract(config.balancerProxyABI, pool.address)
+    let balancerContract=new web3.eth.Contract(config.balancerProxyABI,pool.address)
 
-    let amountToSend = web3.utils.toWei(amount, "ether")
-    let tokenAmountOut = web3.utils.toWei(amountOut, "ether")
-    if (collateral.decimals !== 18) {
-      const decimals = new BigNumber(10)
+    let amountToSend=web3.utils.toWei(amount,"ether")
+    let tokenAmountOut=web3.utils.toWei(amountOut,"ether")
+    if(collateral.decimals!==18) {
+      const decimals=new BigNumber(10)
         .pow(collateral.decimals)
 
-      amountToSend = new BigNumber(amount)
+      amountToSend=new BigNumber(amount)
         .times(decimals)
         .toFixed(0);
-      tokenAmountOut = new BigNumber(amountOut)
+      tokenAmountOut=new BigNumber(amountOut)
         .times(decimals)
         .toFixed(0);
     }
 
-    balancerContract.methods.swapExactAmountOut(collateral.address, amountToSend, asset.address, tokenAmountOut, MAX_UINT256).send({ from: account.address, gasPrice: web3.utils.toWei(await this._getGasPrice(), 'gwei') })
-      .on('transactionHash', function(hash){
+    balancerContract.methods.swapExactAmountOut(collateral.address,amountToSend,asset.address,tokenAmountOut,MAX_UINT256).send({from: account.address,gasPrice: web3.utils.toWei(await this._getGasPrice(),'gwei')})
+      .on('transactionHash',function(hash) {
         console.log(hash)
-        callback(null, hash)
+        callback(null,hash)
       })
-      .on('confirmation', function(confirmationNumber, receipt){
-        console.log(confirmationNumber, receipt);
+      .on('confirmation',function(confirmationNumber,receipt) {
+        console.log(confirmationNumber,receipt);
       })
-      .on('receipt', function(receipt){
+      .on('receipt',function(receipt) {
         console.log(receipt);
       })
-      .on('error', function(error) {
-        if (!error.toString().includes("-32601")) {
+      .on('error',function(error) {
+        if(!error.toString().includes("-32601")) {
           if(error.message) {
             return callback(error.message)
           }
@@ -5218,7 +5227,7 @@ class Store {
         }
       })
       .catch((error) => {
-        if (!error.toString().includes("-32601")) {
+        if(!error.toString().includes("-32601")) {
           if(error.message) {
             return callback(error.message)
           }
@@ -5228,7 +5237,7 @@ class Store {
   }
 }
 
-var store = new Store();
+var store=new Store();
 
 export default {
   store: store,

@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { withStyles } from '@material-ui/core/styles';
@@ -61,7 +62,7 @@ const styles = theme => ({
   },
   actionButton: {
     padding: '12px',
-    backgroundColor: 'white',
+    backgroundColor: 'pink',
     borderRadius: '3rem',
     border: '1px solid #E1E1E1',
     fontWeight: 500,
@@ -162,6 +163,19 @@ class Unlock extends Component {
   };
 }
 
+Unlock.propTypes = {
+  classes: PropTypes.shape({
+    closeIcon: PropTypes.any,
+    contentContainer: PropTypes.any,
+    root: PropTypes.any
+  }),
+  closeModal: PropTypes.func,
+  history: PropTypes.shape({
+    push: PropTypes.func
+  }),
+  t: PropTypes.any
+}
+
 function getLibrary(provider) {
 
   const library = new Web3Provider(provider);
@@ -221,12 +235,12 @@ function MyComponent(props) {
     }
   }, [account, active, closeModal, context, library]);
 
-  // React.useEffect(() => {
-  //   if (storeContext && storeContext.active && !active) {
-  //     console.log("we are deactive: "+storeContext.account)
-  //     store.setStore({ account: {}, web3context: null })
-  //   }
-  // }, [active, storeContext]);
+  //React.useEffect(() => {
+    // if (storeContext && storeContext.active && !active) {
+      // console.log("we are deactive: "+storeContext.account)
+       //store.setStore({ account: {}, web3context: null })
+    // }
+     //}, [active, storeContext]);
 
   // handle logic to eagerly connect to the injected ethereum provider, if it exists and has granted access already
   // const triedEager = useEagerConnect();
@@ -297,7 +311,7 @@ function MyComponent(props) {
                   fontWeight: 500,
                   fontSize: '1rem',
                 } }
-                variant={ 'h3'}>
+                variant={ 'h4'}>
                 { display }
               </Typography>
 

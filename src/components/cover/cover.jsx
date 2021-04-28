@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import { withStyles } from '@material-ui/core/styles';
+import React,{Component} from "react";
+import {withStyles} from '@material-ui/core/styles';
 import {
   Typography,
   Button
 } from '@material-ui/core';
-import { colors } from '../../theme'
+import {colors} from '../../theme'
 
 import {
 } from '../../constants'
@@ -12,7 +12,7 @@ import {
 import NewCover from './newCover'
 import ExistingCover from './existingCover'
 
-const styles = theme => ({
+const styles=theme => ({
   root: {
     flex: 1,
     display: 'flex',
@@ -39,7 +39,7 @@ const styles = theme => ({
     border: '1px solid rgb(174, 174, 174)',
     borderRadius: '0.75rem',
     lineHeight: '1.2',
-    background: colors.white,
+    background: colors.dafident,
   },
   header: {
     display: 'flex',
@@ -48,7 +48,8 @@ const styles = theme => ({
     width: '100%'
   },
   headerButton: {
-    width: '175px'
+    width: '175px',
+    textColor: colors.dafiDefaulthex
   }
 });
 
@@ -57,48 +58,48 @@ class Cover extends Component {
   constructor() {
     super()
 
-    this.state = {
+    this.state={
       screen: 'existingCover'
     }
   }
 
   render() {
-    const { classes } = this.props
-    const { screen } = this.state
+    const {classes}=this.props
+    const {screen}=this.state
 
     return (
-      <div className={ classes.root }>
-        <div className={ classes.coverContainer }>
-          <div className={ classes.header }>
-            { screen === 'newCover' && <Button
-              onClick={ this.backClicked }
+      <div className={classes.root}>
+        <div className={classes.coverContainer}>
+          <div className={classes.header}>
+            {screen==='newCover'&&<Button
+              onClick={this.backClicked}
               variant='outlined'
               color='primary'
-              className={ classes.headerButton }
-            >Back</Button> }
-            { screen !== 'newCover' && <div className={ classes.headerButton }></div> }
-            <Typography variant={'h5'} className={ classes.disclaimer }>This project is in beta. Use at your own risk.</Typography>
-            {screen === 'existingCover' && <Button
-              onClick={ this.addClicked }
+              className={classes.headerButton}
+            >Back</Button>}
+            {screen!=='newCover'&&<div className={classes.headerButton}></div>}
+            <Typography variant={'h5'} className={classes.disclaimer}>This project is in beta. Use at your own risk.</Typography>
+            {screen==='existingCover'&&<Button
+              onClick={this.addClicked}
               variant='contained'
               color='primary'
-              className={ classes.headerButton }
-            >Buy Coverage</Button> }
-            { screen !== 'existingCover' && <div className={ classes.headerButton }></div> }
+              className={classes.headerButton}
+            >Buy Coverage</Button>}
+            {screen!=='existingCover'&&<div className={classes.headerButton}></div>}
           </div>
-          { screen === 'existingCover' && <ExistingCover /> }
-          { screen === 'newCover' && <NewCover /> }
+          {screen==='existingCover'&&<ExistingCover />}
+          {screen==='newCover'&&<NewCover />}
         </div>
       </div>
     )
   };
 
-  addClicked = () => {
-    this.setState({ screen: 'newCover' })
+  addClicked=() => {
+    this.setState({screen: 'newCover'})
   }
 
-  backClicked = () => {
-    this.setState({ screen: 'existingCover' })
+  backClicked=() => {
+    this.setState({screen: 'existingCover'})
   }
 }
 

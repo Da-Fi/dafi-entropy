@@ -1,64 +1,64 @@
-import React, { Component } from 'react';
+import React,{Component} from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
+import {createMuiTheme,MuiThemeProvider} from '@material-ui/core/styles';
+
 import {
   Switch,
   Route
 } from "react-router-dom";
 import IpfsRouter from 'ipfs-react-router'
-
+import interestTheme from './theme'
 import './i18n';
-import interestTheme from './theme';
+
+import Dashboard from './components/dashboard/dashboard';
 
 import APR from './components/apr';
-import InvestSimple from './components/investSimple';
+import Streamgen from './components/streamgen';
 import Manage from './components/manage';
 import Performance from './components/performance';
-import Zap from './components/zap';
+import ZeroSwap from './components/zap';
 import IDai from './components/idai';
-import Footer from './components/footer';
-import Home from './components/home';
-import Header from './components/header';
-import Vaults from './components/vault';
-import Dashboard from './components/dashboard';
+import Entropy from './components/vault';
 import Experimental from './components/experimental';
-import Lending from './components/lending';
-import Cover from './components/cover';
+import LendBlock from './components/lendblock';
+import NewCover from './components/cover/newCover';
 import SEO from './components/seo';
-
-import { injected } from "./stores/connectors";
+import {injected} from "./stores/connectors";
 
 import {
   CONNECTION_CONNECTED,
 } from './constants'
 
 import Store from "./stores";
-const emitter = Store.emitter
-const store = Store.store
+
+const emitter=Store.emitter
+const store=Store.store
+
 
 class App extends Component {
-  state = {};
-  updateAccount () {
-    window.ethereum.on('accountsChanged', function (accounts) {
-      store.setStore({ account: { address: accounts[0] } })
 
-      const web3context = store.getStore('web3context')
+  initalState={};
+  updateAccount() {
+    window.ethereum.on('accountsChanged',function(accounts) {
+      store.setStore({account: {address: accounts[0]}})
+
+      const web3context=store.getStore('web3context')
       if(web3context) {
         emitter.emit(CONNECTION_CONNECTED)
       }
     })
   }
-  componentWillMount() {
+  componentDidMount() {
     injected.isAuthorized().then(isAuthorized => {
-      if (isAuthorized) {
+      if(isAuthorized) {
         injected.activate()
-        .then((a) => {
-          store.setStore({ account: { address: a.account }, web3context: { library: { provider: a.provider } } })
-          emitter.emit(CONNECTION_CONNECTED)
-        })
-        .catch((e) => {
-          console.log(e)
-        })
+          .then((a) => {
+            store.setStore({account: {address: a.account},web3context: {library: {provider: a.provider}}})
+            emitter.emit(CONNECTION_CONNECTED)
+          })
+          .catch((e) => {
+            console.log(e)
+          })
       } else {
 
       }
@@ -67,7 +67,7 @@ class App extends Component {
     if(window.ethereum) {
       this.updateAccount()
     } else {
-      window.addEventListener('ethereum#initialized', this.updateAccount, {
+      window.addEventListener('ethereum#initialized',this.updateAccount,{
         once: true,
       });
     }
@@ -75,71 +75,77 @@ class App extends Component {
 
   render() {
     return (
-      <MuiThemeProvider theme={ createMuiTheme(interestTheme) }>
+      <MuiThemeProvider theme={createMuiTheme(interestTheme)}>
         <CssBaseline />
         <IpfsRouter>
           <div style={{
             display: 'flex',
             flexDirection: 'column',
             minHeight: '100vh',
+            maxWidth: '100%',
             alignItems: 'center',
-            background: "#f9fafb"
+            background: '#363640'
           }}>
             <SEO />
             <Switch>
               <Route path="/stats">
-                <Header />
+                <Dashboard />
                 <APR />
               </Route>
-              <Route path="/earn">
-                <Header />
-                <InvestSimple />
+              <Route path="/streamgen">
+                <Dashboard />
+
+                <Streamgen />
               </Route>
-              <Route path="/zap">
-                <Header />
-                <Zap />
+              <Route path="/zeroswap">
+                <Dashboard />
+                <ZeroSwap />
               </Route>
               <Route path="/idai">
                 <IDai />
+
               </Route>
               <Route path="/performance">
-                <Header />
+                <Dashboard />
                 <Performance />
               </Route>
               <Route path="/manage">
-                <Header />
+                <Dashboard />
                 <Manage />
               </Route>
-              <Route path="/vaults">
-                <Header />
-                <Vaults />
-              </Route>
-              <Route path='/dashboard'>
-                <Header />
+              <Route path="/entropy">
                 <Dashboard />
+                <Entropy />
               </Route>
-              <Route path='/experimental'>
-                <Header />
+
+              <Route path="/experimental">
+                <Dashboard />
                 <Experimental />
               </Route>
-              <Route path='/lending'>
-                <Header />
-                <Lending />
+              <Route path="/lendblock">
+                <Dashboard />
+                <LendBlock />
               </Route>
-              <Route path='/cover'>
-                <Header />
-                <Cover />
+              <Route path="/cover">
+                <Dashboard />
+                <NewCover />
               </Route>
               <Route path="/">
-                <Home />
+                <Dashboard />
               </Route>
             </Switch>
-            <Footer />
+
+
           </div>
+
         </IpfsRouter>
+
       </MuiThemeProvider>
+
     );
   }
 }
+
+
 
 export default App;

@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
-import { withStyles } from '@material-ui/core/styles';
+import React,{Component} from "react";
+import {withRouter} from "react-router-dom";
+import {withStyles} from '@material-ui/core/styles';
 import {
   Typography,
   TextField,
@@ -19,14 +19,14 @@ import {
   ZAP_EXPERIMENTAL_VAULT_RETURNED
 } from '../../constants'
 
-import { colors } from '../../theme'
+import {colors} from '../../theme'
 
 import Store from "../../stores";
-const emitter = Store.emitter
-const dispatcher = Store.dispatcher
-const store = Store.store
+const emitter=Store.emitter
+const dispatcher=Store.dispatcher
+const store=Store.store
 
-const styles = theme => ({
+const styles=theme => ({
   value: {
     cursor: 'pointer'
   },
@@ -89,7 +89,7 @@ const styles = theme => ({
   },
   containedButtonText: {
     fontWeight: '700',
-    color: colors.white,
+    color: colors.black,
   },
   headingContainer: {
     width: '100%',
@@ -153,7 +153,7 @@ const styles = theme => ({
   fullWidth: {
     minWidth: '100%',
     margin: '18px 0px',
-    borderBottom: '1px solid '+colors.borderBlue
+    borderBottom: '1px solid '+colors.dafiGreen
   },
   assetSummarySectionheader: {
     width: '83px'
@@ -196,7 +196,7 @@ class Asset extends Component {
   constructor() {
     super()
 
-    this.state = {
+    this.state={
       amount: '',
       amountError: false,
       redeemAmount: '',
@@ -206,181 +206,181 @@ class Asset extends Component {
   }
 
   componentWillMount() {
-    emitter.on(DEPOSIT_EXPERIMENTAL_VAULT_RETURNED, this.depositReturned);
-    emitter.on(CLAIM_EXPERIMENTAL_VAULT_RETURNED, this.claimReturned);
-    emitter.on(DEPOSIT_ALL_EXPERIMENTAL_VAULT_RETURNED, this.depositReturned);
-    emitter.on(ZAP_EXPERIMENTAL_VAULT_RETURNED, this.zapReturned);
-    emitter.on(ERROR, this.errorReturned);
+    emitter.on(DEPOSIT_EXPERIMENTAL_VAULT_RETURNED,this.depositReturned);
+    emitter.on(CLAIM_EXPERIMENTAL_VAULT_RETURNED,this.claimReturned);
+    emitter.on(DEPOSIT_ALL_EXPERIMENTAL_VAULT_RETURNED,this.depositReturned);
+    emitter.on(ZAP_EXPERIMENTAL_VAULT_RETURNED,this.zapReturned);
+    emitter.on(ERROR,this.errorReturned);
   }
 
   componentWillUnmount() {
-    emitter.removeListener(DEPOSIT_EXPERIMENTAL_VAULT_RETURNED, this.depositReturned);
-    emitter.removeListener(CLAIM_EXPERIMENTAL_VAULT_RETURNED, this.claimReturned);
-    emitter.removeListener(DEPOSIT_ALL_EXPERIMENTAL_VAULT_RETURNED, this.depositReturned);
-    emitter.removeListener(ZAP_EXPERIMENTAL_VAULT_RETURNED, this.zapReturned);
-    emitter.removeListener(ERROR, this.errorReturned);
+    emitter.removeListener(DEPOSIT_EXPERIMENTAL_VAULT_RETURNED,this.depositReturned);
+    emitter.removeListener(CLAIM_EXPERIMENTAL_VAULT_RETURNED,this.claimReturned);
+    emitter.removeListener(DEPOSIT_ALL_EXPERIMENTAL_VAULT_RETURNED,this.depositReturned);
+    emitter.removeListener(ZAP_EXPERIMENTAL_VAULT_RETURNED,this.zapReturned);
+    emitter.removeListener(ERROR,this.errorReturned);
   };
 
-  depositReturned = () => {
-    this.setState({ loading: false, amount: '' })
+  depositReturned=() => {
+    this.setState({loading: false,amount: ''})
   };
 
-  claimReturned = () => {
-    this.setState({ loading: false })
+  claimReturned=() => {
+    this.setState({loading: false})
   };
 
-  zapReturned = () => {
-    this.setState({ loading: false })
+  zapReturned=() => {
+    this.setState({loading: false})
   };
 
-  errorReturned = (error) => {
-    this.setState({ loading: false })
+  errorReturned=(error) => {
+    this.setState({loading: false})
   };
 
   render() {
-    const { classes, asset } = this.props;
+    const {classes,asset}=this.props;
     const {
       amount,
       amountError,
       loading
-    } = this.state
+    }=this.state
 
     return (
-      <div className={ classes.vaultContainer }>
-        <div className={ classes.assetSummary }>
-          <div className={ classes.assetSummarySectionheader }>
-            <Typography variant={ 'h4' } color='primary' noWrap>Warning:</Typography>
+      <div className={classes.vaultContainer}>
+        <div className={classes.assetSummary}>
+          <div className={classes.assetSummarySectionheader}>
+            <Typography variant={'h4'} style={{fontFamily:'"RobotoC'}}  color='primary' noWrap>Warning:</Typography>
           </div>
-          <div className={ classes.assetSummaryDescription }>
+          <div className={classes.assetSummaryDescription}>
             <Typography >This vault accepts CRV in exchange for perpetual claim on Curve DAO admin fees across all Yearn products.</Typography>
             <Typography >Since it locks CRV in Curve Voting Escrow for 4 years and regularly prolongs the lock, this vault doesn't have withdrawal functionality.</Typography>
-            <Typography variant={ 'h4' }>You will NOT get your CRV back. Ever.</Typography>
+            <Typography variant={'h4'} style={{fontFamily:'"RobotoC'}} >You will NOT get your CRV back. Ever.</Typography>
           </div>
-          <div className={ classes.fullWidth }></div>
-          <div className={ classes.assetSummarySectionheader }>
-            <Typography variant={ 'h4' } color='primary' noWrap>Balances:</Typography>
+          <div className={classes.fullWidth}></div>
+          <div className={classes.assetSummarySectionheader}>
+            <Typography variant={'h4'} style={{fontFamily:'"RobotoC"'}}  color='primary' noWrap>Balances:</Typography>
           </div>
           <div className={classes.headingEarning}>
-            <Typography variant={ 'h5' } className={ classes.grey }>Wallet:</Typography>
-            <div className={ classes.flexy }>
-              <Typography variant={ 'h4' } noWrap>{ asset.balance ? (asset.balance).toFixed(2) : '0.00' } { asset.symbol }</Typography>
+            <Typography variant={'h5'} className={classes.grey}>Wallet:</Typography>
+            <div className={classes.flexy}>
+              <Typography variant={'h4'} style={{fontFamily:'"Eczar'}}  noWrap>{asset.balance? (asset.balance).toFixed(2):'0.00'} {asset.symbol}</Typography>
             </div>
           </div>
           <div className={classes.headingEarning}>
-            <Typography variant={ 'h5' } className={ classes.grey }>Vested:</Typography>
-            <div className={ classes.flexy }>
-              <Typography variant={ 'h4' } noWrap>{ asset.vested ? (asset.vested).toFixed(2) : '0.00' } { asset.symbol }</Typography>
+            <Typography variant={'h5'} className={classes.grey}>Vested:</Typography>
+            <div className={classes.flexy}>
+              <Typography variant={'h4'} style={{fontFamily:'"Eczar"'}}  noWrap>{asset.vested? (asset.vested).toFixed(2):'0.00'} {asset.symbol}</Typography>
             </div>
           </div>
           <div className={classes.headingEarning}>
-            <Typography variant={ 'h5' } className={ classes.grey }>Gauges:</Typography>
-            <div className={ classes.flexy }>
-              <Typography variant={ 'h4' } noWrap>{ asset.gaugeBalance ? (asset.gaugeBalance).toFixed(2) : '0.00' } { asset.symbol }</Typography>
+            <Typography variant={'h5'} style={{fontFamily:'"RobotoC"'}} className={classes.grey}>Gauges:</Typography>
+            <div className={classes.flexy}>
+              <Typography variant={'h4'} style={{fontFamily:'"RobotoC"'}}  noWrap>{asset.gaugeBalance? (asset.gaugeBalance).toFixed(2):'0.00'} {asset.symbol}</Typography>
             </div>
           </div>
         </div>
-        <div className={ classes.actionsContainer }>
-          <div className={ classes.tradeContainer }>
-            <div className={ classes.balances }>
-                <Typography variant='h4' onClick={ () => { this.setAmount(100) } } className={ classes.value } noWrap>{ 'Your wallet: '+ (asset.balance ? (Math.floor(asset.balance*10000)/10000).toFixed(4) : '0.0000') } { asset.tokenSymbol ? asset.tokenSymbol : asset.symbol }</Typography>
+        <div className={classes.actionsContainer}>
+          <div className={classes.tradeContainer}>
+            <div className={classes.balances}>
+              <Typography variant='h4' style={{fontFamily:'"RobotoC"'}}  onClick={() => {this.setAmount(100)}} className={classes.value} noWrap>{'Your wallet: '+(asset.balance? (Math.floor(asset.balance*10000)/10000).toFixed(4):'0.0000')} {asset.tokenSymbol? asset.tokenSymbol:asset.symbol}</Typography>
             </div>
             <TextField
               fullWidth
-              className={ classes.actionInput }
+              className={classes.actionInput}
               id='amount'
-              value={ amount }
-              error={ amountError }
-              onChange={ this.onChange }
-              disabled={ loading }
+              value={amount}
+              error={amountError}
+              onChange={this.onChange}
+              disabled={loading}
               placeholder="0.00"
               variant="outlined"
-              onKeyDown={ this.inputKeyDown }
+              onKeyDown={this.inputKeyDown}
             />
-            <div className={ classes.scaleContainer }>
+            <div className={classes.scaleContainer}>
               <Button
-                className={ classes.scale }
+                className={classes.scale}
                 variant='text'
-                disabled={ loading }
+                disabled={loading}
                 color="primary"
-                onClick={ () => { this.setAmount(25) } }>
+                onClick={() => {this.setAmount(25)}}>
                 <Typography variant={'h5'}>25%</Typography>
               </Button>
               <Button
-                className={ classes.scale }
+                className={classes.scale}
                 variant='text'
-                disabled={ loading }
+                disabled={loading}
                 color="primary"
-                onClick={ () => { this.setAmount(50) } }>
+                onClick={() => {this.setAmount(50)}}>
                 <Typography variant={'h5'}>50%</Typography>
               </Button>
               <Button
-                className={ classes.scale }
+                className={classes.scale}
                 variant='text'
-                disabled={ loading }
+                disabled={loading}
                 color="primary"
-                onClick={ () => { this.setAmount(75) } }>
+                onClick={() => {this.setAmount(75)}}>
                 <Typography variant={'h5'}>75%</Typography>
               </Button>
               <Button
-                className={ classes.scale }
+                className={classes.scale}
                 variant='text'
-                disabled={ loading }
+                disabled={loading}
                 color="primary"
-                onClick={ () => { this.setAmount(100) } }>
+                onClick={() => {this.setAmount(100)}}>
                 <Typography variant={'h5'}>100%</Typography>
               </Button>
             </div>
-            <div className={ classes.buttons }>
-              { asset.deposit === true &&
+            <div className={classes.buttons}>
+              {asset.deposit===true&&
                 <Button
-                  className={ classes.actionButton }
+                  className={classes.actionButton}
                   variant="outlined"
                   color="primary"
-                  disabled={ loading || asset.balance <= 0 || asset.depositDisabled === true }
-                  onClick={ this.onDeposit }
+                  disabled={loading||asset.balance<=0||asset.depositDisabled===true}
+                  onClick={this.onDeposit}
                   fullWidth
-                  >
-                  <Typography className={ classes.buttonText } variant={ 'h5'}>Deposit</Typography>
+                >
+                  <Typography className={classes.buttonText} variant={'h5'}>Deposit</Typography>
                 </Button>
               }
-              { asset.depositAll === true &&
+              {asset.depositAll===true&&
                 <Button
-                  className={ classes.actionButton }
+                  className={classes.actionButton}
                   variant="outlined"
                   color="primary"
-                  disabled={ loading || asset.balance <= 0 || asset.depositDisabled === true }
-                  onClick={ this.onDepositAll }
+                  disabled={loading||asset.balance<=0||asset.depositDisabled===true}
+                  onClick={this.onDepositAll}
                   fullWidth
-                  >
-                  <Typography className={ classes.buttonText } variant={ 'h5'}>Deposit All</Typography>
+                >
+                  <Typography className={classes.buttonText} variant={'h5'}>Deposit All</Typography>
                 </Button>
               }
             </div>
           </div>
-          <div className={ classes.sepperator }></div>
+          <div className={classes.sepperator}></div>
           <div className={classes.tradeContainer}>
-            <div className={ classes.zapButton }>
+            <div className={classes.zapButton}>
               <Button
-                className={ classes.actionButton }
+                className={classes.actionButton}
                 variant="outlined"
                 color="primary"
-                disabled={ loading }
-                onClick={ this.onZap }
+                disabled={loading}
+                onClick={this.onZap}
                 fullWidth
-                >
-                <Typography className={ classes.buttonText } variant={ 'h5'}>Zap All (Wallet/Vested/Gauge)</Typography>
+              >
+                <Typography className={classes.buttonText} variant={'h5'}>Zap All (Wallet/Vested/Gauge)</Typography>
               </Button>
             </div>
-            <div className={ classes.buttons }>
+            <div className={classes.buttons}>
               <Button
-                className={ classes.actionButton }
+                className={classes.actionButton}
                 variant="contained"
                 color="primary"
-                disabled={ loading }
-                onClick={ this.onClaim }
+                disabled={loading}
+                onClick={this.onClaim}
                 fullWidth
-                >
-                <Typography className={ classes.containedButtonText } variant={ 'h5'} color='secondary'>Claim Rewards</Typography>
+              >
+                <Typography className={classes.containedButtonText} variant={'h5'} color='secondary'>Claim Rewards</Typography>
               </Button>
             </div>
           </div>
@@ -389,87 +389,87 @@ class Asset extends Component {
     )
   };
 
-  _getAPY = (asset) => {
-    const initialApy = '0.00'
+  _getAPY=(asset) => {
+    const initialApy='0.00'
 
-    if (asset.apy) {
+    if(asset.apy) {
       return asset.apy
     } else {
       return initialApy
     }
   }
 
-  onChange = (event) => {
-    let val = []
-    val[event.target.id] = event.target.value
+  onChange=(event) => {
+    let val=[]
+    val[event.target.id]=event.target.value
     this.setState(val)
   }
 
-  inputKeyDown = (event) => {
-    if (event.which === 13) {
+  inputKeyDown=(event) => {
+    if(event.which===13) {
       this.onInvest();
     }
   }
 
-  onDeposit = () => {
-    this.setState({ amountError: false })
+  onDeposit=() => {
+    this.setState({amountError: false})
 
-    const { amount } = this.state
-    const { asset, startLoading } = this.props
+    const {amount}=this.state
+    const {asset,startLoading}=this.props
 
-    if(!amount || isNaN(amount) || amount <= 0 || amount > asset.balance) {
-      this.setState({ amountError: true })
+    if(!amount||isNaN(amount)||amount<=0||amount>asset.balance) {
+      this.setState({amountError: true})
       return false
     }
 
-    this.setState({ loading: true })
+    this.setState({loading: true})
     startLoading()
-    dispatcher.dispatch({ type: DEPOSIT_EXPERIMENTAL_VAULT, content: { amount: amount, asset: asset } })
+    dispatcher.dispatch({type: DEPOSIT_EXPERIMENTAL_VAULT,content: {amount: amount,asset: asset}})
   }
 
-  onDepositAll = () => {
-    const { asset, startLoading } = this.props
+  onDepositAll=() => {
+    const {asset,startLoading}=this.props
 
-    this.setState({ loading: true })
+    this.setState({loading: true})
     startLoading()
-    dispatcher.dispatch({ type: DEPOSIT_ALL_EXPERIMENTAL_VAULT, content: { asset: asset } })
+    dispatcher.dispatch({type: DEPOSIT_ALL_EXPERIMENTAL_VAULT,content: {asset: asset}})
   }
 
-  onClaim = () => {
-    this.setState({ redeemAmountError: false })
+  onClaim=() => {
+    this.setState({redeemAmountError: false})
 
-    const { asset, startLoading  } = this.props
+    const {asset,startLoading}=this.props
 
-    this.setState({ loading: true })
+    this.setState({loading: true})
     startLoading()
 
-    dispatcher.dispatch({ type: CLAIM_EXPERIMENTAL_VAULT, content: { asset: asset } })
+    dispatcher.dispatch({type: CLAIM_EXPERIMENTAL_VAULT,content: {asset: asset}})
   }
 
-  onZap = () => {
-    this.setState({ redeemAmountError: false })
+  onZap=() => {
+    this.setState({redeemAmountError: false})
 
-    const { asset, startLoading  } = this.props
+    const {asset,startLoading}=this.props
 
-    this.setState({ loading: true })
+    this.setState({loading: true})
     startLoading()
 
-    dispatcher.dispatch({ type: ZAP_EXPERIMENTAL_VAULT, content: { asset: asset } })
+    dispatcher.dispatch({type: ZAP_EXPERIMENTAL_VAULT,content: {asset: asset}})
   }
 
-  setAmount = (percent) => {
+  setAmount=(percent) => {
     if(this.state.loading) {
       return
     }
 
-    const { asset } = this.props
+    const {asset}=this.props
 
-    const balance = asset.balance
-    let amount = balance*percent/100
-    amount = Math.floor(amount*10000)/10000;
+    const balance=asset.balance
+    let amount=balance*percent/100
+    amount=Math.floor(amount*10000)/10000;
 
-    this.setState({ amount: amount.toFixed(4) })
+    this.setState({amount: amount.toFixed(4)})
   }
 }
 
-export default withRouter(withStyles(styles, { withTheme: true })(Asset));
+export default withRouter(withStyles(styles,{withTheme: true})(Asset));

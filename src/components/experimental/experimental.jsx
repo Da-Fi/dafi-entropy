@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
-import { withStyles } from '@material-ui/core/styles';
+import React,{Component} from "react";
+import {withRouter} from "react-router-dom";
+import {withStyles} from '@material-ui/core/styles';
 import {
   Grid,
   Typography,
@@ -11,14 +11,16 @@ import {
   InputAdornment,
   FormControlLabel,
   Checkbox,
-  Tooltip
+  Tooltip,
+  Switch,
+  Fade
 } from '@material-ui/core';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
 import SearchIcon from '@material-ui/icons/Search';
 import TimelineIcon from '@material-ui/icons/Timeline';
 import HelpIcon from '@material-ui/icons/Help';
-import { withNamespaces } from 'react-i18next';
-import { colors } from '../../theme'
+import {withNamespaces} from 'react-i18next';
+import {colors} from '../../theme'
 
 import Snackbar from '../snackbar'
 import Asset from './asset'
@@ -37,11 +39,11 @@ import {
 } from '../../constants'
 
 import Store from "../../stores";
-const emitter = Store.emitter
-const dispatcher = Store.dispatcher
-const store = Store.store
+const emitter=Store.emitter
+const dispatcher=Store.dispatcher
+const store=Store.store
 
-const styles = theme => ({
+const styles=theme => ({
   root: {
     flex: 1,
     display: 'flex',
@@ -192,11 +194,11 @@ const styles = theme => ({
     flex: 1,
     whiteSpace: 'nowrap',
     fontSize: '0.83rem',
-    textOverflow:'ellipsis',
+    textOverflow: 'ellipsis',
     cursor: 'pointer',
     padding: '28px 30px',
     borderRadius: '50px',
-    border: '1px solid '+colors.borderBlue,
+    border: '1px solid '+colors.dafiGreen,
     alignItems: 'center',
     maxWidth: '450px',
     [theme.breakpoints.up('md')]: {
@@ -233,13 +235,13 @@ const styles = theme => ({
     borderRadius: '0.75rem',
     marginBottom: '24px',
     lineHeight: '1.2',
-    background: colors.white,
-    '& a' : {
-      color: colors.black,
+    background: colors.dafiDefaulthex,
+    '& a': {
+      color: colors.dafiGreen,
       textDecoration: 'none',
       fontWeight: 'bold',
     },
-    '& a:hover' : {
+    '& a:hover': {
       textDecoration: 'underline',
     },
   },
@@ -249,11 +251,11 @@ const styles = theme => ({
     lineHeight: '1.2',
   },
   walletAddress: {
-    padding: '0px 12px'
+    padding: '0px 8px'
   },
   walletTitle: {
     flex: 1,
-    color: colors.darkGray
+    color: colors.dafiGreen
   },
   grey: {
     color: colors.darkGray
@@ -269,7 +271,7 @@ const styles = theme => ({
   },
   searchField: {
     flex: 1,
-    background: colors.white,
+    background: colors.dafiPrimaryhex,
     borderRadius: '50px'
   },
   checkbox: {
@@ -285,7 +287,7 @@ const styles = theme => ({
     padding: '0px 6px'
   },
   positive: {
-    color: colors.compoundGreen
+    color: colors.dafiGreen
   },
   infoIcon: {
     fontSize: '1em',
@@ -302,315 +304,317 @@ class Experimental extends Component {
   constructor(props) {
     super()
 
-    const account = store.getStore('account')
+    const account=store.getStore('account')
 
-    this.state = {
+    this.state={
       assets: store.getStore('experimentalVaultAssets'),
       usdPrices: store.getStore('usdPrices'),
       account: account,
-      address: account.address ? account.address.substring(0,6)+'...'+account.address.substring(account.address.length-4,account.address.length) : null,
+      address: account.address? account.address.substring(0,6)+'...'+account.address.substring(account.address.length-4,account.address.length):null,
       snackbarType: null,
       snackbarMessage: null,
       search: '',
       searchError: false,
-      hideZero: localStorage.getItem('yearn.finance-hideZero') === '1' ? true : false,
+      hideZero: localStorage.getItem('dafi-entropy-hideZero')==='1'? true:false,
       loading: true
     }
 
-    if(account && account.address) {
-      dispatcher.dispatch({ type: GET_EXPERIMENTAL_VAULT_BALANCES_FULL, content: {} })
+    if(account&&account.address) {
+      dispatcher.dispatch({type: GET_EXPERIMENTAL_VAULT_BALANCES_FULL,content: {}})
     }
   }
   componentWillMount() {
-    emitter.on(DEPOSIT_EXPERIMENTAL_VAULT_RETURNED, this.showHash);
-    emitter.on(CLAIM_EXPERIMENTAL_VAULT_RETURNED, this.showHash);
-    emitter.on(ZAP_EXPERIMENTAL_VAULT_RETURNED, this.showHash);
-    emitter.on(DEPOSIT_ALL_EXPERIMENTAL_VAULT_RETURNED, this.showHash);
-    emitter.on(ERROR, this.errorReturned);
-    emitter.on(EXPERIMENTAL_VAULT_BALANCES_FULL_RETURNED, this.balancesReturned);
-    emitter.on(CONNECTION_CONNECTED, this.connectionConnected);
-    emitter.on(CONNECTION_DISCONNECTED, this.connectionDisconnected);
+    emitter.on(DEPOSIT_EXPERIMENTAL_VAULT_RETURNED,this.showHash);
+    emitter.on(CLAIM_EXPERIMENTAL_VAULT_RETURNED,this.showHash);
+    emitter.on(ZAP_EXPERIMENTAL_VAULT_RETURNED,this.showHash);
+    emitter.on(DEPOSIT_ALL_EXPERIMENTAL_VAULT_RETURNED,this.showHash);
+    emitter.on(ERROR,this.errorReturned);
+    emitter.on(EXPERIMENTAL_VAULT_BALANCES_FULL_RETURNED,this.balancesReturned);
+    emitter.on(CONNECTION_CONNECTED,this.connectionConnected);
+    emitter.on(CONNECTION_DISCONNECTED,this.connectionDisconnected);
   }
 
   componentWillUnmount() {
-    emitter.removeListener(DEPOSIT_EXPERIMENTAL_VAULT_RETURNED, this.showHash);
-    emitter.removeListener(CLAIM_EXPERIMENTAL_VAULT_RETURNED, this.showHash);
-    emitter.removeListener(ZAP_EXPERIMENTAL_VAULT_RETURNED, this.showHash);
-    emitter.removeListener(DEPOSIT_ALL_EXPERIMENTAL_VAULT_RETURNED, this.showHash);
-    emitter.removeListener(ERROR, this.errorReturned);
-    emitter.removeListener(CONNECTION_CONNECTED, this.connectionConnected);
-    emitter.removeListener(CONNECTION_DISCONNECTED, this.connectionDisconnected);
-    emitter.removeListener(EXPERIMENTAL_VAULT_BALANCES_FULL_RETURNED, this.balancesReturned);
+    emitter.removeListener(DEPOSIT_EXPERIMENTAL_VAULT_RETURNED,this.showHash);
+    emitter.removeListener(CLAIM_EXPERIMENTAL_VAULT_RETURNED,this.showHash);
+    emitter.removeListener(ZAP_EXPERIMENTAL_VAULT_RETURNED,this.showHash);
+    emitter.removeListener(DEPOSIT_ALL_EXPERIMENTAL_VAULT_RETURNED,this.showHash);
+    emitter.removeListener(ERROR,this.errorReturned);
+    emitter.removeListener(CONNECTION_CONNECTED,this.connectionConnected);
+    emitter.removeListener(CONNECTION_DISCONNECTED,this.connectionDisconnected);
+    emitter.removeListener(EXPERIMENTAL_VAULT_BALANCES_FULL_RETURNED,this.balancesReturned);
   };
 
-  balancesReturned = (balances) => {
+  balancesReturned=(balances) => {
     this.setState({
-      assets: store.getStore('experimentalVaultAssets') ,
+      assets: store.getStore('experimentalVaultAssets'),
       loading: false
     })
   };
 
-  connectionConnected = () => {
-    const { t } = this.props
-    const account = store.getStore('account')
+  connectionConnected=() => {
+    const {t}=this.props
+    const account=store.getStore('account')
 
     this.setState({
       loading: true,
       account: account,
-      address: account.address ? account.address.substring(0,6)+'...'+account.address.substring(account.address.length-4,account.address.length) : null
+      address: account.address? account.address.substring(0,6)+'...'+account.address.substring(account.address.length-4,account.address.length):null
     })
 
 
-    dispatcher.dispatch({ type: GET_EXPERIMENTAL_VAULT_BALANCES_FULL, content: {} })
+    dispatcher.dispatch({type: GET_EXPERIMENTAL_VAULT_BALANCES_FULL,content: {}})
 
-    const that = this
+    const that=this
     setTimeout(() => {
-      const snackbarObj = { snackbarMessage: t("Unlock.WalletConnected"), snackbarType: 'Info' }
+      const snackbarObj={snackbarMessage: t("Unlock.WalletConnected"),snackbarType: 'Info'}
       that.setState(snackbarObj)
     })
   };
 
-  connectionDisconnected = () => {
+  connectionDisconnected=() => {
     this.setState({
       account: null,
       address: null
     })
   }
 
-  errorReturned = (error) => {
-    const snackbarObj = { snackbarMessage: null, snackbarType: null }
+  errorReturned=(error) => {
+    const snackbarObj={snackbarMessage: null,snackbarType: null}
     this.setState(snackbarObj)
-    this.setState({ loading: false })
-    const that = this
+    this.setState({loading: false})
+    const that=this
     setTimeout(() => {
-      const snackbarObj = { snackbarMessage: error.toString(), snackbarType: 'Error' }
+      const snackbarObj={snackbarMessage: error.toString(),snackbarType: 'Error'}
       that.setState(snackbarObj)
     })
   };
 
-  showHash = (txHash) => {
-    const snackbarObj = { snackbarMessage: null, snackbarType: null }
+  showHash=(txHash) => {
+    const snackbarObj={snackbarMessage: null,snackbarType: null}
     this.setState(snackbarObj)
-    this.setState({ loading: false })
-    const that = this
+    this.setState({loading: false})
+    const that=this
     setTimeout(() => {
-      const snackbarObj = { snackbarMessage: txHash, snackbarType: 'Hash' }
+      const snackbarObj={snackbarMessage: txHash,snackbarType: 'Hash'}
       that.setState(snackbarObj)
     })
   };
 
   render() {
-    const { classes } = this.props;
+    const {classes}=this.props;
     const {
       loading,
       account,
       snackbarMessage,
-    } = this.state
+    }=this.state
 
-    if(!account || !account.address) {
+    if(!account||!account.address) {
       return (
-        <div className={ classes.root }>
-          <div className={ classes.investedContainerLoggedOut }>
-          <Typography variant={'h5'} className={ classes.disaclaimer }>This project is in beta. Use at your own risk.</Typography>
-            <div className={ classes.introCenter }>
-              <Typography variant='h3'>Connect your wallet to continue</Typography>
+        <div className={classes.root}>
+          <div className={classes.investedContainerLoggedOut}>
+            <Typography variant={'h5'} className={classes.disaclaimer}>This project is in beta. Use at your own risk.</Typography>
+            <div className={classes.introCenter}>
+              <Typography variant='h4'>Connect your wallet to continue</Typography>
             </div>
           </div>
-          { snackbarMessage && this.renderSnackbar() }
+          { snackbarMessage&&this.renderSnackbar()}
         </div>
       )
     }
 
     return (
-      <div className={ classes.root }>
-        <div className={ classes.investedContainer }>
-          <Typography variant={'h5'} className={ classes.disaclaimer }>This project is in beta. Use at your own risk.</Typography>
-          { this.renderFilters() }
-          { this.renderAssetBlocks() }
-          { this.renderStrategyRewards() }
+      <div className={classes.root}>
+        <div className={classes.investedContainer}>
+          <Typography variant={'h5'} className={classes.disaclaimer}>This project is in beta. Use at your own risk.</Typography>
+          {this.renderFilters()}
+          {this.renderAssetBlocks()}
+          {this.renderStrategyRewards()}
         </div>
-        { loading && <Loader /> }
-        { snackbarMessage && this.renderSnackbar() }
+        { loading&&<Loader />}
+        { snackbarMessage&&this.renderSnackbar()}
       </div>
     )
   };
 
-  onSearchChanged = (event) => {
-    let val = []
-    val[event.target.id] = event.target.value
+  onSearchChanged=(event) => {
+    let val=[]
+    val[event.target.id]=event.target.value
     this.setState(val)
   }
 
-  onChange = (event) => {
-    let val = []
-    val[event.target.id] = event.target.checked
+  onChange=(event) => {
+    let val=[]
+    val[event.target.id]=event.target.checked
     this.setState(val)
   };
 
-  renderAssetBlocks = () => {
-    const { assets, expanded, search, hideZero } = this.state
-    const { classes } = this.props
-    const width = window.innerWidth
+  renderAssetBlocks=() => {
+    const {assets,expanded,search,hideZero}=this.state
+    const {classes}=this.props
+    const width=window.innerWidth
 
     return assets.filter((asset) => {
-      if(hideZero && (asset.balance === 0 && asset.vaultBalance === 0)) {
+      if(hideZero&&(asset.balance===0&&asset.vaultBalance===0)) {
         return false
       }
 
-      if(search && search !== '') {
-        return asset.id.toLowerCase().includes(search.toLowerCase()) ||
-              asset.name.toLowerCase().includes(search.toLowerCase()) ||
-              asset.symbol.toLowerCase().includes(search.toLowerCase()) ||
-              asset.description.toLowerCase().includes(search.toLowerCase()) ||
-              asset.vaultSymbol.toLowerCase().includes(search.toLowerCase())
-              // asset.erc20address.toLowerCase().includes(search.toLowerCase()) ||
-              // asset.vaultContractAddress.toLowerCase().includes(search.toLowerCase())
+      if(search&&search!=='') {
+        return asset.id.toLowerCase().includes(search.toLowerCase())||
+          asset.name.toLowerCase().includes(search.toLowerCase())||
+          asset.symbol.toLowerCase().includes(search.toLowerCase())||
+          asset.description.toLowerCase().includes(search.toLowerCase())||
+          asset.vaultSymbol.toLowerCase().includes(search.toLowerCase())
+        // asset.erc20address.toLowerCase().includes(search.toLowerCase()) ||
+        // asset.vaultContractAddress.toLowerCase().includes(search.toLowerCase())
       } else {
         return true
       }
     }).map((asset) => {
       return (
-        <Accordion className={ classes.expansionPanel } square key={ asset.id+"_expand" } expanded={ expanded === asset.id} onChange={ () => { this.handleChange(asset.id) } }>
+        <Accordion className={classes.expansionPanel} square key={asset.id+"_expand"} expanded={expanded===asset.id} onChange={() => {this.handleChange(asset.id)}}>
           <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
+            expandIcon={<Switch checked={this.onChange} />}
             aria-controls="panel1bh-content"
             id="panel1bh-header"
           >
-            <div className={ classes.assetSummary }>
-              <div className={classes.headingName}>
-                <div className={ classes.assetIcon }>
-                  <img
-                    alt=""
-                    src={ require('../../assets/'+asset.symbol.replace(/\+/g, '')+'-logo.png') }
-                    height={ width > 600 ? '40px' : '30px' }
-                    style={asset.disabled?{filter:'grayscale(100%)'}:{}}
-                  />
+            <Fade in={this.onChange}>
+              <div className={classes.assetSummary}>
+                <div className={classes.headingName}>
+                  <div className={classes.assetIcon}>
+                    <img
+                      alt=""
+                      src={require('../../assets/'+asset.symbol.replace(/\+/g,'')+'-logo.png')}
+                      height={width>600? '40px':'30px'}
+                      style={asset.disabled? {filter: 'grayscale(100%)'}:{}}
+                    />
+                  </div>
+                  <div>
+                    <Typography variant={'h4'} className={classes.assetName} noWrap>{asset.name}</Typography>
+                    <Typography variant={'h5'} className={classes.grey}>{asset.description}</Typography>
+                  </div>
                 </div>
-                <div>
-                  <Typography variant={ 'h3' } className={ classes.assetName } noWrap>{ asset.name }</Typography>
-                  <Typography variant={ 'h5' } className={ classes.grey }>{ asset.description }</Typography>
-                </div>
-              </div>
-              <div className={classes.heading}>
-                <Typography variant={ 'h5' } className={ classes.grey }>Deposited:</Typography>
-                <Typography variant={ 'h3' } noWrap>{ (asset.vaultBalance ? (asset.vaultBalance).toFixed(2) : '0.00')+' '+asset.symbol }</Typography>
-              </div>
-              <div className={classes.heading}>
-                <Typography variant={ 'h5' } className={ classes.grey }>Available to deposit:</Typography>
-                <Typography variant={ 'h3' } noWrap>{ (asset.balance ? (asset.balance).toFixed(2) : '0.00')+' '+asset.symbol }</Typography>
-              </div>
-              { asset.depositDisabled === true &&
                 <div className={classes.heading}>
-                  <Tooltip title={
-                    <React.Fragment>
-                      <Typography variant={'h5'} className={ classes.fees }>
-                        This vault is currently inactive and is not taking deposits.
-                      </Typography>
-                    </React.Fragment>
-                  } arrow>
-                  <Grid container spacing={1} direction="row" alignItems="center">
-                    <Grid item>
-                        <HelpIcon fontSize="small" className={ classes.grey } style={{ marginBottom: '-5px' }} />
-                    </Grid>
-                    <Grid item xs>
-                      <Typography variant="h5" className={ classes.grey } >
-                        Inactive
-                      </Typography>
-                    </Grid>
-                  </Grid>
-                  </Tooltip>
+                  <Typography variant={'h5'} className={classes.grey}>Deposited:</Typography>
+                  <Typography variant={'h4'} noWrap>{(asset.vaultBalance? (asset.vaultBalance).toFixed(2):'0.00')+' '+asset.symbol}</Typography>
                 </div>
-              }
+                <div className={classes.heading}>
+                  <Typography variant={'h5'} className={classes.grey}>Available to deposit:</Typography>
+                  <Typography variant={'h4'} noWrap>{(asset.balance? (asset.balance).toFixed(2):'0.00')+' '+asset.symbol}</Typography>
+                </div>
+                {asset.depositDisabled===true&&
+                  <div className={classes.heading}>
+                    <Tooltip title={
+                      <React.Fragment>
+                        <Typography variant={'h5'} className={classes.fees}>
+                          This vault is currently inactive and is not taking deposits.
+                      </Typography>
+                      </React.Fragment>
+                    } arrow>
+                      <Grid container spacing={1} direction="row" alignItems="center">
+                        <Grid item>
+                          <HelpIcon fontSize="small" className={classes.grey} style={{marginBottom: '-5px'}} />
+                        </Grid>
+                        <Grid item xs>
+                          <Typography variant="h5" className={classes.grey} >
+                            Inactive
+                      </Typography>
+                        </Grid>
+                      </Grid>
+                    </Tooltip>
+                  </div>
+                }
 
-            </div>
+              </div>
+            </Fade>
           </AccordionSummary>
-          <AccordionDetails className={ classes.removePadding }>
-            <Asset asset={ asset } startLoading={ this.startLoading } />
+          <AccordionDetails className={classes.removePadding}>
+            <Asset asset={asset} startLoading={this.startLoading} />
           </AccordionDetails>
         </Accordion>
       )
     })
   }
 
-  renderFilters = () => {
-    const { loading, search, searchError, hideZero } = this.state
-    const { classes } = this.props
+  renderFilters=() => {
+    const {loading,search,searchError,hideZero}=this.state
+    const {classes}=this.props
 
     return (
-      <div className={ classes.filters }>
+      <div className={classes.filters}>
         <FormControlLabel
-          className={ classes.checkbox }
+          className={classes.checkbox}
           control={
             <Checkbox
-              checked={ hideZero }
-              onChange={ this.handleChecked }
+              checked={hideZero}
+              onChange={this.handleChecked}
               color='primary'
             />
           }
           label="Hide zero balances"
         />
-        <div className={ classes.between }>
+        <div className={classes.between}>
 
         </div>
         <TextField
           fullWidth
-          disabled={ loading }
-          className={ classes.searchField }
-          id={ 'search' }
-          value={ search }
-          error={ searchError }
-          onChange={ this.onSearchChanged }
+          disabled={loading}
+          className={classes.searchField}
+          id={'search'}
+          value={search}
+          error={searchError}
+          onChange={this.onSearchChanged}
           placeholder="ETH, CRV, ..."
           variant="outlined"
           InputProps={{
-            startAdornment: <InputAdornment position="end" className={ classes.inputAdornment }><SearchIcon /></InputAdornment>,
+            startAdornment: <InputAdornment position="end" className={classes.inputAdornment}><SearchIcon /></InputAdornment>,
           }}
         />
       </div>
     )
   }
 
-  handleChecked = (event) => {
-    this.setState({ hideZero: event.target.checked })
-    localStorage.setItem('yearn.finance-hideZero', (event.target.checked ? '1' : '0' ))
+  handleChecked=(event) => {
+    this.setState({hideZero: event.target.checked})
+    localStorage.setItem('dafi-entropy-hideZero',(event.target.checked? '1':'0'))
   }
 
-  handleChange = (id) => {
-    this.setState({ expanded: this.state.expanded === id ? null : id })
+  handleChange=(id) => {
+    this.setState({expanded: this.state.expanded===id? null:id})
   }
 
-  startLoading = () => {
-    this.setState({ loading: true })
+  startLoading=() => {
+    this.setState({loading: true})
   }
 
-  renderSnackbar = () => {
+  renderSnackbar=() => {
     var {
       snackbarType,
       snackbarMessage
-    } = this.state
-    return <Snackbar type={ snackbarType } message={ snackbarMessage } open={true}/>
+    }=this.state
+    return <Snackbar type={snackbarType} message={snackbarMessage} open={true} />
   };
 
-  _getAPY = (asset) => {
-    const initialApy = '0.00'
+  _getAPY=(asset) => {
+    const initialApy='0.00'
 
-    if (asset.apy) {
+    if(asset.apy) {
       return asset.apy
     } else {
       return initialApy
     }
   }
 
-  renderStrategyRewards = () => {
-    const { classes } = this.props
+  renderStrategyRewards=() => {
+    const {classes}=this.props
 
-    return(
-      <div className={ classes.disaclaimer } style={{ marginTop: '25px', maxWidth: '500px' }}>
+    return (
+      <div className={classes.disaclaimer} style={{marginTop: '25px',maxWidth: '500px'}}>
         <Grid container spacing={1}>
           <Grid item><TimelineIcon fontSize="small" /></Grid>
           <Grid item xs>
-            <Typography variant="h4" style={{ display: 'inline', fontWeight: 'bold' }}>
-            Strategy Rewards
+            <Typography variant="h4" style={{display: 'inline',fontWeight: 'bold'}}>
+              Strategy Rewards
             </Typography>
           </Grid>
         </Grid>

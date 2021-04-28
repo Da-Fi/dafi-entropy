@@ -108,10 +108,10 @@ class Have extends Component {
     return (
       <div className={ classes.root }>
         <div className={ classes.inputCard }>
-          <Typography variant='h3' className={ classes.inputCardHeading }>I have</Typography>
+          <Typography variant='h4'style={{fontFamily:'"Eczar"'}}  className={ classes.inputCardHeading }>Swap</Typography>
           <div className={ classes.tradeContainer }>
             { sendAsset && <div className={ classes.balances }>
-                <Typography variant='h3' className={ classes.title }></Typography><Typography variant='h4' onClick={ () => { this.props.setSendAmountPercent(100) } } className={ classes.value } noWrap>{ 'Balance: '+ ( sendAsset.balance ? sendAsset.balance.toFixed(4) : '0.0000') } { sendAsset.tokenSymbol ? sendAsset.tokenSymbol : sendAsset.symbol }</Typography>
+                <Typography variant='h4' style={{fontFamily:'"Eczar"'}} className={ classes.title }>Receive</Typography><Typography variant='h4' onClick={ () => { this.props.setSendAmountPercent(100) } } className={ classes.value } noWrap>{ 'Balance: '+ ( sendAsset.balance ? sendAsset.balance.toFixed(4) : '0.0000') } { sendAsset.tokenSymbol ? sendAsset.tokenSymbol : sendAsset.symbol }</Typography>
             </div>}
             { this.renderAssetSelect('asset', asset, assetOptions, assetError) }
           </div>

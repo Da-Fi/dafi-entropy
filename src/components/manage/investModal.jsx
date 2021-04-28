@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
-import { withStyles } from '@material-ui/core/styles';
-import {  } from '@material-ui/core/styles';
+import React,{Component} from "react";
+import {withRouter} from "react-router-dom";
+import {withStyles} from '@material-ui/core/styles';
+import {} from '@material-ui/core/styles';
 import {
   DialogContent,
   Dialog,
@@ -21,16 +21,16 @@ import {
 import Loader from '../loader'
 
 import Store from "../../stores";
-const emitter = Store.emitter
-const dispatcher = Store.dispatcher
-const store = Store.store
+const emitter=Store.emitter
+const dispatcher=Store.dispatcher
+const store=Store.store
 
 
 function Transition(props) {
   return <Slide direction="up" {...props} />;
 }
 
-const styles = theme => ({
+const styles=theme => ({
   intro: {
     padding: '12px 0px',
     textAlign: 'center',
@@ -77,7 +77,7 @@ class InvestModal extends Component {
   constructor() {
     super()
 
-    this.state = {
+    this.state={
       ethBalance: store.getStore('ethBalance'),
       amount: '',
       amountError: false,
@@ -86,160 +86,160 @@ class InvestModal extends Component {
   }
 
   componentWillMount() {
-    emitter.on(INVEST_RETURNED, this.investReturned);
-    emitter.on(ERROR, this.errorReturned);
+    emitter.on(INVEST_RETURNED,this.investReturned);
+    emitter.on(ERROR,this.errorReturned);
   }
 
   componentWillUnmount() {
-    emitter.removeListener(INVEST_RETURNED, this.investReturned);
-    emitter.removeListener(ERROR, this.errorReturned);
+    emitter.removeListener(INVEST_RETURNED,this.investReturned);
+    emitter.removeListener(ERROR,this.errorReturned);
   };
 
-  investReturned = () => {
-    this.setState({ loading: false })
+  investReturned=() => {
+    this.setState({loading: false})
     this.props.closeModal()
   };
 
-  errorReturned = (error) => {
-    this.setState({ loading: false })
+  errorReturned=(error) => {
+    this.setState({loading: false})
   };
 
   render() {
-    const { classes, closeModal } = this.props;
+    const {classes,closeModal}=this.props;
     const {
       amount,
       amountError,
       loading
-    } = this.state
+    }=this.state
 
-    const fullScreen = window.innerWidth < 450;
+    const fullScreen=window.innerWidth<450;
 
     return (
-      <Dialog open={ true } onClose={ closeModal } fullWidth={ true } maxWidth={ 'sm' } TransitionComponent={ Transition } fullScreen={ fullScreen }>
+      <Dialog open={true} onClose={closeModal} fullWidth={true} maxWidth={'sm'} TransitionComponent={Transition} fullScreen={fullScreen}>
         <DialogContent>
-          <div className={ classes.intro }>
-            <Typography variant='h3'>Awesome, tell us how much Eth you would like to invest. Once you press submit, you will need to approve the transaction in MetaMask and you will be earning interest on your Eth.</Typography>
+          <div className={classes.intro}>
+            <Typography variant='h4'>Awesome, tell us how much Eth you would like to invest. Once you press submit, you will need to approve the transaction in MetaMask and you will be earning interest on your Eth.</Typography>
           </div>
-          <div className={ classes.amountContainer }>
+          <div className={classes.amountContainer}>
             <TextField
               fullWidth
-              className={ classes.actionInput }
+              className={classes.actionInput}
               id='amount'
-              value={ amount }
-              error={ amountError }
-              onChange={ this.onChange }
-              disabled={ loading }
+              value={amount}
+              error={amountError}
+              onChange={this.onChange}
+              disabled={loading}
               label="Invest Amount"
               placeholder="0.00"
               variant="outlined"
-              onKeyDown={ this.inputKeyDown }
-              helperText={ 'Keep in mind, you need some Ether for transaction fees' }
+              onKeyDown={this.inputKeyDown}
+              helperText={'Keep in mind, you need some Ether for transaction fees'}
             />
           </div>
-          <div className={ classes.scaleContainer }>
+          <div className={classes.scaleContainer}>
             <Button
-              className={ classes.scale }
+              className={classes.scale}
               variant='contained'
-              disabled={ loading }
+              disabled={loading}
               color="primary"
-              onClick={ () => { this.setAmount(25) } }>
+              onClick={() => {this.setAmount(25)}}>
               <Typography color='secondary'>25%</Typography>
             </Button>
             <Button
-              className={ classes.scale }
+              className={classes.scale}
               variant='contained'
-              disabled={ loading }
+              disabled={loading}
               color="primary"
-              onClick={ () => { this.setAmount(50) } }>
+              onClick={() => {this.setAmount(50)}}>
               <Typography color='secondary'>50%</Typography>
             </Button>
             <Button
-              className={ classes.scale }
+              className={classes.scale}
               variant='contained'
-              disabled={ loading }
+              disabled={loading}
               color="primary"
-              onClick={ () => { this.setAmount(75) } }>
+              onClick={() => {this.setAmount(75)}}>
               <Typography color='secondary'>75%</Typography>
             </Button>
             <Button
-              className={ classes.scale }
+              className={classes.scale}
               variant='contained'
-              disabled={ loading }
+              disabled={loading}
               color="primary"
-              onClick={ () => { this.setAmount(100) } }>
+              onClick={() => {this.setAmount(100)}}>
               <Typography color='secondary'>100%</Typography>
             </Button>
           </div>
-          <div className={ classes.actionsContainer }>
+          <div className={classes.actionsContainer}>
             <Button
-              className={ classes.actionButton }
+              className={classes.actionButton}
               variant="text"
               color="secondary"
-              disabled={ loading }
-              onClick={ closeModal }
-              >
-              <Typography className={ classes.buttonText } variant={ 'h3'}>Cancel</Typography>
+              disabled={loading}
+              onClick={closeModal}
+            >
+              <Typography className={classes.buttonText} variant={'h4'}>Cancel</Typography>
             </Button>
             <Button
-              className={ classes.actionButton }
+              className={classes.actionButton}
               variant="contained"
               color="primary"
-              disabled={ loading }
-              onClick={ this.onInvest }
-              >
-              <Typography className={ classes.buttonText } variant={ 'h3'} color='secondary'>Submit</Typography>
+              disabled={loading}
+              onClick={this.onInvest}
+            >
+              <Typography className={classes.buttonText} variant={'h4'} color='secondary'>Submit</Typography>
             </Button>
           </div>
         </DialogContent>
-        { loading && <Loader /> }
+        { loading&&<Loader />}
       </Dialog>
     )
   };
 
-  onChange = (event) => {
-    let val = []
-    val[event.target.id] = event.target.value
+  onChange=(event) => {
+    let val=[]
+    val[event.target.id]=event.target.value
     this.setState(val)
   }
 
-  inputKeyDown = (event) => {
-    if (event.which === 13) {
+  inputKeyDown=(event) => {
+    if(event.which===13) {
       this.onInvest();
     }
   }
 
-  onInvest = () => {
-    this.setState({ amountError: false })
+  onInvest=() => {
+    this.setState({amountError: false})
 
-    const { amount, ethBalance } = this.state
+    const {amount,ethBalance}=this.state
 
-    if(!amount || isNaN(amount) || amount <= 0 || amount > ethBalance) {
-      this.setState({ amountError: true })
+    if(!amount||isNaN(amount)||amount<=0||amount>ethBalance) {
+      this.setState({amountError: true})
       return false
     }
 
-    const asset = { iEarnContract: config.iEarnContract }
+    const asset={iEarnContract: config.iEarnContract}
 
-    this.setState({ loading: true })
+    this.setState({loading: true})
 
-    dispatcher.dispatch({ type: INVEST, content: { amount: amount, asset: asset } })
+    dispatcher.dispatch({type: INVEST,content: {amount: amount,asset: asset}})
   }
 
-  setAmount = (percent) => {
+  setAmount=(percent) => {
 
     if(this.state.loading) {
       return
     }
 
-    const balance = store.getStore('ethBalance')
-    let amount = balance*percent/100
+    const balance=store.getStore('ethBalance')
+    let amount=balance*percent/100
 
-    if(percent === 100) {
-        amount = amount - 0.003
+    if(percent===100) {
+      amount=amount-0.003
     }
 
-    this.setState({ amount: amount.toFixed(8) })
+    this.setState({amount: amount.toFixed(8)})
   }
 }
 
-export default withRouter(withStyles(styles, { withTheme: true })(InvestModal));
+export default withRouter(withStyles(styles,{withTheme: true})(InvestModal));

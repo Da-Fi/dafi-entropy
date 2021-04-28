@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
-import { withStyles } from '@material-ui/core/styles';
+import React,{Component} from "react";
+import {withRouter} from "react-router-dom";
+import {withStyles} from '@material-ui/core/styles';
 import {
   Card,
   Typography,
@@ -28,13 +28,13 @@ import {
   IDAI_RETURNED
 } from '../../constants'
 
-import { withNamespaces } from 'react-i18next';
+import {withNamespaces} from 'react-i18next';
 import Store from "../../stores";
-const emitter = Store.emitter
-const dispatcher = Store.dispatcher
-const store = Store.store
+const emitter=Store.emitter
+const dispatcher=Store.dispatcher
+const store=Store.store
 
-const styles = theme => ({
+const styles=theme => ({
   root: {
     flex: 1,
     display: 'flex',
@@ -139,9 +139,9 @@ class IDai extends Component {
   constructor() {
     super()
 
-    this.state = {
+    this.state={
       account: store.getStore('account'),
-      assets: store.getStore('assets').filter((asset) => asset.idai === true),
+      assets: store.getStore('assets').filter((asset) => asset.idai===true),
       curveContracts: store.getStore('curveContracts'),
       sendAsset: null,
       receiveAsset: null,
@@ -151,70 +151,70 @@ class IDai extends Component {
   }
 
   componentWillMount() {
-    emitter.on(ERROR, this.errorReturned);
-    emitter.on(BALANCES_RETURNED, this.balancesReturned);
-    emitter.on(CONNECTION_CONNECTED, this.connectionConnected);
-    emitter.on(CONNECTION_DISCONNECTED, this.connectionDisconnected);
-    emitter.on(IDAI_RETURNED, this.idaiReturned);
+    emitter.on(ERROR,this.errorReturned);
+    emitter.on(BALANCES_RETURNED,this.balancesReturned);
+    emitter.on(CONNECTION_CONNECTED,this.connectionConnected);
+    emitter.on(CONNECTION_DISCONNECTED,this.connectionDisconnected);
+    emitter.on(IDAI_RETURNED,this.idaiReturned);
   }
 
   componentWillUnmount() {
-    emitter.removeListener(ERROR, this.errorReturned);
-    emitter.removeListener(BALANCES_RETURNED, this.balancesReturned);
-    emitter.removeListener(CONNECTION_CONNECTED, this.connectionConnected);
-    emitter.removeListener(CONNECTION_DISCONNECTED, this.connectionDisconnected);
-    emitter.removeListener(IDAI_RETURNED, this.idaiReturned);
+    emitter.removeListener(ERROR,this.errorReturned);
+    emitter.removeListener(BALANCES_RETURNED,this.balancesReturned);
+    emitter.removeListener(CONNECTION_CONNECTED,this.connectionConnected);
+    emitter.removeListener(CONNECTION_DISCONNECTED,this.connectionDisconnected);
+    emitter.removeListener(IDAI_RETURNED,this.idaiReturned);
   };
 
-  idaiReturned = (txHash) => {
-    const snackbarObj = { snackbarMessage: null, snackbarType: null }
+  idaiReturned=(txHash) => {
+    const snackbarObj={snackbarMessage: null,snackbarType: null}
     this.setState(snackbarObj)
-    this.setState({ loading: false, sendAmount: '', sendAsset: null, receiveAsset: null })
-    const that = this
+    this.setState({loading: false,sendAmount: '',sendAsset: null,receiveAsset: null})
+    const that=this
     setTimeout(() => {
-      const snackbarObj = { snackbarMessage: txHash, snackbarType: 'Hash' }
+      const snackbarObj={snackbarMessage: txHash,snackbarType: 'Hash'}
       that.setState(snackbarObj)
     })
   }
 
-  balancesReturned = (balances) => {
-    this.setState({ assets: store.getStore('assets').filter((asset) => asset.idai === true) })
-    this.setSendAsset(store.getStore('assets').filter((asset) => asset.idai === true)[0])
+  balancesReturned=(balances) => {
+    this.setState({assets: store.getStore('assets').filter((asset) => asset.idai===true)})
+    this.setSendAsset(store.getStore('assets').filter((asset) => asset.idai===true)[0])
   };
 
   refresh() {
-    dispatcher.dispatch({ type: GET_BALANCES, content: {} })
+    dispatcher.dispatch({type: GET_BALANCES,content: {}})
   }
 
-  connectionConnected = () => {
-    this.setState({ account: store.getStore('account') })
+  connectionConnected=() => {
+    this.setState({account: store.getStore('account')})
 
-    dispatcher.dispatch({ type: GET_BALANCES, content: {} })
+    dispatcher.dispatch({type: GET_BALANCES,content: {}})
 
-    const that = this
+    const that=this
     setTimeout(() => {
-      const snackbarObj = { snackbarMessage: 'Wallet succesfully connected.', snackbarType: 'Info' }
+      const snackbarObj={snackbarMessage: 'Wallet succesfully connected.',snackbarType: 'Info'}
       that.setState(snackbarObj)
     })
   };
 
-  connectionDisconnected = () => {
-    this.setState({ account: store.getStore('account') })
+  connectionDisconnected=() => {
+    this.setState({account: store.getStore('account')})
   }
 
-  errorReturned = (error) => {
-    const snackbarObj = { snackbarMessage: null, snackbarType: null }
+  errorReturned=(error) => {
+    const snackbarObj={snackbarMessage: null,snackbarType: null}
     this.setState(snackbarObj)
-    this.setState({ loading: false })
-    const that = this
+    this.setState({loading: false})
+    const that=this
     setTimeout(() => {
-      const snackbarObj = { snackbarMessage: error.toString(), snackbarType: 'Error' }
+      const snackbarObj={snackbarMessage: error.toString(),snackbarType: 'Error'}
       that.setState(snackbarObj)
     })
   };
 
   render() {
-    const { classes, t } = this.props;
+    const {classes,t}=this.props;
     const {
       assets,
       curveContracts,
@@ -227,150 +227,150 @@ class IDai extends Component {
       modalOpen,
       modalBuiltWithOpen,
       snackbarMessage
-    } = this.state
+    }=this.state
 
     return (
-      <div className={ classes.root }>
-        { !account.address &&
-          <div className={ classes.investedContainer }>
-              <div className={ classes.introCenter }>
-                <Typography variant='h3'>{ t('IDai.Intro') }</Typography>
-              </div>
-              <div className={ classes.connectContainer }>
-                <Button
-                  className={ classes.actionButton }
-                  variant="outlined"
-                  color="primary"
-                  disabled={ loading }
-                  onClick={ this.overlayClicked }
-                  >
-                  <Typography className={ classes.buttonText } variant={ 'h5'}>{ t('InvestSimple.Connect') }</Typography>
-                </Button>
-              </div>
-          </div>
-        }
-        { account.address &&
-          <div className={ classes.card }>
-            <div className={ classes.introCenter }>
-              <Typography variant='h3'>{ t('IDai.Intro') }</Typography>
+      <div className={classes.root}>
+        { !account.address&&
+          <div className={classes.investedContainer}>
+            <div className={classes.introCenter}>
+              <Typography variant='h4'>{t('IDai.Intro')}</Typography>
             </div>
-            <Card className={ classes.iHaveContainer }>
-              <Have assets={ assets } curveContracts={ curveContracts } setSendAsset={ this.setSendAsset } sendAsset={ sendAsset } setSendAmountPercent={ this.setSendAmountPercent } loading={ loading } />
-              <Sending sendAsset={ sendAsset } sendAmount={ sendAmount } setSendAmount={ this.setSendAmount } setSendAmountPercent={ this.setSendAmountPercent } loading={ loading }  />
-              <div className={ classes.sepperator }></div>
-              <Want assets={ assets } curveContracts={ curveContracts } receiveAsset={ receiveAsset } setReceiveAsset={ this.setReceiveAsset } loading={ loading }  />
-              <div className={ classes.sepperator }></div>
-              { (!receiveAsset || receiveAsset.symbol !== 'CurveV3') && <Button
-                className={ classes.actionButton }
+            <div className={classes.connectContainer}>
+              <Button
+                className={classes.actionButton}
                 variant="outlined"
                 color="primary"
-                disabled={ loading }
-                onClick={ this.onZap }
-                fullWidth
-                >
-                <Typography className={ classes.buttonText } variant={ 'h5'} color='secondary'>{ t('IDai.Swap') }</Typography>
-              </Button> }
-            </Card>
-            <div className={ classes.introCenter }>
+                disabled={loading}
+                onClick={this.overlayClicked}
+              >
+                <Typography className={classes.buttonText} variant={'h5'}>{t('InvestSimple.Connect')}</Typography>
+              </Button>
             </div>
           </div>
         }
-        { modalOpen && this.renderModal() }
-        { modalBuiltWithOpen && this.renderBuiltWithModal() }
-        { snackbarMessage && this.renderSnackbar() }
-        { loading && <Loader /> }
+        { account.address&&
+          <div className={classes.card}>
+            <div className={classes.introCenter}>
+              <Typography variant='h4'>{t('IDai.Intro')}</Typography>
+            </div>
+            <Card className={classes.iHaveContainer}>
+              <Have assets={assets} curveContracts={curveContracts} setSendAsset={this.setSendAsset} sendAsset={sendAsset} setSendAmountPercent={this.setSendAmountPercent} loading={loading} />
+              <Sending sendAsset={sendAsset} sendAmount={sendAmount} setSendAmount={this.setSendAmount} setSendAmountPercent={this.setSendAmountPercent} loading={loading} />
+              <div className={classes.sepperator}></div>
+              <Want assets={assets} curveContracts={curveContracts} receiveAsset={receiveAsset} setReceiveAsset={this.setReceiveAsset} loading={loading} />
+              <div className={classes.sepperator}></div>
+              {(!receiveAsset||receiveAsset.symbol!=='CurveV3')&&<Button
+                className={classes.actionButton}
+                variant="outlined"
+                color="primary"
+                disabled={loading}
+                onClick={this.onZap}
+                fullWidth
+              >
+                <Typography className={classes.buttonText} variant={'h5'} color='secondary'>{t('IDai.Swap')}</Typography>
+              </Button>}
+            </Card>
+            <div className={classes.introCenter}>
+            </div>
+          </div>
+        }
+        { modalOpen&&this.renderModal()}
+        { modalBuiltWithOpen&&this.renderBuiltWithModal()}
+        { snackbarMessage&&this.renderSnackbar()}
+        { loading&&<Loader />}
       </div>
     )
   };
 
-  onZap = () => {
-    this.setState({ amountError: false })
+  onZap=() => {
+    this.setState({amountError: false})
 
-    const { sendAmount, sendAsset, receiveAsset } = this.state
+    const {sendAmount,sendAsset,receiveAsset}=this.state
 
-    if(!sendAmount || isNaN(sendAmount) || sendAmount <= 0 || parseFloat(sendAmount) > sendAsset.balance) {
-      this.setState({ amountError: true })
+    if(!sendAmount||isNaN(sendAmount)||sendAmount<=0||parseFloat(sendAmount)>sendAsset.balance) {
+      this.setState({amountError: true})
       return false
     }
 
-    this.setState({ loading: true })
-    dispatcher.dispatch({ type: IDAI, content: { amount: sendAmount, sendAsset: sendAsset, receiveAsset: receiveAsset } })
+    this.setState({loading: true})
+    dispatcher.dispatch({type: IDAI,content: {amount: sendAmount,sendAsset: sendAsset,receiveAsset: receiveAsset}})
   }
 
-  setReceiveAsset = (receiveAsset) => {
-    this.setState({ receiveAsset })
+  setReceiveAsset=(receiveAsset) => {
+    this.setState({receiveAsset})
   }
 
-  setSendAsset = (sendAsset) => {
-    let receiveAsset = {
+  setSendAsset=(sendAsset) => {
+    let receiveAsset={
       id: 'DAI',
       name: 'DAI',
       symbol: 'DAI',
       amount: 0
     }
-    const balance = sendAsset.balance
-    let sendAmount = balance*100/100
+    const balance=sendAsset.balance
+    let sendAmount=balance*100/100
 
-    sendAmount = Math.floor(sendAmount*10000)/10000;
-    receiveAsset.balance = sendAmount.toFixed(4);
+    sendAmount=Math.floor(sendAmount*10000)/10000;
+    receiveAsset.balance=sendAmount.toFixed(4);
 
-    this.setState({ sendAsset, receiveAsset, sendAmount: sendAmount.toFixed(4) })
+    this.setState({sendAsset,receiveAsset,sendAmount: sendAmount.toFixed(4)})
 
   }
 
-  setSendAmountPercent = (percent) => {
-    const { sendAsset, receiveAsset } = this.state
+  setSendAmountPercent=(percent) => {
+    const {sendAsset,receiveAsset}=this.state
 
-    const balance = sendAsset.balance
-    let sendAmount = balance*percent/100
+    const balance=sendAsset.balance
+    let sendAmount=balance*percent/100
 
-    sendAmount = Math.floor(sendAmount*10000)/10000;
-    this.setState({ sendAmount: sendAmount.toFixed(4) })
-    receiveAsset.balance = sendAmount.toFixed(4);
-    this.setState({ receiveAsset: receiveAsset })
+    sendAmount=Math.floor(sendAmount*10000)/10000;
+    this.setState({sendAmount: sendAmount.toFixed(4)})
+    receiveAsset.balance=sendAmount.toFixed(4);
+    this.setState({receiveAsset: receiveAsset})
   }
 
-  setSendAmount = (amount) => {
-    const { receiveAsset } = this.state
-    this.setState({ sendAmount: amount })
-    receiveAsset.balance = parseFloat(amount).toFixed(4);
-    this.setState({ receiveAsset: receiveAsset })
+  setSendAmount=(amount) => {
+    const {receiveAsset}=this.state
+    this.setState({sendAmount: amount})
+    receiveAsset.balance=parseFloat(amount).toFixed(4);
+    this.setState({receiveAsset: receiveAsset})
   }
 
-  renderModal = () => {
+  renderModal=() => {
     return (
-      <UnlockModal closeModal={ this.closeModal } modalOpen={ this.state.modalOpen } />
+      <UnlockModal closeModal={this.closeModal} modalOpen={this.state.modalOpen} />
     )
   }
 
-  renderBuiltWithModal = () => {
+  renderBuiltWithModal=() => {
     return (
-      <BuiltWithModal closeModal={ this.closeBuiltWithModal } modalOpen={ this.state.modalBuiltWithOpen } />
+      <BuiltWithModal closeModal={this.closeBuiltWithModal} modalOpen={this.state.modalBuiltWithOpen} />
     )
   }
 
-  renderSnackbar = () => {
+  renderSnackbar=() => {
     var {
       snackbarType,
       snackbarMessage
-    } = this.state
-    return <Snackbar type={ snackbarType } message={ snackbarMessage } open={true}/>
+    }=this.state
+    return <Snackbar type={snackbarType} message={snackbarMessage} open={true} />
   };
 
-  overlayClicked = () => {
-    this.setState({ modalOpen: true })
+  overlayClicked=() => {
+    this.setState({modalOpen: true})
   }
 
-  closeModal = () => {
-    this.setState({ modalOpen: false })
+  closeModal=() => {
+    this.setState({modalOpen: false})
   }
 
-  builtWithOverlayClicked = () => {
-    this.setState({ modalBuiltWithOpen: true })
+  builtWithOverlayClicked=() => {
+    this.setState({modalBuiltWithOpen: true})
   }
 
-  closeBuiltWithModal = () => {
-    this.setState({ modalBuiltWithOpen: false })
+  closeBuiltWithModal=() => {
+    this.setState({modalBuiltWithOpen: false})
   }
 }
 

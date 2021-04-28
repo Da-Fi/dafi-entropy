@@ -42,7 +42,7 @@ const styles = theme => ({
   pairs: {
     padding: '42px 36px',
     borderRadius: '50px',
-    border: '1px solid ' + colors.borderBlue,
+    border: '1px solid ' + colors.dafiGreen,
     margin: '40px',
     width: 'calc(100% - 80px)'
   },
@@ -148,13 +148,13 @@ const styles = theme => ({
   inline: {
     display: 'flex'
   },
-  statisticsContainer : {
+  statisticsContainer: {
     width: 'calc(100% - 80px)'
   },
-  statisticCard : {
+  statisticCard: {
     padding: '42px 36px',
     borderRadius: '25px',
-    border: '1px solid ' + colors.borderBlue,
+    border: '1px solid ' + colors.dafiGreen,
     marginTop: '40px'
   },
   statistic: {
@@ -174,8 +174,8 @@ class APR extends Component {
       loading: true
     }
 
-    if(account && account.address) {
-      dispatcher.dispatch({ type: GET_VAULT_BALANCES_FULL, content: { } })
+    if (account && account.address) {
+      dispatcher.dispatch({ type: GET_VAULT_BALANCES_FULL, content: {} })
     }
   }
 
@@ -196,7 +196,7 @@ class APR extends Component {
       account: store.getStore('account'),
       loading: true
     })
-    dispatcher.dispatch({ type: GET_VAULT_BALANCES_FULL, content: { } })
+    dispatcher.dispatch({ type: GET_VAULT_BALANCES_FULL, content: {} })
   };
 
   connectionDisconnected = () => {
@@ -215,87 +215,87 @@ class APR extends Component {
     const { loading } = this.state
 
     return (
-      <div className={ classes.root }>
+      <div className={classes.root}>
 
-        { !loading && this.renderAggStats() }
+        { !loading && this.renderAggStats()}
 
-        { !loading && 
-          <Card className={ classes.pairs }>
-            <table className={ classes.tableContainer }>
+        { !loading &&
+          <Card className={classes.pairs}>
+            <table className={classes.tableContainer}>
               <thead>
-                { this.renderHeaders() }
+                {this.renderHeaders()}
               </thead>
               <tbody>
-                { this.renderStats() }
+                {this.renderStats()}
               </tbody>
             </table>
           </Card>
         }
 
-        { loading && <CircularProgress /> }
+        { loading && <CircularProgress />}
 
-        { loading && <Loader /> }
+        { loading && <Loader />}
       </div>
     )
   };
 
-  renderAggStats = () => { 
-    
+  renderAggStats = () => {
+
     const { classes } = this.props
 
-    return(
-        <div className={classes.statisticsContainer}>
-          <Grid container spacing={3}>
-            <Grid item md={3}>
-              <Card className={classes.statisticCard}>
-                <b>
-                  Total Value Locked (TVL)
+    return (
+      <div className={classes.statisticsContainer}>
+        <Grid container spacing={3}>
+          <Grid item md={3}>
+            <Card className={classes.statisticCard}>
+              <b>
+                Total Value Locked (TVL)
                 </b>
-                <div>
-                  { this.renderStatTh() }
-                </div>
-              </Card>
-            </Grid>
-            <Grid item md={3}>
-              <Card className={classes.statisticCard}>
-                <b>Vault Holdings</b>
-                <Tooltip title="Total assets held in vaults, excluding assets that are deployed into other protocols" arrow>
-                    <InfoIcon fontSize="small" style={{ color: colors.darkGray, marginLeft: '5px', marginBottom: '-5px' }} />
-                  </Tooltip>
-                <div>
-                  { this.renderStatTsh() }
-                </div>
-              </Card>
-            </Grid>
-            <Grid item md={3}>
-              <Card className={classes.statisticCard}>
-                <b>
-                  Strategy Holdings
-                  <Tooltip title="Total assets deployed to other protocols as part of vault strategies" arrow>
-                    <InfoIcon fontSize="small" style={{ color: colors.darkGray, marginLeft: '5px', marginBottom: '-5px' }} />
-                  </Tooltip>
-                </b> 
-                <div>
-                  { this.renderStatTvh() }
-                </div>
-              </Card>
-            </Grid>
-            <Grid item md={3}>
-              <Card className={classes.statisticCard}>
-                <b>
-                  Annual Yield
-                  <Tooltip title="Average annual yield (unstable) based on 1 month sampled period, across active vaults" arrow>
-                    <InfoIcon fontSize="small" style={{ color: colors.darkGray, marginLeft: '5px', marginBottom: '-5px' }} />
-                  </Tooltip>
-                </b>
-                <div>
-                  { this.renderStatRevenue() } 
-                </div>
-              </Card>
-            </Grid>
+              <div>
+                {this.renderStatTh()}
+              </div>
+            </Card>
           </Grid>
-        </div>
-      )
+          <Grid item md={3}>
+            <Card className={classes.statisticCard}>
+              <b>Vault Holdings</b>
+              <Tooltip title="Total assets held in vaults, excluding assets that are deployed into other protocols" arrow>
+                <InfoIcon fontSize="small" style={{ color: colors.darkGray, marginLeft: '5px', marginBottom: '-5px' }} />
+              </Tooltip>
+              <div>
+                {this.renderStatTsh()}
+              </div>
+            </Card>
+          </Grid>
+          <Grid item md={3}>
+            <Card className={classes.statisticCard}>
+              <b>
+                Strategy Holdings
+                  <Tooltip title="Total assets deployed to other protocols as part of vault strategies" arrow>
+                  <InfoIcon fontSize="small" style={{ color: colors.darkGray, marginLeft: '5px', marginBottom: '-5px' }} />
+                </Tooltip>
+              </b>
+              <div>
+                {this.renderStatTvh()}
+              </div>
+            </Card>
+          </Grid>
+          <Grid item md={3}>
+            <Card className={classes.statisticCard}>
+              <b>
+                Annual Yield
+                  <Tooltip title="Average annual yield (unstable) based on 1 month sampled period, across active vaults" arrow>
+                  <InfoIcon fontSize="small" style={{ color: colors.darkGray, marginLeft: '5px', marginBottom: '-5px' }} />
+                </Tooltip>
+              </b>
+              <div>
+                {this.renderStatRevenue()}
+              </div>
+            </Card>
+          </Grid>
+        </Grid>
+      </div>
+    )
 
   }
 
@@ -314,28 +314,28 @@ class APR extends Component {
 
     return (
       <span className={classes.statistic}>
-        { '$' + parseFloat( statTvl.toFixed(2) ).toLocaleString() }
+        { '$' + parseFloat(statTvl.toFixed(2)).toLocaleString()}
       </span>
     )
-}
+  }
 
   renderStatTvh = () => {
-      const { classes } = this.props
-      const { assets } = this.state
+    const { classes } = this.props
+    const { assets } = this.state
 
-      var statTvl = 0
+    var statTvl = 0
 
-      assets.filter((asset) => {
-        return asset.symbol !== 'ETH';
-      }).forEach((asset) => {
-        statTvl += asset.vaultHoldings ? asset.vaultHoldings * asset.usdPrice : 0
-      })
-  
-      return (
-        <span className={classes.statistic}>
-          { '$' + parseFloat( statTvl.toFixed(2) ).toLocaleString() }
-        </span>
-      )
+    assets.filter((asset) => {
+      return asset.symbol !== 'ETH';
+    }).forEach((asset) => {
+      statTvl += asset.vaultHoldings ? asset.vaultHoldings * asset.usdPrice : 0
+    })
+
+    return (
+      <span className={classes.statistic}>
+        { '$' + parseFloat(statTvl.toFixed(2)).toLocaleString()}
+      </span>
+    )
   }
 
   renderStatTsh = () => {
@@ -352,7 +352,7 @@ class APR extends Component {
 
     return (
       <span className={classes.statistic}>
-        { '$' + parseFloat( statTvl.toFixed(2) ).toLocaleString() }
+        { '$' + parseFloat(statTvl.toFixed(2)).toLocaleString()}
       </span>
     )
   }
@@ -375,7 +375,7 @@ class APR extends Component {
 
       assetYield = asset.stats.apyOneMonthSample ? assetTvl * (asset.stats.apyOneMonthSample / 100) : 0
 
-      if ( assetYield > 0 ) { 
+      if (assetYield > 0) {
         statTvl += assetTvl
         statYield += assetYield
       }
@@ -385,8 +385,8 @@ class APR extends Component {
 
     return (
       <span className={classes.statistic}>
-        { ( statApy * 100 ).toFixed(2) }%
-        <span style={{ fontSize: '0.7em', color: colors.darkGray, paddingLeft: '6px' }}>{ '$' + parseFloat( statYield.toFixed(2) ).toLocaleString() }</span>
+        { (statApy * 100).toFixed(2)}%
+        <span style={{ fontSize: '0.7em', color: colors.darkGray, paddingLeft: '6px' }}>{'$' + parseFloat(statYield.toFixed(2)).toLocaleString()}</span>
       </span>
     )
   }
@@ -395,41 +395,41 @@ class APR extends Component {
     const { classes } = this.props
 
     return (
-      <tr className={ classes.pair }>
-        <th className={ classes.headerName }>
-          <Typography  align='right' variant={'h4'} className={classes.aggregatedHeader}>{ 'Vault' }</Typography>
+      <tr className={classes.pair}>
+        <th className={classes.headerName}>
+          <Typography align='right' variant={'h4'} style={{fontFamily:'"RobotoC"'}}  className={classes.aggregatedHeader}>{'Vault'}</Typography>
         </th>
-        <th className={ classes.headerStrategy }>
-          <Typography  align='right' variant={'h4'} className={classes.aggregatedHeader}>{ 'Current Strategy' }</Typography>
+        <th className={classes.headerStrategy}>
+          <Typography align='right' variant={'h4'} style={{fontFamily:'"RobotoC"'}}  className={classes.aggregatedHeader}>{'Current Strategy'}</Typography>
         </th>
-        <th className={ classes.headerValue }>
-          <Typography  align='right' variant={'h4'} className={classes.aggregatedHeaderRight}>{ 'Vault holdings' }</Typography>
+        <th className={classes.headerValue}>
+          <Typography align='right' variant={'h4'} style={{fontFamily:'"RobotoC"'}}  className={classes.aggregatedHeaderRight}>{'Vault holdings'}</Typography>
         </th>
-        <th className={ classes.headerValue }>
-          <Typography  align='right' variant={'h4'} className={classes.aggregatedHeaderRight}>{ 'Strategy holdings' }</Typography>
+        <th className={classes.headerValue}>
+          <Typography align='right' variant={'h4'} style={{fontFamily:'"RobotoC"'}}  className={classes.aggregatedHeaderRight}>{'Strategy holdings'}</Typography>
         </th>
-        <th className={ classes.headerHoldings }>
-          <Typography  align='right' variant={'h4'} className={classes.aggregatedHeaderRight}>{ 'Your holdings' }</Typography>
-          <div className={ classes.subHeader }>
-            <div className={ classes.headerValue }>
-              <Typography  align='right' variant={'h4'} className={classes.aggregatedHeaderRight}>{ 'Token' }</Typography>
+        <th className={classes.headerHoldings}>
+          <Typography align='right' variant={'h4'} style={{fontFamily:'"RobotoC"'}}  className={classes.aggregatedHeaderRight}>{'Your holdings'}</Typography>
+          <div className={classes.subHeader}>
+            <div className={classes.headerValue}>
+              <Typography align='right' variant={'h4'} style={{fontFamily:'"RobotoC"'}}  className={classes.aggregatedHeaderRight}>{'Token'}</Typography>
             </div>
-            <div className={ classes.headerValue }>
-              <Typography  align='right' variant={'h4'} className={classes.aggregatedHeaderRight}>{ 'USD' }</Typography>
+            <div className={classes.headerValue}>
+              <Typography align='right' variant={'h4'} style={{fontFamily:'"RobotoC"'}}  className={classes.aggregatedHeaderRight}>{'USD'}</Typography>
             </div>
           </div>
         </th>
-        <th className={ classes.headerROI }>
-          <Typography  align='right' variant={'h4'} className={classes.aggregatedHeaderCenter}>{ 'ROI based on sampled period' }</Typography>
-          <div className={ classes.subHeader }>
-            <div className={ classes.headerValue }>
-              <Typography  align='right' variant={'h4'} className={classes.aggregatedHeaderRight}>{ '1 Week' }</Typography>
+        <th className={classes.headerROI}>
+          <Typography align='right' variant={'h4'} style={{fontFamily:'"RobotoC"'}}  className={classes.aggregatedHeaderCenter}>{'ROI based on sampled period'}</Typography>
+          <div className={classes.subHeader}>
+            <div className={classes.headerValue}>
+              <Typography align='right' variant={'h4'} style={{fontFamily:'"RobotoC"'}}  className={classes.aggregatedHeaderRight}>{'1 Week'}</Typography>
             </div>
-            <div className={ classes.headerValue }>
-              <Typography  align='right' variant={'h4'} className={classes.aggregatedHeaderRight}>{ '1 Month' }</Typography>
+            <div className={classes.headerValue}>
+              <Typography align='right' variant={'h4'} style={{fontFamily:'"RobotoC"'}}  className={classes.aggregatedHeaderRight}>{'1 Month'}</Typography>
             </div>
-            <div className={ classes.headerValue }>
-              <Typography  align='right' variant={'h4'} className={classes.aggregatedHeaderRight}>{ 'Inception' }</Typography>
+            <div className={classes.headerValue}>
+              <Typography align='right' variant={'h4'} style={{fontFamily:'"RobotoC"'}}  className={classes.aggregatedHeaderRight}>{'Inception'}</Typography>
             </div>
           </div>
         </th>
@@ -447,40 +447,40 @@ class APR extends Component {
       }).map((asset) => {
 
         return (
-          <tr key={ asset.id } className={ classes.pair }>
-            <td className={ classes.name } onClick={() => { window.open(`https://etherscan.io/address/${asset.vaultContractAddress}#code`, "_blank")} }>
-              <div className={ classes.assetIcon }>
+          <tr key={asset.id} className={classes.pair}>
+            <td className={classes.name} onClick={() => { window.open(`https://etherscan.io/address/${asset.vaultContractAddress}#code`, "_blank") }}>
+              <div className={classes.assetIcon}>
                 <img
                   alt=""
-                  src={ require('../../assets/'+asset.symbol.replace(/\+/g, '')+'-logo.png') }
+                  src={require('../../assets/' + asset.symbol.replace(/\+/g, '') + '-logo.png')}
                   height="30px"
                 />
               </div>
-              <Typography align='right' variant={'h4'} >{ asset.name }</Typography>
+              <Typography align='right' variant={'h4'} style={{fontFamily:'"RobotoC"'}}  >{asset.name}</Typography>
             </td>
-            <td className={ classes.strategy } onClick={() => { window.open(`https://etherscan.io/address/${asset.strategy}#code`, "_blank")} }>
-              <Typography align='right' variant='h5'>{ asset.strategyName }</Typography>
+            <td className={classes.strategy} onClick={() => { window.open(`https://etherscan.io/address/${asset.strategy}#code`, "_blank") }}>
+              <Typography align='right' variant='h5' style={{fontFamily:'"Eczar"'}} >{asset.strategyName}</Typography>
             </td>
-            <td className={ classes.apr2 }>
-              <Typography align='right' variant='h5' className={ classes.inline }>{ asset.vaultHoldings ? parseFloat(asset.vaultHoldings.toFixed(2)).toLocaleString() : '0.00'  } <div className={classes.symbol}>{ asset.symbol }</div></Typography>
+            <td className={classes.apr2}>
+              <Typography align='right' variant='h5' style={{fontFamily:'"Eczar"'}} className={classes.inline}>{asset.vaultHoldings ? parseFloat(asset.vaultHoldings.toFixed(2)).toLocaleString() : '0.00'} <div className={classes.symbol}>{asset.symbol}</div></Typography>
             </td>
-            <td className={ classes.apr2 }>
-              <Typography align='right' variant='h5' className={ classes.inline }>{ asset.strategyHoldings ? parseFloat(asset.strategyHoldings.toFixed(2)).toLocaleString() : '0.00' } <div className={classes.symbol}>{ asset.symbol }</div></Typography>
+            <td className={classes.apr2}>
+              <Typography align='right' variant='h5' style={{fontFamily:'"Eczar"'}} className={classes.inline}>{asset.strategyHoldings ? parseFloat(asset.strategyHoldings.toFixed(2)).toLocaleString() : '0.00'} <div className={classes.symbol}>{asset.symbol}</div></Typography>
             </td>
-            <td className={ classes.apr1 }>
-              <Typography align='right' variant='h5' className={ classes.inline }>{ asset.vaultBalance ? parseFloat((asset.vaultBalance*asset.pricePerFullShare).toFixed(2)).toLocaleString() : '0.00' } <div className={classes.symbol}>{ asset.symbol }</div></Typography>
+            <td className={classes.apr1}>
+              <Typography align='right' variant='h5' style={{fontFamily:'"Eczar"'}} className={classes.inline}>{asset.vaultBalance ? parseFloat((asset.vaultBalance * asset.pricePerFullShare).toFixed(2)).toLocaleString() : '0.00'} <div className={classes.symbol}>{asset.symbol}</div></Typography>
             </td>
-            <td className={ classes.apr1 }>
-              <Typography align='right' variant='h5' className={ classes.inline }><div className={classes.preSymbol}>$</div>{ asset.vaultBalance ? parseFloat((asset.vaultBalance*asset.pricePerFullShare*asset.usdPrice).toFixed(2)).toLocaleString() : '0.00' }</Typography>
+            <td className={classes.apr1}>
+              <Typography align='right' variant='h5' style={{fontFamily:'"Eczar"'}} className={classes.inline}><div className={classes.preSymbol}>$</div>{asset.vaultBalance ? parseFloat((asset.vaultBalance * asset.pricePerFullShare * asset.usdPrice).toFixed(2)).toLocaleString() : '0.00'}</Typography>
             </td>
-            <td className={ classes.apr1 }>
-              <Typography align='right' variant='h5' className={ classes.inline }>{ asset.stats && asset.stats.apyOneWeekSample ? parseFloat(asset.stats.apyOneWeekSample.toFixed(2)).toLocaleString() : '0.00' }<div className={classes.symbol}>%</div></Typography>
+            <td className={classes.apr1}>
+              <Typography align='right' variant='h5' style={{fontFamily:'"Eczar"'}} className={classes.inline}>{asset.stats && asset.stats.apyOneWeekSample ? parseFloat(asset.stats.apyOneWeekSample.toFixed(2)).toLocaleString() : '0.00'}<div className={classes.symbol}>%</div></Typography>
             </td>
-            <td className={ classes.apr1 }>
-              <Typography align='right' variant='h5' className={ classes.inline }>{ asset.stats && asset.stats.apyOneMonthSample ? parseFloat(asset.stats.apyOneMonthSample.toFixed(2)).toLocaleString() : '0.00' }<div className={classes.symbol}>%</div></Typography>
+            <td className={classes.apr1}>
+              <Typography align='right' variant='h5' style={{fontFamily:'"Eczar"'}} className={classes.inline}>{asset.stats && asset.stats.apyOneMonthSample ? parseFloat(asset.stats.apyOneMonthSample.toFixed(2)).toLocaleString() : '0.00'}<div className={classes.symbol}>%</div></Typography>
             </td>
-            <td className={ classes.apr1 }>
-              <Typography align='right' variant='h5' className={ classes.inline }>{ asset.stats && asset.stats.apyInceptionSample ? parseFloat(asset.stats.apyInceptionSample.toFixed(2)).toLocaleString() : '0.00' }<div className={classes.symbol}>%</div></Typography>
+            <td className={classes.apr1}>
+              <Typography align='right' variant='h5'style={{fontFamily:'"Eczar"'}}  className={classes.inline}>{asset.stats && asset.stats.apyInceptionSample ? parseFloat(asset.stats.apyInceptionSample.toFixed(2)).toLocaleString() : '0.00'}<div className={classes.symbol}>%</div></Typography>
             </td>
           </tr>)
       })

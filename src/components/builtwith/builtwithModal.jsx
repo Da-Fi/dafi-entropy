@@ -1,26 +1,29 @@
-import React, { Component } from "react";
+import React,{Component} from "react";
 import {
   DialogContent,
   Dialog,
   Slide
 } from '@material-ui/core';
+// react plugin for creating notifications over the dashboard
 
-import BuiltWith from './builtwith.jsx';
+// reactstrap components
 
+
+import BuiltWith from './builtwith.jsx'
 function Transition(props) {
   return <Slide direction="up" {...props} />;
 }
 
 class BuiltWithModal extends Component {
   render() {
-    const { closeModal, modalOpen } = this.props;
+    const {closeModal,modalOpen}=this.props;
 
-    const fullScreen = window.innerWidth < 450;
+    const fullScreen=window.innerWidth<450;
 
     return (
-      <Dialog open={ modalOpen } onClose={ closeModal } fullWidth={ true } maxWidth={ 'sm' } TransitionComponent={ Transition } fullScreen={ fullScreen }>
+      <Dialog open={modalOpen} onClose={closeModal} fullWidth={true} maxWidth={'sm'} TransitionComponent={Transition} fullScreen={fullScreen}>
         <DialogContent>
-          <BuiltWith closeModal={ closeModal } />
+          <BuiltWith closeModal={closeModal} />
         </DialogContent>
       </Dialog>
     )

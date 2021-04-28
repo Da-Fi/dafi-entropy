@@ -1,8 +1,9 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800');
-@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900');
+@import url('https://fonts.googleapis.com/css2?family=Eczar:wght@400;500;700&family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
 
 * {
-  outline: none !important;
+  outline: none;
 }
 
 body {
@@ -13,13 +14,13 @@ body {
   --red: #dc3545;
   --orange: #fd7e14;
   --yellow: #ffc107;
-  --green: #28a745;
+  --green: #28a746;
   --teal: #20c997;
   --cyan: #17a2b8;
   --white: #fff;
   --gray: #6c757d;
   --gray-dark: #343a40;
-  --primary: #007bff;
+  --primary: #00ffc3;
   --secondary: #6c757d;
   --success: #28a745;
   --info: #17a2b8;
@@ -27,33 +28,57 @@ body {
   --danger: #dc3545;
   --light: #f8f9fa;
   --dark: #343a40;
-  --breakpoint-xs: 0;
-  --breakpoint-sm: 576px;
-  --breakpoint-md: 768px;
-  --breakpoint-lg: 992px;
-  --breakpoint-xl: 1200px;
-  --font-family-sans-serif: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
-  --font-family-monospace: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+  
+  --breakpoint-xs: 0px;
+  --breakpoint-sm: 600px;
+  --breakpoint-md: 900px;
+  --breakpoint-lg: 1200px;
+  --breakpoint-xl: 1800px;
+  --font-family-sans-serif: -apple-system,BlinkMacSystemFont,"Segoe UI","Eczar","Roboto Condensed","Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  --font-family-monospace: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace, "Audiowide", cursive;
   margin: 0;
   font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
   font-size: 1rem;
   font-weight: 400;
-  line-height: 1.5;
-  color: #212529;
+  line-height: 1.2;
+  color: #3FBFBF;
   text-align: left;
-  background-color: #fff;
+  background-color: RGBA(54,54,64,100);
 }
+                            
 
 html {
-  font-family: sans-serif;
+  font-family: 'Eczar sans-serif';
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
   -ms-overflow-style: scrollbar;
   -webkit-tap-highlight-color: transparent;
+ 
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+.dafiPrimaryhex { color: #3FBFBF; }
+.dafiDefaulthex { color: #212626; }
+.dafiColorhex1 { color: #3FBFA8; }
+.dafiColorhex2 { color: #43D9A2; }
+.dafiColorhex3 { color: #41D983; }
+
+/* Color Theme Swatches in RGBA */
+.dafiPrimaryrgba { color: rgba(63, 191, 191, 1); }
+.dafiDefaultrgba { color: rgba(33, 38, 38, 1); }
+.dafiColor3rgba { color: rgba(63, 191, 168, 1); }
+.dafiColor4rgba { color: rgba(67, 217, 162, 1); }
+.dafiColor5rgba { color: rgba(65, 217, 131, 1); }
+
+/* Color Theme Swatches in HSLA */
+.dafiColorPrimaryhsla { color: hsla(180, 50, 49, 1); }
+.dafiColorDefaulthsla { color: hsla(180, 7, 13, 1); }
+.dafiColor3hsla { color: hsla(169, 50, 49, 1); }
+.dafiColor4hsla { color: hsla(158, 66, 55, 1); }
+.dafiColor5hsla { color: hsla(146, 66, 55, 1); }
+
+

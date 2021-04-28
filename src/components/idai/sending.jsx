@@ -73,7 +73,7 @@ class Sending extends Component {
     return (
       <div className={ classes.root }>
         <div className={ classes.inputCard }>
-          <Typography variant='h3' className={ classes.inputCardHeading }>Send amount</Typography>
+          <Typography variant='h4' className={ classes.inputCardHeading }>Send amount</Typography>
           { this.renderAmountInput('amount', sendAmount, false, 'Amount', '0.00', (sendAsset ? sendAsset.symbol : '')) }
           <div className={ classes.scaleContainer }>
             <Button
@@ -137,7 +137,7 @@ class Sending extends Component {
         placeholder={ placeholder }
         variant="outlined"
         InputProps={{
-          endAdornment: <InputAdornment position="end" className={ classes.inputAdornment }><Typography variant='h3'>{ inputAdornment }</Typography></InputAdornment>,
+          endAdornment: <InputAdornment position="end" className={ classes.inputAdornment }><Typography variant='h4'>{ inputAdornment }</Typography></InputAdornment>,
         }}
       />
     )

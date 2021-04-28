@@ -163,14 +163,14 @@ class Invested extends Component {
     return (
       <div className={ classes.root }>
         <Card className={ classes.inputCard }>
-          <Typography variant='h3' className={ classes.inputCardHeading }>Investments</Typography>
+          <Typography variant='h4' className={ classes.inputCardHeading }>Investments</Typography>
           <div className={ classes.inputCardValues }>
             <Typography variant='h4' className={ classes.inputCardBalance } align='right'>$18.43</Typography>
             <Typography variant='h5' className={ classes.inputCardSubtitle } align='right'>Interest Earned</Typography>
           </div>
         </Card>
         <Card className={ classes.assetsCard }>
-          <Typography variant='h3' className={ classes.assetCardHeading }>I am earning interest on</Typography>
+          <Typography variant='h4' className={ classes.assetCardHeading }>I am earning interest on</Typography>
           {this.renderAssetTable()}
         </Card>
       </div>
@@ -238,7 +238,7 @@ class Invested extends Component {
                     disabled={ loading }
                     onClick={ this.onCollateralize }
                     >
-                    <Typography className={ classes.buttonText } variant={ 'h3'}>Redeem</Typography>
+                    <Typography className={ classes.buttonText } variant={ 'h4'}>Redeem</Typography>
                   </Button>
                 </div>
               </div>

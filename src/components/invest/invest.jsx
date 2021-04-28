@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
-import { withStyles } from '@material-ui/core/styles';
+import React,{Component} from "react";
+import {withRouter} from "react-router-dom";
+import {withStyles} from '@material-ui/core/styles';
 
 import Collateral from './collateral'
 import Invested from './invested'
@@ -12,14 +12,14 @@ import {
 
 import Store from "../../stores";
 // const emitter = Store.emitter
-const dispatcher = Store.dispatcher
+const dispatcher=Store.dispatcher
 // const store = Store.store
 
-const styles = theme => ({
+const styles=theme => ({
   root: {
     flex: 1,
     display: 'flex',
-    maxWidth: '1200px',
+    maxWidth: '1600px',
     width: '100%'
   },
   collateralContainer: {
@@ -39,20 +39,20 @@ const styles = theme => ({
 class Invest extends Component {
 
   componentWillMount() {
-    dispatcher.dispatch({ type: GET_PRICES, content: {} })
-    dispatcher.dispatch({ type: GET_VAULT_VALUES, content: {} })
+    dispatcher.dispatch({type: GET_PRICES,content: {}})
+    dispatcher.dispatch({type: GET_VAULT_VALUES,content: {}})
   }
 
   render() {
-    const { classes } = this.props;
+    const {classes}=this.props;
 
     return (
-      <div className={ classes.root }>
-        <div className={ classes.collateralContainer }>
+      <div className={classes.root}>
+        <div className={classes.collateralContainer}>
           <Collateral />
         </div>
-        <div className={ classes.seperatorontainer }></div>
-        <div className={ classes.investedContainer }>
+        <div className={classes.seperatorontainer}></div>
+        <div className={classes.investedContainer}>
           <Invested />
         </div>
       </div>

@@ -1,667 +1,199 @@
-import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
-import { withStyles } from '@material-ui/core/styles';
-import {
-  Typography,
-  TextField,
-  MenuItem
-} from '@material-ui/core';
-import { colors } from '../../theme'
+import React from 'react';
+import clsx from 'clsx';
+import {makeStyles,useTheme} from '@material-ui/core/styles';
+import Drawer from '@material-ui/core/Drawer';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import List from '@material-ui/core/List';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import {Typography} from '@material-ui/core';
+import Divider from '@material-ui/core/Divider';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import {mainListItems} from '../dashboard/dashLists';
+import {colors} from '../../theme/theme';
+import SUBHEADER_1 from '../dashboard/Subheader_1.jsx';
 
-import Loader from '../loader'
-import InfoIcon from '@material-ui/icons/Info';
+const drawerWidth=192;
 
-import {
-  ERROR,
-  CONNECTION_CONNECTED,
-  CONNECTION_DISCONNECTED,
-  GET_DASHBOARD_SNAPSHOT,
-  DASHBOARD_SNAPSHOT_RETURNED,
-} from '../../constants'
 
-import Store from "../../stores";
-const emitter = Store.emitter
-const dispatcher = Store.dispatcher
-const store = Store.store
+const useStyles=makeStyles((theme) => ({
+    root: {
+        display: 'flex',
+        width: '["setWidth"]'
+    },
+    appBar: {
+        zIndex: theme.zIndex.drawer+1,
+        transition: theme.transitions.create(['width','margin'],{
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.leavingScreen,
+        }),
+    },
+    appBarShift: {
+        marginLeft: drawerWidth,
+        width: `calc(100% - ${drawerWidth}px)`,
+        transition: theme.transitions.create(['width','margin'],{
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.enteringScreen,
+        }),
+    },
+    menuButton: {
+        marginRight: 36,
+    },
+    hide: {
+        display: 'none',
+    },
+    drawer: {
+        width: drawerWidth,
+        flexShrink: 0,
+        whiteSpace: 'nowrap',
+    },
+    drawerOpen: {
+        width: drawerWidth,
+        transition: theme.transitions.create('width',{
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.enteringScreen,
+        }),
+    },
+    drawerClose: {
+        transition: theme.transitions.create('width',{
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.leavingScreen,
+        }),
+        overflowX: 'hidden',
+        width: theme.spacing(7)+1,
+        [theme.breakpoints.up('sm')]: {
+            width: theme.spacing(9)+1,
+        },
+    },
+    toolbar: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+        padding: theme.spacing(0,1),
+        // necessary for content to be below app bar
+        ...theme.mixins.toolbar,
+    },
+    content: {
+        flexGrow: 1,
+        padding: theme.spacing(3),
+        persistentBehavior: 'fit'
+    },
+    spacer: {
+        width: 100,
+        flex: 1,
+        justifyContent: 'flex-end'
+    },
+}));
 
-const styles = theme => ({
-  root: {
-    flex: 1,
-    display: 'flex',
-    flexDirection: 'column',
-    maxWidth: '1200px',
-    width: '100%',
-    justifyContent: 'flex-start',
-    alignItems: 'center'
-  },
-  investedContainerLoggedOut: {
-    display: 'flex',
-    flex: 1,
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    minWidth: '100%',
-    marginTop: '40px',
-    [theme.breakpoints.up('md')]: {
-      minWidth: '900px',
-    }
-  },
-  investedContainer: {
-    display: 'flex',
-    flex: 1,
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    minWidth: '100%',
-    marginTop: '40px',
-    [theme.breakpoints.up('md')]: {
-      minWidth: '900px',
-    }
-  },
-  disaclaimer: {
-    padding: '12px',
-    border: '1px solid rgb(174, 174, 174)',
-    borderRadius: '0.75rem',
-    marginBottom: '24px',
-    background: colors.white
-  },
-  portfolioContainer: {
-    width: '100%',
-    display: 'flex',
-    justifyContent: 'space-between',
-  },
-  vaultContainer: {
-    padding: '28px 30px',
-    borderRadius: '50px',
-    border: '1px solid '+colors.borderBlue,
-    background: colors.white,
-    display: 'flex',
-    flexDirection: 'column',
-    width: '100%',
-  },
-  earnContainer: {
-    marginTop: '40px',
-    padding: '28px 30px',
-    borderRadius: '50px',
-    border: '1px solid '+colors.borderBlue,
-    background: colors.white,
-    display: 'flex',
-    flexDirection: 'column',
-    width: '100%',
-  },
-  gray: {
-    color: colors.darkGray
-  },
-  between: {
-    width: '40px',
-    height: '40px'
-  },
-  titleBalance: {
-    padding: '28px 30px',
-    borderRadius: '50px',
-    border: '1px solid '+colors.borderBlue,
-    background: colors.white,
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
-    cursor: 'pointer'
-  },
-  prettyAlign: {
-    display: 'flex',
-    alignItems: 'center'
-  },
-  infoIcon: {
-    fontSize: '1em',
-    marginRight: '6px'
-  },
-  assetSummary: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    flex: 1,
-    flexWrap: 'wrap',
-    [theme.breakpoints.up('sm')]: {
-      flexWrap: 'nowrap'
-    }
-  },
-  assetIcon: {
-    display: 'flex',
-    alignItems: 'center',
-    verticalAlign: 'middle',
-    borderRadius: '20px',
-    height: '30px',
-    width: '30px',
-    textAlign: 'center',
-    cursor: 'pointer',
-    marginRight: '12px',
-  },
-  heading: {
-    display: 'none',
-    [theme.breakpoints.up('md')]: {
-      display: 'flex',
-      flexDirection: 'column',
-      minWidth: '200px',
-      alignItems: 'flex-end'
-    }
-  },
-  headingName: {
-    display: 'flex',
-    alignItems: 'center',
-    width: '325px',
-    [theme.breakpoints.down('sm')]: {
-      width: 'auto',
-      flex: 1
-    }
-  },
-  flexy: {
-    display: 'flex',
-    alignItems: 'center'
-  },
-  vault: {
-    borderBottom: '1px solid rgba(25, 101, 233, 0.2)',
-    padding: '12px',
-    '&:last-child': {
-      borderBottom: 'none'
-    }
-  },
-  sectionHeading: {
-    color: colors.darkGray,
-    width: '100%',
-    marginLeft: '54px'
-  },
-  inline: {
-    display: 'flex',
-    alignItems: 'baseline'
-  },
-  symbol: {
-    paddingLeft: '6px'
-  },
-  symbolAt: {
-    paddingLeft: '6px',
-    color: colors.darkGray
-  },
-  basedOnContainer: {
-    display: 'flex',
-    width: '100%',
-    justifyContent: 'flex-end',
-    alignItems: 'center'
-  }
-});
+export default function Dashboard() {
+    const classes=useStyles();
+    const theme=useTheme();
+    const [open,setOpen]=React.useState(false);
+    const [width,setWidth]=React.useState(window.innerWidth);
+    const [height,setHeight]=React.useState(window.innerHeight);
 
-class Dashboard extends Component {
+    const handleDrawerOpen=() => {
+        setOpen(true);
+    };
 
-  constructor(props) {
-    super()
-
-    const dashboard = store.getStore('dashboard')
-    const account = store.getStore('account')
-    const growth = localStorage.getItem('yearn.finance-dashboard-growth')
-    const currency = localStorage.getItem('yearn.finance-dashboard-currency')
-    const basedOn = localStorage.getItem('yearn.finance-dashboard-basedon')
-
-    this.state = {
-      dashboard: dashboard,
-      account: account,
-      loading: true,
-      growth: growth ? parseInt(growth) : 1, // 0=daily 1=weekly 2=yearly
-      currency: currency ? currency : 'USD', // USD / ETH,
-      basedOn: basedOn ? parseInt(basedOn > 3 ? 3 : basedOn) : 1 // 1=apyThreeDaySample  2=apyOneWeekSample  3= apyInceptionSample  4=apyInceptionSample (old)
-    }
-
-    if(account && account.address) {
-      dispatcher.dispatch({ type: GET_DASHBOARD_SNAPSHOT, content: {} })
-    }
-  }
-
-  componentWillMount() {
-    emitter.on(ERROR, this.errorReturned);
-    emitter.on(CONNECTION_CONNECTED, this.connectionConnected);
-    emitter.on(CONNECTION_DISCONNECTED, this.connectionDisconnected);
-    emitter.on(DASHBOARD_SNAPSHOT_RETURNED, this.dashboardSnapshotReturned);
-  }
-
-  componentWillUnmount() {
-    emitter.removeListener(ERROR, this.errorReturned);
-    emitter.removeListener(CONNECTION_CONNECTED, this.connectionConnected);
-    emitter.removeListener(CONNECTION_DISCONNECTED, this.connectionDisconnected);
-    emitter.removeListener(DASHBOARD_SNAPSHOT_RETURNED, this.dashboardSnapshotReturned);
-  };
-
-  dashboardSnapshotReturned = () => {
-    this.setState({
-      loading: false,
-      dashboard: store.getStore('dashboard')
-    })
-  }
-
-  connectionConnected = () => {
-    const account = store.getStore('account')
-    this.setState({ loading: true, account: account })
-    dispatcher.dispatch({ type: GET_DASHBOARD_SNAPSHOT, content: {} })
-  };
-
-  connectionDisconnected = () => {
-    this.setState({ account: null })
-  };
-
-  errorReturned = (error) => {
-    this.setState({ loading: false })
-  };
-
-  render() {
-    const { classes } = this.props;
-    const {
-      loading,
-      dashboard,
-      growth,
-      currency,
-      account,
-    } = this.state
-
-    if(!account || !account.address) {
-      return (
-        <div className={ classes.root }>
-          <div className={ classes.investedContainerLoggedOut }>
-          <Typography variant={'h5'} className={ classes.disaclaimer }>This project is in beta. Use at your own risk.</Typography>
-            <div className={ classes.introCenter }>
-              <Typography variant='h3'>Connect your wallet to continue</Typography>
-            </div>
-          </div>
-        </div>
-      )
-    }
+    const handleDrawerClose=() => {
+        setOpen(false);
+    };
+    const updateWidthAndHeight=() => {
+        setWidth(window.innerWidth);
+        setHeight(window.innerHeight);
+    };
+    React.useEffect(() => {
+        window.addEventListener("resize",updateWidthAndHeight);
+        return () => window.removeEventListener("resize",updateWidthAndHeight);
+    });
 
     return (
-      <div className={ classes.root }>
-        <div className={ classes.investedContainer}>
-          <div className={ classes.portfolioContainer }>
-            <div className={ classes.titleBalance } onClick={ this.balanceClicked }>
-              { currency === 'USD' && <Typography variant={ 'h2' }>$ { parseFloat(dashboard.portfolio_balance_usd.toFixed(2)).toLocaleString() }</Typography> }
-              { currency === 'ETH' &&
-                <div className={ classes.inline }>
-                  <Typography variant={ 'h2' } noWrap>{ parseFloat(dashboard.portfolio_balance_eth.toFixed(2)).toLocaleString() }</Typography >
-                  <Typography className={ classes.symbol } variant={ 'h3' }>ETH</Typography>
+        <div className={classes.root}>
+            <CssBaseline />
+            <AppBar
+                style={{background: colors.dafidentheader}}
+                position="fixed"
+                className={clsx(classes.appBar,{
+                    [classes.appBarShift]: open,
+                })}
+            >
+                <Toolbar>
+                    <IconButton
+                        color="inherit"
+                        aria-label="open drawer"
+                        onClick={handleDrawerOpen}
+                        edge="start"
+                        className={clsx(classes.menuButton,{
+                            [classes.hide]: open,
+                        })}
+                    >
+                        <MenuIcon />
+                    </IconButton>
+                    <div>
+
+                        <IconButton>
+                            <img
+                                alt=''
+                                src={require('../../assets/dafi_crc_log_only.png')}
+                                height={'32px'}>
+                            </img>
+                        </IconButton>
+
+                    </div>
+                    <Typography variant="h5" style={{fontFamily: '"RobotoC"'}} noWrap>
+                        DA-FI DAO
+          </Typography>
+
+                    <div className={classes.spacer} style={{width: 75}} />
+                    <div>
+
+                        <SUBHEADER_1 style={{flex: 1,justifyContent: 'flex-end'}} />
+
+                    </div>
+                </Toolbar>
+            </AppBar>
+            <Drawer
+                variant="permanent"
+                className={clsx(classes.drawer,{
+                    [classes.drawerOpen]: open,
+                    [classes.drawerClose]: !open,
+                })}
+                classes={{
+                    paper: clsx({
+                        [classes.drawerOpen]: open,
+                        [classes.drawerClose]: !open,
+                    }),
+                }}
+            >
+                <div className={classes.toolbar}>
+                    <IconButton onClick={handleDrawerClose}>
+                        {theme.direction==='rtl'? <ChevronRightIcon />:<ChevronLeftIcon />}
+                    </IconButton>
                 </div>
-              }
-              <Typography variant={ 'h4' } className={ classes.gray }>Portfolio Balance</Typography>
-            </div>
-            <div className={ classes.between }>
-            </div>
-            { growth === 0 &&
-              <div className={ classes.titleBalance } onClick={ this.growthClicked }>
-                { currency === 'USD' && <Typography variant={ 'h2' }>$ { parseFloat(dashboard.portfolio_growth_usd_daily.toFixed(2)).toLocaleString() }</Typography> }
-                { currency === 'ETH' &&
-                  <div className={ classes.inline }>
-                    <Typography variant={ 'h2' } noWrap>{ parseFloat(dashboard.portfolio_growth_eth_daily.toFixed(2)).toLocaleString() }</Typography >
-                    <Typography className={ classes.symbol } variant={ 'h3' }>ETH</Typography>
-                  </div>
-                }
-                <Typography variant={ 'h4' } className={ `${classes.gray} ${classes.prettyAlign}` }>
-                  Daily Growth
-                </Typography>
-              </div>
-            }
+                <Divider />
+                <List>
+                    {mainListItems}
+                </List>
 
-            { growth === 1 &&
-              <div className={ classes.titleBalance } onClick={ this.growthClicked }>
-                { currency === 'USD' && <Typography variant={ 'h2' }>$ { parseFloat(dashboard.portfolio_growth_usd_weekly.toFixed(2)).toLocaleString() }</Typography> }
-                { currency === 'ETH' &&
-                  <div className={ classes.inline }>
-                    <Typography variant={ 'h2' } noWrap>{ parseFloat(dashboard.portfolio_growth_eth_weekly.toFixed(2)).toLocaleString() }</Typography >
-                    <Typography className={ classes.symbol } variant={ 'h3' }>ETH</Typography>
-                  </div>
-                }
-                <Typography variant={ 'h4' } className={ `${classes.gray} ${classes.prettyAlign}` }>
-                  Weekly Growth
-                </Typography>
-              </div>
-            }
+            </Drawer>
+            <main className={classes.content}>
+                <div className={classes.toolbar} />
 
-            { growth === 2 &&
-              <div className={ classes.titleBalance } onClick={ this.growthClicked }>
-                { currency === 'USD' && <Typography variant={ 'h2' }>$ { parseFloat(dashboard.portfolio_growth_usd_yearly.toFixed(2)).toLocaleString() }</Typography> }
-                { currency === 'ETH' &&
-                  <div className={ classes.inline }>
-                    <Typography variant={ 'h2' } noWrap>{ parseFloat(dashboard.portfolio_growth_eth_yearly.toFixed(2)).toLocaleString() }</Typography >
-                    <Typography className={ classes.symbol } variant={ 'h3' }>ETH</Typography>
-                  </div>
-                }
-                <Typography variant={ 'h4' } className={ `${classes.gray} ${classes.prettyAlign}` }>
-                  Yearly Growth
-                </Typography>
-              </div>
-            }
-          </div>
-          { this.renderBasedOn() }
-          { (dashboard.vaults && dashboard.vaults.length > 0) &&
-            <div className={ classes.vaultContainer }>
-              <Typography variant={ 'h3' } className={ classes.sectionHeading }>Vaults Overview</Typography>
-              { this.renderVaults() }
-            </div>
-          }
-          { (dashboard.assets && dashboard.assets.length > 0) &&
-            <div className={ classes.earnContainer }>
-              <Typography variant={ 'h3' } className={ classes.sectionHeading }>Earn Overview</Typography>
-              { this.renderEarn() }
-            </div>
-          }
+            </main>
         </div>
-        { loading && <Loader /> }
-      </div>
-    )
-  };
-
-  renderBasedOn = () => {
-
-    const { classes } = this.props
-    const { basedOn, loading } = this.state
-
-    const options = [
-      {
-        value: 1,
-        description: '1 week'
-      },
-      {
-        value: 2,
-        description: '1 month'
-      },
-      {
-        value: 3,
-        description: 'inception'
-      }
-    ]
-
-    return (
-      <div className={ classes.basedOnContainer }>
-        <InfoIcon className={ classes.infoIcon } />
-        <Typography>Growth is based on the vault's performance { basedOn === 3 ? 'since' : 'for the past' }</Typography>
-        <TextField
-          id={ 'basedOn' }
-          name={ 'basedOn' }
-          select
-          value={ basedOn }
-          onChange={ this.onSelectChange }
-          SelectProps={{
-            native: false
-          }}
-          disabled={ loading }
-          className={ classes.assetSelectRoot }
-        >
-        { options &&
-          options.map((option) => {
-            return (
-              <MenuItem key={ option.value } value={ option.value }>
-                <Typography variant='h4'>{ option.description }</Typography>
-              </MenuItem>
-            )
-          })
-        }
-      </TextField>
-      </div>
-    )
-  }
-
-  onSelectChange = (event) => {
-    let val = []
-    val[event.target.name] = event.target.value
-    this.setState(val)
-
-    localStorage.setItem('yearn.finance-dashboard-basedon', event.target.value)
-
-    this.setState({ loading: true })
-    dispatcher.dispatch({ type: GET_DASHBOARD_SNAPSHOT, content: {} })
-  }
-
-  growthClicked = () => {
-    const { growth } = this.state
-    let newGrowth = 0
-    switch (growth) {
-      case 0:
-        newGrowth = 1
-        break;
-      case 1:
-        newGrowth = 2
-        break;
-      case 2:
-        newGrowth = 0
-        break;
-      default:
-        newGrowth = 0
-    }
-    this.setState({ growth: newGrowth })
-    localStorage.setItem('yearn.finance-dashboard-growth', newGrowth.toString())
-  }
-
-  balanceClicked = () => {
-    const { currency } = this.state
-    this.setState({ currency: (currency === 'USD' ? 'ETH' : 'USD') })
-
-    localStorage.setItem('yearn.finance-dashboard-currency', (currency === 'USD' ? 'ETH' : 'USD'))
-  }
-
-  renderVaults = () => {
-    const { growth, currency } = this.state
-    const { vaults } = this.state.dashboard
-    const { classes } = this.props
-
-    if(!vaults || vaults.length === 0) {
-      return null
-    }
-
-    return vaults.map((asset) => {
-      return (<div className={ classes.vault } key={asset.id}>
-        <div className={ classes.assetSummary }>
-          <div className={classes.headingName}>
-            <div className={ classes.assetIcon }>
-              <img
-                alt=""
-                src={ require('../../assets/'+asset.symbol.replace(/\+/g, '')+'-logo.png') }
-                height={ '30px'}
-              />
-            </div>
-            <div>
-              <Typography variant={ 'h3' } noWrap>{ asset.name }</Typography>
-              <Typography variant={ 'h5' } noWrap className={ classes.gray }>{ asset.description }</Typography>
-            </div>
-          </div>
-          { growth === 0 &&
-            <div className={classes.heading}>
-              <Typography variant={ 'h5' } className={ classes.gray }>Daily Growth</Typography>
-              { currency === 'USD' &&
-                <div className={ classes.inline }>
-                  <Typography variant={ 'h3' } noWrap>$ { parseFloat(asset.vaultGrowth_daily_usd.toFixed(2)).toLocaleString() }</Typography >
-                  <Typography className={ classes.symbolAt } variant={ 'h4' }> @ </Typography>
-                  <Typography className={ classes.symbol } variant={ 'h4' }> { (this._getAPY(asset)/365).toFixed(2) }%</Typography>
-                </div>
-              }
-              { currency === 'ETH' &&
-                <div className={ classes.inline }>
-                  <Typography variant={ 'h3' } noWrap>{ parseFloat(asset.vaultGrowth_daily_eth.toFixed(2)).toLocaleString() }</Typography >
-                  <Typography className={ classes.symbol } variant={ 'h4' }>ETH</Typography>
-                  <Typography className={ classes.symbolAt } variant={ 'h4' }> @ </Typography>
-                  <Typography className={ classes.symbol } variant={ 'h4' }> { (this._getAPY(asset)/365).toFixed(2) }%</Typography>
-                </div>
-              }
-            </div>
-          }
-          { growth === 1 &&
-            <div className={classes.heading}>
-              <Typography variant={ 'h5' } className={ classes.gray }>Weekly Growth</Typography>
-              { currency === 'USD' &&
-                <div className={ classes.inline }>
-                  <Typography variant={ 'h3' } noWrap>$ { parseFloat(asset.vaultGrowth_weekly_usd.toFixed(2)).toLocaleString() }</Typography >
-                  <Typography className={ classes.symbolAt } variant={ 'h4' }> @ </Typography>
-                  <Typography className={ classes.symbol } variant={ 'h4' }> { (this._getAPY(asset)/52).toFixed(2) }%</Typography>
-                </div>
-              }
-              { currency === 'ETH' &&
-                <div className={ classes.inline }>
-                  <Typography variant={ 'h3' } noWrap>{ parseFloat(asset.vaultGrowth_weekly_eth.toFixed(2)).toLocaleString() }</Typography >
-                  <Typography className={ classes.symbol } variant={ 'h4' }>ETH</Typography>
-                  <Typography className={ classes.symbolAt } variant={ 'h4' }> @ </Typography>
-                  <Typography className={ classes.symbol } variant={ 'h4' }> { (this._getAPY(asset)/52).toFixed(2) }%</Typography>
-                </div>
-              }
-            </div>
-          }
-          { growth === 2 &&
-            <div className={classes.heading}>
-              <Typography variant={ 'h5' } className={ classes.gray }>Yearly Growth</Typography>
-              { currency === 'USD' &&
-                <div className={ classes.inline }>
-                  <Typography variant={ 'h3' } noWrap>$ { parseFloat(asset.vaultGrowth_yearly_usd.toFixed(2)).toLocaleString() }</Typography >
-                  <Typography className={ classes.symbolAt } variant={ 'h4' }> @ </Typography>
-                  <Typography className={ classes.symbol } variant={ 'h4' }> { (this._getAPY(asset)/1).toFixed(2) }%</Typography>
-                </div>
-              }
-              { currency === 'ETH' &&
-                <div className={ classes.inline }>
-                  <Typography variant={ 'h3' } noWrap>{ parseFloat(asset.vaultGrowth_yearly_eth.toFixed(2)).toLocaleString() }</Typography >
-                  <Typography className={ classes.symbol } variant={ 'h4' }>ETH</Typography>
-                  <Typography className={ classes.symbolAt } variant={ 'h4' }> @ </Typography>
-                  <Typography className={ classes.symbol } variant={ 'h4' }> { (this._getAPY(asset)/1).toFixed(2) }%</Typography>
-                </div>
-              }
-            </div>
-          }
-          <div className={classes.heading}>
-            <Typography variant={ 'h5' } className={ classes.gray }>Net worth</Typography>
-            { currency === 'USD' && <Typography variant={ 'h3' } noWrap>$ { parseFloat(asset.usdBalance ? (asset.usdBalance).toFixed(2) : '0.00').toLocaleString() }</Typography > }
-            { currency === 'ETH' &&
-              <div className={ classes.inline }>
-                <Typography variant={ 'h3' } noWrap>{ parseFloat(asset.ethBalance ? (asset.ethBalance).toFixed(2) : '0.00').toLocaleString() }</Typography >
-                <Typography className={ classes.symbol } variant={ 'h4' }>ETH</Typography>
-              </div>
-            }
-          </div>
-        </div>
-      </div>)
-    })
-  }
-
-  renderEarn = () => {
-    const { growth, currency } = this.state
-    const { assets } = this.state.dashboard
-    const { classes } = this.props
-
-    if(!assets || assets.length === 0) {
-      return null
-    }
-
-    return assets.map((asset) => {
-      return (<div className={ classes.vault } key={asset.id}>
-        <div className={ classes.assetSummary }>
-          <div className={classes.headingName}>
-            <div className={ classes.assetIcon }>
-              <img
-                alt=""
-                src={ require('../../assets/'+asset.symbol.replace(/\+/g, '')+'-logo.png') }
-                height={ '30px'}
-              />
-            </div>
-            <div>
-              <Typography variant={ 'h3' } noWrap>{ asset.name }</Typography>
-              <Typography variant={ 'h5' } noWrap className={ classes.gray }>{ asset.description }</Typography>
-            </div>
-          </div>
-          { growth === 0 &&
-            <div className={classes.heading}>
-              <Typography variant={ 'h5' } className={ classes.gray }>Daily Growth</Typography>
-              { currency === 'USD' &&
-                <div className={ classes.inline }>
-                  <Typography variant={ 'h3' } noWrap>$ { parseFloat(asset.earnGrowth_daily_usd.toFixed(2)).toLocaleString() }</Typography >
-                  <Typography className={ classes.symbolAt } variant={ 'h4' }> @ </Typography>
-                  <Typography className={ classes.symbol } variant={ 'h4' }> { (asset.maxApr ? (asset.maxApr*100/365).toFixed(2) : '0.00') }%</Typography>
-                </div>
-              }
-              { currency === 'ETH' &&
-                <div className={ classes.inline }>
-                  <Typography variant={ 'h3' } noWrap>{ parseFloat(asset.earnGrowth_daily_eth.toFixed(2)).toLocaleString() }</Typography >
-                  <Typography className={ classes.symbol } variant={ 'h4' }>ETH</Typography>
-                  <Typography className={ classes.symbolAt } variant={ 'h4' }> @ </Typography>
-                  <Typography className={ classes.symbol } variant={ 'h4' }> { (asset.maxApr ? (asset.maxApr*100/365).toFixed(2) : '0.00') }%</Typography>
-                </div>
-              }
-            </div>
-          }
-          { growth === 1 &&
-            <div className={classes.heading}>
-              <Typography variant={ 'h5' } className={ classes.gray }>Weekly Growth</Typography>
-              { currency === 'USD' &&
-                <div className={ classes.inline }>
-                  <Typography variant={ 'h3' } noWrap>$ { parseFloat(asset.earnGrowth_weekly_usd.toFixed(2)).toLocaleString() }</Typography >
-                  <Typography className={ classes.symbolAt } variant={ 'h4' }> @ </Typography>
-                  <Typography className={ classes.symbol } variant={ 'h4' }> { (asset.maxApr ? (asset.maxApr*100/52).toFixed(2) : '0.00') }%</Typography>
-                </div>
-              }
-              { currency === 'ETH' &&
-                <div className={ classes.inline }>
-                  <Typography variant={ 'h3' } noWrap>{ parseFloat(asset.earnGrowth_weekly_eth.toFixed(2)).toLocaleString() }</Typography >
-                  <Typography className={ classes.symbol } variant={ 'h4' }>ETH</Typography>
-                  <Typography className={ classes.symbolAt } variant={ 'h4' }> @ </Typography>
-                  <Typography className={ classes.symbol } variant={ 'h4' }> { (asset.maxApr ? (asset.maxApr*100/52).toFixed(2) : '0.00') }%</Typography>
-                </div>
-              }
-            </div>
-          }
-          { growth === 2 &&
-            <div className={classes.heading}>
-              <Typography variant={ 'h5' } className={ classes.gray }>Yearly Growth</Typography>
-              { currency === 'USD' &&
-                <div className={ classes.inline }>
-                  <Typography variant={ 'h3' } noWrap>$ { parseFloat(asset.earnGrowth_yearly_usd.toFixed(2)).toLocaleString() }</Typography >
-                  <Typography className={ classes.symbolAt } variant={ 'h4' }> @ </Typography>
-                  <Typography className={ classes.symbol } variant={ 'h4' }> { (asset.maxApr ? (asset.maxApr*100).toFixed(2) : '0.00') }%</Typography>
-                </div>
-              }
-              { currency === 'ETH' &&
-                <div className={ classes.inline }>
-                  <Typography variant={ 'h3' } noWrap>{ parseFloat(asset.earnGrowth_yearly_eth.toFixed(2)).toLocaleString() }</Typography >
-                  <Typography className={ classes.symbol } variant={ 'h4' }>ETH</Typography>
-                  <Typography className={ classes.symbolAt } variant={ 'h4' }> @ </Typography>
-                  <Typography className={ classes.symbol } variant={ 'h4' }> { (asset.maxApr ? (asset.maxApr*100).toFixed(2) : '0.00') }%</Typography>
-                </div>
-              }
-            </div>
-          }
-          <div className={classes.heading}>
-            <Typography variant={ 'h5' } className={ classes.gray }>Net worth</Typography>
-            { currency === 'USD' && <Typography variant={ 'h3' } noWrap>$ { parseFloat(asset.usdBalance ? (asset.usdBalance).toFixed(2) : '0.00').toLocaleString() }</Typography > }
-            { currency === 'ETH' &&
-              <div className={ classes.inline }>
-                <Typography variant={ 'h3' } noWrap>{ parseFloat(asset.ethBalance ? (asset.ethBalance).toFixed(2) : '0.00').toLocaleString() }</Typography >
-                <Typography className={ classes.symbol } variant={ 'h4' }>ETH</Typography>
-              </div>
-            }
-          </div>
-        </div>
-      </div>)
-    })
-  }
-
-  _getAPY = (asset) => {
-    const { basedOn } = this.state
-
-    if(asset && asset.stats) {
-      switch (basedOn) {
-        case 1:
-          return asset.stats.apyOneWeekSample
-        case 2:
-          return asset.stats.apyOneMonthSample
-        case 3:
-          return asset.stats.apyInceptionSample
-        default:
-          return asset.apy
-      }
-    } else if (asset.apy) {
-      return asset.apy
-    } else {
-      return '0.00'
-    }
-  }
-
+    );
 }
 
-  export default withRouter(withStyles(styles)(Dashboard));
+
+
+
+
+
+
+
+
+

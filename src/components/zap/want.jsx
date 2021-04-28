@@ -1,15 +1,15 @@
-import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
-import { withStyles } from '@material-ui/core/styles';
+import React,{Component} from "react";
+import {withRouter} from "react-router-dom";
+import {withStyles} from '@material-ui/core/styles';
 import {
   Typography,
   TextField,
   MenuItem,
   InputAdornment
 } from '@material-ui/core';
-import { colors } from '../../theme'
+import {colors} from '../../theme'
 
-import { withNamespaces } from 'react-i18next';
+import {withNamespaces} from 'react-i18next';
 // import {
 //   BALANCES_RETURNED
 // } from '../../constants'
@@ -19,7 +19,7 @@ import { withNamespaces } from 'react-i18next';
 // const dispatcher = Store.dispatcher
 // const store = Store.store
 
-const styles = theme => ({
+const styles=theme => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
@@ -30,11 +30,12 @@ const styles = theme => ({
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
+    background:colors.dafidark
   },
   inputCardHeading: {
     width: '100%',
     padding: '12px 0px 12px 20px',
-    color: colors.darkGray
+    color: colors.dafiGreen
   },
   assetSelectRoot: {
     borderRadius: '1.25rem'
@@ -42,6 +43,7 @@ const styles = theme => ({
   assetSelectMenu: {
     padding: '15px 15px 15px 20px',
     minWidth: '200px',
+    background: colors.dafilight
   },
   assetSelectIcon: {
     display: 'inline-block',
@@ -71,93 +73,93 @@ class Want extends Component {
   constructor(props) {
     super()
 
-    this.state = {
+    this.state={
       asset: '',
       assets: props.assets,
       curveContracts: props.curveContracts,
-      assetOptions: [...props.assets, ...props.curveContracts],
+      assetOptions: [...props.assets,...props.curveContracts],
       assetError: false
     }
   }
 
   componentWillReceiveProps(props) {
-    if(props.assets && props.curveContracts) {
+    if(props.assets&&props.curveContracts) {
 
-      const a = props.assets
-      const b = props.curveContracts
-      const assetOptions = [...a, ...b]
-      const _asset = this.state.asset?this.state.asset:''
+      const a=props.assets
+      const b=props.curveContracts
+      const assetOptions=[...a,...b]
+      const _asset=this.state.asset? this.state.asset:''
 
-      this.setState({ assetOptions: assetOptions, assets: props.assets, curveContracts: props.curveContracts, asset: _asset })
+      this.setState({assetOptions: assetOptions,assets: props.assets,curveContracts: props.curveContracts,asset: _asset})
     }
   }
 
   render() {
-    const { classes, sendAsset, t, bestPrice, sendAmount } = this.props;
+    const {classes,sendAsset,t,bestPrice,sendAmount}=this.props;
     const {
       assetOptions,
       asset
-    } = this.state;
+    }=this.state;
 
-    let amount = null
-    if(bestPrice && bestPrice.price > 0 && sendAmount && sendAmount > 0) {
-      amount = (parseFloat(bestPrice.price) * parseFloat(sendAmount)).toFixed(4)
+    let amount=null
+    if(bestPrice&&bestPrice.price>0&&sendAmount&&sendAmount>0) {
+      amount=(parseFloat(bestPrice.price)*parseFloat(sendAmount)).toFixed(4)
     }
 
     return (
-      <div className={ classes.root }>
-        <div className={ classes.inputCard }>
+      <div className={classes.root}>
+        <div className={classes.inputCard}>
 
-          <Typography variant='h3' className={ classes.inputCardHeading }>{ t("Zap.IWillReceive") }</Typography>
-          { (sendAsset && sendAsset.symbol === 'ETH') && this.renderAsset('DAI', amount) }
-          { (!sendAsset || sendAsset.symbol !== 'ETH') && this.renderAssetSelect('asset', asset, assetOptions, null, sendAsset) }
+          <Typography style={{fontFamily:'"RobotoC"'}} variant='h5' className={classes.inputCardHeading}>{t("Receive")}</Typography>
+          {(sendAsset&&sendAsset.symbol==='ETH')&&this.renderAsset('DAI',amount)}
+          {(!sendAsset||sendAsset.symbol!=='ETH')&&this.renderAssetSelect('asset',asset,assetOptions,null,sendAsset)}
         </div>
       </div>
     )
   };
 
-  onChange = (event, value) => {
-    let val = []
-    val[event.target.name] = event.target.value
+  onChange=(event,value) => {
+    let val=[]
+    val[event.target.name]=event.target.value
     this.setState(val)
 
-    let asset = this.state.assets.filter((asset) => { return asset.symbol === event.target.value})
+    let asset=this.state.assets.filter((asset) => {return asset.symbol===event.target.value})
 
-    if(asset.length > 0) {
-      asset = asset[0]
+    if(asset.length>0) {
+      asset=asset[0]
     } else {
-      asset = this.state.curveContracts.filter((contract) => { return contract.symbol === event.target.value })
+      asset=this.state.curveContracts.filter((contract) => {return contract.symbol===event.target.value})
 
-      if(asset.length > 0) {
-        asset = asset[0]
+      if(asset.length>0) {
+        asset=asset[0]
       } else {
-        asset = null
+        asset=null
       }
     }
 
-    var that = this;
+    var that=this;
     setTimeout(() => {
       that.props.setReceiveAsset(asset)
     })
   };
 
-  renderAsset = (id, amount) => {
+  renderAsset=(id,amount) => {
 
-    const { classes } = this.props
+    const {classes}=this.props
 
     return (
       <TextField
-        id={ id }
-        name={ id }
-        value={ amount ? (amount + ' ' + id) : id }
+        id={id}
+        name={id}
+        value={amount? (amount+' '+id):id}
         variant="outlined"
         disabled
         InputProps={{
-          startAdornment: <InputAdornment position="start" className={ classes.inputAdornment }>
-            <div className={ classes.assetSelectIcon }>
+          startAdornment: <InputAdornment position="start" className={classes.inputAdornment}>
+            <div className={classes.assetSelectIcon}>
               <img
                 alt=""
-                src={ require('../../assets/'+(['crvV1', 'crvV2', 'crvV3', 'crvV3', 'crv'].includes(id) ? 'CRV' : id)+'-logo.png') }
+                src={require('../../assets/'+(['crvV1','crvV2','crvV3','crvV3','crv'].includes(id)? 'CRV':id)+'-logo.png')}
                 height="30px"
               />
             </div>
@@ -168,79 +170,79 @@ class Want extends Component {
 
   }
 
-  renderAssetSelect = (id, value, options, error, sendAsset) => {
+  renderAssetSelect=(id,value,options,error,sendAsset) => {
 
-    const { loading } = this.props
+    const {loading}=this.props
 
     return (
       <TextField
-        id={ id }
-        name={ id }
+        id={id}
+        name={id}
         select
-        value={ value }
-        onChange={ this.onChange }
+        value={value}
+        onChange={this.onChange}
         SelectProps={{
           native: false,
         }}
         variant="outlined"
-        disabled={ loading }
+        disabled={loading}
       >
-        { options ? options.filter((option) => {
-            if(sendAsset && ['crvV1', 'crvV2'].includes(sendAsset.id)) {
-              return ['crvV3'].includes(option.id) === true
-            }
-            if(sendAsset && ['crvV3'].includes(sendAsset.id)) {
-              return ['crvV1', 'crvV2', 'crvV3', 'ETHv1', 'BUSDv3'].includes(option.id) === false
-            }
-            if(sendAsset && ['crvV4'].includes(sendAsset.id)) {
-              return ['crvV1', 'crvV2', 'crvV3', 'crvV4', 'ETHv1', 'TUSDv2'].includes(option.id) === false
-            }
-            if(sendAsset && ['BUSDv3'].includes(sendAsset.id)) {
-              return ['crvV4'].includes(option.id) === true
-            }
-            if(sendAsset && ['TUSDv2'].includes(sendAsset.id)) {
-              return ['crvV3'].includes(option.id) === true
-            }
+        { options? options.filter((option) => {
+          if(sendAsset&&['crvV1','crvV2'].includes(sendAsset.id)) {
+            return ['crvV3'].includes(option.id)===true
+          }
+          if(sendAsset&&['crvV3'].includes(sendAsset.id)) {
+            return ['crvV1','crvV2','crvV3','ETHv1','BUSDv3'].includes(option.id)===false
+          }
+          if(sendAsset&&['crvV4'].includes(sendAsset.id)) {
+            return ['crvV1','crvV2','crvV3','crvV4','ETHv1','TUSDv2'].includes(option.id)===false
+          }
+          if(sendAsset&&['BUSDv3'].includes(sendAsset.id)) {
+            return ['crvV4'].includes(option.id)===true
+          }
+          if(sendAsset&&['TUSDv2'].includes(sendAsset.id)) {
+            return ['crvV3'].includes(option.id)===true
+          }
 
-            return ['crvV4', 'crvV3'].includes(option.id) === true
-          }).map(this.renderAssetOption) : null }
+          return ['crvV4','crvV3'].includes(option.id)===true
+        }).map(this.renderAssetOption):null}
       </TextField>
     )
   };
 
-  renderAssetOption = (option) => {
+  renderAssetOption=(option) => {
 
-    const { classes, sendAsset } = this.props
+    const {classes,sendAsset}=this.props
     return (
-      <MenuItem key={ option.symbol } value={ option.symbol } className={ classes.assetSelectMenu }>
+      <MenuItem key={option.symbol} value={option.symbol} className={classes.assetSelectMenu}>
         <React.Fragment>
-          <div className={ classes.assetSelectIcon }>
+          <div className={classes.assetSelectIcon}>
             <img
               alt=""
-              src={ require('../../assets/'+(['crvV1', 'crvV2', 'crvV3', 'crvV4'].includes(option.id) ? 'CRV' : option.symbol)+'-logo.png') }
+              src={require('../../assets/'+(['crvV1','crvV2','crvV3','crvV4'].includes(option.id)? 'CRV':option.symbol)+'-logo.png')}
               height="30px"
             />
           </div>
-          <div className={ classes.assetSelectIconName }>
-            <Typography variant='h4'>{ option.symbol }</Typography>
+          <div className={classes.assetSelectIconName}>
+            <Typography variant='h4'>{option.symbol}</Typography>
           </div>
           {
-            (sendAsset && sendAsset.id === 'crvV3' && option.id === 'crvV4') &&(
+            (sendAsset&&sendAsset.id==='crvV3'&&option.id==='crvV4')&&(
               <React.Fragment>
-              <div className={ classes.assetSelectPlus }>
-                <Typography variant='h4'>{ '+' }</Typography>
-              </div>
-              <div className={ classes.assetSelectIcon }>
-                <img
-                  alt=""
-                  src={ require('../../assets/TUSD-logo.png') }
-                  height="30px"
-                />
-              </div>
-              <div className={ classes.assetSelectIconName }>
-                <Typography variant='h4'>{ 'TUSD' }</Typography>
-              </div>
-            </React.Fragment>)
+                <div className={classes.assetSelectPlus}>
+                  <Typography variant='h4'>{'+'}</Typography>
+                </div>
+                <div className={classes.assetSelectIcon}>
+                  <img
+                    alt=""
+                    src={require('../../assets/TUSD-logo.png')}
+                    height="30px"
+                  />
+                </div>
+                <div className={classes.assetSelectIconName}>
+                  <Typography variant='h4'>{'TUSD'}</Typography>
+                </div>
+              </React.Fragment>)
           }
         </React.Fragment>
       </MenuItem>

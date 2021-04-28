@@ -73,7 +73,7 @@ class Want extends Component {
     return (
       <div className={ classes.root }>
         <div className={ classes.inputCard }>
-          <Typography variant='h3' className={ classes.inputCardHeading }>I will receive</Typography>
+          <Typography variant='h4' className={ classes.inputCardHeading }>I will receive</Typography>
           { (!receiveAsset) && this.renderAsset('') }
           { (receiveAsset) && this.renderAsset('DAI') }
         </div>
