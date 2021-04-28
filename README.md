@@ -1,4 +1,5 @@
 # Da-Fi 
+# dafi-entropy
 #
 # hat tip yearn.finance
 
