@@ -56,7 +56,7 @@ export const trezor=new TrezorConnector({
 export const frame=new FrameConnector({supportedChainIds: [1]});
 
 export const fortmatic=new FortmaticConnector({
-  apiKey: "pk_live_81C05C9F97967E8E",
+  apiKey: "pk_live_ABD29B8F212A94C2",
   chainId: 1
 });
 

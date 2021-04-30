@@ -82,7 +82,7 @@ const useStyles=makeStyles((theme) => ({
         persistentBehavior: 'fit'
     },
     spacer: {
-        width: 100,
+        width: '2em',
         flex: 1,
         justifyContent: 'flex-end'
     },
@@ -148,7 +148,7 @@ export default function Dashboard() {
                         DA-FI DAO
           </Typography>
 
-                    <div className={classes.spacer} style={{width: 75}} />
+                    <div className={classes.spacer} />
                     <div>
 
                         <SUBHEADER_1 style={{flex: 1,justifyContent: 'flex-end'}} />

@@ -19,12 +19,9 @@ const store=Store.store
 
 const useStyles=theme => ({
   root: {
-    verticalAlign: 'top',
     width: '100%',
-    display: 'flex',
-    [theme.breakpoints.down('sm')]: {
-      marginBottom: '40px'
-    }
+    display: 'flex'
+
   },
   Subheader_1: {
     background: 'rgba(26,26,26,0)',
@@ -78,12 +75,10 @@ const useStyles=theme => ({
 
     justifyContent: 'flex-end',
     flex: 1,
-    [breakpoints.down('sm')]: {
-      flex: '0'
-    }
+
   },
   walletAddress: {
-    padding: '8px',
+    padding: '5px',
     border: '4px solid '+colors.dafiPrimaryhex,
     fontFamily: 'Eczar',
     fontWeight: '600',
@@ -97,8 +92,6 @@ const useStyles=theme => ({
       color: colors.dafiDefaulthex,
       [theme.breakpoints.down('sm')]: {
         display: 'flex',
-        position: 'absolute',
-        transform: 'translate(0, 200%)',
         border: "2px solid "+colors.dafiGreen,
         background: colors.dafilight
       }
