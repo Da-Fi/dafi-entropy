@@ -191,8 +191,7 @@ class SUBHEADER_1 extends Component {
           }
           {!address&&
             <Typography variant={'body2'} className={classes.walletAddress} noWrap onClick={this.addressClicked} >
-              Connect your wallet
-              </Typography>
+              Connect </Typography>
           }
 
 
