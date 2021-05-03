@@ -11,17 +11,16 @@ import interestTheme from './theme'
 import './i18n';
 
 import Dashboard from './components/dashboard/dashboard';
-
+import Entropy from './components/vault/vault';
 import APR from './components/apr';
 import Streamgen from './components/streamgen';
 import Manage from './components/manage';
 import Performance from './components/performance';
 import ZeroSwap from './components/zap';
 import IDai from './components/idai';
-import Entropy from './components/vault';
 import Experimental from './components/experimental';
-import LendBlock from './components/lendblock';
 import NewCover from './components/cover/newCover';
+import EntropyXgrid from './components/incubator/entropyxgrid';
 import SEO from './components/seo';
 import {injected} from "./stores/connectors";
 
@@ -122,9 +121,9 @@ class App extends Component {
                 <Dashboard />
                 <Experimental />
               </Route>
-              <Route path="/lendblock">
+              <Route path="/Incubator">
                 <Dashboard />
-                <LendBlock />
+                <EntropyXgrid />
               </Route>
               <Route path="/cover">
                 <Dashboard />

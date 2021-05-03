@@ -34,12 +34,20 @@ const store=Store.store
 const styles=theme => ({
   root: {
     flex: 1,
+    paddingLeft: '64px',
     display: 'flex',
     flexDirection: 'column',
-    maxWidth: '100%',
-    width: '100%',
+    maxWidth: '97%',
+    minWidth: '0%',
     justifyContent: 'flex-start',
-    alignItems: 'center'
+    alignItems: 'center',
+    [theme.breakpoints.down('xl')]: {
+      paddingLeft: '64px',
+      flexGrow: 1,
+      flexShrink: 1,
+      maxWidth: '1200px',
+      minWidth: '0%',
+    },
   },
   investedContainerLoggedOut: {
     display: 'flex',
@@ -47,10 +55,10 @@ const styles=theme => ({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    minWidth: '100%',
+    minWidth: '0%',
     marginTop: '40px',
     [theme.breakpoints.up('md')]: {
-      minWidth: '900px',
+      minWidth: '0px',
     }
   },
   investedContainer: {
@@ -60,10 +68,10 @@ const styles=theme => ({
     backgroundImage: 'linear-gradient(180deg, rgba(54,54,64,1) 0%, rgba(44,59,87,1) 25%, rgba(75,91,87,1) 50%, rgba(33,38,38,1) 100%)',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    minWidth: '100%',
+    minWidth: '0%',
     marginTop: '40px',
     [theme.breakpoints.up('md')]: {
-      minWidth: '900px',
+      minWidth: '0px',
     }
   },
   balancesContainer: {
@@ -143,23 +151,26 @@ const styles=theme => ({
     display: 'none',
     paddingTop: '12px',
     flex: 1,
-    flexShrink: 0,
+    flexShrink: 1,
+    justifyContent: 'flex-start',
     [theme.breakpoints.up('sm')]: {
       paddingTop: '5px',
-      display: 'block'
+      display: 'flex',
     }
   },
   headingName: {
     paddingTop: '5px',
+    paddingRight: '5px',
     fontFamily: '"RobotoC"',
     flex: 1,
-    flexShrink: 0,
+    flexShrink: 1,
     display: 'flex',
     alignItems: 'center',
-    minWidth: '100%',
-    [theme.breakpoints.up('sm')]: {
-      minWidth: 'auto',
-    }
+    minWidth: '0%',
+    [theme.breakpoints.up('lg')]: {
+      display: 'block'
+
+    },
   },
   buttonText: {
     fontWeight: '700',
@@ -171,7 +182,7 @@ const styles=theme => ({
     background: 'rgba(26,26,26,0)',
     alignItems: 'center',
     flex: 1,
-    flexWrap: 'wrap',
+    flexWrap: 'nowrap',
     [theme.breakpoints.up('sm')]: {
       flexWrap: 'nowrap'
     }
@@ -206,7 +217,7 @@ const styles=theme => ({
     borderRadius: '50px',
     border: '3px solid '+colors.dafiGreen,
     alignItems: 'center',
-    maxWidth: 'calc(100vw - 24px)',
+    maxWidth: '100%',
     width: '100%',
     [theme.breakpoints.up('md')]: {
       width: '100%',
@@ -218,8 +229,9 @@ const styles=theme => ({
     height: '40px'
   },
   expansionPanel: {
-    maxWidth: 'calc(100vw - 24px)',
-    width: '100%',
+    maxWidth: '97%',
+    minWidth: '0%',
+    width: '97%',
     backgroundImage: 'linear-gradient(180deg, rgba(54,54,64,1) 0%, rgba(44,59,87,1) 25%, rgba(75,91,87,1) 50%, rgba(33,38,38,1) 100%)',
     border: '16px solid '+colors.dafident,
     borderRadius: '16px'
@@ -384,7 +396,7 @@ class Streamgen extends Component {
           <div className={classes.investedContainerLoggedOut}>
             <Typography variant={'h5'} style={{fontFamily: '"RobotoC"'}} className={classes.disaclaimer}>Da-Fi is in beta, use at your own risk.</Typography>
             <div className={classes.introCenter}>
-              <Typography variant={'h4'} style={{fontFamily: '"RobotoC"'}}>Connect Wallet</Typography>
+              <Typography variant={'h5'} style={{fontFamily: '"RobotoC"'}}>Connect Wallet</Typography>
             </div>
           </div>
           { snackbarMessage&&this.renderSnackbar()}
@@ -461,29 +473,29 @@ class Streamgen extends Component {
                     />
                   </div>
                   <div>
-                    <Typography variant={'h4'} style={{fontFamily: '"RobotoC"'}}>{asset.name}</Typography>
-                    <Typography variant={'h5'} style={{fontFamily: '"RobotoC"'}} className={classes.grey}>{asset.description}</Typography>
+                    <Typography variant={'h5'} style={{fontFamily: '"RobotoC"'}}>{asset.name}</Typography>
+
                   </div>
                 </div>
                 <div className={classes.heading}>
-                  <Typography variant={'h4'} style={{fontFamily: '"Eczar"',color: colors.dafiheat}}>
+                  <Typography variant={'h5'} style={{fontFamily: '"Eczar"',color: colors.dafiheat}}>
                     {
                       asset.maxApr
                         ? (asset.maxApr*100).toFixed(4)+' %'
                         :'0.0000 %'
                     }
                   </Typography>
-                  <Typography variant={'h5'} style={{fontFamily: '"Eczar"'}} className={classes.grey}>{t('InvestSimple.InterestRate')}</Typography>
+                  <Typography variant={'h5'} style={{fontFamily: '"Eczar"'}} className={classes.grey}>{t('')}</Typography>
                 </div>
                 <div className={classes.heading}>
-                  <Typography style={{fontFamily: '"Eczar"',color: colors.dafiheat}} variant={'h4'}>
+                  <Typography style={{fontFamily: '"Eczar"',color: colors.dafiheat}} variant={'h5'}>
                     {
                       asset.balance
                         ? (asset.balance).toFixed(4)+' '+(asset.tokenSymbol? asset.tokenSymbol:asset.symbol)
                         :'0.0000 '+(asset.tokenSymbol? asset.tokenSymbol:asset.symbol)
                     }
                   </Typography>
-                  <Typography variant={'h5'} style={{fontFamily: '"RobotoC"'}} className={classes.grey}>{t('InvestSimple.AvailableBalance')}</Typography>
+                  <Typography variant={'h5'} style={{fontFamily: '"RobotoC"'}} className={classes.grey}>{t('')}</Typography>
                 </div>
               </div>
 
@@ -525,29 +537,29 @@ class Streamgen extends Component {
                     />
                   </div>
                   <div>
-                    <Typography variant={'h4'} style={{fontFamily: '"RobotoC"'}}>{asset.name}</Typography>
+                    <Typography variant={'h5'} style={{fontFamily: '"RobotoC"'}}>{asset.name}</Typography>
                     <Typography variant={'h5'} style={{fontFamily: '"RobotoC"'}} className={classes.grey}>{asset.description}</Typography>
                   </div>
                 </div>
                 <div className={classes.heading}>
-                  <Typography style={{fontFamily: '"Eczar"',color: colors.dafiheat}} variant={'h4'}>
+                  <Typography style={{fontFamily: '"Eczar"',color: colors.dafiheat}} variant={'h5'}>
                     {
                       asset.maxApr
                         ? (asset.maxApr*100).toFixed(4)+' %'
                         :'0.0000 %'
                     }
                   </Typography>
-                  <Typography style={{fontFamily: '"Eczar"'}} variant={'h5'} className={classes.grey}>{t('InvestSimple.InterestRate')}</Typography>
+                  <Typography style={{fontFamily: '"Eczar"'}} variant={'h5'} className={classes.grey}>{t('')}</Typography>
                 </div>
                 <div className={classes.heading}>
-                  <Typography style={{fontFamily: '"Eczar"',color: colors.dafiPrimaryhex}} variant={'h4'}>
+                  <Typography style={{fontFamily: '"Eczar"',color: colors.dafiPrimaryhex}} variant={'h5'}>
                     {
                       asset.balance
                         ? (asset.balance).toFixed(4)+' '+(asset.tokenSymbol? asset.tokenSymbol:asset.symbol)
                         :'0.0000 '+(asset.tokenSymbol? asset.tokenSymbol:asset.symbol)
                     }
                   </Typography>
-                  <Typography style={{fontFamily: '"Eczar"'}} variant={'h5'} className={classes.grey}>{t('InvestSimple.AvailableBalance')}</Typography>
+                  <Typography style={{fontFamily: '"Eczar"'}} variant={'h5'} className={classes.grey}>{t('')}</Typography>
                 </div>
               </div>
             </Fade>
@@ -588,19 +600,19 @@ class Streamgen extends Component {
                   />
                 </div>
                 <div>
-                  <Typography style={{fontFamily: '"RobotoC"',color: colors.dafiPrimaryhex}} variant={'h4'}>{asset.name}</Typography>
-                  <Typography style={{fontFamily: '"RobotoC"'}} variant={'h5'} className={classes.grey}>{asset.description}</Typography>
+                  <Typography style={{fontFamily: '"RobotoC"',color: colors.dafiPrimaryhex}} variant={'h5'}>{asset.name}</Typography>
+                  <Typography style={{fontFamily: '"RobotoC"'}} variant={'body2'} className={classes.grey}>{asset.description}</Typography>
                 </div>
               </div>
               <div className={classes.heading}>
-                <Typography style={{fontFamily: '"Eczar"',color: colors.dafiheat}} variant={'h4'}>
+                <Typography style={{fontFamily: '"Eczar"',color: colors.dafiheat}} variant={'h5'}>
                   {
                     asset.maxApr
                       ? (asset.maxApr*100).toFixed(4)+' %'
                       :'0.0000 %'
                   }
                 </Typography>
-                <Typography style={{fontFamily: '"Eczar"'}} variant={'h5'} className={classes.heat}>{t('InvestSimple.InterestRate')}</Typography>
+                <Typography style={{fontFamily: '"Eczar"'}} variant={'h5'} className={classes.heat}>{t('')}</Typography>
               </div>
               <div className={classes.heading}>
                 <Typography style={{fontFamily: '"Eczar"'}} variant={'h5'}>
@@ -610,7 +622,7 @@ class Streamgen extends Component {
                       :'0.0000 '+(asset.tokenSymbol? asset.tokenSymbol:asset.symbol)
                   }
                 </Typography>
-                <Typography style={{fontFamily: '"Eczar"'}} variant={'h5'} className={classes.heat}>{t('InvestSimple.AvailableBalance')}</Typography>
+                <Typography style={{fontFamily: '"Eczar"'}} variant={'h5'} className={classes.heat}>{t('')}</Typography>
               </div>
             </div>
           </AccordionSummary>

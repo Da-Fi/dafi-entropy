@@ -1,6 +1,7 @@
 import React,{Component} from "react";
 import {withRouter} from "react-router-dom";
 import {withStyles} from '@material-ui/core/styles';
+
 import {
   Typography,
   TextField,
@@ -29,6 +30,22 @@ const dispatcher=Store.dispatcher
 const store=Store.store
 
 const styles=theme => ({
+  root: {
+
+    flexGrow: 1,
+    [theme.breakpoints.down('xl')]: {
+      maxWidth: '1200px',
+      minWidth: '0%',
+      flexGrow: 1,
+      flexShrink: 1,
+
+    }
+  },
+  paper: {
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  },
   value: {
     cursor: 'pointer',
     color: colors.contrastText
@@ -42,7 +59,8 @@ const styles=theme => ({
 
   },
   balances: {
-    width: '100%',
+    maxWidth: '97%',
+    minWidth: '0%',
     textAlign: 'right',
     paddingRight: '24px',
     cursor: 'pointer'
@@ -52,7 +70,9 @@ const styles=theme => ({
     display: 'flex',
     flex: '1',
     flexDirection: 'column',
-    width: '100%',
+    maxWidth: '97%',
+    minWidth: '0',
+    width: 'fit',
     background: 'rgba(26,26,26,0)',
 
   },
@@ -60,12 +80,18 @@ const styles=theme => ({
     paddingBottom: '12px',
     background: colors.dafilight, ///surrounding area asset input
     display: 'flex',
+    flexDirection: 'column',
+    maxwidth: '97%',
+    minWidth: '0',
     flex: '1',
     padding: '24px',
-    border: '4px solid '+colors.dafiGreen,
-    borderRadius: '24px',
-    [theme.breakpoints.down('sm')]: {
-      flexDirection: 'column'
+    width: 'fit',
+
+    [theme.breakpoints.down('xl')]: {
+      flexDirection: 'column',
+      width: 'auto',
+      flexGrow: 1,
+      flexShrink: 1
     }
   },
   title: {
@@ -73,9 +99,9 @@ const styles=theme => ({
   },
   actionButton: {
 
-    height: '47px',
+    height: '32px',
     width: 'fit',
-    fontSize: '0.875rem',
+    fontSize: '0.625rem',
     border: '2px solid '+colors.dafiDefaulthex,
     padding: '6px 12px',
     variant: 'contained',
@@ -120,10 +146,12 @@ const styles=theme => ({
   sepperator: {
     borderBottom: '1px solid '+colors.purple,
     margin: '24px',
-    [theme.breakpoints.up('sm')]: {
-      width: '40px',
-      borderBottom: 'none',
-      margin: '0px'
+    [theme.breakpoints.down('xl')]: {
+      maxWidth: '100%',
+      minWidth: '0%',
+      borderBottom: '1px solid'+colors.purple,
+      margin: '24px'
+
     }
   },
   scaleContainer: {
@@ -144,8 +172,8 @@ const styles=theme => ({
     color: "#00f"
   },
   headingContainer: {
-    borderRadius: '50px',
-    width: '100%',
+    borderRadius: '24px',
+    width: '97%',
     display: 'flex',
     [theme.breakpoints.up('sm')]: {
       display: 'none'
@@ -165,24 +193,26 @@ const styles=theme => ({
   buttons: {
 
     display: 'flex',
-    width: '100%'
+    width: '90%'
   },
   disabledContainer: {
-    width: '100%',
+    width: '97%',
     paddingTop: '12px',
     textAlign: 'center'
   },
   assetSummary: {
     display: 'flex',
-    alignItems: 'center',
     flex: 1,
-    padding: '12px 24px',
+    maxWidth: '97%',
+    width: '75%',
+    paddingBottom: '12px',
     background: colors.dafilight,
     border: '4px solid '+colors.dafiGreen, //toplevel border
-    borderRadius: '24px',
-    width: '100%',
-    marginBottom: '24px',
-    flexWrap: 'wrap'
+    borderRadius: '16px',
+    padding: '24px',
+    [theme.breakpoints.down('xl')]: {
+      flexDirection: 'column'
+    },
   },
   headingEarning: {
     flex: 1,
@@ -206,7 +236,7 @@ const styles=theme => ({
     borderBottom: '1px solid '+colors.dafiGreen
   },
   assetSummarySectionheader: {
-    width: '83px'
+    width: '97%'
   },
   link: {
     cursor: 'pointer',
@@ -268,74 +298,12 @@ class Asset extends Component {
     }=this.state
 
     return (
-      <div className={classes.vaultContainer}>
-        <div className={classes.assetSummary}>
-          <div className={classes.assetSummarySectionheader}>
-            <Typography variant={'h4'} style={{fontFamily: '"RobotoC"',color: colors.darkBlack}} noWrap>Strat</Typography>
-          </div>
-          <div className={classes.headingStrategy}>
-            <div>
-              <Typography variant={'h4'} style={{fontFamily: '"RobotoC"'}} className={classes.grey}>Vault</Typography>
-              <Typography variant={'body1'} style={{fontFamily: '"RobotoC"'}} noWrap>{asset.strategyName}</Typography>
-            </div>
-          </div>
-          <div className={classes.headingEarning}>
-            <Typography variant={'h4'} style={{fontFamily: '"RobotoC"',color: colors.darkBlack}} >YoY %</Typography>
-            <div className={classes.flexy}>
-              <Typography style={{fontFamily: '"Eczar"'}} variant={'body1'} noWrap>{(this._getAPY(asset)/1).toFixed(2)}% </Typography>
-            </div>
-          </div>
-          <div className={classes.headingEarning}>
-            <Typography variant={'h4'} style={{fontFamily: '"Eczar"'}} className={classes.grey}>MoM %</Typography>
-            <div className={classes.flexy}>
-              <Typography style={{fontFamily: '"Eczar"'}} variant={'body1'} noWrap>{(this._getAPY(asset)/12).toFixed(2)}% </Typography>
-            </div>
-          </div>
-          <div className={classes.headingEarning}>
-            <Typography variant={'h4'} style={{fontFamily: '"RobotoC"'}} className={classes.grey}>WoW %</Typography>
-            <div className={classes.flexy}>
-              <Typography variant={'body1'} style={{fontFamily: '"Eczar"'}} noWrap>{(this._getAPY(asset)/52).toFixed(2)}% </Typography>
-            </div>
-          </div>
-          <div className={classes.fullWidth}></div>
-          <div className={classes.assetSummarySectionheader}>
-            <Typography variant={'h4'} style={{fontFamily: '"RobotoC"'}} noWrap >Stats</Typography>
-          </div>
-          <div className={classes.headingEarning}>
-            <Typography style={{fontFamily: '"RobotoC"'}} variant={'h4'} className={classes.grey}>Net</Typography>
-            <div className={classes.flexy}>
-              <Typography variant={'body1'} style={{fontFamily: '"Eczar"'}} noWrap>{asset.addressStatistics? (asset.addressStatistics.earnings/10**asset.decimals).toFixed(2):'0.00'} {asset.symbol}</Typography>
-            </div>
-          </div>
-          <div className={classes.headingEarning}>
-            <Typography variant={'h4'} style={{fontFamily: '"RobotoC"'}} className={classes.grey}>DEP</Typography>
-            <div className={classes.flexy}>
-              <Typography variant={'body1'} style={{fontFamily: '"Eczar"'}} noWrap>{asset.addressStatistics? (asset.addressStatistics.totalDeposits/10**asset.decimals).toFixed(2):'0.00'} </Typography>
-            </div>
-          </div>
-          <div className={classes.headingEarning}>
-            <Typography variant={'h4'} style={{fontFamily: '"RobotoC"'}} className={classes.grey}>WTH</Typography>
-            <div className={classes.flexy}>
-              <Typography variant={'body1'} style={{fontFamily: '"Eczar"'}} noWrap>{asset.addressStatistics? (asset.addressStatistics.totalWithdrawals/10**asset.decimals).toFixed(2):'0.00'} </Typography>
-            </div>
-          </div>
-          <div className={classes.headingEarning}>
-            <Typography variant={'h4'} style={{fontFamily: '"RobotoC"'}} className={classes.grey}>X-In</Typography>
-            <div className={classes.flexy}>
-              <Typography variant={'body1'} style={{fontFamily: '"Eczar"'}} noWrap>{asset.addressStatistics? (asset.addressStatistics.totalTransferredIn/10**asset.decimals).toFixed(2):'0.00'} </Typography>
-            </div>
-          </div>
-          <div className={classes.headingEarning}>
-            <Typography variant={'h4'} style={{fontFamily: '"RobotoC"'}} className={classes.grey}>X-Out</Typography>
-            <div className={classes.flexy}>
-              <Typography style={{fontFamily: '"Eczar"'}} variant={'body1'} noWrap>{asset.addressStatistics? (asset.addressStatistics.totalTransferredOut/10**asset.decimals).toFixed(2):'0.00'} </Typography>
-            </div>
-          </div>
-        </div>
+      <div className={classes.root}>
+
         <div className={classes.actionsContainer} style={{background: colors.dafifmj}}>
           <div className={classes.tradeContainer}>
             <div className={classes.balances}>
-              <Typography variant='h5' style={{fontFamily: '"Eczar"'}} onClick={() => {this.setAmount(100)}} className={classes.value} noWrap>{'Wallet '+(asset.balance? (Math.floor(asset.balance*10000)/10000).toFixed(4):'0.0000')} {asset.tokenSymbol? asset.tokenSymbol:asset.symbol}</Typography>
+              <Typography variant='body1' style={{fontFamily: '"Eczar"'}} onClick={() => {this.setAmount(100)}} className={classes.value} noWrap>{'Wallet '+(asset.balance? (Math.floor(asset.balance*10000)/10000).toFixed(4):'0.0000')} {asset.tokenSymbol? asset.tokenSymbol:asset.symbol}</Typography>
             </div>
             <TextField
               fullWidth
@@ -356,7 +324,7 @@ class Asset extends Component {
                 disabled={loading}
                 color="primary"
                 onClick={() => {this.setAmount(25)}}>
-                <Typography style={{fontFamily: '"Eczar"'}} variant={'h5'}>25%</Typography>
+                <Typography style={{fontFamily: '"Eczar"'}} variant={'body1'}>25%</Typography>
               </Button>
               <Button
                 className={classes.scale}
@@ -364,7 +332,7 @@ class Asset extends Component {
                 disabled={loading}
                 color="primary"
                 onClick={() => {this.setAmount(50)}}>
-                <Typography style={{fontFamily: '"Eczar"'}} variant={'h5'}>50%</Typography>
+                <Typography style={{fontFamily: '"Eczar"'}} variant={'body1'}>50%</Typography>
               </Button>
               <Button
                 className={classes.scale}
@@ -372,7 +340,7 @@ class Asset extends Component {
                 disabled={loading}
                 color="primary"
                 onClick={() => {this.setAmount(75)}}>
-                <Typography style={{fontFamily: '"Eczar"'}} variant={'h5'}>75%</Typography>
+                <Typography style={{fontFamily: '"Eczar"'}} variant={'body1'}>75%</Typography>
               </Button>
               <Button
                 className={classes.scale}
@@ -380,7 +348,7 @@ class Asset extends Component {
                 disabled={loading}
                 color="primary"
                 onClick={() => {this.setAmount(100)}}>
-                <Typography style={{fontFamily: '"Eczar"'}} variant={'h5'}>100%</Typography>
+                <Typography style={{fontFamily: '"Eczar"'}} variant={'body1'}>100%</Typography>
               </Button>
             </div>
             <div className={classes.buttons}>
@@ -393,7 +361,7 @@ class Asset extends Component {
                   onClick={this.onDeposit}
                   fullWidth
                 >
-                  <Typography className={classes.buttonText} style={{fontFamily: '"RobotoC"'}} variant={'h5'} color={asset.disabled? '':'secondary'}>Deposit</Typography>
+                  <Typography className={classes.buttonText} style={{fontFamily: '"RobotoC"'}} variant={'body1'} color={asset.disabled? '':'secondary'}>Deposit</Typography>
                 </Button>
               }
               {asset.depositAll===true&&
@@ -405,20 +373,20 @@ class Asset extends Component {
                   onClick={this.onDepositAll}
                   fullWidth
                 >
-                  <Typography className={classes.buttonText} style={{fontFamily: '"RobotoC"'}} variant={'h5'} color={asset.disabled? '':'secondary'}>Deposit All</Typography>
+                  <Typography className={classes.buttonText} style={{fontFamily: '"RobotoC"'}} variant={'body1'} color={asset.disabled? '':'secondary'}>Deposit All</Typography>
                 </Button>
               }
             </div>
             {asset.depositDisabled===true&&
               <div className={classes.disabledContainer}>
-                <Typography variant='h5' style={{fontFamily: '"RobotoC"'}} >Deposits are currently disabled for this vault</Typography>
+                <Typography variant='body1' style={{fontFamily: '"RobotoC"'}} >Deposits are currently disabled for this vault</Typography>
               </div>
             }
           </div>
           <div className={classes.sepperator}></div>
           <div className={classes.tradeContainer}>
             <div className={classes.balances}>
-              <Typography variant='h5' style={{fontFamily: '"Eczar"'}} onClick={() => {this.setRedeemAmount(100)}} className={classes.value} noWrap>{(asset.vaultBalance? (Math.floor(asset.vaultBalance*asset.pricePerFullShare*10000)/10000).toFixed(4):'0.0000')} {asset.symbol} ({asset.vaultBalance? (Math.floor(asset.vaultBalance*10000)/10000).toFixed(4):'0.0000'} {asset.vaultSymbol}) </Typography>
+              <Typography variant='body1' style={{fontFamily: '"Eczar"'}} onClick={() => {this.setRedeemAmount(100)}} className={classes.value} noWrap>{(asset.vaultBalance? (Math.floor(asset.vaultBalance*asset.pricePerFullShare*10000)/10000).toFixed(4):'0.0000')} {asset.symbol} ({asset.vaultBalance? (Math.floor(asset.vaultBalance*10000)/10000).toFixed(4):'0.0000'} {asset.vaultSymbol}) </Typography>
             </div>
             <TextField
               fullWidth
@@ -439,7 +407,7 @@ class Asset extends Component {
                 disabled={loading}
                 color="primary"
                 onClick={() => {this.setRedeemAmount(25)}}>
-                <Typography style={{fontFamily: '"Eczar"'}} variant={'h5'}>25%</Typography>
+                <Typography style={{fontFamily: '"Eczar"'}} variant={'body1'}>25%</Typography>
               </Button>
               <Button
                 className={classes.scale}
@@ -447,7 +415,7 @@ class Asset extends Component {
                 disabled={loading}
                 color="primary"
                 onClick={() => {this.setRedeemAmount(50)}}>
-                <Typography style={{fontFamily: '"Eczar"'}} variant={'h5'}>50%</Typography>
+                <Typography style={{fontFamily: '"Eczar"'}} variant={'body1'}>50%</Typography>
               </Button>
               <Button
                 className={classes.scale}
@@ -455,7 +423,7 @@ class Asset extends Component {
                 disabled={loading}
                 color="primary"
                 onClick={() => {this.setRedeemAmount(75)}}>
-                <Typography style={{fontFamily: '"Eczar"'}} variant={'h5'}>75%</Typography>
+                <Typography style={{fontFamily: '"Eczar"'}} variant={'body1'}>75%</Typography>
               </Button>
               <Button
                 className={classes.scale}
@@ -463,7 +431,7 @@ class Asset extends Component {
                 disabled={loading}
                 color="primary"
                 onClick={() => {this.setRedeemAmount(100)}}>
-                <Typography style={{fontFamily: '"Eczar"'}} variant={'h5'}>100%</Typography>
+                <Typography style={{fontFamily: '"Eczar"'}} variant={'body1'}>100%</Typography>
               </Button>
             </div>
             <div className={classes.buttons}>
@@ -476,7 +444,7 @@ class Asset extends Component {
                   onClick={this.onWithdraw}
                   fullWidth
                 >
-                  <Typography style={{fontFamily: '"RobotoC"'}} className={classes.buttonText} variant={'h5'} color='contrastText'>Withdraw</Typography>
+                  <Typography style={{fontFamily: '"RobotoC"'}} className={classes.buttonText} variant={'body1'} color='contrastText'>Withdraw</Typography>
                 </Button>
               }
               {asset.withdrawAll===true&&
@@ -488,13 +456,13 @@ class Asset extends Component {
                   onClick={this.onWithdrawAll}
                   fullWidth
                 >
-                  <Typography style={{fontFamily: '"RobotoC"'}} className={classes.buttonText} variant={'h5'} color='secondary'>Withdraw All</Typography>
+                  <Typography style={{fontFamily: '"RobotoC"'}} className={classes.buttonText} variant={'body1'} color='secondary'>Withdraw All</Typography>
                 </Button>
               }
             </div>
             {asset.symbol==='DAI'&&
               <div className={classes.disabledContainer}>
-                <Typography style={{fontFamily: '"RobotoC"'}} variant='h5'>
+                <Typography style={{fontFamily: '"RobotoC"'}} variant='body1'>
                   <WarningIcon fontSize="small" style={{marginBottom: '-5px'}} />
                   Withdrawals might be subject to high slippage due to recent large <a className={classes.link} href="https://etherscan.io/tx/0x7207d444430344d4d8384d4dd8c12a8a343c9c01ccdb17c8962b84f40955c59f" target="_blank" rel="noopener noreferrer">withdrawal</a>
                 </Typography>
@@ -503,6 +471,7 @@ class Asset extends Component {
           </div>
         </div>
       </div>
+
     )
   };
 

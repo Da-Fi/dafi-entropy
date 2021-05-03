@@ -39,8 +39,9 @@ const styles=theme => ({
   actionsContainer: {
     paddingBottom: '12px',
     background: colors.dafilight,
-    border: '3px solid '+colors.dafiGreen,
-    borderRadius: '24px',
+    border: '0.25rem solid '+colors.dafiPrimaryhex,
+    borderRadius: '0.375rem',
+
     display: 'flex',
     flex: '1',
     [theme.breakpoints.down('sm')]: {
@@ -154,7 +155,7 @@ class Asset extends Component {
     return (<div className={classes.actionsContainer}>
       <div className={classes.tradeContainer}>
         {!asset.disabled&&<div className={classes.balances}>
-          <Typography variant='h4' style={{fontFamily: '"RobotoC',color: colors.dafiPrimaryhex}} className={classes.title}></Typography><Typography variant='h4' onClick={() => {this.setAmount(100)}} className={classes.value} noWrap>{'Balance: '+(asset.balance? asset.balance.toFixed(4):'0.0000')} {asset.tokenSymbol? asset.tokenSymbol:asset.symbol}</Typography>
+          <Typography variant={'h5'} style={{fontFamily: '"RobotoC',color: colors.dafiPrimaryhex}} className={classes.title}></Typography><Typography variant='h4' onClick={() => {this.setAmount(100)}} className={classes.value} noWrap>{'Balance: '+(asset.balance? asset.balance.toFixed(4):'0.0000')} {asset.tokenSymbol? asset.tokenSymbol:asset.symbol}</Typography>
         </div>}
         <TextField
           fullWidth
@@ -173,7 +174,7 @@ class Asset extends Component {
             className={classes.scale}
             variant='text'
             disabled={loading||asset.disabled}
-            color="primary"
+            color="secondary"
             onClick={() => {this.setAmount(25)}}>
             <Typography variant={'h5'}>25%</Typography>
           </Button>
@@ -181,7 +182,7 @@ class Asset extends Component {
             className={classes.scale}
             variant='text'
             disabled={loading||asset.disabled}
-            color="primary"
+            color="secondary"
             onClick={() => {this.setAmount(50)}}>
             <Typography variant={'h5'}>50%</Typography>
           </Button>
@@ -189,7 +190,7 @@ class Asset extends Component {
             className={classes.scale}
             variant='text'
             disabled={loading||asset.disabled}
-            color="primary"
+            color="secondary"
             onClick={() => {this.setAmount(75)}}>
             <Typography variant={'h5'}>75%</Typography>
           </Button>
@@ -197,7 +198,7 @@ class Asset extends Component {
             className={classes.scale}
             variant='text'
             disabled={loading||asset.disabled}
-            color="primary"
+            color="secondary"
             onClick={() => {this.setAmount(100)}}>
             <Typography variant={'h5'}>100%</Typography>
           </Button>
@@ -216,7 +217,7 @@ class Asset extends Component {
       <div className={classes.sepperator}></div>
       <div className={classes.tradeContainer}>
         <div className={classes.balances}>
-          <Typography variant='h4' className={classes.title}></Typography><Typography variant='h4' onClick={() => {this.setRedeemAmount(100)}} className={classes.value} noWrap>{asset.investedBalance? asset.investedBalance.toFixed(4):'0.0000'} {asset.investSymbol} ({asset.investedBalance? (parseFloat(asset.investedBalance)*parseFloat(asset.price)).toFixed(4):'0'}  {asset.tokenSymbol? asset.tokenSymbol:asset.symbol} )</Typography>
+          <Typography variant={'h5'} className={classes.title}></Typography><Typography variant='h4' onClick={() => {this.setRedeemAmount(100)}} className={classes.value} noWrap>{asset.investedBalance? asset.investedBalance.toFixed(4):'0.0000'} {asset.investSymbol} ({asset.investedBalance? (parseFloat(asset.investedBalance)*parseFloat(asset.price)).toFixed(4):'0'}  {asset.tokenSymbol? asset.tokenSymbol:asset.symbol} )</Typography>
         </div>
         <TextField
           fullWidth

@@ -145,17 +145,17 @@ let dafi_theme=responsiveFontSizes(
           lineHeight: 1.167
         },
         h4: {
-          fontSize: '1.375rem',
+          fontSize: '1rem',
           fontType: '"Eczar"',
           fontWeight: '700',
           WebkitFontSmoothing: "antialiased",
           MozOsxFontSmoothing: "grayscale",
-          lineHeight: 1.1875
+          lineHeight: 1.125
 
 
         },
         h5: {
-          fontSize: '1.125rem',
+          fontSize: '0.875rem',
           fontType: '"Eczar"',
           fontWeight: '700',
           WebkitFontSmoothing: "antialiased",
@@ -165,7 +165,7 @@ let dafi_theme=responsiveFontSizes(
 
         },
         body1: {
-          fontSize: '1rem',
+          fontSize: '0.875rem',
           fontWeight: '500',
           fontType: '"RobotoC"',
           overflow: 'hidden',
@@ -173,8 +173,8 @@ let dafi_theme=responsiveFontSizes(
           MozOsxFontSmoothing: "grayscale"
         },
         body2: {
-          fontSize: '0.875rem',
-          fontWeight: '600',
+          fontSize: '0.375rem',
+          fontWeight: '700',
           fontType: '"Eczar"',
           backgroundColor: 'none',
           overflow: 'hidden',
@@ -263,16 +263,16 @@ let dafi_theme=responsiveFontSizes(
             lineHeight: 1.167
           },
           h4: {
-            fontSize: '1.375rem',
+            fontSize: '1rem',
             fontType: '"RobotoC"',
             fontWeight: '700',
             WebkitFontSmoothing: "antialiased",
             MozOsxFontSmoothing: "grayscale",
-            lineHeight: 1.25
+            lineHeight: 1.125
 
           },
           h5: {
-            fontSize: '1.125rem',
+            fontSize: '0.875rem',
             fontType: '"Eczar"',
             fontWeight: '700',
             WebkitFontSmoothing: "antialiased",
@@ -282,7 +282,7 @@ let dafi_theme=responsiveFontSizes(
 
           },
           body1: {
-            fontSize: '1rem',
+            fontSize: '.875rem',
             fontWeight: '500',
             fontType: '"RobotoC"',
             overflow: 'hidden',
@@ -291,7 +291,7 @@ let dafi_theme=responsiveFontSizes(
             fontcolor: colors.darkBlack
           },
           body2: {
-            fontSize: '0.875rem',
+            fontSize: '0.375rem',
             fontWeight: '700',
             fontType: '"Eczar"',
             overflow: 'hidden',
@@ -311,6 +311,12 @@ let dafi_theme=responsiveFontSizes(
           easeIn: "cubic-bezier(0.4, 0, 1, 1)",
           sharp: "cubic-bezier(0.4, 0, 0.6, 1)"
         }
+      },
+      MuiTouchRipple: {
+        root: {
+          width: '48px',
+          height: '48px'
+        },
       },
 
 

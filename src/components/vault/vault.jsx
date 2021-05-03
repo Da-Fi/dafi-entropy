@@ -43,15 +43,17 @@ const store=Store.store
 
 const styles=(theme) => ({
   root: {
-    flex: 1,
-    display: 'flex',
-    flexDirection: 'column',
-    maxWidth: '100%',
-    fontFamily: '"RobotoC"',
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexGrow: 1,
+    paddingLeft: '64px',
+
     background: 'RGBA(26,26,26,0)',
+    [theme.breakpoints.down('xl')]: {
+
+      flexGrow: 1,
+      flexShrink: 1,
+      maxWidth: '1200px',
+      minWidth: '0%',
+    },
 
   },
   investedContainerLoggedOut: {
@@ -61,10 +63,15 @@ const styles=(theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
 
-    minWidth: '100%',
+    minWidth: '0%',
     marginTop: '40px',
-    [theme.breakpoints.up('md')]: {
-      minWidth: '900px',
+    [theme.breakpoints.up('xl')]: {
+      minWidth: '0%',
+    },
+    [theme.breakpoints.down('xl')]: {
+      width: 'auto',
+      flexGrow: 1,
+      flexShrink: 1,
     }
   },
   investedContainer: {
@@ -75,22 +82,32 @@ const styles=(theme) => ({
     justifyContent: 'flex-start',
 
 
-
-    minWidth: '100%',
+    maxWidth: '97%',
+    minWidth: '0%',
     marginTop: '40px',
-    [theme.breakpoints.up('md')]: {
-      minWidth: '900px',
+    [theme.breakpoints.up('xl')]: {
+      maxWidth: '97%',
+    },
+    [theme.breakpoints.down('xl')]: {
+      width: 'auto',
+      flexGrow: 1,
+      flexShrink: 1,
     }
   },
   balancesContainer: {
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'right',
+    alignItems: 'center',
     flexWrap: 'wrap',
     justifyContent: 'flex-end',
     border: '1px solid '+colors.dafiGreen,
     padding: '12px 12px',
     position: 'relative',
+    [theme.breakpoints.down('xl')]: {
+      width: 'auto',
+      flexGrow: 1,
+      flexShrink: 1,
+    },
   },
   connectContainer: {
     padding: '12px',
@@ -103,16 +120,16 @@ const styles=(theme) => ({
     }
   },
   intro: {
-    width: '100%',
+    width: '97%',
     position: 'relative',
     display: 'flex',
     justifyContent: 'flex-end',
     alignItems: 'center',
     paddingBottom: '32px',
 
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       justifyContent: 'center',
-      maxWidth: 'calc(100vw - 24px)',
+      maxWidth: '95%',
       flexWrap: 'wrap'
     }
   },
@@ -132,75 +149,97 @@ const styles=(theme) => ({
     '&:hover': {
       backgroundColor: colors.purple,
     },
-    padding: '12px',
-    fontWeight: 500,
+    padding: '15px',
+    fontWeight: 700,
     text: colors.dafitriadicblue,
-    [theme.breakpoints.up('md')]: {
-      padding: '15px',
+    [theme.breakpoints.up('xl')]: {
+      padding: '18px',
     }
   },
   heading: {
     display: 'none',
     flex: 1,
     [theme.breakpoints.up('md')]: {
+      dislay: 'flex',
+      fontSize: '1rem',
+      justifyContent: 'flex-end',
+      width: '45%'
+    },
+    [theme.breakpoints.up('xl')]: {
       display: 'block'
-    }
+    },
   },
   headingName: {
     display: 'flex',
+    flex: 1,
     paddingLeft: '0.625rem',
     font: '"Eczar"',
-    alignItems: 'center',
-    width: '425px',
-    [theme.breakpoints.down('sm')]: {
-      width: 'auto',
-      flex: 1
-    }
+    width: '65%',
+    [theme.breakpoints.up('sm')]: {
+      fontSize: '1rem'
+    },
   },
   headingEarning: {
     display: 'flex',
     color: "#ff1744",
     fontFamily: '"Eczar"',
-    width: '265px',
+    flex: 1,
+    justifyContent: 'flex-end',
     [theme.breakpoints.up('sm')]: {
-      display: 'block'
-    }
+      fontSize: '1rem',
+      flex: 1,
+      justifyContent: 'flex-end',
+    },
+    [theme.breakpoints.down('xl')]: {
+      maxWidth: '35%',
+      minWidth: '0',
+      width: '35%',
+      flex: 1,
+      justifyContent: 'flex-end',
+    },
   },
   buttonText: {
     fontWeight: '700',
-    color: '#ffffff',
+    color: 'secondary',
     fontFamily: '"Eczar"',
   },
   assetSummary: {
     display: 'flex',
     background: "rgba(26,26,26,0)",
-
-
-    alignItems: 'center',
     flex: 1,
+    alignItems: '',
+    height: '32px',
+    width: '100%',
     flexWrap: 'wrap',
     [theme.breakpoints.up('sm')]: {
-      flexWrap: 'nowrap'
-    }
+      flexWrap: 'nowrap',
+      fontSize: '1rem',
+    },
   },
+
   assetName: {
-    [theme.breakpoints.down('sm')]: {
-      fontSize: '0.8rem'
+    display: 'flex',
+
+    height: '20px',
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      fontSize: '1rem'
     }
   },
+
   assetIcon: {
     display: 'flex',
     alignItems: 'center',
     verticalAlign: 'middle',
-    borderRadius: '20px',
-    height: '30px',
-    width: '30px',
+    borderRadius: '12px',
+    height: '28px',
+    width: '20px',
     textAlign: 'center',
     cursor: 'pointer',
-    marginRight: '20px',
-    [theme.breakpoints.up('sm')]: {
-      height: '40px',
-      width: '40px',
+    marginRight: '16px',
+    [theme.breakpoints.up('lg')]: {
+      height: '36px',
+      width: '36px',
       marginRight: '24px',
     }
   },
@@ -218,36 +257,42 @@ const styles=(theme) => ({
     border: '1px solid '+colors.dafiGreen,
     alignItems: 'center',
     maxWidth: '350px',
-    [theme.breakpoints.up('md')]: {
-      width: '100%'
-    }
+    [theme.breakpoints.up('xl')]: {
+      minWidth: '0%'
+    },
   },
   between: {
     width: '40px'
   },
   expansionPanel: {
-    maxWidth: 'calc(100vw-24px)',
+    maxWidth: '97%',
+    minWidth: '0%',
+    width: '97%',
     backgroundImage: 'linear-gradient(180deg, rgba(54,54,64,1) 0%, rgba(44,59,87,1) 25%, rgba(75,91,87,1) 50%, rgba(33,38,38,1) 100%)',
-    width: '100%',
+
     border: '1px solid '+colors.dafident,
-    borderRadius: '16px'
+    borderRadius: '16px',
   },
+
+
+
   versionToggle: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-end',
   },
   tableHeadContainer: {
-    width: '100%',
+    maxWidth: '97%',
+    minWidth: '0%',
     display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center'
+    justifyContent: 'space=between',
   },
   investAllContainer: {
     paddingTop: '24px',
     display: 'flex',
     justifyContent: 'flex-end',
-    width: '100%',
+    maxWidth: '97%',
+    minWidth: '0%',
   },
   disaclaimer: {
     padding: '12px',
@@ -306,7 +351,7 @@ const styles=(theme) => ({
   },
   flexy: {
     display: 'flex',
-    alignItems: 'center'
+
   },
   on: {
     color: colors.dafiGreen,
@@ -327,7 +372,7 @@ const styles=(theme) => ({
   },
   removePadding: {
     padding: '0px',
-    maxWidth: '1040px'
+    maxWidth: '1040px',
   }
 });
 
@@ -448,9 +493,9 @@ class Entropy extends Component {
 
         <div className={classes.root}>
           <div className={classes.investedContainerLoggedOut}>
-            <Typography variant={'h5'} style={{fontFamily: '"RobotoC"'}} className={classes.disaclaimer}>Da-Fi is in beta. Use at your own risk.</Typography>
+            <Typography variant={'body1'} style={{fontFamily: '"RobotoC"'}} className={classes.disaclaimer}>Da-Fi is in beta. Use at your own risk. DApp is also available using ENS domain app.da-fi.eth.link </Typography>
             <div className={classes.introCenter}>
-              <Typography variant='h4' style={{fontFamily: '"RobotoC"'}} >Connect your wallet to continue</Typography>
+              <Typography variant='body1' style={{fontFamily: '"RobotoC"'}} >Connect your wallet to continue</Typography>
             </div>
           </div>
           { snackbarMessage&&this.renderSnackbar()}
@@ -461,7 +506,7 @@ class Entropy extends Component {
     return (
       <div className={classes.root}>
         <div className={classes.investedContainer}>
-          <Typography variant={'h5'} style={{fontFamily: '"RobotoC"'}} className={classes.disaclaimer}>Da-Fi is in beta. Use at your own risk.</Typography>
+          <Typography variant={'body1'} style={{fontFamily: '"RobotoC"'}} className={classes.disaclaimer}>Da-Fi is in beta. Use at your own risk.DApp is also available at ENS domain app.da-fi.eth.link </Typography>
           {this.renderFilters()}
           {this.renderBasedOn()}
           {this.renderAssetBlocks()}
@@ -521,48 +566,57 @@ class Entropy extends Component {
                     <img
                       alt=""
                       src={require('../../assets/'+asset.symbol.replace(/\+/g,'')+'-logo.png')}
-                      height={width>600? '40px':'30px'}
+                      height={width>600? '32px':'32px'}
                       style={asset.disabled? {filter: 'grayscale(100%)'}:{}}
                     />
-                  </div>
 
+                  </div>
                   <div>
-                    <Typography variant={'h4'} style={{fontFamily: '"RobotoC"',color: colors.dafiPrimaryhex}} className={classes.assetName} noWrap>{asset.name}</Typography>
-                    <Typography variant={'h5'} style={{fontFamily: '"RobotoC"'}} className={classes.grey}>{asset.description}</Typography>
+
+
+                    <Typography variant={'body1'} style={{fontFamily: '"RobotoC"',color: colors.dafiPrimaryhex}} className={classes.assetName} noWrap>{asset.name}</Typography>
+                    <Typography variant={'body1'} style={{fontFamily: '"RobotoC"'}} className={classes.grey}>{asset.description}</Typography>
                   </div>
                 </div>
                 {
                   (!['LINK'].includes(asset.id)&&!['GUSD'].includes(asset.id)&&asset.vaultBalance>0)&&
                   <div className={classes.headingEarning}>
-                    <Typography variant={'h4'} style={{fontFamily: '"RobotoC"',color: colors.dafiPrimaryhex}} >YoY %:</Typography>
-                    <div className={classes.flexy} >
-                      <Typography variant={'h5'} style={{fontFamily: '"Eczar"'}} noWrap>{(this._getAPY(asset)/1).toFixed(2)}% </Typography>
-                      <Typography variant={'h5'} style={{fontFamily: '"Eczar"'}} className={classes.on}> on </Typography>
-                      <Typography variant={'h5'} style={{fontFamily: '"Eczar"'}} noWrap>{(asset.vaultBalance? (Math.floor(asset.vaultBalance*asset.pricePerFullShare*10000)/10000).toFixed(2):'0.00')} {asset.symbol}</Typography>
+
+                    <div>
+                      <Typography variant={'body1'} style={{fontFamily: '"Eczar"'}} noWrap>{(this._getAPY(asset)/1).toFixed(2)}% </Typography>
+
+                      <Typography variant={'body1'} noWrap>{(asset.vaultBalance? (Math.floor(asset.vaultBalance*asset.pricePerFullShare*10000)/10000).toFixed(2):'0.00')} {asset.symbol}</Typography>
+
                     </div>
                   </div>
+
+
+
                 }
+
                 {
                   (!['LINK'].includes(asset.id)&&!['GUSD'].includes(asset.id)&&asset.vaultBalance===0)&&
+
                   <div className={classes.headingEarning}>
-                    <Typography style={{fontFamily: '"RobotoC"'}} variant={'h4'} className={classes.grey}>YoY %:</Typography>
-                    <div className={classes.flexy}>
-                      <Typography variant={'h5'} style={{fontFamily: '"Eczar"'}} noWrap>{(this._getAPY(asset)/1).toFixed(2)}% </Typography>
+                    <div>
+
+                      <Typography variant={'body1'} style={{fontFamily: '"Eczar"'}} noWrap>{(this._getAPY(asset)/1).toFixed(2)}% </Typography>
+                      <Typography variant={'body1'} style={{fontFamily: '"Eczar"'}} noWrap>{(asset.vaultBalance? (Math.floor(asset.vaultBalance*asset.pricePerFullShare*10000)/10000).toFixed(2):'0.00')} {asset.symbol}</Typography>
                     </div>
                   </div>
                 }
                 {
                   ['LINK'].includes(asset.id)&&
                   <div className={classes.headingEarning}>
-                    <Typography variant={'h4'} style={{fontFamily: '"RobotoC"'}} className={classes.grey}>YoY %:</Typography>
-                    <Typography variant={'h5'} style={{fontFamily: '"Eczar"'}} noWrap>Not Available</Typography>
+                    <Typography variant={'body1'} style={{fontFamily: '"RobotoC"'}} className={classes.grey}></Typography>
+                    <Typography variant={'body1'} style={{fontFamily: '"Eczar"'}} noWrap>Not Available</Typography>
                   </div>
                 }
                 {
                   ['GUSD'].includes(asset.id)&&
                   <div className={classes.headingEarning}>
-                    <Typography variant={'h4'} style={{fontFamily: '"RobotoC"'}} className={classes.grey}>YoY%:</Typography>
-                    <Typography variant={'h5'} style={{fontFamily: '"Eczar"'}} noWrap>
+                    <Typography variant={'body1'} style={{fontFamily: '"RobotoC"'}} className={classes.grey}></Typography>
+                    <Typography variant={'body1'} style={{fontFamily: '"Eczar"'}} noWrap>
                       Not Available
                     <Tooltip title="The GUSD strategy is temporally disabled due to misleading APY calculation. It is safe to withdraw your funds, you are not charged 0.5% withdrawal fee." arrow>
                         <InfoIcon style={{color: colors.darkGray,marginLeft: '5px',marginBottom: '-5px',fontFamily: '"RobotoC"'}} />
@@ -572,8 +626,8 @@ class Entropy extends Component {
                 }
                 {!(asset.depositDisabled===true)&&
                   <div className={classes.heading}>
-                    <Typography variant={'h4'} style={{fontFamily: '"RobotoC"'}} className={classes.grey}>Liquid Funds:</Typography>
-                    <Typography variant={'h5'} style={{fontFamily: '"Eczar"'}} noWrap>{(asset.balance? (asset.balance).toFixed(2):'0.00')+' '+asset.symbol}</Typography>
+                    <Typography variant={'body1'} style={{fontFamily: '"RobotoC"'}} className={classes.grey}>Balance:</Typography>
+                    <Typography variant={'body1'} style={{fontFamily: '"Eczar"'}} noWrap>{(asset.balance? (asset.balance).toFixed(2):'0.00')+' '+asset.symbol}</Typography>
                   </div>
                 }
 
@@ -581,7 +635,7 @@ class Entropy extends Component {
                   <div className={classes.heading}>
                     <Tooltip title={
                       <React.Fragment>
-                        <Typography variant={'h5'} style={{fontFamily: '"RobotoC"'}} className={classes.fees}>
+                        <Typography variant={'body1'} style={{fontFamily: '"RobotoC"'}} className={classes.fees}>
                           Vault inactive, deposits unavailable.
                         </Typography>
                       </React.Fragment>
@@ -593,7 +647,7 @@ class Entropy extends Component {
                           <HelpIcon fontSize="small" className={classes.grey} style={{marginBottom: '-5px'}} />
                         </Grid>
                         <Grid item xs>
-                          <Typography variant="h5" style={{fontFamily: '"RobotoC"'}} className={classes.grey} >
+                          <Typography variant={'body1'} style={{fontFamily: '"RobotoC"'}} className={classes.grey} >
                             Inactive
                         </Typography>
                         </Grid>
@@ -639,7 +693,7 @@ class Entropy extends Component {
         <div className={classes.between}>
           <Tooltip title={
             <React.Fragment>
-              <Typography style={{fontFamily: '"RobotoC"'}} variant={'h5'} className={classes.fees}>
+              <Typography style={{fontFamily: '"RobotoC"'}} variant={'body1'} className={classes.fees}>
                 The 0.5% withdrawal fee on all vaults & <br /><br />
                    5% performance fee on subsidized gas will be eliminated in a future release.
                 </Typography>
@@ -749,7 +803,7 @@ class Entropy extends Component {
             options.map((option) => {
               return (
                 <MenuItem key={option.value} value={option.value}>
-                  <Typography style={{fontFamily: '"RobotoC"'}} variant='h5'>{option.description}</Typography>
+                  <Typography style={{fontFamily: '"RobotoC"'}} variant='body1'>{option.description}</Typography>
                 </MenuItem>
               )
             })
@@ -769,7 +823,7 @@ class Entropy extends Component {
         <Grid container spacing={1}>
           <Grid item><TimelineIcon fontSize="small" /></Grid>
           <Grid item xs>
-            <Typography variant="h5" style={{display: 'inline',fontWeight: 'bold'}}>
+            <Typography variant="body1" style={{display: 'inline',fontWeight: 'bold'}}>
               Rewards
                 </Typography>
           </Grid>

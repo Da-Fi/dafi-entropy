@@ -27,14 +27,17 @@ const useStyles=theme => ({
     background: 'rgba(26,26,26,0)',
     border: 'none',
     borderTop: 'none',
-    width: '100%'
+    width: '100%',
+    display: 'flex',
+    flexShrink: 1,
 
   },
   icon: {
     display: 'flex',
     alignItems: 'center',
     flex: 1,
-    cursor: 'pointer'
+    cursor: 'pointer',
+    flexShrink: 1,
   },
   links: {
     display: 'flex',
@@ -101,7 +104,7 @@ const useStyles=theme => ({
     background: colors.dafiGreen,
     opacity: '1',
     borderRadius: '10px',
-    blur: '5rem',
+    blur: '5em',
     width: '10px',
     height: '10px',
     marginRight: '3px',

@@ -15,14 +15,16 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import {mainListItems} from '../dashboard/dashLists';
 import {colors} from '../../theme/theme';
 import SUBHEADER_1 from '../dashboard/Subheader_1.jsx';
-
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
 const drawerWidth=192;
+
 
 
 const useStyles=makeStyles((theme) => ({
     root: {
         display: 'flex',
-        width: '["setWidth"]'
+        flexGrow: 1,
     },
     appBar: {
         zIndex: theme.zIndex.drawer+1,
@@ -86,6 +88,16 @@ const useStyles=makeStyles((theme) => ({
         flex: 1,
         justifyContent: 'flex-end'
     },
+    paper: {
+        display: 'flex',
+        flexGrow: 1,
+        flexShrink: 1,
+        background: '#363640',
+        backgroundImage: 'linear-gradient(180deg,rgba(54,54,64,1) 0%,rgba(44,59,87,1) 25%,rgba(75,91,87,1) 50%,rgba(33,38,38,1) 100%)',
+        border: '2px solid '+colors.dafiPrimaryhex,
+        borderRadius: '0.625rem',
+        padding: '0.25rem',
+    }
 }));
 
 export default function Dashboard() {
@@ -105,6 +117,7 @@ export default function Dashboard() {
     const updateWidthAndHeight=() => {
         setWidth(window.innerWidth);
         setHeight(window.innerHeight);
+
     };
     React.useEffect(() => {
         window.addEventListener("resize",updateWidthAndHeight);
@@ -182,6 +195,14 @@ export default function Dashboard() {
             </Drawer>
             <main className={classes.content}>
                 <div className={classes.toolbar} />
+
+                <Grid container spacing={2}>
+                    <Grid item xs={12}>
+                        <Paper className={classes.paper}>
+                            <Typography variant="body1" style={{fontFamily: '"RobotoC"',color: colors.dafiPrimaryhex,alignItems: 'center'}}>Use side nav buttons to access Da-Fi Entropy v1 vaults, streams, swaps, and Cover insurance. This is Da-Fi's first release which will enable implentation of Da-Fi DAO - a next gen DAO that is sustainable, efficient, and intereoperable. Head to the Incubator page for a small preview of Da-Fi-Entropy v2!</Typography>
+                        </Paper>
+                    </Grid>
+                </Grid>
 
             </main>
         </div>

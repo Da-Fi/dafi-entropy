@@ -49,7 +49,7 @@ export const mainListItems=(
             <ListItemText disableTypography primary={<Typography variant={'body1'} style={{fontFamily: '"RobotoC"',color: colors.dafiGreen}}>ZeroSwap</Typography>} />
         </ListItem>
         <ListItem button>
-            <Link to="/Incubator">
+            <Link to="/incubator">
                 <ListItemIcon>
                     <SvgIcon viewBox="0 0 24 24"><path d="M15 14v-3h3V9l4 3.5-4 3.5v-2h-3m-1-6.3V9H2V7.7L8 4l6 3.7M7 10h2v5H7v-5m-4 0h2v5H3v-5m10 0v2.5l-2 1.8V10h2m-3.9 6l-.6.5 1.7 1.5H2v-2h7.1m7.9-1v3h-3v2l-4-3.5 4-3.5v2h3z" fill={colors.dafiGreen} /></SvgIcon>
                 </ListItemIcon>
@@ -65,7 +65,7 @@ export const mainListItems=(
             <ListItemText disableTypography primary={<Typography variant={'body1'} style={{fontFamily: '"RobotoC"',color: colors.dafiGreen}}>Cover</Typography>} />
         </ListItem>
         <ListItem button>
-            <Link to="/dafidao">
+            <Link to="/stats">
                 <ListItemIcon>
 
                     <SvgIcon viewBox="0 0 24 24"><path d="M12 5.5A3.5 3.5 0 0115.5 9a3.5 3.5 0 01-3.5 3.5A3.5 3.5 0 018.5 9 3.5 3.5 0 0112 5.5M5 8c.56 0 1.08.15 1.53.42-.15 1.43.27 2.85 1.13 3.96C7.16 13.34 6.16 14 5 14a3 3 0 01-3-3 3 3 0 013-3m14 0a3 3 0 013 3 3 3 0 01-3 3c-1.16 0-2.16-.66-2.66-1.62a5.536 5.536 0 001.13-3.96c.45-.27.97-.42 1.53-.42M5.5 18.25c0-2.07 2.91-3.75 6.5-3.75s6.5 1.68 6.5 3.75V20h-13v-1.75M0 20v-1.5c0-1.39 1.89-2.56 4.45-2.9-.59.68-.95 1.62-.95 2.65V20H0m24 0h-3.5v-1.75c0-1.03-.36-1.97-.95-2.65 2.56.34 4.45 1.51 4.45 2.9V20z" fill={colors.dafiGreen} /></SvgIcon>
