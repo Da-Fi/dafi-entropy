@@ -15,7 +15,7 @@ export default function EntropyXGrid() {
   });
 
   return (
-    <div style={{height: 520,width: '100%'}}>
+    <div style={{paddingLeft: '8rem',paddingRight: '5.5rem',height: 520,width: '100%'}}>
       <XGrid
         {...data}
         loading={data.rows.length===0}

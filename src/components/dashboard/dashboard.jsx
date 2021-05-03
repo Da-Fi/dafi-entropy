@@ -199,7 +199,7 @@ export default function Dashboard() {
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
                         <Paper className={classes.paper}>
-                            <Typography variant="body1" style={{fontFamily: '"RobotoC"',color: colors.dafiPrimaryhex,alignItems: 'center'}}>Use side nav buttons to access Da-Fi Entropy v1 vaults, streams, swaps, and Cover insurance. This is Da-Fi's first release which will enable implentation of Da-Fi DAO - a next gen DAO that is sustainable, efficient, and intereoperable. Head to the Incubator page for a small preview of Da-Fi-Entropy v2!</Typography>
+                            <Typography variant="body1" style={{fontFamily: '"RobotoC"',color: colors.dafiPrimaryhex,alignItems: 'center'}}>Use side nav buttons to access Da-Fi Entropy v1 vaults, streams, swaps, and Cover insurance. This is Da-Fi's first release which will enable implentation of Da-Fi DAO - a next gen DAO that is sustainable, efficient, and intereoperable. Head to the Incubator page for a small preview of Da-Fi-Entropy v2! EntropyXGrid can display up to 3 millon lines of dynamic data and much more! </Typography>
                         </Paper>
                     </Grid>
                 </Grid>
