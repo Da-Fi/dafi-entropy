@@ -1,6 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import {makeStyles,useTheme} from '@material-ui/core/styles';
+import {Link} from 'react-router-dom';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -101,6 +102,8 @@ const useStyles=makeStyles((theme) => ({
 }));
 
 export default function Dashboard() {
+    const preventDefault=event => event.preventDefault();
+    const [anchorEl,setAnchorEl]=React.useState(null);
     const classes=useStyles();
     const theme=useTheme();
     const [open,setOpen]=React.useState(false);
@@ -114,6 +117,10 @@ export default function Dashboard() {
     const handleDrawerClose=() => {
         setOpen(false);
     };
+
+    const handleClick=event => {
+        setAnchorEl(event.currentTarget);
+    };
     const updateWidthAndHeight=() => {
         setWidth(window.innerWidth);
         setHeight(window.innerHeight);
@@ -123,6 +130,7 @@ export default function Dashboard() {
         window.addEventListener("resize",updateWidthAndHeight);
         return () => window.removeEventListener("resize",updateWidthAndHeight);
     });
+
 
     return (
         <div className={classes.root}>
@@ -199,7 +207,19 @@ export default function Dashboard() {
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
                         <Paper className={classes.paper}>
-                            <Typography variant="body1" style={{fontFamily: '"RobotoC"',color: colors.dafiPrimaryhex,alignItems: 'center'}}>Use side nav buttons to access Da-Fi Entropy v1 vaults, streams, swaps, and Cover insurance. This is Da-Fi's first release which will enable implentation of Da-Fi DAO - a next gen DAO that is sustainable, efficient, and intereoperable. Head to the Incubator page for a small preview of Da-Fi-Entropy v2! EntropyXGrid can display up to 3 millon lines of dynamic data and much more! </Typography>
+                            <Typography variant="body1" style={{fontFamily: '"RobotoC"',color: colors.dafiPrimaryhex,alignItems: 'center'}}>Use side nav buttons to access Da-Fi Entropy v1 vaults, streams, swaps, and Cover insurance.
+                            This the first and 'foundational' release of Da-Fi which will enable the formation of a community driven
+                            iterate fast 'Kusama of DAO's' - Da-Fi DAO. 90% of total Da-Fi token supply is designated for the Da-Fi DAO community and currently in a Gnosis MultiSig Safe. Check out the preview of EntropyX - an enterprise level de-fi
+                            data engine that simply outperforms comparable de-fi DApps! EntropyX will be included in Da-Fi Entropy v2 and is built specifically for React, renders 3 million dynamic cells of data, is fully responsive, customizeable, virtualizeable, accessible on any device, and much more! ==================> </Typography>
+                            <div style={{alignItems: 'center'}}>
+
+                                <IconButton href="/incubator" onClick={handleClick} style={{border: '1px solid '+colors.dafiheat,color: 'secondary',borderRadius: '0.25rem',padding: '0.25rem',fontFamily: '"RobotoC"'}}>
+                                    <Link to="/incubator">
+                                        EntropyX
+                            </Link>
+                                </IconButton>
+                            </div>
+
                         </Paper>
                     </Grid>
                 </Grid>

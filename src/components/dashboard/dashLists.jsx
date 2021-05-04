@@ -65,7 +65,7 @@ export const mainListItems=(
             <ListItemText disableTypography primary={<Typography variant={'body1'} style={{fontFamily: '"RobotoC"',color: colors.dafiGreen}}>Cover</Typography>} />
         </ListItem>
         <ListItem button>
-            <Link to="/stats">
+            <Link to="/apiDocs">
                 <ListItemIcon>
 
                     <SvgIcon viewBox="0 0 24 24"><path d="M12 5.5A3.5 3.5 0 0115.5 9a3.5 3.5 0 01-3.5 3.5A3.5 3.5 0 018.5 9 3.5 3.5 0 0112 5.5M5 8c.56 0 1.08.15 1.53.42-.15 1.43.27 2.85 1.13 3.96C7.16 13.34 6.16 14 5 14a3 3 0 01-3-3 3 3 0 013-3m14 0a3 3 0 013 3 3 3 0 01-3 3c-1.16 0-2.16-.66-2.66-1.62a5.536 5.536 0 001.13-3.96c.45-.27.97-.42 1.53-.42M5.5 18.25c0-2.07 2.91-3.75 6.5-3.75s6.5 1.68 6.5 3.75V20h-13v-1.75M0 20v-1.5c0-1.39 1.89-2.56 4.45-2.9-.59.68-.95 1.62-.95 2.65V20H0m24 0h-3.5v-1.75c0-1.03-.36-1.97-.95-2.65 2.56.34 4.45 1.51 4.45 2.9V20z" fill={colors.dafiGreen} /></SvgIcon>
@@ -98,7 +98,7 @@ export const secondaryListItems=(
             <ListItemIcon>
                 <SvgIcon viewBox="0 0 24 24"><path d="M6.91 5.5l2.3 2.29-1.42 1.42-2.29-2.3-2.29 2.3-1.42-1.42 2.3-2.29-2.3-2.29 1.42-1.42 2.29 2.3 2.29-2.3 1.42 1.42m13 13l-1.42-1.42-2.29 2.3-2.29-2.3-1.42 1.42 2.3 2.29-2.3 2.29 1.42 1.42 2.29-2.3 2.29 2.3 1.42-1.42-2.3-2.29m.49-11.67L17.18 11 15.6 9.73l1.17-1.5a9.08 9.08 0 00-6.66 5.62A4.5 4.5 0 117.5 13a4 4 0 01.78.08 11.27 11.27 0 018.15-6.82L15 5.18l1.27-1.58M10 17.5A2.5 2.5 0 107.5 20a2.5 2.5 0 002.5-2.5z" /></SvgIcon>
             </ListItemIcon>
-            <ListItemText disableTypography primary={<Typography variant={'body1'} style={{fontFamily: '"RobotoC"',color: colors.dafiGreen}}>Community</Typography>} /> />
+            <ListItemText disableTypography primary={<Typography variant={'body1'} style={{fontFamily: '"RobotoC"',color: colors.dafiGreen}}>Community</Typography>} />
         </ListItem>
         <ListItem button>
 

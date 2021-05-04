@@ -79,7 +79,7 @@ export const colors={
   dafident: 'linear-gradient(to bottom, #363640, #72DEFF, #4F5257, #3FBFBF, #4b5b57, #363430)',
   dafilight: 'linear-gradient(155deg, #3c3c46, #00ffc3, #72DEFF, #e0f7fa, #4b5b57, #363640)',
   dafidark: 'linear-gradient(0deg, darkBlack, #000061, darkGray, darkBlack)',
-  dafispace: 'linear-gradient(0deg, #363640, #505054,#3FBFBF, #364040, #29292B, #ABABAB, #2B2B2B)',
+  dafispace: 'linear-gradient(240deg, #363640, #505054,#3FBFBF, #364040, #29292B, #ABABAB, #2B2B2B)',
   dafigray: "#000000",
   dafifuschia: "#ff0357",
   dafitriadicblue: "#003CFF",
@@ -318,7 +318,9 @@ let dafi_theme=responsiveFontSizes(
           height: '48px'
         },
       },
-
+      MuiDataGridcolumsContainer: {
+        color: colors.dafiGreen
+      },
 
 
 
@@ -333,7 +335,7 @@ let dafi_theme=responsiveFontSizes(
           minHeight: '30px',
           display: 'flex',
           alignItems: 'center',
-          background: colors.dafiDefaulthex
+          background: colors.rallyblue
         }
       },
       MuiButton: {
