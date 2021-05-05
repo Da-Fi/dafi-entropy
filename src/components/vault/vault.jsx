@@ -159,13 +159,10 @@ const styles=(theme) => ({
   },
   heading: {
     display: 'none',
-    [theme.breakpoints.up('sm')]: {
-      display: 'flex',
-      fontSize: '1rem',
-    },
     [theme.breakpoints.up('xl')]: {
-      display: 'block'
+      display: 'none'
     },
+
   },
   bottomHeading: {
     display: 'none',
@@ -207,8 +204,8 @@ const styles=(theme) => ({
     background: "rgba(26,26,26,0)",
     flex: 1,
     alignItems: '',
-    height: '32px',
-    width: '100%',
+    height: '48px',
+    width: '95%',
     flexWrap: 'wrap',
     [theme.breakpoints.up('sm')]: {
       flexWrap: 'nowrap',
@@ -350,6 +347,7 @@ const styles=(theme) => ({
   },
   flexy: {
     display: 'flex',
+    width: '100%',
 
   },
   on: {
@@ -574,7 +572,7 @@ class Entropy extends Component {
 
 
                     <Typography variant={'body1'} style={{fontFamily: '"RobotoC"',color: colors.dafiPrimaryhex}} className={classes.assetName} noWrap>{asset.name}</Typography>
-                    <Typography variant={'body1'} style={{fontFamily: '"RobotoC"'}} className={classes.grey}>{asset.description}</Typography>
+                    <Typography variant={'body2'} style={{fontFamily: '"RobotoC"'}} className={classes.grey}>{asset.description}</Typography>
                   </div>
                 </div>
                 {
@@ -582,9 +580,10 @@ class Entropy extends Component {
                   <div className={classes.headingEarning}>
 
                     <div>
+
                       <Typography variant={'body2'} style={{fontFamily: '"Eczar"'}} noWrap>{(this._getAPY(asset)/1).toFixed(2)}% </Typography>
 
-                      <Typography className={classes.bottomHeading} variant={'body2'} noWrap>{(asset.vaultBalance? (Math.floor(asset.vaultBalance*asset.pricePerFullShare*10000)/10000).toFixed(2):'0.00')} {asset.symbol}</Typography>
+                      <Typography variant={'body2'}> {(asset.vaultBalance? (Math.floor(asset.vaultBalance*asset.pricePerFullShare*10000)/10000).toFixed(2):'0.00')}> {asset.symbol}</Typography>
 
                     </div>
                   </div>
@@ -599,23 +598,23 @@ class Entropy extends Component {
                   <div className={classes.headingEarning}>
                     <div>
 
-                      <Typography variant={'body2'} style={{fontFamily: '"Eczar"'}} noWrap>{(this._getAPY(asset)/1).toFixed(2)}% </Typography>
-                      <Typography variant={'body2'} style={{fontFamily: '"Eczar"'}} noWrap>{(asset.vaultBalance? (Math.floor(asset.vaultBalance*asset.pricePerFullShare*10000)/10000).toFixed(2):'0.00')} {asset.symbol}</Typography>
+                      <Typography variant={'body2'} style={{fontFamily: '"Eczar"'}}>{(this._getAPY(asset)/1).toFixed(2)}% </Typography>
+                      <Typography variant={'body2'} style={{fontFamily: '"Eczar"'}}>{(asset.vaultBalance? (Math.floor(asset.vaultBalance*asset.pricePerFullShare*10000)/10000).toFixed(2):'0.00')} {asset.symbol}</Typography>
                     </div>
                   </div>
                 }
                 {
                   ['LINK'].includes(asset.id)&&
                   <div className={classes.headingEarning}>
-                    <Typography variant={'body1'} style={{fontFamily: '"RobotoC"'}} className={classes.grey}></Typography>
-                    <Typography variant={'body1'} style={{fontFamily: '"Eczar"'}} noWrap>Not Available</Typography>
+                    <Typography variant={'body2'} style={{fontFamily: '"RobotoC"'}} className={classes.grey}></Typography>
+                    <Typography variant={'body2'} style={{fontFamily: '"Eczar"'}} >Not Available</Typography>
                   </div>
                 }
                 {
                   ['GUSD'].includes(asset.id)&&
                   <div className={classes.headingEarning}>
-                    <Typography variant={'body1'} style={{fontFamily: '"RobotoC"'}} className={classes.grey}></Typography>
-                    <Typography variant={'body1'} style={{fontFamily: '"Eczar"'}} noWrap>
+                    <Typography variant={'body2'} style={{fontFamily: '"RobotoC"'}} className={classes.grey}></Typography>
+                    <Typography variant={'body2'} style={{fontFamily: '"Eczar"'}}>
                       Not Available
                     <Tooltip title="The GUSD strategy is temporally disabled due to misleading APY calculation. It is safe to withdraw your funds, you are not charged 0.5% withdrawal fee." arrow>
                         <InfoIcon style={{color: colors.darkGray,marginLeft: '5px',marginBottom: '-5px',fontFamily: '"RobotoC"'}} />
@@ -626,7 +625,7 @@ class Entropy extends Component {
                 {!(asset.depositDisabled===true)&&
                   <div className={classes.heading}>
                     <Typography variant={'body1'} style={{fontFamily: '"RobotoC"'}} className={classes.grey}>Balance:</Typography>
-                    <Typography variant={'body1'} style={{fontFamily: '"Eczar"'}} noWrap>{(asset.balance? (asset.balance).toFixed(2):'0.00')+' '+asset.symbol}</Typography>
+                    <Typography variant={'body1'} style={{fontFamily: '"Eczar"'}} >{(asset.balance? (asset.balance).toFixed(2):'0.00')+' '+asset.symbol}</Typography>
                   </div>
                 }
 

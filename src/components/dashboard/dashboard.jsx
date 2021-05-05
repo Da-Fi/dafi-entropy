@@ -18,6 +18,7 @@ import {colors} from '../../theme/theme';
 import SUBHEADER_1 from '../dashboard/Subheader_1.jsx';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Grid';
 const drawerWidth=192;
 
 
@@ -205,23 +206,24 @@ export default function Dashboard() {
                 <div className={classes.toolbar} />
 
                 <Grid container spacing={2}>
-                    <Grid item xs={12}>
+                    <Grid item xs={12} style={{background: colors.dafidark}}>
                         <Paper className={classes.paper}>
-                            <Typography variant="body1" style={{fontFamily: '"RobotoC"',color: colors.dafiPrimaryhex,alignItems: 'center'}}>Use side nav buttons to access Da-Fi Entropy v1 vaults, streams, swaps, and Cover insurance.
-                            This the first and 'foundational' release of Da-Fi which will enable the formation of a community driven
-                            iterate fast 'Kusama of DAO's' - Da-Fi DAO. 90% of total Da-Fi token supply is designated for the Da-Fi DAO community and currently in a Gnosis MultiSig Safe. Check out the preview of EntropyX - an enterprise level de-fi
-                            data engine that simply outperforms comparable de-fi DApps! EntropyX will be included in Da-Fi Entropy v2 and is built specifically for React, renders 3 million dynamic cells of data, is fully responsive, customizeable, virtualizeable, accessible on any device, and much more! ==================> </Typography>
-                            <div style={{alignItems: 'center',verticalAlign: 'middle'}}>
-
-                                <IconButton href="/incubator" onClick={handleClick} style={{paddingTop: '32px',border: '1px solid '+colors.dafiheat,color: 'primary',borderRadius: '0.25rem',padding: '0.25rem',fontFamily: '"RobotoC"'}}>
-                                    <Link to="/incubator">
-                                        EntropyX
-                            </Link>
-                                </IconButton>
-                            </div>
-
+                            <Typography variant="body1" style={{fontFamily: '"RobotoC"',color: colors.dafiGreen,alignContent: 'center'}}>Welcome to Da-Fi DAO, the iterate fast next-gen DAO. This is the first DApp release for Da-Fi and it will be instrumental in driving Da-Fi DAO community interest, growth and objectives. Da-Fi is close to submitting various grant appications through Polkadot, Moonbeam, the Web3 Foundation, the Fantom Foundation, and others. Flexible Da-Fi token governance will also be announce in greater detail very soon.  90% of total Da-Fi token supply is designated for the Da-Fi DAO community and the tokens currently in a Gnosis MultiSig Safe. Da-Fi token is "governance" and holders will be able to vote on the trajectory of Da-Fi. More to be announced soon! In the meantime, check out the preview of EntropyX - an enterprise level de-fi
+                            data engine and UI that simply outperforms! EntropyX will be included in Da-Fi Entropy v2 and is built specifically for React, renders 3 million dynamic cells of data, is fully responsive, customizeable, virtualizeable, accessible on any device, and much more! ==================> </Typography>
                         </Paper>
+
+
+
+
                     </Grid>
+                    <Box style={{height: 64,display: "flex",alignItems: "center",width: "100%"}}>
+
+                        <IconButton href="/incubator" onClick={handleClick} style={{justifyContent: 'flex-end',border: '1px solid '+colors.dafiheat,color: 'primary',background: colors.dafiheader,borderRadius: '0.25rem',padding: '0.25rem',fontFamily: '"RobotoC"',alignSelf: 'center'}}>
+                            <Link to="/incubator">
+                                EntropyX
+                            </Link>
+                        </IconButton>
+                    </Box>
                 </Grid>
 
             </main>
