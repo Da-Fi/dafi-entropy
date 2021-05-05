@@ -211,9 +211,9 @@ export default function Dashboard() {
                             This the first and 'foundational' release of Da-Fi which will enable the formation of a community driven
                             iterate fast 'Kusama of DAO's' - Da-Fi DAO. 90% of total Da-Fi token supply is designated for the Da-Fi DAO community and currently in a Gnosis MultiSig Safe. Check out the preview of EntropyX - an enterprise level de-fi
                             data engine that simply outperforms comparable de-fi DApps! EntropyX will be included in Da-Fi Entropy v2 and is built specifically for React, renders 3 million dynamic cells of data, is fully responsive, customizeable, virtualizeable, accessible on any device, and much more! ==================> </Typography>
-                            <div style={{alignItems: 'center'}}>
+                            <div style={{alignItems: 'center',verticalAlign: 'middle'}}>
 
-                                <IconButton href="/incubator" onClick={handleClick} style={{border: '1px solid '+colors.dafiheat,color: 'secondary',borderRadius: '0.25rem',padding: '0.25rem',fontFamily: '"RobotoC"'}}>
+                                <IconButton href="/incubator" onClick={handleClick} style={{paddingTop: '32px',border: '1px solid '+colors.dafiheat,color: 'primary',borderRadius: '0.25rem',padding: '0.25rem',fontFamily: '"RobotoC"'}}>
                                     <Link to="/incubator">
                                         EntropyX
                             </Link>

@@ -3,8 +3,8 @@ import {XGrid} from '@material-ui/x-grid';
 import {useDemoData} from '@material-ui/x-grid-data-generator';
 import {LicenseInfo} from '@material-ui/x-grid';
 import {colors} from '../../theme/theme.jsx';
-
-
+import theme from '../../theme';
+import Box from '@material-ui/core/Box';
 
 
 export default function EntropyXGrid() {
@@ -14,7 +14,14 @@ export default function EntropyXGrid() {
   });
 
   return (
-    <div style={{paddingLeft: '8.2rem',paddingRight: '4rem',height: 520,width: '100%',background: colors.dafident}}>
+    <div style={{
+      paddingLeft: '4rem',
+      display: 'flex',flexGrow: 1,minWidth: '0%',height: 520,width: '97%',background: colors.dafident,[theme.breakpoints.down('md')]: {
+        height: 475,
+        width: '80%'
+      }
+    }}>
+
       <XGrid
         {...data}
         loading={data.rows.length===0}

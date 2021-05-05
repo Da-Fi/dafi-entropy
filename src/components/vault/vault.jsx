@@ -45,9 +45,10 @@ const styles=(theme) => ({
   root: {
     flexGrow: 1,
     paddingLeft: '64px',
+    maxWidth: '95%',
 
     background: 'RGBA(26,26,26,0)',
-    [theme.breakpoints.down('xl')]: {
+    [theme.breakpoints.up('sm')]: {
 
       flexGrow: 1,
       flexShrink: 1,
@@ -158,15 +159,18 @@ const styles=(theme) => ({
   },
   heading: {
     display: 'none',
-    flex: 1,
-    [theme.breakpoints.up('md')]: {
-      dislay: 'flex',
+    [theme.breakpoints.up('sm')]: {
+      display: 'flex',
       fontSize: '1rem',
-      justifyContent: 'flex-end',
-      width: '45%'
     },
     [theme.breakpoints.up('xl')]: {
       display: 'block'
+    },
+  },
+  bottomHeading: {
+    display: 'none',
+    [theme.breakpoints.up('sm')]: {
+      display: 'flex',
     },
   },
   headingName: {
@@ -174,29 +178,24 @@ const styles=(theme) => ({
     flex: 1,
     paddingLeft: '0.625rem',
     font: '"Eczar"',
-    width: '65%',
+    width: '63%',
     [theme.breakpoints.up('sm')]: {
       fontSize: '1rem'
     },
   },
   headingEarning: {
-    display: 'flex',
-    color: "#ff1744",
-    fontFamily: '"Eczar"',
-    flex: 1,
-    justifyContent: 'flex-end',
+    display: 'none',
     [theme.breakpoints.up('sm')]: {
-      fontSize: '1rem',
+      fontSize: '0.625rem',
+      maxWidth: '28%',
       flex: 1,
       justifyContent: 'flex-end',
+      display: 'flex',
+      color: "#ff1744",
+      fontFamily: '"Eczar"',
+
     },
-    [theme.breakpoints.down('xl')]: {
-      maxWidth: '35%',
-      minWidth: '0',
-      width: '35%',
-      flex: 1,
-      justifyContent: 'flex-end',
-    },
+
   },
   buttonText: {
     fontWeight: '700',
@@ -583,9 +582,9 @@ class Entropy extends Component {
                   <div className={classes.headingEarning}>
 
                     <div>
-                      <Typography variant={'body1'} style={{fontFamily: '"Eczar"'}} noWrap>{(this._getAPY(asset)/1).toFixed(2)}% </Typography>
+                      <Typography variant={'body2'} style={{fontFamily: '"Eczar"'}} noWrap>{(this._getAPY(asset)/1).toFixed(2)}% </Typography>
 
-                      <Typography variant={'body1'} noWrap>{(asset.vaultBalance? (Math.floor(asset.vaultBalance*asset.pricePerFullShare*10000)/10000).toFixed(2):'0.00')} {asset.symbol}</Typography>
+                      <Typography className={classes.bottomHeading} variant={'body2'} noWrap>{(asset.vaultBalance? (Math.floor(asset.vaultBalance*asset.pricePerFullShare*10000)/10000).toFixed(2):'0.00')} {asset.symbol}</Typography>
 
                     </div>
                   </div>
@@ -600,8 +599,8 @@ class Entropy extends Component {
                   <div className={classes.headingEarning}>
                     <div>
 
-                      <Typography variant={'body1'} style={{fontFamily: '"Eczar"'}} noWrap>{(this._getAPY(asset)/1).toFixed(2)}% </Typography>
-                      <Typography variant={'body1'} style={{fontFamily: '"Eczar"'}} noWrap>{(asset.vaultBalance? (Math.floor(asset.vaultBalance*asset.pricePerFullShare*10000)/10000).toFixed(2):'0.00')} {asset.symbol}</Typography>
+                      <Typography variant={'body2'} style={{fontFamily: '"Eczar"'}} noWrap>{(this._getAPY(asset)/1).toFixed(2)}% </Typography>
+                      <Typography variant={'body2'} style={{fontFamily: '"Eczar"'}} noWrap>{(asset.vaultBalance? (Math.floor(asset.vaultBalance*asset.pricePerFullShare*10000)/10000).toFixed(2):'0.00')} {asset.symbol}</Typography>
                     </div>
                   </div>
                 }
