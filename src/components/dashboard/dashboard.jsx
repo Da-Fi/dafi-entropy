@@ -18,8 +18,10 @@ import {colors} from '../../theme/theme';
 import SUBHEADER_1 from '../dashboard/Subheader_1.jsx';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import breakpoints from '../../theme/theme.jsx';
 import Box from '@material-ui/core/Grid';
 const drawerWidth=192;
+
 
 
 
@@ -27,6 +29,7 @@ const useStyles=makeStyles((theme) => ({
     root: {
         display: 'flex',
         flexGrow: 1,
+        minWidth: '0%',
     },
     appBar: {
         zIndex: theme.zIndex.drawer+1,
@@ -44,7 +47,7 @@ const useStyles=makeStyles((theme) => ({
         }),
     },
     menuButton: {
-        marginRight: 36,
+        marginRight: 16,
     },
     hide: {
         display: 'none',
@@ -68,7 +71,7 @@ const useStyles=makeStyles((theme) => ({
         }),
         overflowX: 'hidden',
         width: theme.spacing(7)+1,
-        [theme.breakpoints.up('sm')]: {
+        [theme.breakpoints.up("sm")]: {
             width: theme.spacing(9)+1,
         },
     },
@@ -86,19 +89,45 @@ const useStyles=makeStyles((theme) => ({
         persistentBehavior: 'fit'
     },
     spacer: {
-        width: '2em',
+        width: '5em',
         flex: 1,
         justifyContent: 'flex-end'
     },
+    logo: {
+        display: 'flex',
+        [theme.breakpoints.down("sm")]: {
+            display: 'none',
+        },
+    },
+    ex: {
+        display: 'flex',
+        [theme.breakpoints.down("sm")]: {
+            borderRadius: '4.5rem',
+        },
+    },
+
     paper: {
         display: 'flex',
         flexGrow: 1,
         flexShrink: 1,
         background: '#363640',
         backgroundImage: 'linear-gradient(180deg,rgba(54,54,64,1) 0%,rgba(44,59,87,1) 25%,rgba(75,91,87,1) 50%,rgba(33,38,38,1) 100%)',
-        border: '2px solid '+colors.dafiPrimaryhex,
+        border: '3px solid '+colors.dafiPrimaryhex,
         borderRadius: '0.625rem',
-        padding: '0.25rem',
+        placeContent: 'center',
+        padding: theme.spacing(1),
+        textAlign: 'center',
+
+    },
+    paperx: {
+        display: 'flex',
+        flexGrow: 1,
+        flexShrink: 1,
+        placeContent: 'center',
+        padding: theme.spacing(1),
+        textAlign: 'center',
+
+
     }
 }));
 
@@ -157,7 +186,7 @@ export default function Dashboard() {
                     </IconButton>
                     <div>
 
-                        <IconButton>
+                        <IconButton className={classes.logo}>
                             <img
                                 alt=''
                                 src={require('../../assets/dafi_crc_log_only.png')}
@@ -166,11 +195,21 @@ export default function Dashboard() {
                         </IconButton>
 
                     </div>
-                    <Typography variant="h5" style={{fontFamily: '"RobotoC"'}} noWrap>
+                    <Typography className={classes.logo} variant={'h5'} style={{fontFamily: '"RobotoC"',fontWeight: '700'}} noWrap>
                         DA-FI DAO
           </Typography>
 
-                    <div className={classes.spacer} />
+                    <div className={classes.spacer} style={{paddingLeft: '16px'}} >
+                        <IconButton href="/incubator" onClick={handleClick} style={{
+                            border: '2px solid '+colors.dafiPrimaryhex,backgroundColor: "#4d4855",backgroundImage: 'linear-gradient(147deg, #4d4855 0%, #000000 74%)',
+                            borderRadius: '0.875rem',padding: '0.5rem',fontFamily: '"RobotoC"',fontSize: 'small',flex: 1,justifyContent: 'flex-end',
+
+                        }}>
+                            <Link to="/incubator" color='contrastText' >
+                                EntropyX
+                            </Link>
+                        </IconButton>
+                    </div>
                     <div>
 
                         <SUBHEADER_1 style={{flex: 1,justifyContent: 'flex-end'}} />
@@ -207,23 +246,17 @@ export default function Dashboard() {
 
                 <Grid container spacing={2}>
                     <Grid item xs={12} style={{background: colors.dafidark}}>
-                        <Paper className={classes.paper}>
-                            <Typography variant="body1" style={{fontFamily: '"RobotoC"',color: colors.dafiGreen,alignContent: 'center'}}>Welcome to Da-Fi DAO, the iterate fast next-gen DAO. This is the first DApp release for Da-Fi and it will be instrumental in driving Da-Fi DAO community interest, growth and objectives. Da-Fi is close to submitting various grant appications through Polkadot, Moonbeam, the Web3 Foundation, the Fantom Foundation, and others. Flexible Da-Fi token governance will also be announce in greater detail very soon.  90% of total Da-Fi token supply is designated for the Da-Fi DAO community and the tokens currently in a Gnosis MultiSig Safe. Da-Fi token is "governance" and holders will be able to vote on the trajectory of Da-Fi. More to be announced soon! In the meantime, check out the preview of EntropyX - an enterprise level de-fi
-                            data engine and UI that simply outperforms! EntropyX will be included in Da-Fi Entropy v2 and is built specifically for React, renders 3 million dynamic cells of data, is fully responsive, customizeable, virtualizeable, accessible on any device, and much more! ==================> </Typography>
+                        <Paper className={classes.paper} style={{alignContent: 'center'}}>
+                            <Typography variant="body2" style={{fontFamily: '"RobotoC"',color: colors.dafiGreen,alignContent: 'center'}}>Welcome to Da-Fi DAO, the iterate fast next-gen DAO. This is the first DApp release for Da-Fi, its in a live-beta active dev stage, and it will be instrumental in driving Da-Fi DAO community interest, growth and objectives. Da-Fi is in the process of completing various grant appications through Polkadot & Moonbeam, the Web3 Foundation, the Fantom Foundation, and others. Foundational Da-Fi token (symbol DA-FI) governance details will be announced in greater detail very soon.  90% of total Da-Fi token supply is designated for the Da-Fi DAO community. These 45k DA-FI tokens are currently in a Gnosis MultiSig Safe and located using ENS name da-fi.eth. Da-Fi will be looking for creative devs very soon as well. Check out the preview of EntropyX - an enterprise level de-fi
+                            data engine and grid UI that simply outperforms! EntropyX will be included in Da-Fi Entropy v2 and is built specifically for React, renders 3 million dynamic cells of data, is fully responsive, customizeable, virtualizeable, accessible on any device, and much more! ==================> </Typography>
+
                         </Paper>
 
 
 
 
                     </Grid>
-                    <Box style={{height: 64,display: "flex",alignItems: "center",width: "100%"}}>
 
-                        <IconButton href="/incubator" onClick={handleClick} style={{justifyContent: 'flex-end',border: '1px solid '+colors.dafiheat,color: 'primary',background: colors.dafiheader,borderRadius: '0.25rem',padding: '0.25rem',fontFamily: '"RobotoC"',alignSelf: 'center'}}>
-                            <Link to="/incubator">
-                                EntropyX
-                            </Link>
-                        </IconButton>
-                    </Box>
                 </Grid>
 
             </main>

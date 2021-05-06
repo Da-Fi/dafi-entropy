@@ -148,7 +148,7 @@ const styles=(theme) => ({
     borderRadius: '50px',
     backgroundColor: colors.dafiPrimaryhex,
     '&:hover': {
-      backgroundColor: colors.purple,
+      backgroundColor: colors.dafiheat,
     },
     padding: '15px',
     fontWeight: 700,
@@ -196,7 +196,7 @@ const styles=(theme) => ({
   },
   buttonText: {
     fontWeight: '700',
-    color: 'secondary',
+    color: 'primary',
     fontFamily: '"Eczar"',
   },
   assetSummary: {
@@ -204,7 +204,7 @@ const styles=(theme) => ({
     background: "rgba(26,26,26,0)",
     flex: 1,
     alignItems: '',
-    height: '48px',
+    height: '36px',
     width: '95%',
     flexWrap: 'wrap',
     [theme.breakpoints.up('sm')]: {
@@ -228,8 +228,8 @@ const styles=(theme) => ({
     alignItems: 'center',
     verticalAlign: 'middle',
     borderRadius: '12px',
-    height: '28px',
-    width: '20px',
+    height: '36px',
+    width: '24px',
     textAlign: 'center',
     cursor: 'pointer',
     marginRight: '16px',

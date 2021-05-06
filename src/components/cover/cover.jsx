@@ -18,7 +18,7 @@ const styles=theme => ({
     display: 'flex',
     flexDirection: 'column',
     maxWidth: '1200px',
-    width: '100%',
+    width: 'fit',
     justifyContent: 'center',
     alignItems: 'center'
   },

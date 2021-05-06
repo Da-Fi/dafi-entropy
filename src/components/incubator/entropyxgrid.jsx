@@ -5,24 +5,53 @@ import {LicenseInfo} from '@material-ui/x-grid';
 import {colors} from '../../theme/theme.jsx';
 import theme from '../../theme';
 import Box from '@material-ui/core/Box';
+import {makeStyles,useTheme} from '@material-ui/core/styles'
 
 
 export default function EntropyXGrid() {
+  const useStyles=makeStyles((theme) => ({
+    root: {
+      display: 'flex',
+      flexGrow: 1,
+      flexShrink: 1,
+      minWidth: '0',
+      maxWidth: '100%'
+    },
+    content: {
+      flexGrow: 1,
+      flexShrink: 1,
+      padding: theme.spacing(3),
+      persistentBehavior: 'fit'
+    },
+  }
+
+  ));
+  const [width,setWidth]=React.useState(window.innerWidth);
+  const [height,setHeight]=React.useState(window.innerHeight);
+  const updateWidthAndHeight=() => {
+    setWidth(window.innerWidth);
+    setHeight(window.innerHeight);
+
+  };
+  React.useEffect(() => {
+    window.addEventListener("resize",updateWidthAndHeight);
+    return () => window.removeEventListener("resize",updateWidthAndHeight);
+  });
   const {data}=useDemoData({
     dataSet: 'Commodity',
     rowLength: 100000,
   });
 
   return (
-    <div style={{
+    <div className="root" style={{
       paddingLeft: '4rem',
-      display: 'flex',flexGrow: 1,minWidth: '0%',height: 520,width: '97%',background: colors.dafident,[theme.breakpoints.down('md')]: {
+      height: 520,width: '94%',background: colors.dafident,[theme.breakpoints.down('md')]: {
         height: 475,
         width: '80%'
       }
     }}>
 
-      <XGrid
+      <XGrid className="content"
         {...data}
         loading={data.rows.length===0}
         rowHeight={38}

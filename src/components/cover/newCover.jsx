@@ -34,20 +34,23 @@ const store=Store.store
 const styles=theme => ({
   root: {
     flex: 1,
-    width: '100%',
+    flexGrow: 1,
+    flexShrink: 1,
+    minWidth: '0%',
     marginTop: '60px',
     maxWidth: '1000px',
   },
   coverList: {
-    width: '100%',
+    minWidth: '0%',
     display: 'flex',
     flexWrap: 'wrap',
     alignItems: 'center',
     justifyContent: 'center'
   },
   flexy: {
-    width: '100%',
-    display: 'flex'
+    display: 'flex',
+    flexGrow: 1,
+    flexShrink: 1,
   },
   label: {
     flex: 1,
@@ -58,7 +61,7 @@ const styles=theme => ({
     display: 'flex',
     flexDirection: 'column',
     flex: 1,
-    minWidth: '100%',
+    minWidth: '0%',
     marginBottom: '40px',
   },
   balances: {
@@ -76,7 +79,7 @@ const styles=theme => ({
   claimOptionContainer: {
     display: 'flex',
     flex: 1,
-    minWidth: '100%',
+    minWidth: '0%',
     marginBottom: '40px',
     flexWrap: 'wrap'
   },
@@ -119,7 +122,7 @@ const styles=theme => ({
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
-    width: '100%',
+    minWidth: '0%',
     height: '250px',
     borderTopRightRadius: '50px',
     borderTopLeftRadius: '50px',
@@ -155,7 +158,7 @@ const styles=theme => ({
   },
   pricesContainer: {
     display: 'flex',
-    minWidth: '100%',
+    minWidth: '0%',
     alignItems: 'center',
     justifyContent: 'space-evenly',
     padding: '0px 12px'
@@ -176,7 +179,7 @@ const styles=theme => ({
   },
   disclaimerContainer: {
     display: 'flex',
-    width: '100%',
+    minWidth: '0%',
     alignItems: 'center',
     justifyContent: 'center'
   },

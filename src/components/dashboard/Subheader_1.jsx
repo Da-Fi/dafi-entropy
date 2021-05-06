@@ -27,9 +27,10 @@ const useStyles=theme => ({
     background: 'rgba(26,26,26,0)',
     border: 'none',
     borderTop: 'none',
-    width: '100%',
     display: 'flex',
+    flexGrow: 1,
     flexShrink: 1,
+    mindWidth: '0%'
 
   },
   icon: {
@@ -70,7 +71,10 @@ const useStyles=theme => ({
 
   walletTitle: {
     flex: 1,
-    color: colors.darkBlack
+    color: colors.darkBlack,
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
+    },
   },
   account: {
     display: 'flex',
@@ -78,27 +82,42 @@ const useStyles=theme => ({
 
     justifyContent: 'flex-end',
     flex: 1,
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
+    },
 
   },
   walletAddress: {
     padding: '5px',
-    border: '4px solid '+colors.dafiPrimaryhex,
+    border: '2px solid '+colors.dafiPrimaryhex,
     fontFamily: 'Eczar',
     fontWeight: '600',
     borderRadius: '16px',
     display: 'flex',
+    flexGrow: 1,
+    flexShrink: 1,
     alignItems: 'center',
     cursor: 'pointer',
     '&:hover': {
-      border: "4px solid "+colors.dafiGreen,
+      border: "3px solid "+colors.dafiGreen,
       background: colors.dafilight,
       color: colors.dafiDefaulthex,
-      [theme.breakpoints.down('sm')]: {
-        display: 'flex',
-        border: "2px solid "+colors.dafiGreen,
-        background: colors.dafilight
-      }
-    }
+    },
+    [theme.breakpoints.down('sm')]: {
+      display: 'flex',
+      fontSize: 'small',
+      maxWidth: '64px',
+      border: "2px solid "+colors.dafiGreen,
+      borderRadius: '50px',
+      background: colors.dafidark,
+      color: colors.dafiDefaulthex,
+      '&:hover': {
+        background: colors.dafilight,
+        color: colors.dafiGreen,
+      },
+
+
+    },
   },
   connectedDot: {
     background: colors.dafiGreen,
@@ -109,6 +128,9 @@ const useStyles=theme => ({
     height: '10px',
     marginRight: '3px',
     marginLeft: '6px'
+  },
+  [theme.breakpoints.down('sm')]: {
+    display: 'flex',
   },
   name: {
     paddingLeft: '24px',
@@ -187,7 +209,7 @@ class SUBHEADER_1 extends Component {
         <div className={classes.SUBHEADER_1}>
 
           {address&&
-            <Typography variant={'body2'} style={{background: colors.dafilight,justifyContent: "flex-end"}} className={classes.walletAddress} noWrap onClick={this.addressClicked} >
+            <Typography variant={'body2'} style={{background: colors.dafilight}} className={classes.walletAddress} noWrap onClick={this.addressClicked} >
               {addressAlias}
               <div className={classes.connectedDot} ></div>
             </Typography>
