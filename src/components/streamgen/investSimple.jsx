@@ -41,13 +41,8 @@ const styles=theme => ({
     minWidth: '0%',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    [theme.breakpoints.down('xl')]: {
-      paddingLeft: '64px',
-      flexGrow: 1,
-      flexShrink: 1,
-      maxWidth: '1200px',
-      minWidth: '0%',
-    },
+    flexGrow: 1,
+    flexShrink: 1,
   },
   investedContainerLoggedOut: {
     display: 'flex',
@@ -71,7 +66,7 @@ const styles=theme => ({
     minWidth: '0%',
     marginTop: '40px',
     [theme.breakpoints.up('md')]: {
-      minWidth: '0px',
+
     }
   },
   balancesContainer: {
@@ -156,6 +151,27 @@ const styles=theme => ({
     [theme.breakpoints.up('sm')]: {
       paddingTop: '5px',
       display: 'flex',
+      flex: 1,
+      flexGrow: 1,
+      flexShrink: 1,
+      justifyContent: 'flex-end'
+    }
+  },
+
+  headingRate: {
+    display: 'flex',
+    paddingTop: '12px',
+    flex: 1,
+    flexShrink: 1,
+    flexGrow: 1,
+    justifyContent: 'flex-end',
+    [theme.breakpoints.up('sm')]: {
+      paddingTop: '5px',
+      display: 'flex',
+      flex: 1,
+      flexGrow: 1,
+      flexShrink: 1,
+      justifyContent: 'flex-start'
     }
   },
   headingName: {
@@ -477,7 +493,7 @@ class Streamgen extends Component {
 
                   </div>
                 </div>
-                <div className={classes.heading}>
+                <div className={classes.headingRate}>
                   <Typography variant={'h5'} style={{fontFamily: '"Eczar"',color: colors.dafiheat}}>
                     {
                       asset.maxApr

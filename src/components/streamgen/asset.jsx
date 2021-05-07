@@ -71,10 +71,11 @@ const styles=theme => ({
   },
   scaleContainer: {
     display: 'flex',
+    flexGrow: 1,
+    flexShrink: 1,
     justifyContent: 'space-between',
     padding: '0px 0px 12px 0px',
-    alignItems: 'center',
-    flexWrap: 'wrap',
+
   },
   scale: {
     minWidth: '10px'
@@ -82,21 +83,7 @@ const styles=theme => ({
   buttonText: {
     fontWeight: '700',
   },
-  headingContainer: {
-    width: '100%',
-    display: 'flex',
-    [theme.breakpoints.up('sm')]: {
-      display: 'none',
-    }
-  },
-  heading: {
-    paddingBottom: '12px',
-    flex: 1,
-    flexShrink: 0,
-    [theme.breakpoints.up('sm')]: {
-      display: 'none',
-    }
-  },
+
   right: {
     textAlign: 'right'
   }

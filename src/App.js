@@ -7,28 +7,30 @@ import {
   Route
 } from "react-router-dom";
 import IpfsRouter from 'ipfs-react-router'
-import interestTheme from './theme'
+import interestTheme from './theme/theme'
 import './i18n';
+
 
 import Dashboard from './components/dashboard/dashboard';
 import Entropy from './components/vault/vault';
-import APR from './components/apr';
-import Streamgen from './components/streamgen';
-import Manage from './components/manage';
-import Performance from './components/performance';
-import ZeroSwap from './components/zap';
-import IDai from './components/idai';
-import Experimental from './components/experimental';
+import APR from './components/apr/apr';
+import Streamgen from './components/streamgen/investSimple';
+import Manage from './components/manage/manage';
+import Performance from './components/performance/performance';
+import ZeroSwap from './components/zap/zap';
+import IDai from './components/idai/idai';
+import Experimental from './components/experimental/experimental';
 import NewCover from './components/cover/newCover';
 import EntropyXgrid from './components/incubator/entropyxgrid';
-import SEO from './components/seo';
+import SEO from './components/seo/seo';
 import {injected} from "./stores/connectors";
 
 import {
   CONNECTION_CONNECTED,
-} from './constants'
+} from './constants/constants'
 
-import Store from "./stores";
+import Store from "./stores/store";
+import newCover from './components/cover/newCover';
 
 const emitter=Store.emitter
 const store=Store.store
@@ -47,6 +49,7 @@ class App extends Component {
       }
     })
   }
+
   componentDidMount() {
     injected.isAuthorized().then(isAuthorized => {
       if(isAuthorized) {
@@ -82,6 +85,7 @@ class App extends Component {
             flexDirection: 'column',
             minHeight: '100vh',
             maxWidth: '100%',
+            minWidth: '0%',
             alignItems: 'center',
             background: '#363640'
           }}>
@@ -125,7 +129,7 @@ class App extends Component {
                 <Dashboard />
                 <EntropyXgrid />
               </Route>
-              <Route path="/cover">
+              <Route path="/newCover">
                 <Dashboard />
                 <NewCover />
               </Route>
