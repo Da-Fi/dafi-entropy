@@ -18,9 +18,6 @@ import {colors} from '../../theme/theme';
 import SUBHEADER_1 from '../dashboard/Subheader_1.jsx';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-
-import breakpoints from '../../theme/theme.jsx';
-import Box from '@material-ui/core/Grid';
 const drawerWidth=160;
 
 

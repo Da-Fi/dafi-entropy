@@ -30,7 +30,7 @@ import {
 } from './constants/constants'
 
 import Store from "./stores/store";
-import newCover from './components/cover/newCover';
+
 
 const emitter=Store.emitter
 const store=Store.store
