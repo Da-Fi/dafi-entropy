@@ -13,7 +13,7 @@ import {AuthereumConnector} from "@web3-react/authereum-connector";
 
 const POLLING_INTERVAL=12000;
 const RPC_URLS={
-  1: "https://eth-mainnet.alchemyapi.io/v2/tIh40leTPQfMnBjxhQgufOcR8XLsIEYj",
+  1: "https://polygon-mainnet.infura.io/38e56806c8f4467ab892bd3911d54157",
   4: "https://rinkeby.infura.io/v3/38e56806c8f4467ab892bd3911d54157"
 };
 
