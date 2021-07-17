@@ -1,5 +1,5 @@
 const config={
-  infuraProvider: 'https://polygon-mainnet.infura.io/38e56806c8f4467ab892bd3911d54157',
+  infuraProvider: 'https://polygon-mainnet.infura.io/v3/38e56806c8f4467ab892bd3911d54157',
   statsProvider: 'https://api.yearn.tools/',
   iEarnContract: '0x36eDE31daE17B981dc32Fba9372A09C7e4Aa29B3',
   coverAPI: 'https://api.coverprotocol.com/protocol_data/production',
