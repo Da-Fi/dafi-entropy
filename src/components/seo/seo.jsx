@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
-import { Helmet } from "react-helmet";
+import React,{Component} from "react";
+import {withRouter} from "react-router-dom";
+import {Helmet} from "react-helmet";
 
 class SEO extends Component {
 
@@ -10,21 +10,21 @@ class SEO extends Component {
 
   render() {
 
-    const base_path = 'https://yearn.finance'
-    const section = window.location.pathname.substring(1)
+    const base_path='https://da-fi.io'
+    const section=window.location.pathname.substring(1)
 
-    const location = base_path + '/' + section
-    const description = section.charAt(0).toUpperCase() + section.slice(1)
+    const location=base_path+'/'+section
+    const description=section.charAt(0).toUpperCase()+section.slice(1)
 
-    var sectionImg = {
-      dashboard: base_path + require('../../assets/dafi_crc_log_only.png'),
-      earn: base_path + require('../../assets/dafi_crc_log_only.png'),
-      zap: base_path + require('../../assets/dafi_crc_log_only.png'),
-      experimental: base_path + require('../../assets/dafi_crc_log_only.png'),
-      lending: base_path + require('../../assets/cream-icon.png'),
-      vaults: base_path + require('../../assets/dafi_crc_log_only.png'),
-      cover: base_path + require('../../assets/cover-icon.png'),
-      stats: base_path + require('../../assets/dafi_crc_log_only.png'),
+    var sectionImg={
+      dashboard: base_path+require('../../assets/dafidao_crcl.png'),
+      earn: base_path+require('../../assets/dafidao_crcl.png'),
+      zap: base_path+require('../../assets/dafidao_crcl.png'),
+      experimental: base_path+require('../../assets/dafidao_crcl.png'),
+      lending: base_path+require('../../assets/dafidao_crcl.png'),
+      vaults: base_path+require('../../assets/dafidao_crcl.png'),
+      cover: base_path+require('../../assets/dafidao_crcl.png'),
+      stats: base_path+require('../../assets/dafidao_crcl.png'),
     }
 
     return (
