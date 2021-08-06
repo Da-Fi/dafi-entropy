@@ -1,16 +1,15 @@
-# Da-Fi 
+# Da-Fi DAO
 # dafi-entropy
 #
 # hat tip yearn.finance
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-## If you have a commmunity dedicated iterate fast wide-open Da-Fi DAO like mentality and want to help develop a next-gen DAO by, for example, moving Layer2 integrated Ethereum de-fi infrastructure to Cardano, Polkdadot, Fantom, Skale and or simply want to dedicate a lifes work to raising the blockchain from sustainability to a new era of capitalism and socio-economic structures, feel free to reach out @ earnmore@da-fi.com or RMourey_Jr@da-fi.com, Da-Fi DAO is looking for you. 
+## DA-FI DAO is the data agnostic DAO of the future. Find out more @da-fi.com.
 ## This project was deployed onto IPFS, FIleCoin, and Dfinity utilizing Fleek.Co and cloudflare domain management @ app.da-fi.eth.link
 ## EntropyX is a professionally licesned product and must be paid for if you wish to fork this repo and use the engine. Message Da-Fi for details.
 ## Project was implemenetd using NVM NodeJS 10.22 but should not have any issues with newer node version based on significant testing performed. 
 ## Subgraph deployed at repo da-fi/entropy1
 ## Complete Documenation, API collections, Subgraphs, and docker implemtations are in progress and will be available ASAP. 
-
 
 ## Available Scripts
 
