@@ -245,8 +245,8 @@ export default function Dashboard() {
                 <Grid container spacing={2}>
                     <Grid item xs={12} style={{background: colors.dafidark}}>
                         <Paper className={classes.paper} style={{alignContent: 'center'}}>
-                            <Typography variant="body2" style={{fontFamily: '"RobotoC"',color: colors.dafiGreen,alignContent: 'center'}}>Welcome to Da-Fi DAO, the iterate fast next-gen DAO. This is the first DApp release for Da-Fi, its in a live-beta active dev stage, and it will be instrumental in driving Da-Fi DAO community interest, growth and objectives. Da-Fi is in the process of completing various grant applications through Polkadot & Moonbeam, the Web3 Foundation, the Fantom Foundation, and others. Foundational Da-Fi token (symbol DA-FI) governance details will be announced in greater detail very soon.  90% of the 50,000 total Da-Fi token supply is designated for the Da-Fi DAO community and are currently in a Gnosis MultiSig Safe linked to ENS domain name 'da-fi.eth'. Da-Fi will be looking for creative devs very soon as well. Check out the preview of EntropyX - an enterprise level de-fi
-                            data engine and grid UI that simply outperforms! EntropyX will be included in Da-Fi Entropy v2 and is built specifically for React, renders 3 million dynamic cells of data, is fully responsive, customizeable, virtualizeable, accessible on any device, and much more! ==================> </Typography>
+                            <Typography variant="body2" style={{fontFamily: '"RobotoC"',color: colors.dafiGreen,alignContent: 'center'}}>Welcome to Da-Fi DAO, the successful modifier of the Cardano blockchain and next-gen DAO. This is the live beta of our v1 DApp. The v2 DApp, EntropyX,  
+                             can be previewed by clicking the EntropyX button. The revamped data engine shown renders 3 million dynamic cells of virtualizeable data in seconds and is accessible on any device! v2 will also include Polygon contracts rather then the current Ethereum contracts. Learn more at https://da-fi.com </Typography>
 
                         </Paper>
 
