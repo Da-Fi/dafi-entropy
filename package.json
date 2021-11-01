@@ -19,7 +19,7 @@
     "@mui-treasury/layout": "^4.5.0",
     "@mui-treasury/mockup": "^1.2.12",
     "@mui-treasury/styles": "^1.13.1",
-    "@polkadot/extension-dapp": "^0.37.2",
+    "@polkadot/extension-dapp": "^0.40.3",
     "@popperjs/core": "^2.9.2",
     "@web3-react/authereum-connector": "^6.1.6",
     "@web3-react/core": "^6.1.1",
