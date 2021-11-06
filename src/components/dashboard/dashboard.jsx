@@ -187,7 +187,7 @@ export default function Dashboard() {
                         <IconButton className={classes.logo}>
                             <img
                                 alt=''
-                                src={require('../../assets/transparent_color_text.png')}
+                                src={require('../../assets/dafidao_crcl.png')}
                                 height={'32px'}>
                             </img>
                         </IconButton>
