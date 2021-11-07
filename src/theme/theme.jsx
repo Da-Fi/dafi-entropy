@@ -197,10 +197,10 @@ let dafi_theme=responsiveFontSizes(
     },
     palette: {
       primary: {
-        light: '#484848',
-        main: '#363640',
-        dark: '#000000',
-        contrastText: colors.dafiheat
+        light: '#00ffc3',
+        main: '#3Fbfbf',
+        dark: '#363640',
+        contrastText: colors.rallyblue
       },
       secondary: {
         light: '#00FFC3',
