@@ -1417,8 +1417,8 @@ class Store {
         earnAddress: '',
         decimals: 18
       },{
-        token: 'LINK',
-        address: '0x514910771AF9Ca656af840dff83E8264EcF986CA',
+        token: 'DA-FI',
+        address: '0xeaaD65885fEA47a3B1258935f4Ce83aaB06FDD3A',
         created: 0,
         mod: 1,
         earnAddress: '',
