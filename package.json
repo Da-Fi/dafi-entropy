@@ -14,7 +14,7 @@
     "@material/drawer": "^11.0.0",
     "@material/ripple": "^10.0.0",
     "@material/top-app-bar": "^11.0.0",
-    "@polkadot/extension-dapp": "^0.37.2",
+    "@polkadot/extension-dapp": "^0.38.1",
     "@web3-react/authereum-connector": "^6.1.6",
     "@web3-react/core": "^6.1.1",
     "@web3-react/fortmatic-connector": "^6.1.6",
