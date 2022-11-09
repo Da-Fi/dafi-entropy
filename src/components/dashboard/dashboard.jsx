@@ -194,7 +194,7 @@ export default function Dashboard() {
 
                     </div>
                     <Typography className={classes.logo} variant={'h5'} style={{fontFamily: '"RobotoC"',fontWeight: '700'}} noWrap>
-                        DA-FI DAO
+                        DAFIDAO
           </Typography>
 
                     <div className={classes.spacer} style={{paddingLeft: '16px'}} >
