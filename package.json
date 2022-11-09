@@ -53,7 +53,7 @@
     "styled-components": "^5.2.1",
     "typeface-roboto": "0.0.54",
     "use-react-router": "^1.0.7",
-    "web3": "1.2.11"
+    "web3": "1.7.5"
   },
   "resolutions": {
     "trezor-connect": "8.1.15"
