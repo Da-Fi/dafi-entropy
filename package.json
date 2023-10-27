@@ -29,7 +29,7 @@
     "@web3-react/walletconnect-connector": "^6.2.8",
     "@web3-react/walletlink-connector": "^6.1.6",
     "async": "^3.2.0",
-    "axios": "^0.21.4",
+    "axios": "^1.6.0",
     "bignumber.js": "^9.0.1",
     "classnames": "^2.2.6",
     "ethjs-ens": "^2.0.1",
