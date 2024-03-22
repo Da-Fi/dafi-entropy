@@ -48,12 +48,12 @@
     "react-image-fallback": "^8.0.0",
     "react-notification-alert": "0.0.13",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^3.4.3",
+    "react-scripts": "^5.0.0",
     "request-promise": "^4.2.6",
     "styled-components": "^5.2.1",
     "typeface-roboto": "0.0.54",
     "use-react-router": "^1.0.7",
-    "web3": "1.2.11"
+    "web3": "4.0.1"
   },
   "resolutions": {
     "trezor-connect": "8.1.15"
